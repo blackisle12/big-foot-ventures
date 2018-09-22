@@ -1,0 +1,8 @@
+﻿@{
+    if (Model.IsRedirectFromDelete)
+    {
+        <div class="alert alert-success">
+            <i class="fa fa-info-circle"></i> @Model.DeleteMessage
+        </div>
+    }
+}

@@ -1,0 +1,20 @@
+﻿@using BigFootVentures.Application.Web.Models.Utilities
+
+@{
+    if (Model.PageMode == EnumUtils.ViewModels.PageMode.View || Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess)
+    {
+        <button type="button" onclick="window.open('@Url.Action(Model.Name, new { toEdit = 1 })', '_self')" target="_blank"><i class="fa fa-edit"></i> Edit</button>
+        <button type="button" onclick="OnRecordDelete('@Url.Action($"{Model.Name}Delete", new { ID = Model.Record.ID })');"><i class="fa fa-trash-o"></i> Delete</button>
+    }
+    else
+    {
+        <button type="submit"><i class="fa fa-save"></i> Save</button>
+
+        if (Model.Record.ID > 0)
+        {
+            <button type="button" onclick="window.open('@Url.Action(Model.Name)', '_self')" target="_blank"><i class="fa fa-stop-circle"></i> Cancel</button>
+        }
+    }
+}
+
+<script src="~/Scripts/Views/Shared/_PageEditViewFooter.js"></script>

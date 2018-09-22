@@ -1,0 +1,11 @@
+﻿<div class="row">
+    <div class="col-sm-12">
+        <span>
+            Page <input class="pagination-input" type="text" name="page" value="@Model.Page" /> of @Model.Pages.ToString("N0")
+        </span>
+        <span class="pull-right">
+            Showing <input class="pagination-input" type="text" name="rowCount" value="@Model.RowCount" /> rows per page
+            <button type="submit"><i class="fa fa-refresh"></i></button>
+        </span>
+    </div>
+</div>

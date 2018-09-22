@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Big Foot Ventures</title>
+
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Views/Shared/_Layout.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- START: Navigation Bar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Big Foot</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li class="@(Request.RawUrl.IndexOf("/Home/Brand", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Brands", "Home")">Brand</a></li>
+                        <li class="@(Request.RawUrl.IndexOf("/Home/Domains", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Domains", "Home")">Domain</a></li>
+                        <li class="@(Request.RawUrl.IndexOf("/Home/Offices", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Offices", "Home")">Office</a></li>
+                        <li class="@(Request.RawUrl.IndexOf("/Home/OfficeStatuses", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("OfficeStatuses", "Home")">Office Status</a></li>
+                        <li class="@(Request.RawUrl.IndexOf("/Home/TLDs", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TLDs", "Home")">TLD</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- END: Navigation Bar -->
+
+        <div class="body-content">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

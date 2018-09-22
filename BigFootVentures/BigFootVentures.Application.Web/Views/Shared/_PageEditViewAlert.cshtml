@@ -1,0 +1,11 @@
+﻿@using BigFootVentures.Application.Web.Models.Utilities
+
+@{
+    if (Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess || Model.PageMode == EnumUtils.ViewModels.PageMode.PersistError)
+    {
+        <div class="alert alert-@(Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess ? "success" : "danger")">
+            <i class="fa fa-info-circle"></i>
+            @Html.Raw(Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess ? Model.SuccessMessage : Model.ErrorMessage)
+        </div>
+    }
+}
