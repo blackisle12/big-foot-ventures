@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{5202067A-7C69-42D5-9B1C-6362AF8E0531}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{7810F283-51C6-49E6-8971-B1509E0B3DCE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigFootVentures.BusinessObjects", "BigFootVentures.BusinessObjects\BigFootVentures.BusinessObjects.csproj", "{8614345F-6816-435F-B1F4-7D711EA91EB6}"
 EndProject
 Global
