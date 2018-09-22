@@ -83,6 +83,8 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    model.Record.Category = string.Join(";", model.Record.CategoriesSelected);
+
                     if (model.Record.ID == 0)
                     {
                         this._managementService.Brand_Insert(model.Record);

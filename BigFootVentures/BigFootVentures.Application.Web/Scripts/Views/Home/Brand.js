@@ -1,5 +1,18 @@
 ﻿$(function () {    
+    InitScript();
+
+    /* START: Functions */
+    function InitScript() {
+        $('[name="Record.CategoriesAvailable"] option:selected').removeAttr('selected');
+        $('[name="Record.CategoriesSelected"] option:selected').removeAttr('selected');
+    }
+    /* END: Functions */
+
     /* START: Event Listeners */
+    $('form').submit(function () {
+        $('[name="Record.CategoriesSelected"] option').attr('selected', 'selected');
+    });
+
     $('[name="btn-add-categories"]').on('click', function () {        
         var $categoriesAvailable = $('[name="Record.CategoriesAvailable"]');
         var $categoriesSelected = $('[name="Record.CategoriesSelected"]');
