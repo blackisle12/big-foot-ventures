@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{52
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigFootVentures.BusinessObjects", "BigFootVentures.BusinessObjects\BigFootVentures.BusinessObjects.csproj", "{8614345F-6816-435F-B1F4-7D711EA91EB6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C50BFC6E-3E9F-4DC6-A772-084751CD2A9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
