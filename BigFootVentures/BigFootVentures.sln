@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{5202067A-7C69-42D5-9B1C-6362AF8E0531}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{7810F283-51C6-49E6-8971-B1509E0B3DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigFootVentures.BusinessObjects", "BigFootVentures.BusinessObjects\BigFootVentures.BusinessObjects.csproj", "{8614345F-6816-435F-B1F4-7D711EA91EB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8614345F-6816-435F-B1F4-7D711EA91EB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8614345F-6816-435F-B1F4-7D711EA91EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8614345F-6816-435F-B1F4-7D711EA91EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8614345F-6816-435F-B1F4-7D711EA91EB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8614345F-6816-435F-B1F4-7D711EA91EB6} = {5202067A-7C69-42D5-9B1C-6362AF8E0531}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C7D2573-C7A1-4FD5-B35A-8BB83A2F7FD3}
+	EndGlobalSection
+EndGlobal
