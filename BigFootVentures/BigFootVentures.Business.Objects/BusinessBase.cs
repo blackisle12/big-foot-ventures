@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BigFootVentures.Business.Objects
+﻿namespace BigFootVentures.Business.Objects
 {
     public abstract class BusinessBase
     {
+        #region "Properties"
+
+        public int ID { get; set; }
+
+        #endregion
     }
 }

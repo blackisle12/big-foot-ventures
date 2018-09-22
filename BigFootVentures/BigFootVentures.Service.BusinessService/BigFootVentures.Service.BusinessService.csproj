@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BigFootVentures.Business.DataAccess\BigFootVentures.Business.DataAccess.csproj" />
+    <ProjectReference Include="..\BigFootVentures.Business.Objects\BigFootVentures.Business.Objects.csproj" />
+  </ItemGroup>
+
 </Project>
