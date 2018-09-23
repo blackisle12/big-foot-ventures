@@ -5,7 +5,7 @@
 @using BigFootVentures.Application.Web.Models.Utilities
 
 @{
-    ViewBag.Title = "Brand - " + Model.Record.Name;
+    ViewBag.Title = "Brand - " + (Model.Record.Name ?? "New Record");
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

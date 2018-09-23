@@ -56,6 +56,6 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             return parameters.ToArray();
         }
 
-        #endregion     
+        #endregion
     }
 }

@@ -1,36 +1,37 @@
 ﻿using BigFootVentures.Business.DataAccess;
-using BigFootVentures.Business.DataAccess.Mapping.Management;
-using BigFootVentures.Business.Objects.Management;
+using BigFootVentures.Business.DataAccess.Mapping;
+using BigFootVentures.Business.Objects;
 using System.Collections.Generic;
 
 namespace BigFootVentures.Service.BusinessService
 {
-    public interface IManagementService
+    public interface IManagementService<TModel> where TModel : BusinessBase
     {
         #region "Factory Methods"
 
-        ICollection<Brand> Brand_Get(int startIndex, int rowCount, out int total);
+        ICollection<TModel> Get(int startIndex, int rowCount, out int total);
 
-        Brand Brand_Get(int ID);
+        TModel Get(int ID);
 
         #endregion
 
         #region "Persistence"
 
-        void Brand_Insert(Brand brand);
+        void Insert(TModel model);
 
-        void Brand_Update(Brand brand);
+        void Update(TModel model);
 
-        void Brand_Delete(int ID);
+        void Delete(int ID);
 
         #endregion
     }
 
-    public sealed class ManagementService : IManagementService
+    public sealed class ManagementService<TModel> : IManagementService<TModel> where TModel : BusinessBase
     {
         #region "Private Members"
-
-        private readonly IRepository<Brand> _brandRepository = null;
+        
+        private readonly string _connectionString = null;
+        private readonly IMapper _mapper = null;
 
         #endregion
 
@@ -38,40 +39,56 @@ namespace BigFootVentures.Service.BusinessService
 
         public ManagementService(string connectionString)
         {
-            this._brandRepository = new Repository<Brand>(connectionString, new BrandMapper());
+            this._connectionString = connectionString;
+            this._mapper = DataAccessMapper.GetMapper(typeof(TModel));
         }
 
         #endregion
 
         #region "Factory Methods"
 
-        public ICollection<Brand> Brand_Get(int startIndex, int rowCount, out int total)
+        public ICollection<TModel> Get(int startIndex, int rowCount, out int total)
         {
-            return this._brandRepository.Get(startIndex, rowCount, out total);
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.Get(startIndex, rowCount, out total);
+            }                
         }
 
-        public Brand Brand_Get(int ID)
+        public TModel Get(int ID)
         {
-            return this._brandRepository.Get(ID);
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.Get(ID);
+            }
         }
 
         #endregion
 
         #region "Persistence"
 
-        public void Brand_Insert(Brand brand)
+        public void Insert(TModel model)
         {
-            this._brandRepository.Insert(brand);
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                repository.Insert(model);
+            }
         }
 
-        public void Brand_Update(Brand brand)
+        public void Update(TModel model)
         {
-            this._brandRepository.Update(brand);
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                repository.Update(model);
+            }
         }
 
-        public void Brand_Delete(int ID)
+        public void Delete(int ID)
         {
-            this._brandRepository.Delete(ID);
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                repository.Delete(ID);
+            }
         }
 
         #endregion

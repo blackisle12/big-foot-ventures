@@ -2,7 +2,6 @@
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using System;
-using System.Linq;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.Utilities.EnumUtils.ViewModels;
 
@@ -12,15 +11,17 @@ namespace BigFootVentures.Application.Web.Controllers
     {
         #region "Private Members"
 
-        private readonly IManagementService _managementService = null;
+        private readonly IManagementService<Brand> _managementBrandService = null;
+        private readonly IManagementService<Company> _managementCompanyService = null;
 
         #endregion
 
         #region "Constructors"
 
-        public HomeController(IManagementService managementService)
+        public HomeController(IManagementService<Brand> managementBrandService, IManagementService<Company> managemntCompanyService)
         {
-            this._managementService = managementService;
+            this._managementBrandService = managementBrandService;
+            this._managementCompanyService = managemntCompanyService;
         }
 
         #endregion
@@ -36,7 +37,7 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             startIndex = (page - 1) * rowCount;
 
-            var brands = this._managementService.Brand_Get(startIndex, rowCount, out int total);
+            var brands = this._managementBrandService.Get(startIndex, rowCount, out int total);
             var pageResult = new VMPageResult<Brand>
             {
                 StartIndex = startIndex,
@@ -57,7 +58,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         public ActionResult Brand(int ID, int? toEdit)
         {
-            var brand = ID > 0 ? this._managementService.Brand_Get(ID) : new Brand();
+            var brand = ID > 0 ? this._managementBrandService.Get(ID) : new Brand();
             var model = new VMModel<Brand>
             {
                 Record = brand,
@@ -89,14 +90,14 @@ namespace BigFootVentures.Application.Web.Controllers
 
                     if (model.Record.ID == 0)
                     {
-                        this._managementService.Brand_Insert(model.Record);
+                        this._managementBrandService.Insert(model.Record);
 
                         TempData.Add("IsNewlyCreated", true);
                         return RedirectToAction("Brand", "Home", new { model.Record.ID });
                     }
                     else
                     {
-                        this._managementService.Brand_Update(model.Record);
+                        this._managementBrandService.Update(model.Record);
                     }
                 }
 
@@ -116,7 +117,7 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             try
             {
-                this._managementService.Brand_Delete(ID);
+                this._managementBrandService.Delete(ID);
 
                 TempData.Add("IsRedirectFromDelete", true);
             }

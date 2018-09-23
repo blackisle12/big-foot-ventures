@@ -1,0 +1,30 @@
+﻿using BigFootVentures.Business.DataAccess.Mapping;
+using BigFootVentures.Business.DataAccess.Mapping.Management;
+using BigFootVentures.Business.Objects.Management;
+using System;
+
+namespace BigFootVentures.Service.BusinessService
+{
+    internal static class DataAccessMapper
+    {
+        #region "Public Methods"
+
+        public static IMapper GetMapper(Type type)
+        {
+            if (type == typeof(Brand))
+            {
+                return new BrandMapper();
+            }
+            else if (type == typeof(Company))
+            {
+                return new CompanyMapper();
+            }
+            else
+            {
+                return null;
+            }                
+        }
+
+        #endregion
+    }
+}
