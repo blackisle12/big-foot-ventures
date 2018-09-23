@@ -1,6 +1,7 @@
 ﻿$(function () {    
     InitScript();
-
+    $('#infoMaximize').hide();
+    $('#delMaximize').hide();
     /* START: Functions */
     function InitScript() {
         $('[name="Record.CategoriesAvailable"] option:selected').removeAttr('selected');
@@ -33,4 +34,29 @@
         });
     });
     /* END: Event Listeners */
+
+    $('#infoMinimize').on('click', function () {
+        ToggleElement('panelInformation');
+        $('#infoMaximize').show();
+        $('#infoMinimize').hide()        
+    });
+
+    $('#infoMaximize').on('click', function () {
+        ToggleElement('panelInformation');
+        $('#infoMaximize').hide();
+        $('#infoMinimize').show();
+    });
+
+    $('#delMinimize').on('click', function () {
+        ToggleElement('delPanel');
+        $('#delMaximize').show();
+        $('#delMinimize').hide()
+    });
+
+    $('#delMaximize').on('click', function () {
+        ToggleElement('delPanel');
+        $('#delMaximize').hide();
+        $('#delMinimize').show();
+    });
 });
+
