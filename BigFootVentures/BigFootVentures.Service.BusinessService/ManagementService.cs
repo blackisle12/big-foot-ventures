@@ -1,6 +1,7 @@
 ﻿using BigFootVentures.Business.DataAccess;
 using BigFootVentures.Business.DataAccess.Mapping;
 using BigFootVentures.Business.Objects;
+using BigFootVentures.Service.BusinessService.DataAccessMapping;
 using System.Collections.Generic;
 
 namespace BigFootVentures.Service.BusinessService
@@ -40,7 +41,7 @@ namespace BigFootVentures.Service.BusinessService
         public ManagementService(string connectionString)
         {
             this._connectionString = connectionString;
-            this._mapper = DataAccessMapper.GetMapper(typeof(TModel));
+            this._mapper = ManagementMapper.GetMapper(typeof(TModel));
         }
 
         #endregion

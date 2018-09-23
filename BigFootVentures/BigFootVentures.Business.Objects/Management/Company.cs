@@ -2,5 +2,8 @@
 {
     public sealed class Company : BusinessBase
     {
+        #region "Properties"
+
+        #endregion
     }
 }

@@ -92,27 +92,6 @@ namespace BigFootVentures.Business.Objects.Management
 
         #region "Picklist"
 
-        public static string[] PickListPurpose()
-        {
-            return new string[]
-            {
-                "",
-                "Core",
-                "Non-Core"
-            };
-        }
-
-        public static string[] PickListValue()
-        {
-            return new string[]
-            {
-                "",
-                "Low",
-                "Medium",
-                "High"
-            };
-        }
-
         public static string[] PickListCategory(string[] excludedValues)
         {
             var categories = new string[]

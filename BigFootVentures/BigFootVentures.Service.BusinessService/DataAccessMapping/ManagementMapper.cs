@@ -3,9 +3,9 @@ using BigFootVentures.Business.DataAccess.Mapping.Management;
 using BigFootVentures.Business.Objects.Management;
 using System;
 
-namespace BigFootVentures.Service.BusinessService
+namespace BigFootVentures.Service.BusinessService.DataAccessMapping
 {
-    internal static class DataAccessMapper
+    internal static class ManagementMapper
     {
         #region "Public Methods"
 

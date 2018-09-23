@@ -45,13 +45,13 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Purpose</label>
                             <div class="col-sm-10">
-                                @Html.DropDownListFor(m => m.Record.Purpose, new SelectList(Brand.PickListPurpose()), new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.Record.Purpose, new SelectList(EnumUtils.GetDescriptions<EnumUtils.Models.Management.Brand.Purpose>()), new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Value</label>
                             <div class="col-sm-10">
-                                @Html.DropDownListFor(m => m.Record.Value, new SelectList(Brand.PickListValue()), new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.Record.Value, new SelectList(EnumUtils.GetDescriptions<EnumUtils.Models.Management.Brand.Value>()), new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -80,10 +80,9 @@
                             </div>
                         </div>
                     </fieldset>
-                </div>                
+                </div>
             </div>
             <!-- END: Information -->
-
             <!-- START: Deletion Request -->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -107,7 +106,7 @@
                 </div>
             </div>
             <!-- END: Deletion Request -->
-        </div>        
+        </div>
 
         <div class="panel-footer">
             @Html.Partial("../Shared/_PageEditViewFooter")
