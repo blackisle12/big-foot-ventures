@@ -2,6 +2,7 @@
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.Utilities.EnumUtils.ViewModels;
 
@@ -83,7 +84,8 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    model.Record.Category = string.Join(";", model.Record.CategoriesSelected);
+                    if (model.Record.CategoriesSelected != null)                    
+                        model.Record.Category = string.Join(";", model.Record.CategoriesSelected);
 
                     if (model.Record.ID == 0)
                     {

@@ -12,10 +12,14 @@ namespace BigFootVentures.Application.Web.Models.Utilities
         {
             var selectListItems = new List<VMSelectListItem>();
 
-            foreach (var option in options)
+            if (options != null)
             {
-                selectListItems.Add(new VMSelectListItem { Text = option, Value = option });
-            }
+                foreach (var option in options)
+                {
+                    if (!string.Equals(option, "System.String[]"))
+                        selectListItems.Add(new VMSelectListItem { Text = option, Value = option });
+                }
+            }            
 
             return new MultiSelectList(selectListItems, "Text", "Value");
         }
