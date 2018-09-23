@@ -26,22 +26,70 @@ namespace BigFootVentures.Application.Web.Models.Utilities
                         [Description("Non-Core")]
                         NonCore
                     }
-                }
 
-                public enum Value
-                {
-                    [Description("")]
-                    NotSet,
+                    public enum Value
+                    {
+                        [Description("")]
+                        NotSet,
 
-                    [Description("Low")]
-                    Low,
+                        [Description("Low")]
+                        Low,
 
-                    [Description("Medium")]
-                    Medium,
+                        [Description("Medium")]
+                        Medium,
 
-                    [Description("High")]
-                    High
-                }
+                        [Description("High")]
+                        High
+                    }
+
+                    public enum Category
+                    {
+                        [Description("Actor Names")]
+                        ActorNames,
+
+                        [Description("Airlines")]
+                        Airlines,
+
+                        [Description("Animals")]
+                        Animals,
+
+                        [Description("Brandbucket")]
+                        Brandbucket,
+
+                        [Description("First Names")]
+                        FirstNames,
+
+                        [Description("Last Names")]
+                        LastNames,
+
+                        [Description("Locations")]
+                        Locations,
+
+                        [Description("MG's Request")]
+                        MGRequest,
+
+                        [Description("Misc")]
+                        Misc,
+
+                        [Description("Model Names")]
+                        ModelNames,
+
+                        [Description("Movie Titles")]
+                        MovieTitles,
+
+                        [Description("Names")]
+                        Names,
+
+                        [Description("Numbers")]
+                        Numbers,
+
+                        [Description("Sitematrix")]
+                        Sitematrix,
+
+                        [Description("Typo")]
+                        Typo
+                    }
+                }                
             }
         }
 
