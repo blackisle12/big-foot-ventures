@@ -8,7 +8,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities
     {
         #region "Public Methods"
 
-        public static MultiSelectList GetMultiSelectList(string[] options)
+        public static MultiSelectList GetMultiSelectList(ICollection<string> options)
         {
             var selectListItems = new List<VMSelectListItem>();
 
@@ -19,7 +19,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities
                     if (!string.Equals(option, "System.String[]"))
                         selectListItems.Add(new VMSelectListItem { Text = option, Value = option });
                 }
-            }            
+            }
 
             return new MultiSelectList(selectListItems, "Text", "Value");
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace BigFootVentures.Business.Objects.Management
 {
@@ -44,36 +43,5 @@ namespace BigFootVentures.Business.Objects.Management
         public bool DeletionRequestChk { get; set; }
 
         #endregion
-
-        #region "Picklist"
-
-        public static string[] PickListCategory(string[] excludedValues)
-        {
-            var categories = new string[]
-            {
-                "Actor Names",
-                "Airlines",
-                "Animals",
-                "Brandbucket",
-                "First Names",
-                "Last Names",
-                "Locations",
-                "MG's Request",
-                "Misc",
-                "Model Names",
-                "Movie Titles",
-                "Names",
-                "Numbers",
-                "Sitematrix",
-                "Typo"
-            };
-
-
-            return excludedValues == null ?
-                categories :
-                categories.Where(i => !excludedValues.Contains(i)).ToArray();
-        }
-
-        #endregion    
     }
 }
