@@ -1,7 +1,7 @@
-﻿@using BigFootVentures.Application.Web.Models.Utilities
+﻿@using BigFootVentures.Application.Web.Models
 
 @{
-    if (Model.PageMode == EnumUtils.ViewModels.PageMode.View || Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess)
+    if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
     {
         <button type="button" onclick="window.open('@Url.Action(Model.Name, new { toEdit = 1 })', '_self')" target="_blank"><i class="fa fa-edit"></i> Edit</button>
         <button type="button" onclick="OnRecordDelete('@Url.Action($"{Model.Name}Delete", new { ID = Model.Record.ID })');"><i class="fa fa-trash-o"></i> Delete</button>

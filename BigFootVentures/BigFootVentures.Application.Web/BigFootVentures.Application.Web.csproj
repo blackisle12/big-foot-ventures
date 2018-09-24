@@ -186,6 +186,7 @@
     <Compile Include="Models\ViewModels\VMModel.cs" />
     <Compile Include="Models\ViewModels\VMPageResult.cs" />
     <Compile Include="Models\ViewModels\VMSelectListItem.cs" />
+    <Compile Include="Models\VMEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

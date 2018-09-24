@@ -12,7 +12,16 @@ namespace BigFootVentures.Business.Objects.Management
 
         [Required(ErrorMessage = "This field is required")]
         public string CompanyName { get; set; }
-        public string FormerCompanyName { get; set; }
+        public string FormerName { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string Suffix { get; set; }
+        public string Title { get; set; }
+        public string Salutation { get; set; }
+
         public string Type { get; set; }
         public string Description { get; set; }
 
@@ -27,6 +36,7 @@ namespace BigFootVentures.Business.Objects.Management
         public string OfficeIDGB { get; set; }
         public string OHIMNumTrademarks { get; set; }
         public string OHIMNUMOppositions { get; set; }
+        public string AddressType { get; set; }
         public string CompanySize { get; set; }
         public string EscrowAgent { get; set; }
         public string Broker { get; set; }

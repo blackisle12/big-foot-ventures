@@ -1,11 +1,11 @@
-﻿@using BigFootVentures.Application.Web.Models.Utilities
+﻿@using BigFootVentures.Application.Web.Models
 
 @{
-    if (Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess || Model.PageMode == EnumUtils.ViewModels.PageMode.PersistError)
+    if (Model.PageMode == VMEnums.PageMode.PersistSuccess || Model.PageMode == VMEnums.PageMode.PersistError)
     {
-        <div class="alert alert-@(Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess ? "success" : "danger")">
+        <div class="alert alert-@(Model.PageMode == VMEnums.PageMode.PersistSuccess ? "success" : "danger")">
             <i class="fa fa-info-circle"></i>
-            @Html.Raw(Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess ? Model.SuccessMessage : Model.ErrorMessage)
+            @Html.Raw(Model.PageMode == VMEnums.PageMode.PersistSuccess ? Model.SuccessMessage : Model.ErrorMessage)
         </div>
     }
 }

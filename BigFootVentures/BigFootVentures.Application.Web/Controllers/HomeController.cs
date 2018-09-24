@@ -3,7 +3,7 @@ using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using System;
 using System.Web.Mvc;
-using static BigFootVentures.Application.Web.Models.Utilities.EnumUtils.ViewModels;
+using static BigFootVentures.Application.Web.Models.VMEnums;
 
 namespace BigFootVentures.Application.Web.Controllers
 {
