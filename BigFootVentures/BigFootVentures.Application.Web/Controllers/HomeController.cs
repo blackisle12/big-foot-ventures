@@ -18,10 +18,10 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Constructors"
 
-        public HomeController(IManagementService<Brand> managementBrandService, IManagementService<Company> managemntCompanyService)
+        public HomeController(IManagementService<Brand> managementBrandService, IManagementService<Company> managementCompanyService)
         {
             this._managementBrandService = managementBrandService;
-            this._managementCompanyService = managemntCompanyService;
+            this._managementCompanyService = managementCompanyService;
         }
 
         #endregion
@@ -72,6 +72,29 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return View(model);
+        }
+
+        public ActionResult Companies(int startIndex = 0, int rowCount = 10, int page = 1)
+        {
+            startIndex = (page - 1) * rowCount;
+
+            var companies = this._managementCompanyService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Company>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = companies
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);         
         }
 
         #endregion
