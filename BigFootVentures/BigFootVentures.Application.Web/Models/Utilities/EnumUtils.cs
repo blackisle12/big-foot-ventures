@@ -139,7 +139,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
         #endregion
 
-        #region "Custom Bindings"
+        #region "Extensions"
 
         public static string ToDescription(this Enum value)
         {
