@@ -1,11 +1,11 @@
 ﻿$(function () {    
     InitScript();
-    $('#infoMaximize').hide();
-    $('#delMaximize').hide();
     /* START: Functions */
     function InitScript() {
         $('[name="Record.CategoriesAvailable"] option:selected').removeAttr('selected');
         $('[name="Record.CategoriesSelected"] option:selected').removeAttr('selected');
+        $('[name="Info.Maximize"]').hide();
+        $('[name="Del.Maximize"]').hide();
     }
     /* END: Functions */
 
@@ -35,28 +35,28 @@
     });
     /* END: Event Listeners */
 
-    $('#infoMinimize').on('click', function () {
-        ToggleElement('panelInformation');
-        $('#infoMaximize').show();
-        $('#infoMinimize').hide()        
+    $('[name="Info.Minimize"]').on('click', function () {
+        ToggleElement('Panel.Information');
+        $('[name="Info.Maximize"]').show();
+        $('[name="Info.Minimize"]').hide();
     });
 
-    $('#infoMaximize').on('click', function () {
-        ToggleElement('panelInformation');
-        $('#infoMaximize').hide();
-        $('#infoMinimize').show();
+    $('[name="Info.Maximize"]').on('click', function () {
+        ToggleElement('Panel.Information');
+        $('[name="Info.Maximize"]').hide();
+        $('[name="Info.Minimize"]').show();
     });
 
-    $('#delMinimize').on('click', function () {
-        ToggleElement('delPanel');
-        $('#delMaximize').show();
-        $('#delMinimize').hide()
+    $('[name="Del.Minimize"]').on('click', function () {
+        ToggleElement('Del.Panel');
+        $('[name="Del.Maximize"]').show();
+        $('[name="Del.Minimize"]').hide();
     });
 
-    $('#delMaximize').on('click', function () {
-        ToggleElement('delPanel');
-        $('#delMaximize').hide();
-        $('#delMinimize').show();
+    $('[name="Del.Maximize"]').on('click', function () {
+        ToggleElement('Del.Panel');
+        $('[name="Info.Maximize"]').hide();
+        $('[name="Info.Minimize"]').show();
     });
 });
 

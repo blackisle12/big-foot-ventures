@@ -31,9 +31,9 @@
             <!-- START: Information -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Information <span class="pull-right" id="infoMinimize"><i class="fa fa-window-minimize"></i></span><span class="pull-right" id="infoMaximize"><i class="fa fa-window-maximize"></i></span></h4>
+                    <h4 class="panel-title">Information <span class="pull-right" name="Info.Minimize"><i class="fa fa-window-minimize"></i></span><span class="pull-right" name="Info.Maximize"><i class="fa fa-window-maximize"></i></span></h4>
                 </div>
-                <div id="panelInformation" class="panel-body">
+                <div name="Panel.Information" class="panel-body">
                     <fieldset @(Model.PageMode == EnumUtils.ViewModels.PageMode.View || Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess ? "disabled" : string.Empty)>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Name</label>
@@ -86,9 +86,9 @@
             <!-- START: Deletion Request -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Deletion Request <span class="pull-right" id="delMinimize"><i class="fa fa-window-minimize"></i></span><span class="pull-right" id="delMaximize"><i class="fa fa-window-maximize"></i></span></h4>
+                    <h4 class="panel-title">Deletion Request <span class="pull-right" name="Del.Minimize"><i class="fa fa-window-minimize"></i></span><span class="pull-right" name="Del.Maximize"><i class="fa fa-window-maximize"></i></span></h4>
                 </div>
-                <div id="delPanel" class="panel-body">
+                <div name="Del.Panel" class="panel-body">
                     <fieldset @(Model.PageMode == EnumUtils.ViewModels.PageMode.View || Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess ? "disabled" : string.Empty)>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Deletion Request</label>

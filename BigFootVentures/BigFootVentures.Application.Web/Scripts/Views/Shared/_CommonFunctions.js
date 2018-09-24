@@ -1,3 +1,3 @@
-﻿function ToggleElement(id) {
-    $("#" + id).toggle();
+﻿function ToggleElement(name) {
+    $('[name="' + name +'"]').toggle();
 }
