@@ -86,7 +86,7 @@ textarea {
     min-height: 120px;
 }
 
-.panel-default > .panel-heading {
+.panel-default > .panel-body > .panel-default > .panel-heading {
     box-shadow: 5px 5px 5px #666;
     -moz-box-shadow: 5px 5px 5px #666;
     -webkit-box-shadow: 1px 1px 1px #666;
