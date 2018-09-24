@@ -6,7 +6,7 @@
         $('[name="Record.CategoriesSelected"] option').attr('selected', 'selected');
     });
 
-    $('[name="Button.AddCategories"]').on('click', function () {        
+    $('[name="Button.Add.Categories"]').on('click', function () {        
         var $categoriesAvailable = $('[name="Record.CategoriesAvailable"]');
         var $categoriesSelected = $('[name="Record.CategoriesSelected"]');
         
@@ -16,7 +16,7 @@
         });
     });
 
-    $('[name="Button.RemoveCategories"]').on('click', function () {
+    $('[name="Button.Remove.Categories"]').on('click', function () {
         var $categoriesAvailable = $('[name="Record.CategoriesAvailable"]');
         var $categoriesSelected = $('[name="Record.CategoriesSelected"]');
 
