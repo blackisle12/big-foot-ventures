@@ -33,6 +33,4 @@
         });
     });
     /* END: Event Listeners */
-
-
 });
