@@ -1,10 +1,11 @@
 ﻿$(function () {    
     InitScript();
-
     /* START: Functions */
     function InitScript() {
         $('[name="Record.CategoriesAvailable"] option:selected').removeAttr('selected');
         $('[name="Record.CategoriesSelected"] option:selected').removeAttr('selected');
+        $('[name="Info.Maximize"]').hide();
+        $('[name="Del.Maximize"]').hide();
     }
     /* END: Functions */
 
@@ -33,4 +34,29 @@
         });
     });
     /* END: Event Listeners */
+
+    $('[name="Info.Minimize"]').on('click', function () {
+        ToggleElement('Panel.Information');
+        $('[name="Info.Maximize"]').show();
+        $('[name="Info.Minimize"]').hide();
+    });
+
+    $('[name="Info.Maximize"]').on('click', function () {
+        ToggleElement('Panel.Information');
+        $('[name="Info.Maximize"]').hide();
+        $('[name="Info.Minimize"]').show();
+    });
+
+    $('[name="Del.Minimize"]').on('click', function () {
+        ToggleElement('Del.Panel');
+        $('[name="Del.Maximize"]').show();
+        $('[name="Del.Minimize"]').hide();
+    });
+
+    $('[name="Del.Maximize"]').on('click', function () {
+        ToggleElement('Del.Panel');
+        $('[name="Info.Maximize"]').hide();
+        $('[name="Info.Minimize"]').show();
+    });
 });
+

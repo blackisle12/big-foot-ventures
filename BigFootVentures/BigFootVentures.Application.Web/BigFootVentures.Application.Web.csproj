@@ -225,6 +225,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
+    <Content Include="Scripts\Views\Shared\_CommonFunctions.js" />
     <Content Include="Scripts\Views\Shared\_PageEditViewFooter.js" />
     <Content Include="Scripts\Views\Shared\_Validator.js" />
     <Content Include="Web.config" />
