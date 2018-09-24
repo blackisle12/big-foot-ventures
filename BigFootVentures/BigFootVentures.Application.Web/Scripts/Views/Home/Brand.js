@@ -1,20 +1,12 @@
 ﻿$(function () {    
-    InitScript();
-    /* START: Functions */
-    function InitScript() {
-        $('[name="Record.CategoriesAvailable"] option:selected').removeAttr('selected');
-        $('[name="Record.CategoriesSelected"] option:selected').removeAttr('selected');
-        $('[name="Info.Maximize"]').hide();
-        $('[name="Del.Maximize"]').hide();
-    }
-    /* END: Functions */
+    InitScript();    
 
     /* START: Event Listeners */
     $('form').submit(function () {
         $('[name="Record.CategoriesSelected"] option').attr('selected', 'selected');
     });
 
-    $('[name="btn-add-categories"]').on('click', function () {        
+    $('[name="Button.AddCategories"]').on('click', function () {        
         var $categoriesAvailable = $('[name="Record.CategoriesAvailable"]');
         var $categoriesSelected = $('[name="Record.CategoriesSelected"]');
         
@@ -24,7 +16,7 @@
         });
     });
 
-    $('[name="btn-remove-categories"]').on('click', function () {
+    $('[name="Button.RemoveCategories"]').on('click', function () {
         var $categoriesAvailable = $('[name="Record.CategoriesAvailable"]');
         var $categoriesSelected = $('[name="Record.CategoriesSelected"]');
 
@@ -35,28 +27,42 @@
     });
     /* END: Event Listeners */
 
-    $('[name="Info.Minimize"]').on('click', function () {
-        ToggleElement('Panel.Information');
-        $('[name="Info.Maximize"]').show();
-        $('[name="Info.Minimize"]').hide();
+    $('[name="Information.Minimize"]').on('click', function () {
+        ToggleElement('PanelBody.Information');
+
+        $('[name="Information.Maximize"]').show();
+        $('[name="Information.Minimize"]').hide();
     });
 
-    $('[name="Info.Maximize"]').on('click', function () {
-        ToggleElement('Panel.Information');
-        $('[name="Info.Maximize"]').hide();
-        $('[name="Info.Minimize"]').show();
+    $('[name="Information.Maximize"]').on('click', function () {
+        ToggleElement('PanelBody.Information');
+
+        $('[name="Information.Maximize"]').hide();
+        $('[name="Information.Minimize"]').show();
     });
 
-    $('[name="Del.Minimize"]').on('click', function () {
-        ToggleElement('Del.Panel');
-        $('[name="Del.Maximize"]').show();
-        $('[name="Del.Minimize"]').hide();
+    $('[name="DeletionRequest.Minimize"]').on('click', function () {
+        ToggleElement('PanelBody.DeletionRequest');
+
+        $('[name="DeletionRequest.Maximize"]').show();
+        $('[name="DeletionRequest.Minimize"]').hide();
     });
 
-    $('[name="Del.Maximize"]').on('click', function () {
-        ToggleElement('Del.Panel');
-        $('[name="Info.Maximize"]').hide();
-        $('[name="Info.Minimize"]').show();
+    $('[name="DeletionRequest.Maximize"]').on('click', function () {
+        ToggleElement('PanelBody.DeletionRequest');
+
+        $('[name="DeletionRequest.Maximize"]').hide();
+        $('[name="DeletionRequest.Minimize"]').show();
     });
 });
+
+/* START: Functions */
+function InitScript() {
+    $('[name="Record.CategoriesAvailable"] option:selected').removeAttr('selected');
+    $('[name="Record.CategoriesSelected"] option:selected').removeAttr('selected');
+
+    $('[name="Information.Maximize"]').hide();
+    $('[name="DeletionRequest.Maximize"]').hide();    
+}
+/* END: Functions */
 

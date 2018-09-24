@@ -31,9 +31,13 @@
             <!-- START: Information -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Information <span class="pull-right" name="Info.Minimize"><i class="fa fa-window-minimize"></i></span><span class="pull-right" name="Info.Maximize"><i class="fa fa-window-maximize"></i></span></h4>
+                    <h4 class="panel-title">
+                        Information
+                        <span class="pull-right" name="Information.Minimize"><i class="fa fa-window-minimize"></i></span>
+                        <span class="pull-right" name="Information.Maximize"><i class="fa fa-window-maximize"></i></span>
+                    </h4>
                 </div>
-                <div name="Panel.Information" class="panel-body">
+                <div class="panel-body" name="PanelBody.Information">
                     <fieldset @(Model.PageMode == EnumUtils.ViewModels.PageMode.View || Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess ? "disabled" : string.Empty)>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Name</label>
@@ -60,8 +64,8 @@
                                 @Html.ListBoxFor(m => m.Record.CategoriesAvailable, InputUtils.GetMultiSelectList(EnumUtils.GetDescriptions<EnumUtils.Models.Management.Brand.Category>(Model.Record.Categories)), new { @class = "form-control pick-list-box" })
                             </div>
                             <div class="col-sm-1 vertical-align">
-                                <button type="button" name="btn-add-categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-right"></i></button>
-                                <button type="button" name="btn-remove-categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" name="Button.AddCategories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" name="Button.RemoveCategories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-left"></i></button>
                             </div>
                             <div class="col-sm-3">
                                 @Html.ListBoxFor(m => m.Record.CategoriesSelected, InputUtils.GetMultiSelectList(Model.Record.Categories), new { @class = "form-control pick-list-box" })
@@ -83,12 +87,17 @@
                 </div>
             </div>
             <!-- END: Information -->
+
             <!-- START: Deletion Request -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Deletion Request <span class="pull-right" name="Del.Minimize"><i class="fa fa-window-minimize"></i></span><span class="pull-right" name="Del.Maximize"><i class="fa fa-window-maximize"></i></span></h4>
+                    <h4 class="panel-title">
+                        Deletion Request
+                        <span class="pull-right" name="DeletionRequest.Minimize"><i class="fa fa-window-minimize"></i></span>
+                        <span class="pull-right" name="DeletionRequest.Maximize"><i class="fa fa-window-maximize"></i></span>
+                    </h4>
                 </div>
-                <div name="Del.Panel" class="panel-body">
+                <div class="panel-body" name="PanelBody.DeletionRequest">
                     <fieldset @(Model.PageMode == EnumUtils.ViewModels.PageMode.View || Model.PageMode == EnumUtils.ViewModels.PageMode.PersistSuccess ? "disabled" : string.Empty)>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Deletion Request</label>
