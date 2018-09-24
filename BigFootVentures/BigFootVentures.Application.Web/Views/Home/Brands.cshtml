@@ -35,7 +35,7 @@
                         foreach (var brand in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.Action("Brand", "Home", new { ID = brand.ID })" target="_blank">@brand.Name</a></td>
+                                <td><a href="@Url.RouteUrl("BrandView", new { ID = brand.ID })" target="_blank">@brand.Name</a></td>
                                 <td>@brand.Purpose</td>
                                 <td>@brand.Value</td>
                                 <td>@brand.Category</td>

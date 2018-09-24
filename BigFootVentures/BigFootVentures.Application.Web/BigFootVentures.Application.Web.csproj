@@ -179,7 +179,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Utilities\EnumUtils.cs" />
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
     <Compile Include="Models\Utilities\StringUtils.cs" />
