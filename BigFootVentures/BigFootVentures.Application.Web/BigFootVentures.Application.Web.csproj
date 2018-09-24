@@ -182,6 +182,7 @@
     <Compile Include="Models\Utilities\EnumUtils.cs" />
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
+    <Compile Include="Models\Utilities\StringUtils.cs" />
     <Compile Include="Models\ViewModels\VMModel.cs" />
     <Compile Include="Models\ViewModels\VMPageResult.cs" />
     <Compile Include="Models\ViewModels\VMSelectListItem.cs" />
@@ -194,6 +195,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Views\Home\Brand.css" />
+    <Content Include="Content\Views\Home\Companies.css" />
     <Content Include="Content\Views\Home\Brands.css" />
     <Content Include="Content\Views\Shared\_Layout.css" />
     <Content Include="favicon.ico" />
@@ -223,7 +225,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
-    <Content Include="Scripts\Views\Home\Brands.js" />
+    <Content Include="Scripts\Views\Shared\_CommonFunctions.js" />
     <Content Include="Scripts\Views\Shared\_PageEditViewFooter.js" />
     <Content Include="Scripts\Views\Shared\_Validator.js" />
     <Content Include="Scripts\Utilites\StringUtils.js" />
@@ -246,6 +248,7 @@
     <Content Include="Views\Shared\_PageTableViewHeader.cshtml" />
     <Content Include="Views\Home\Brand.cshtml" />
     <Content Include="Views\Home\Brands.cshtml" />
+    <Content Include="Views\Home\Companies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

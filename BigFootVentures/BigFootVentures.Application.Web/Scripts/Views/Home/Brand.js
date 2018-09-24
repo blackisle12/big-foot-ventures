@@ -1,12 +1,5 @@
 ﻿$(function () {    
-    InitScript();
-
-    /* START: Functions */
-    function InitScript() {
-        $('[name="Record.CategoriesAvailable"] option:selected').removeAttr('selected');
-        $('[name="Record.CategoriesSelected"] option:selected').removeAttr('selected');
-    }
-    /* END: Functions */
+    InitScript();    
 
     /* START: Event Listeners */
     $('form').submit(function () {
@@ -33,4 +26,43 @@
         });
     });
     /* END: Event Listeners */
+
+    $('[name="Information.Minimize"]').on('click', function () {
+        ToggleElement('PanelBody.Information');
+
+        $('[name="Information.Maximize"]').show();
+        $('[name="Information.Minimize"]').hide();
+    });
+
+    $('[name="Information.Maximize"]').on('click', function () {
+        ToggleElement('PanelBody.Information');
+
+        $('[name="Information.Maximize"]').hide();
+        $('[name="Information.Minimize"]').show();
+    });
+
+    $('[name="DeletionRequest.Minimize"]').on('click', function () {
+        ToggleElement('PanelBody.DeletionRequest');
+
+        $('[name="DeletionRequest.Maximize"]').show();
+        $('[name="DeletionRequest.Minimize"]').hide();
+    });
+
+    $('[name="DeletionRequest.Maximize"]').on('click', function () {
+        ToggleElement('PanelBody.DeletionRequest');
+
+        $('[name="DeletionRequest.Maximize"]').hide();
+        $('[name="DeletionRequest.Minimize"]').show();
+    });
 });
+
+/* START: Functions */
+function InitScript() {
+    $('[name="Record.CategoriesAvailable"] option:selected').removeAttr('selected');
+    $('[name="Record.CategoriesSelected"] option:selected').removeAttr('selected');
+
+    $('[name="Information.Maximize"]').hide();
+    $('[name="DeletionRequest.Maximize"]').hide();    
+}
+/* END: Functions */
+

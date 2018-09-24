@@ -14,6 +14,8 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/Utilites/StringUtils.js"></script>
+    <script src="~/Scripts/Views/Shared/_CommonFunctions.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -32,11 +34,8 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
-                        <li class="@(Request.RawUrl.IndexOf("/Home/Brand", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Brands", "Home")">Brand</a></li>
-                        <li class="@(Request.RawUrl.IndexOf("/Home/Domains", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Domains", "Home")">Domain</a></li>
-                        <li class="@(Request.RawUrl.IndexOf("/Home/Offices", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Offices", "Home")">Office</a></li>
-                        <li class="@(Request.RawUrl.IndexOf("/Home/OfficeStatuses", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("OfficeStatuses", "Home")">Office Status</a></li>
-                        <li class="@(Request.RawUrl.IndexOf("/Home/TLDs", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TLDs", "Home")">TLD</a></li>
+                        <li class="@(Request.RawUrl.IndexOf("/Home/Brand", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Brands", "Home")">Brands</a></li>
+                        <li class="@(Request.RawUrl.IndexOf("/Home/Compan", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Companies", "Home")">Companies</a></li>
                     </ul>
                 </div>
             </div>

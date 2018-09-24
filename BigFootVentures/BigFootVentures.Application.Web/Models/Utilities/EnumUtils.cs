@@ -89,7 +89,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities
                         [Description("Typo")]
                         Typo
                     }
-                }                
+                }
             }
         }
 
@@ -108,18 +108,18 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
         #region "Public Methods"
 
-        public static ICollection<string> GetDescriptions<TEnum>() where TEnum : struct, IConvertible
+        public static ICollection<string> GetDescriptions<TEnum>(string[] excludedValues = null) where TEnum : struct, IConvertible
         {
             var descriptions = new List<string>();
             
 
             foreach (TEnum value in Enum.GetValues(typeof(TEnum)))
-            {                                
+            {
                 descriptions.Add(EnumUtils.GetDescription((object)value));
             }
 
-            return descriptions;
-        }        
+            return excludedValues == null ? descriptions : descriptions.Where(i => !excludedValues.Contains(i)).ToList();
+        }
 
         #endregion
 
@@ -139,7 +139,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
         #endregion
 
-        #region "Custom Bindings"
+        #region "Extensions"
 
         public static string ToDescription(this Enum value)
         {
