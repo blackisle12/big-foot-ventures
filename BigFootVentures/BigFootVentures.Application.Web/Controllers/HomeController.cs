@@ -1,9 +1,12 @@
 ﻿using BigFootVentures.Application.Web.Models.Extensions;
 using BigFootVentures.Application.Web.Models.ViewModels;
+using BigFootVentures.Business.Objects;
 using BigFootVentures.Business.Objects.Enumerators;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
 
@@ -77,10 +80,10 @@ namespace BigFootVentures.Application.Web.Controllers
                 PageMode = PageMode.View
             };
 
-            if (TempData.ContainsKey("IsBrandPosted"))
+            if (TempData.ContainsKey("IsPosted"))
             {
-                model.PageMode = (bool)TempData["IsBrandPosted"] ? PageMode.PersistSuccess : PageMode.PersistError;
-                TempData.Remove("IsBrandPosted");
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
             }
 
             return View("Brand", model);
@@ -89,24 +92,41 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("Brand/Edit/{ID:int}", Name = "BrandEdit")]
         public ActionResult BrandEdit(int ID)
         {
-            var brand = this._managementBrandService.Get(ID);
-            var model = new VMModel<Brand>
+            VMModel<Brand> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
             {
-                Record = brand,
-                PageMode = PageMode.Edit
-            };
+                model = this.GetValidationErrors<Brand>();
+            }
+            else
+            {
+                model = new VMModel<Brand>
+                {
+                    Record = this._managementBrandService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
 
             return View("Brand", model);
         }
 
         [Route("Brand/New", Name = "BrandNew")]
         public ActionResult BrandNew()
-        {            
-            var model = new VMModel<Brand>
+        {
+            VMModel<Brand> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
             {
-                Record = new Brand(),
-                PageMode = PageMode.Edit
-            };
+                model = this.GetValidationErrors<Brand>();
+            }
+            else
+            {
+                model = new VMModel<Brand>
+                {
+                    Record = new Brand(),
+                    PageMode = PageMode.Edit
+                };
+            }
 
             return View("Brand", model);
         }
@@ -115,13 +135,13 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("Brand", Name = "BrandPost")]
         public ActionResult Brand(VMModel<Brand> model)
         {
-            try
+            Action action = () =>
             {
-                if (ModelState.IsValid)
-                {
-                    if (model.Record.CategoriesSelected != null)
-                        model.Record.Category = string.Join(";", model.Record.CategoriesSelected);
+                if (model.Record.CategoriesSelected != null)
+                    model.Record.Category = string.Join(";", model.Record.CategoriesSelected);
 
+                if (ModelState.IsValid)
+                {                    
                     if (model.Record.ID == 0)
                     {
                         this._managementBrandService.Insert(model.Record);
@@ -131,16 +151,13 @@ namespace BigFootVentures.Application.Web.Controllers
                         this._managementBrandService.Update(model.Record);
                     }
                 }
+                else
+                {
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
 
-                TempData.Add("IsBrandPosted", true);
-            }
-            catch (Exception ex)
-            {
-                //log exception here                
-                TempData.Add("IsBrandPosted", false);
-            }
-            
-            return RedirectToRoute("BrandView", new { model.Record.ID });
+            return RedirectPost<Brand>(model, action);            
         }
 
         [HttpGet]
@@ -158,7 +175,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 //log exception here
             }
 
-            return RedirectToAction("Brands", "Home");
+            return RedirectToAction("Brands");
         }
 
         #endregion
@@ -193,6 +210,86 @@ namespace BigFootVentures.Application.Web.Controllers
             };
 
             return View("Company", model);
+        }
+
+        [HttpPost]
+        [Route("Company", Name = "CompanyPost")]
+        public ActionResult Company(VMModel<Company> model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {                    
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementCompanyService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementCompanyService.Update(model.Record);
+                    }
+                }
+                else
+                {
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+
+                TempData.Add("IsCompanyPosted", true);
+                return RedirectToRoute("CompanyView", new { model.Record.ID });
+            }
+            catch (Exception ex)
+            {
+                //log exception here                
+                TempData.Add("IsCompanyPosted", false);
+                return RedirectToRoute("CompanyNew", new { recordType = model.Record.AccountRecordType });
+            }            
+        }
+
+        #endregion
+
+        #region "Private Methods"
+
+        private ActionResult RedirectPost<TModel>(VMModel<TModel> model, Action action) where TModel : BusinessBase
+        {            
+            var routeName = model.Name;
+
+            try
+            {
+                action();
+                routeName += "View";
+
+                TempData.Add("IsPosted", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+                
+                model.PageMode = PageMode.PersistError;
+                routeName += model.Record.ID > 0 ? "Edit" : "New";
+
+                TempData.Add("ModelPosted", model);
+                TempData.Add("ModelPostedState", ModelState);
+            }            
+
+            return RedirectToRoute(routeName, new { model.Record.ID });
+        }
+
+        private VMModel<TModel> GetValidationErrors<TModel>() where TModel : BusinessBase
+        {
+            var model = (VMModel<TModel>)TempData["ModelPosted"];
+            TempData.Remove("ModelPosted");
+
+            var modelState = (ModelStateDictionary)TempData["ModelPostedState"];
+
+            for (var i = 0; i < modelState.Values.Count; i++)
+            {
+                foreach (var error in modelState.Values.ElementAt(i).Errors)
+                {
+                    ModelState.AddModelError(modelState.Keys.ElementAt(i), error.ErrorMessage);
+                }
+            }
+
+            return model;
         }
 
         #endregion

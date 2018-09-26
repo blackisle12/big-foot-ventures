@@ -10,7 +10,7 @@ namespace BigFootVentures.Application.Web.Models.ViewModels
         public TModel Record { get; set; }
         public PageMode PageMode { get; set; }
         public string SuccessMessage { get { return $"<strong>Nicely done!</strong> {typeof(TModel).Name} has been saved successfully."; } }
-        public string ErrorMessage { get { return "<strong>Oh no!</strong> An error has occured while processing your request. Please try again later."; } }
+        public string ErrorMessage { get { return "<strong>Oh no!</strong> An error has occured while processing your request. Please review your changes."; } }
 
         public string Name { get { return typeof(TModel).Name; } }
 
