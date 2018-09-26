@@ -502,11 +502,11 @@
                         </h4>
                     </div>
                     <div class="panel-body">
-                        <fieldset disabled>
+                        <fieldset>
                             <div class="form-group">
                                 <label class="col-sm-offset-6 col-sm-2 control-label">Account Record Type</label>
                                 <div class="col-sm-4">
-                                    @Html.TextBoxFor(m => m.Record.AccountRecordType, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.Record.AccountRecordType, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
                             </div>
                         </fieldset>

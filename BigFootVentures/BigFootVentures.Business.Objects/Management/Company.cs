@@ -1,5 +1,4 @@
-﻿using BigFootVentures.Business.Objects.Extensions.Attributes.Management.Company;
-using System;
+﻿using System;
 
 namespace BigFootVentures.Business.Objects.Management
 {
@@ -21,11 +20,9 @@ namespace BigFootVentures.Business.Objects.Management
         public string AccountOwner { get; set; }
         public int ParentAccountID { get; set; }
 
-        [IsCompanyNameRequired(ErrorMessage = "This field is required")]
         public string CompanyName { get; set; }
         public string FormerName { get; set; }
 
-        [IsLastNameRequired(ErrorMessage = "This field is required")]
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

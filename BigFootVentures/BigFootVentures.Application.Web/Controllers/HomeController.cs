@@ -5,7 +5,6 @@ using BigFootVentures.Business.Objects.Enumerators;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
@@ -157,7 +156,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
             };
 
-            return RedirectPost<Brand>(model, action);            
+            return RedirectPost<Brand>(model, action, new { ID = model.Record.ID });
         }
 
         [HttpGet]
@@ -203,11 +202,20 @@ namespace BigFootVentures.Application.Web.Controllers
                 string.Equals(recordType, ManagementEnums.Company.AccountRecordType.PersonAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase)))
                 throw new Exception(); //throw to error 500
 
-            var model = new VMModel<Company>
+            VMModel<Company> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
             {
-                Record = new Company { AccountRecordType = recordType },
-                PageMode = PageMode.Edit
-            };
+                model = this.GetValidationErrors<Company>();
+            }
+            else
+            {
+                model = new VMModel<Company>
+                {
+                    Record = new Company { AccountRecordType = recordType },
+                    PageMode = PageMode.Edit
+                };
+            }
 
             return View("Company", model);
         }
@@ -216,10 +224,32 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("Company", Name = "CompanyPost")]
         public ActionResult Company(VMModel<Company> model)
         {
-            try
+            Action action = () =>
             {
+                if (string.Equals(model.Record.AccountRecordType, ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    if (string.IsNullOrWhiteSpace(model.Record.CompanyName))
+                    {
+                        ModelState.AddModelError("Record.CompanyName", "This field is required");
+                    }
+                }
+                else if (string.Equals(model.Record.AccountRecordType, ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription(), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    if (string.IsNullOrWhiteSpace(model.Record.CompanyName))
+                    {
+                        ModelState.AddModelError("Record.CompanyName", "This field is required");
+                    }
+                }
+                else if (string.Equals(model.Record.AccountRecordType, ManagementEnums.Company.AccountRecordType.PersonAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    if (string.IsNullOrWhiteSpace(model.Record.LastName))
+                    {
+                        ModelState.AddModelError("Record.LastName", "This field is required");
+                    }
+                }
+
                 if (ModelState.IsValid)
-                {                    
+                {
                     if (model.Record.ID == 0)
                     {
                         this._managementCompanyService.Insert(model.Record);
@@ -233,24 +263,17 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     throw new Exception("error on validation.."); //will rework on this
                 }
+            };
 
-                TempData.Add("IsCompanyPosted", true);
-                return RedirectToRoute("CompanyView", new { model.Record.ID });
-            }
-            catch (Exception ex)
-            {
-                //log exception here                
-                TempData.Add("IsCompanyPosted", false);
-                return RedirectToRoute("CompanyNew", new { recordType = model.Record.AccountRecordType });
-            }            
+            return RedirectPost<Company>(model, action, new { recordType = model.Record.AccountRecordType, ID = model.Record.ID });
         }
 
         #endregion
 
         #region "Private Methods"
 
-        private ActionResult RedirectPost<TModel>(VMModel<TModel> model, Action action) where TModel : BusinessBase
-        {            
+        private ActionResult RedirectPost<TModel>(VMModel<TModel> model, Action action, dynamic routeValues) where TModel : BusinessBase
+        {
             var routeName = model.Name;
 
             try
@@ -269,9 +292,9 @@ namespace BigFootVentures.Application.Web.Controllers
 
                 TempData.Add("ModelPosted", model);
                 TempData.Add("ModelPostedState", ModelState);
-            }            
+            }
 
-            return RedirectToRoute(routeName, new { model.Record.ID });
+            return RedirectToRoute(routeName, routeValues);
         }
 
         private VMModel<TModel> GetValidationErrors<TModel>() where TModel : BusinessBase
