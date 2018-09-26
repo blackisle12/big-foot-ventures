@@ -21,7 +21,7 @@
 
     @Html.Partial("../Shared/_PageEditViewAlert")
 
-    <div class="panel panel-default">
+    <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
                 You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Brand <strong>@Model.Record.Name</strong>

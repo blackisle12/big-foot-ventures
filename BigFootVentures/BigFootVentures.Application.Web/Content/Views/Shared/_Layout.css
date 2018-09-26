@@ -87,6 +87,10 @@ textarea {
     min-height: 60px;
 }
 
+.panel-parent > .panel-body {
+    background-color: #f4e7ff61;
+}
+
 .panel-default > .panel-body > .panel-default > .panel-heading {
     box-shadow: 5px 5px 5px #666;
     -moz-box-shadow: 5px 5px 5px #666;
@@ -119,4 +123,8 @@ textarea {
 
 .display-flex {
     display: flex;
+}
+
+.container-top-padding {
+    padding-top: 60px;
 }
