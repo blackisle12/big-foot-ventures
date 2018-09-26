@@ -128,3 +128,11 @@ textarea {
 .container-top-padding {
     padding-top: 60px;
 }
+
+.text-neutral {
+    color: #333 !important;
+}
+
+.input-neutral {
+    border-color: #ccc !important;
+}

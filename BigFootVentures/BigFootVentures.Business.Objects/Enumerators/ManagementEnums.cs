@@ -260,6 +260,39 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 [Description("Utilities")]
                 Utilities
             }
+
+            public enum Salutation
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Mr.")]
+                Mr,
+
+                [Description("Ms.")]
+                Ms,
+
+                [Description("Mrs.")]
+                Mrs,
+
+                [Description("Dr.")]
+                Dr,
+
+                [Description("Prof.")]
+                Prof
+            }
+
+            public enum AddressType
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Commercial Building")]
+                CommercialBuilding,
+
+                [Description("Residential")]
+                Residential
+            }
         }
     }
 }

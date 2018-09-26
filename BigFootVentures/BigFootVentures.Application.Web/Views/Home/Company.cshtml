@@ -1,4 +1,5 @@
 ﻿@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Extensions
 @using BigFootVentures.Application.Web.Models.Utilities
 @using BigFootVentures.Application.Web.Models.ViewModels
 @using BigFootVentures.Business.Objects.Enumerators
@@ -16,300 +17,509 @@
 {
     @Html.Partial("../Shared/_PageEditViewAlert")
 
-    <div class="panel panel-default panel-parent">
-        <div class="panel-heading">
-            <span class="panel-title">
-                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Company <strong>@(Model.Record.CompanyName ?? Model.Record.LastName ?? string.Empty)</strong>
-            </span>
-            <span class="panel-title pull-right">
-                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
-            </span>
-        </div>
-        <div class="panel-body">
-            <!-- START: Account Information -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Account Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Company Name</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.CompanyName, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Record.CompanyName, "", new { @class = "text-danger" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Account Record Type</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.AccountRecordType, new { @class = "form-control", @readonly = "readonly" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Former Name</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.FormerName, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Account Owner</label>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Type</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.Type, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Type>()), new { @class = "form-control" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Parent Account</label>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Description</label>
-                            <div class="col-sm-4">
-                                @Html.TextAreaFor(m => m.Record.Description, new { @class = "form-control" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Phone</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Office ID OHIM</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.OfficeIDOHIM, new { @class = "form-control" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Fax</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Fax, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">OHIM Num Trademarks</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.OHIMNumTrademarks, new { @class = "form-control" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Email</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Email, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Company Size</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.CompanySize, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.CompanySize>()), new { @class = "form-control" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Industry</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Industry>()), new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Name ID</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.NameID, new { @class = "form-control" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Employees</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Employees, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Office ID GB</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.OfficeIDGB, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">OHIM Num Oppositions</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.OHIMNUMOppositions, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Escrow Agent</label>
-                            <div class="col-sm-10">
-                                @Html.CheckBoxFor(m => m.Record.EscrowAgentChk)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Broker</label>
-                            <div class="col-sm-10">
-                                @Html.CheckBoxFor(m => m.Record.BrokerChk)
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: Account Information -->
-            <!-- START: Deletion Request -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Deletion Request
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Deletion Request</label>
-                            <div class="col-sm-10">
-                                @Html.CheckBoxFor(m => m.Record.DeletionRequestChk)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Deletion Request Reason</label>
-                            <div class="col-sm-10">
-                                @Html.TextAreaFor(m => m.Record.DeletionRequestReason, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: Deletion Request -->
-            <!-- START: Incorporation Information -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Incorporation Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Company Registration Number</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.CompanyRegistrationNumber, new { @class = "form-control" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Date of Incorporation</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.DateOfIncorporation, new { @class = "form-control", @type = "date" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Country of incorporation</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.Industry, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Officers</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Officers, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Tax number</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.TaxNumber, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: Incorporation Information -->
-            <!-- START: External Representative Information -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        External Representative Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">TM Filing Cost</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.TMFilingCost, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">TM Cancellation Cost</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.TMCancellationCost, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">TM Opposition Cost</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.TMOppositionCost, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">TM Priority Cost</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.TMPriorityCost, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">TM Registration Certificate Cost</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.TMRegistrationCertificateCost, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">TM Research Cost</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.TMResearchCost, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: External Representative Information -->
-            <!-- START: Address Information -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Address Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Shipping Country</label>
-                            <div class="col-sm-10">
-                                @Html.DropDownListFor(m => m.Record.ShippingCountry, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Shipping Street</label>
-                            <div class="col-sm-10">
-                                @Html.TextAreaFor(m => m.Record.ShippingStreet, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Shipping City</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.ShippingCity, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Shipping State/Province</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.ShippingState, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Shipping Zip/Postal Code</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.ShippingPostalCode, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: Address Information -->
-        </div>
+<div class="panel panel-default panel-parent">
+    <div class="panel-heading">
+        <span class="panel-title">
+            You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Company <strong>@(Model.Record.CompanyName ?? Model.Record.LastName ?? string.Empty)</strong>
+        </span>
+        <span class="panel-title pull-right">
+            <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+        </span>
     </div>
+    <div class="panel-body">
+        <!-- START: Account Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Account Information
+                    <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    @{
+                        if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription())
+                        {
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Company Name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.CompanyName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Record.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Account Record Type</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.AccountRecordType, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Former Name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.FormerName, new { @class = "form-control" })
+                                </div>
+                                <label class="col-sm-2 control-label">Account Owner</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(m => m.Record.Type, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Type>()), new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Parent Account</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-4">
+                                    @Html.TextAreaFor(m => m.Record.Description, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Office ID OHIM</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.OfficeIDOHIM, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Fax</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Fax, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">OHIM Num Trademarks</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.OHIMNumTrademarks, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Email, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Company Size</label>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(m => m.Record.CompanySize, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.CompanySize>()), new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Industry</label>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Industry>()), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Name ID</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.NameID, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Employees</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Employees, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Office ID GB</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(m => m.Record.OfficeIDGB, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">OHIM Num Oppositions</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(m => m.Record.OHIMNUMOppositions, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Escrow Agent</label>
+                                <div class="col-sm-10">
+                                    @Html.CheckBoxFor(m => m.Record.EscrowAgentChk)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Broker</label>
+                                <div class="col-sm-10">
+                                    @Html.CheckBoxFor(m => m.Record.BrokerChk)
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.PersonAccount.ToDescription())
+                        {
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Salutation</label>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(m => m.Record.Salutation, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Salutation>()), new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Account Owner</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">First Name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.FirstName, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Middle Name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.MiddleName, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Mobile</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Mobile, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">                                
+                                <label class="col-sm-2 control-label">Last Name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.LastName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Record.LastName, "", new { @class = "text-danger" })
+                                </div>
+
+                                <label class="col-sm-2 control-label text-neutral">Fax</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Fax, new { @class = "form-control input-neutral" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Suffix</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Suffix, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Email, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Title, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Industry</label>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Industry>()), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(m => m.Record.Type, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Type>()), new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">OHIM Num Trademarks</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.OHIMNumTrademarks, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-4">
+                                    @Html.TextAreaFor(m => m.Record.Description, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">OHIM Owner ID</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.OHIMOwnerID, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Office ID OHIM</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.OfficeIDOHIM, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">BigFoot Group</label>
+                                <div class="col-sm-4">
+                                    @Html.CheckBoxFor(m => m.Record.BigFootGroupChk)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Address Type</label>
+                                <div class="col-sm-10">
+                                    @Html.DropDownListFor(m => m.Record.AddressType, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.AddressType>()), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Company Size</label>
+                                <div class="col-sm-10">
+                                    @Html.DropDownListFor(m => m.Record.AddressType, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.CompanySize>()), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Name ID</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(m => m.Record.NameID, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Former Name</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(m => m.Record.FormerName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Office ID GB</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(m => m.Record.OfficeIDGB, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">OHIM Num Oppositions</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(m => m.Record.OHIMNUMOppositions, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Escrow Agent</label>
+                                <div class="col-sm-10">
+                                    @Html.CheckBoxFor(m => m.Record.EscrowAgentChk)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Broker</label>
+                                <div class="col-sm-10">
+                                    @Html.CheckBoxFor(m => m.Record.BrokerChk)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Country of incorporation</label>
+                                <div class="col-sm-10">
+                                    @Html.DropDownListFor(m => m.Record.CountryOfIncorporation, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Tax number</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(m => m.Record.TaxNumber, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        }
+                    }
+                </fieldset>
+            </div>
+        </div>
+        <!-- END: Account Information -->
+        <!-- START: Deletion Request -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Deletion Request
+                    <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Deletion Request</label>
+                        <div class="col-sm-10">
+                            @Html.CheckBoxFor(m => m.Record.DeletionRequestChk)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Deletion Request Reason</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(m => m.Record.DeletionRequestReason, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <!-- END: Deletion Request -->
+        <!-- START: Incorporation Information -->
+        @{
+            if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription())
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Incorporation Information
+                            <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Company Registration Number</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.CompanyRegistrationNumber, new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Date of Incorporation</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.DateOfIncorporation, new { @class = "form-control", @type = "date" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Country of incorporation</label>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(m => m.Record.Industry, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
+                                </div>
+
+                                <label class="col-sm-2 control-label">Officers</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.Officers, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Tax number</label>
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(m => m.Record.TaxNumber, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            }
+        }
+        <!-- END: Incorporation Information -->
+        <!-- START: External Representative Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    External Representative Information
+                    <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">TM Filing Cost</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Record.TMFilingCost, new { @class = "form-control" })
+                        </div>
+
+                        <label class="col-sm-2 control-label">BigFoot Accredited</label>
+                        <div class="col-sm-4">
+                            @Html.CheckBoxFor(m => m.Record.BigFootAccreditedChk)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">TM Cancellation Cost</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.TMCancellationCost, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">TM Opposition Cost</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.TMOppositionCost, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">TM Priority Cost</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.TMPriorityCost, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">TM Registration Certificate Cost</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.TMRegistrationCertificateCost, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">TM Research Cost</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.TMResearchCost, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Other Costs</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(m => m.Record.TMResearchCost, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <!-- END: External Representative Information -->
+        <!-- START: Address Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Address Information
+                    <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Shipping Country</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(m => m.Record.ShippingCountry, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Shipping Street</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(m => m.Record.ShippingStreet, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Shipping City</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.ShippingCity, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Shipping State/Province</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.ShippingState, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Shipping Zip/Postal Code</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.ShippingPostalCode, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <!-- END: Address Information -->
+        <!-- START: System Information -->
+        @{
+            if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.PersonAccount.ToDescription())
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            System Information
+                            <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset disabled>
+                            <div class="form-group">
+                                <label class="col-sm-offset-6 col-sm-2 control-label">Account Record Type</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Record.AccountRecordType, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            }
+        }
+        <!-- END: System Information -->
+    </div>
+    <div class="panel-footer">
+        @Html.Partial("../Shared/_PageEditViewFooter")
+    </div>
+</div>
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
