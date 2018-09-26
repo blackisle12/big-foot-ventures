@@ -1,9 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BigFootVentures.Business.Objects.Management
 {
     public sealed class Company : BusinessBase
     {
+        #region "Private Members"
+        
+        private string _escrowAgent { get; set; }
+        private string _broker { get; set; }
+        private string _deletionRequest { get; set; }
+
+        #endregion
+
         #region "Properties"
 
         public string AccountRecordType { get; set; }
@@ -38,10 +47,10 @@ namespace BigFootVentures.Business.Objects.Management
         public string OHIMNUMOppositions { get; set; }
         public string AddressType { get; set; }
         public string CompanySize { get; set; }
-        public string EscrowAgent { get; set; }
-        public string Broker { get; set; }
+        public string EscrowAgent { get { return this._escrowAgent; } set { this._escrowAgent = value; this.EscrowAgentChk = string.Equals(value, true.ToString(), StringComparison.InvariantCultureIgnoreCase); } }
+        public string Broker { get { return this._broker; } set { this._broker = value; this.BrokerChk = string.Equals(value, true.ToString(), StringComparison.InvariantCultureIgnoreCase); } }
 
-        public string DeletionRequest { get; set; }
+        public string DeletionRequest { get { return this._deletionRequest; } set { this._deletionRequest = value; this.DeletionRequestChk = string.Equals(value, true.ToString(), StringComparison.InvariantCultureIgnoreCase); } }
         public string DeletionRequestReason { get; set; }
 
         public string CompanyRegistrationNumber { get; set; }
@@ -64,6 +73,14 @@ namespace BigFootVentures.Business.Objects.Management
         public string ShippingCity { get; set; }
         public string ShippingState { get; set; }
         public string ShippingPostalCode { get; set; }
+
+        #endregion
+
+        #region "Calculated Properties"
+
+        public bool EscrowAgentChk { get; set; }
+        public bool BrokerChk { get; set; }
+        public bool DeletionRequestChk { get; set; }
 
         #endregion
     }

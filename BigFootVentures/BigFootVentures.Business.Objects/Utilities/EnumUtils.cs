@@ -22,11 +22,7 @@ namespace BigFootVentures.Business.Objects.Utilities
             return excludedValues == null ? descriptions : descriptions.Where(i => !excludedValues.Contains(i)).ToList();
         }
 
-        #endregion
-
-        #region "Private Methods"
-
-        private static string GetDescription(object value)
+        public static string GetDescription(object value)
         {
             var enumValue = (Enum)value;
             var attribute = enumValue.GetType()
@@ -36,15 +32,6 @@ namespace BigFootVentures.Business.Objects.Utilities
                 .FirstOrDefault();
 
             return attribute == null ? value.ToString() : ((DescriptionAttribute)attribute).Description;
-        }
-
-        #endregion
-
-        #region "Extensions"
-
-        public static string ToDescription(this Enum value)
-        {
-            return EnumUtils.GetDescription(value);
         }
 
         #endregion

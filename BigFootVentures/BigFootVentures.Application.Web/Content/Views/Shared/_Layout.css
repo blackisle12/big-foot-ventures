@@ -80,10 +80,11 @@ textarea {
 
 .form-control {
     border-radius: 0px;
+    height: 30px;
 }
 
 textarea {
-    min-height: 120px;
+    min-height: 60px;
 }
 
 .panel-default > .panel-body > .panel-default > .panel-heading {
@@ -106,7 +107,7 @@ textarea {
 }
 
 .pick-list-box {
-    height: 250px !important;
+    height: 200px !important;
     overflow-y: auto;
 }
 

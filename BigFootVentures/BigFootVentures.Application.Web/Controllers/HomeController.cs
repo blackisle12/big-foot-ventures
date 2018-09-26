@@ -1,4 +1,6 @@
-﻿using BigFootVentures.Application.Web.Models.ViewModels;
+﻿using BigFootVentures.Application.Web.Models.Extensions;
+using BigFootVentures.Application.Web.Models.ViewModels;
+using BigFootVentures.Business.Objects.Enumerators;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using System;
@@ -138,7 +140,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Add("IsBrandPosted", false);
             }
             
-            return RedirectToRoute("BrandView", new { ID = model.Record.ID });
+            return RedirectToRoute("BrandView", new { model.Record.ID });
         }
 
         [HttpGet]
@@ -167,6 +169,30 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult CompanyNewSelectRecordType()
         {
             return View();
+        }
+
+        [HttpPost]
+        [Route("CompanyNewSelectRecordType", Name = "CompanyNewSelectRecordTypePost")]
+        public ActionResult CompanyNewSelectRecordType(string recordType)
+        {
+            return RedirectToRoute("CompanyNew", new { recordType });
+        }
+
+        [Route("Company/New/{recordType}", Name = "CompanyNew")]
+        public ActionResult CompanyNew(string recordType)
+        {
+            if (!(string.Equals(recordType, ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
+                string.Equals(recordType, ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
+                string.Equals(recordType, ManagementEnums.Company.AccountRecordType.PersonAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase)))
+                throw new Exception(); //throw to error 500
+
+            var model = new VMModel<Company>
+            {
+                Record = new Company { AccountRecordType = recordType },
+                PageMode = PageMode.Edit
+            };
+
+            return View("Company", model);
         }
 
         #endregion
