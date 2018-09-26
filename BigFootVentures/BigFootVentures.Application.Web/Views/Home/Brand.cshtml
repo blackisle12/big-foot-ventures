@@ -36,11 +36,10 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Information
-                        <span class="pull-right" name="Information.Minimize"><i class="fa fa-window-minimize"></i></span>
-                        <span class="pull-right" name="Information.Maximize"><i class="fa fa-window-maximize"></i></span>
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
                     </h4>
                 </div>
-                <div class="panel-body" name="PanelBody.Information">
+                <div class="panel-body">
                     <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Name</label>
@@ -95,11 +94,10 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         Deletion Request
-                        <span class="pull-right" name="DeletionRequest.Minimize"><i class="fa fa-window-minimize"></i></span>
-                        <span class="pull-right" name="DeletionRequest.Maximize"><i class="fa fa-window-maximize"></i></span>
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
                     </h4>
                 </div>
-                <div class="panel-body" name="PanelBody.DeletionRequest">
+                <div class="panel-body">
                     <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Deletion Request</label>
@@ -125,5 +123,6 @@
     </div>
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
     <script src="~/Scripts/Views/Home/Brand.js"></script>
 }
