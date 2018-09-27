@@ -45,11 +45,10 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Brands"
 
-        [Route("Brands/{startIndex?}/{rowCount?}/{page?}", Name = "Brands")]
-        public ActionResult Brands(int startIndex = 0, int rowCount = 10, int page = 1)
+        [Route("Brands/{rowCount?}/{page?}", Name = "Brands")]
+        public ActionResult Brands(int rowCount = 10, int page = 1)
         {
-            startIndex = (page - 1) * rowCount;
-
+            var startIndex = (page - 1) * rowCount;
             var brands = this._managementBrandService.Get(startIndex, rowCount, out int total);
             var pageResult = new VMPageResult<Brand>
             {
@@ -180,6 +179,69 @@ namespace BigFootVentures.Application.Web.Controllers
         #endregion
 
         #region "Companies"
+
+        [Route("Companies/{rowCount?}/{page?}", Name = "Companies")]
+        public ActionResult Companies(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var companies = this._managementCompanyService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Company>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = companies
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Company/{ID:int}", Name = "CompanyView")]
+        public ActionResult Company(int ID)
+        {
+            var company = this._managementCompanyService.Get(ID);
+            var model = new VMModel<Company>
+            {
+                Record = company,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Company", model);
+        }
+
+        [Route("Company/Edit/{ID:int}", Name = "CompanyEdit")]
+        public ActionResult CompanyEdit(int ID)
+        {
+            VMModel<Company> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Company>();
+            }
+            else
+            {
+                model = new VMModel<Company>
+                {
+                    Record = this._managementCompanyService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Company", model);
+        }
 
         [Route("Company/New/SelectRecordType", Name = "CompanyNewSelectRecordType")]
         public ActionResult CompanyNewSelectRecordType()

@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model VMPageResult<Brand>
+@model VMPageResult<Company>
 
 @using (Html.BeginForm("Companies", "Home", FormMethod.Get))
 {
@@ -24,13 +24,18 @@
                     <tr class="th-bg">
                         <th class="th-name">Name</th>
                         <th class="th-record-type">Record Type</th>
-                        <th class="th-type">Type</th>                        
+                        <th class="th-type">Type</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{
                         foreach (var company in Model.Records)
-                        {                            
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("CompanyView", new { ID = company.ID })" target="_blank">@company.CompanyName</a></td>
+                                <td>@company.AccountRecordType</td>
+                                <td>@company.Type</td>
+                            </tr>
                         }
                     }
                 </tbody>
@@ -40,4 +45,6 @@
             @Html.Partial("../Shared/_PageTableViewFooter")
         </div>
     </div>
+
+    <script src="~/Scripts/Views/Home/Companies.js"></script>
 }

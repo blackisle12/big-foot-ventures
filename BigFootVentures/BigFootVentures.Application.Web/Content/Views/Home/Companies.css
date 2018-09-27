@@ -1,1 +1,11 @@
-﻿
+﻿.th-name {
+    width: 60%;
+}
+
+.th-record-type {
+    width: 25%;
+}
+
+.th-type {
+    width: 15%;
+}
