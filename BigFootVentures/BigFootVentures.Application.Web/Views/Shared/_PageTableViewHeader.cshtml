@@ -4,7 +4,16 @@
             @($"{Model.Total.ToString("N0")} {Model.Name.ToLower()}(s) found")
         </span>
         <span class="pull-right">
-            <button type="button" onclick="window.open('@Url.RouteUrl($"{Model.Name}New")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
+            @{
+                if (Model.Name == "Company")
+                {
+                    <button type="button" onclick="window.open('@Url.RouteUrl("CompanyNewSelectRecordType")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
+                }
+                else
+                {
+                    <button type="button" onclick="window.open('@Url.RouteUrl($"{Model.Name}New")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
+                }
+            }
         </span>
     </div>
 </div>
