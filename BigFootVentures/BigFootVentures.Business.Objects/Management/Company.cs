@@ -5,12 +5,8 @@ namespace BigFootVentures.Business.Objects.Management
     public sealed class Company : BusinessBase
     {
         #region "Private Members"
-        
-        private string _escrowAgent { get; set; }
-        private string _broker { get; set; }
+
         private string _deletionRequest { get; set; }
-        private string _bigFootAccredited { get; set; }
-        private string _bigFootGroup { get; set; }
 
         #endregion
 
@@ -48,8 +44,8 @@ namespace BigFootVentures.Business.Objects.Management
         public string OHIMOwnerID { get; set; }
         public string AddressType { get; set; }
         public string CompanySize { get; set; }
-        public string EscrowAgent { get { return this._escrowAgent; } set { this._escrowAgent = value; this.EscrowAgentChk = string.Equals(value, true.ToString(), StringComparison.InvariantCultureIgnoreCase); } }
-        public string Broker { get { return this._broker; } set { this._broker = value; this.BrokerChk = string.Equals(value, true.ToString(), StringComparison.InvariantCultureIgnoreCase); } }
+        public bool EscrowAgent { get; set; }
+        public bool Broker { get; set; }
 
         public string DeletionRequest { get { return this._deletionRequest; } set { this._deletionRequest = value; this.DeletionRequestChk = string.Equals(value, true.ToString(), StringComparison.InvariantCultureIgnoreCase); } }
         public string DeletionRequestReason { get; set; }
@@ -66,9 +62,9 @@ namespace BigFootVentures.Business.Objects.Management
         public string TMPriorityCost { get; set; }
         public string TMRegistrationCertificateCost { get; set; }
         public string TMResearchCost { get; set; }
-        public string OtherCosts { get; set; }        
-        public string BigFootAccredited { get { return this._bigFootAccredited; } set { this._bigFootAccredited = value; this.BigFootAccreditedChk = string.Equals(value, true.ToString(), StringComparison.InvariantCultureIgnoreCase); } }
-        public string BigFootGroup { get { return this._bigFootGroup; } set { this._bigFootGroup = value; this.BigFootGroupChk = string.Equals(value, true.ToString(), StringComparison.InvariantCultureIgnoreCase); } }
+        public string OtherCosts { get; set; }
+        public bool BigFootAccredited { get; set; }
+        public bool BigFootGroup { get; set; }
 
         public string ShippingCountry { get; set; }
         public string ShippingStreet { get; set; }
@@ -79,12 +75,8 @@ namespace BigFootVentures.Business.Objects.Management
         #endregion
 
         #region "Calculated Properties"
-
-        public bool EscrowAgentChk { get; set; }
-        public bool BrokerChk { get; set; }
+        
         public bool DeletionRequestChk { get; set; }
-        public bool BigFootAccreditedChk { get; set; }
-        public bool BigFootGroupChk { get; set; }
 
         #endregion
     }

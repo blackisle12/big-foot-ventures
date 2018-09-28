@@ -50,8 +50,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     OHIMOwnerID = dataReader["OHIM OWNER ID"] as string,
                     AddressType = dataReader["ADDRESS TYPE"] as string,
                     CompanySize = dataReader["COMPANY SIZE"] as string,
-                    //EscrowAgent = ((sbyte)dataReader["ESCROW AGENT"] == 1)
-                    //Broker
+                    EscrowAgent = (Convert.ToSByte(dataReader["ESCROW AGENT"]) == 1),
+                    Broker = (Convert.ToSByte(dataReader["BROKER"]) == 1),
 
                     DeletionRequest = dataReader["DELETION REQUEST"] as string,
                     DeletionRequestReason = dataReader["DELETION REQUEST REASOND"] as string,
@@ -69,8 +69,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     TMRegistrationCertificateCost = dataReader["TM REGISTRATION CERTIFICATE COST"] as string,
                     TMResearchCost = dataReader["TM RESEARCH COST"] as string,
                     OtherCosts = dataReader["OTHER COSTS"] as string,
-                    //bigfootaccredited
-                    //bigfootgroup
+                    BigFootAccredited = (Convert.ToSByte(dataReader["BIGFOOT ACCREDITED"]) == 1),
+                    BigFootGroup = (Convert.ToSByte(dataReader["BIGFOOT GROUP"]) == 1),                    
 
                     ShippingCountry = dataReader["SHIPPINGCOUNTRY"] as string,
                     ShippingStreet = dataReader["SHIPPINGSTREET"] as string,
