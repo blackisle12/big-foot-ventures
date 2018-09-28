@@ -335,6 +335,24 @@ namespace BigFootVentures.Application.Web.Controllers
             return RedirectPost<Company>(model, postModel);
         }
 
+        [HttpGet]
+        [Route("Company/Delete/{ID:int}", Name = "CompanyDelete")]
+        public ActionResult CompanyDelete(int ID)
+        {
+            try
+            {
+                this._managementCompanyService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Companies");
+        }
+
         #endregion
 
         #region "Private Methods"

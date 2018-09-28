@@ -23,6 +23,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     AccountOwner = dataReader["AccountOwner"] as string,
                     //ParentAccountID
 
+                    DisplayName = dataReader["DISPLAYNAME"] as string,
+
                     CompanyName = dataReader["NAME"] as string,
                     FormerName = dataReader["FORMER NAME"] as string,
 
