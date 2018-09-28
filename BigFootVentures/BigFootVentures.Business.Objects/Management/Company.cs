@@ -33,6 +33,7 @@ namespace BigFootVentures.Business.Objects.Management
         public string Mobile { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
+
         public string Industry { get; set; }
         public string Employees { get; set; }
 
@@ -63,6 +64,7 @@ namespace BigFootVentures.Business.Objects.Management
         public string TMRegistrationCertificateCost { get; set; }
         public string TMResearchCost { get; set; }
         public string OtherCosts { get; set; }
+
         public bool BigFootAccredited { get; set; }
         public bool BigFootGroup { get; set; }
 

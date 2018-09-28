@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace BigFootVentures.Business.DataAccess.Mapping.Management
 {
@@ -39,6 +40,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     Mobile = dataReader["PERSONMOBILEPHONE"] as string,
                     Fax = dataReader["FAX"] as string,
                     Email = dataReader["EMAIL"] as string,
+
                     Industry = dataReader["INDUSTRY"] as string,
                     Employees = dataReader["NUMBEROFEMPLOYEES"] as string,
 
@@ -69,8 +71,9 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     TMRegistrationCertificateCost = dataReader["TM REGISTRATION CERTIFICATE COST"] as string,
                     TMResearchCost = dataReader["TM RESEARCH COST"] as string,
                     OtherCosts = dataReader["OTHER COSTS"] as string,
+
                     BigFootAccredited = (Convert.ToSByte(dataReader["BIGFOOT ACCREDITED"]) == 1),
-                    BigFootGroup = (Convert.ToSByte(dataReader["BIGFOOT GROUP"]) == 1),                    
+                    BigFootGroup = (Convert.ToSByte(dataReader["BIGFOOT GROUP"]) == 1),
 
                     ShippingCountry = dataReader["SHIPPINGCOUNTRY"] as string,
                     ShippingStreet = dataReader["SHIPPINGSTREET"] as string,
@@ -85,7 +88,73 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
         public MySqlParameter[] CreateParameters(object entity)
         {
-            throw new NotImplementedException();
+            var company = (Company)entity;
+            var parameters = new List<MySqlParameter>();
+
+            parameters.AddRange(new MySqlParameter[]
+            {
+                new MySqlParameter("pAccountRecordType", MySqlDbType.VarChar, 100) { Value = company.AccountRecordType, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pCompanyName", MySqlDbType.VarChar, 100) { Value = company.CompanyName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pFormerName", MySqlDbType.VarChar, 100) { Value = company.FormerName, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pLastName", MySqlDbType.VarChar, 100) { Value = company.LastName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pFirstName", MySqlDbType.VarChar, 100) { Value = company.FirstName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pMiddleName", MySqlDbType.VarChar, 100) { Value = company.MiddleName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pSuffix", MySqlDbType.VarChar, 100) { Value = company.Suffix, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTitle", MySqlDbType.VarChar, 100) { Value = company.Title, Direction = ParameterDirection.Input },
+                new MySqlParameter("pSalutation", MySqlDbType.VarChar, 100) { Value = company.Salutation, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pType", MySqlDbType.VarChar, 100) { Value = company.Type, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDescription", MySqlDbType.VarChar, 255) { Value = company.Description, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pPhone", MySqlDbType.VarChar, 100) { Value = company.Phone, Direction = ParameterDirection.Input },
+                new MySqlParameter("pMobile", MySqlDbType.VarChar, 100) { Value = company.Mobile, Direction = ParameterDirection.Input },
+                new MySqlParameter("pFax", MySqlDbType.VarChar, 100) { Value = company.Fax, Direction = ParameterDirection.Input },
+                new MySqlParameter("pEmail", MySqlDbType.VarChar, 100) { Value = company.Email, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pIndustry", MySqlDbType.VarChar, 100) { Value = company.Industry, Direction = ParameterDirection.Input },
+                new MySqlParameter("pEmployees", MySqlDbType.VarChar, 100) { Value = company.Employees, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pNameID", MySqlDbType.VarChar, 100) { Value = company.NameID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOfficeIDOHIM", MySqlDbType.VarChar, 100) { Value = company.OfficeIDOHIM, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOfficeIDGB", MySqlDbType.VarChar, 100) { Value = company.OfficeIDGB, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOHIMNumTrademarks", MySqlDbType.VarChar, 100) { Value = company.OHIMNumTrademarks, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOHIMNumOppositions", MySqlDbType.VarChar, 100) { Value = company.OHIMNUMOppositions, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOHIMOwnerID", MySqlDbType.VarChar, 100) { Value = company.OHIMOwnerID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pAddressType", MySqlDbType.VarChar, 100) { Value = company.AddressType, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCompanySize", MySqlDbType.VarChar, 100) { Value = company.CompanySize, Direction = ParameterDirection.Input },
+                new MySqlParameter("pEscrowAgent", company.EscrowAgent ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pBroker", company.Broker ? 1 : 0) { Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pDeletionRequest", MySqlDbType.VarChar, 100) { Value = company.DeletionRequestChk, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = company.DeletionRequestReason, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pCompanyRegistrationNumber", MySqlDbType.VarChar, 100) { Value = company.CompanyRegistrationNumber, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCountryOfIncorporation", MySqlDbType.VarChar, 100) { Value = company.CountryOfIncorporation, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDateOfIncorporation", MySqlDbType.VarChar, 100) { Value = company.DateOfIncorporation, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTaxNumber", MySqlDbType.VarChar, 100) { Value = company.TaxNumber, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOfficers", MySqlDbType.VarChar, 100) { Value = company.Officers, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pTMFilingCost", MySqlDbType.VarChar, 100) { Value = company.TMFilingCost, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTMCancellationCost", MySqlDbType.VarChar, 100) { Value = company.TMCancellationCost, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTMOppositionCost", MySqlDbType.VarChar, 100) { Value = company.TMOppositionCost, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTMPriorityCost", MySqlDbType.VarChar, 100) { Value = company.TMPriorityCost, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTMRegistrationCertificateCost", MySqlDbType.VarChar, 100) { Value = company.TMRegistrationCertificateCost, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTMResearchCost", MySqlDbType.VarChar, 100) { Value = company.TMResearchCost, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOtherCosts", MySqlDbType.VarChar, 255) { Value = company.OtherCosts, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pBigFootAccredited", company.BigFootAccredited ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pBigFootGroup", company.BigFootGroup ? 1 : 0) { Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pShippingCountry", MySqlDbType.VarChar, 100) { Value = company.ShippingCountry, Direction = ParameterDirection.Input },
+                new MySqlParameter("pShippingStreet", MySqlDbType.VarChar, 255) { Value = company.ShippingStreet, Direction = ParameterDirection.Input },
+                new MySqlParameter("pShippingCity", MySqlDbType.VarChar, 100) { Value = company.ShippingCity, Direction = ParameterDirection.Input },
+                new MySqlParameter("pShippingState", MySqlDbType.VarChar, 100) { Value = company.ShippingState, Direction = ParameterDirection.Input },
+                new MySqlParameter("pShippingPostalCode", MySqlDbType.VarChar, 100) { Value = company.ShippingPostalCode, Direction = ParameterDirection.Input },
+            });
+
+            return parameters.ToArray();
         }
 
         #endregion

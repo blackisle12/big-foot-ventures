@@ -1,4 +1,5 @@
 ﻿using BigFootVentures.Application.Web.Models.Extensions;
+using BigFootVentures.Application.Web.Models.Utilities;
 using BigFootVentures.Application.Web.Models.ViewModels;
 using BigFootVentures.Business.Objects;
 using BigFootVentures.Business.Objects.Enumerators;
@@ -133,7 +134,7 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("Brand", Name = "BrandPost")]
         public ActionResult Brand(VMModel<Brand> model)
         {
-            Action action = () =>
+            Func<int> postModel = () =>
             {
                 if (model.Record.CategoriesSelected != null)
                     model.Record.Category = string.Join(";", model.Record.CategoriesSelected);
@@ -148,6 +149,8 @@ namespace BigFootVentures.Application.Web.Controllers
                     {
                         this._managementBrandService.Update(model.Record);
                     }
+
+                    return model.Record.ID;
                 }
                 else
                 {
@@ -155,7 +158,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
             };
 
-            return RedirectPost<Brand>(model, action, new { ID = model.Record.ID });
+            return RedirectPost<Brand>(model, postModel);
         }
 
         [HttpGet]
@@ -286,7 +289,7 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("Company", Name = "CompanyPost")]
         public ActionResult Company(VMModel<Company> model)
         {
-            Action action = () =>
+            Func<int> postModel = () =>
             {
                 if (string.Equals(model.Record.AccountRecordType, ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -320,6 +323,8 @@ namespace BigFootVentures.Application.Web.Controllers
                     {
                         this._managementCompanyService.Update(model.Record);
                     }
+
+                    return model.Record.ID;
                 }
                 else
                 {
@@ -327,20 +332,20 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
             };
 
-            return RedirectPost<Company>(model, action, new { recordType = model.Record.AccountRecordType, ID = model.Record.ID });
+            return RedirectPost<Company>(model, postModel);
         }
 
         #endregion
 
         #region "Private Methods"
 
-        private ActionResult RedirectPost<TModel>(VMModel<TModel> model, Action action, dynamic routeValues) where TModel : BusinessBase
+        private ActionResult RedirectPost<TModel>(VMModel<TModel> model, Func<int> postModel) where TModel : BusinessBase
         {
             var routeName = model.Name;
 
             try
             {
-                action();
+                model.Record.ID = postModel();
                 routeName += "View";
 
                 TempData.Add("IsPosted", true);
@@ -356,7 +361,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Add("ModelPostedState", ModelState);
             }
 
-            return RedirectToRoute(routeName, routeValues);
+            return RedirectToRoute(routeName, RouteUtils.GetRouteMapping(typeof(TModel), model.Record));
         }
 
         private VMModel<TModel> GetValidationErrors<TModel>() where TModel : BusinessBase
