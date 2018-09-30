@@ -48,6 +48,7 @@
                                         @Html.TextBoxFor(m => m.Record.CompanyName, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(m => m.Record.CompanyName, "", new { @class = "text-danger" })
                                     </div>
+
                                     <label class="col-sm-2 control-label text-neutral">Account Record Type</label>
                                     <div class="col-sm-4">
                                         @Html.TextBoxFor(m => m.Record.AccountRecordType, new { @class = "form-control input-neutral", @readonly = "readonly" })

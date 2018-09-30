@@ -23,7 +23,7 @@ input,
 select,
 textarea {
     max-width: 280px;
-    font-size: 11px !important;
+    font-size: 12px !important;
 }
 
 .btn {
@@ -36,7 +36,7 @@ textarea {
     -moz-box-shadow: 5px 5px 5px #666;
     -webkit-box-shadow: 1px 1px 1px #666;
     border-color: transparent;
-    background-color: #434343;
+    background-color: #333;
 }
 
 .navbar-default .navbar-brand {
@@ -65,21 +65,17 @@ textarea {
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-    background-color: #434343;
+    background-color: #333;
     color: #ffffff;
-    border-bottom: 5px solid #329FDA;
+    border-bottom: 5px solid white;
 }
 
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
     background-color: #eee;
 }
 
-.form-control[disabled], fieldset[disabled] .form-control {
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
     background-color: transparent;
-}
-
-.form-control[readonly]{
-    cursor:not-allowed;
 }
 
 .form-control {
@@ -99,11 +95,6 @@ textarea {
     box-shadow: 5px 5px 5px #666;
     -moz-box-shadow: 5px 5px 5px #666;
     -webkit-box-shadow: 1px 1px 1px #666;
-}
-
-.panel-default > .panel-body > .panel-default > .panel-heading > .panel-title {
-   font-size: 9pt;
-   font-weight:600;
 }
 
 .panel-heading {
@@ -144,8 +135,4 @@ textarea {
 
 .input-neutral {
     border-color: #ccc !important;
-}
-
-.required {
-    border-left: 4px solid #ff6767;
 }
