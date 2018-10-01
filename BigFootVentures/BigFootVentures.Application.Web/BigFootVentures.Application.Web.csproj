@@ -197,6 +197,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Views\Home\Brand.css" />
+    <Content Include="Content\Views\Home\Registers.css" />
     <Content Include="Content\Views\Home\Companies.css" />
     <Content Include="Content\Views\Home\Brands.css" />
     <Content Include="Content\Views\Shared\_Layout.css" />
@@ -227,6 +228,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Views\Home\Brands.js" />
+    <Content Include="Scripts\Views\Home\Registers.js" />
     <Content Include="Scripts\Views\Home\Companies.js" />
     <Content Include="Scripts\Views\Home\Company.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
@@ -257,6 +259,7 @@
     <Content Include="Views\Home\Companies.cshtml" />
     <Content Include="Views\Home\CompanyNewSelectRecordType.cshtml" />
     <Content Include="Views\Home\Company.cshtml" />
+    <Content Include="Views\Home\Registers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

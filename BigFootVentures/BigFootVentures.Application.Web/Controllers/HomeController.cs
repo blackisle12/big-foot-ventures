@@ -19,15 +19,19 @@ namespace BigFootVentures.Application.Web.Controllers
 
         private readonly IManagementService<Brand> _managementBrandService = null;
         private readonly IManagementService<Company> _managementCompanyService = null;
+        private readonly IManagementService<Register> _managementRegisterService = null;
 
         #endregion
 
         #region "Constructors"
 
-        public HomeController(IManagementService<Brand> managementBrandService, IManagementService<Company> managementCompanyService)
+        public HomeController(IManagementService<Brand> managementBrandService,
+            IManagementService<Company> managementCompanyService,
+            IManagementService<Register> managementRegisterService)
         {
             this._managementBrandService = managementBrandService;
             this._managementCompanyService = managementCompanyService;
+            this._managementRegisterService = managementRegisterService;
         }
 
         #endregion
@@ -351,6 +355,140 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return RedirectToAction("Companies");
+        }
+
+        #endregion
+
+        #region "Registers"
+
+        [Route("Registers/{rowCount?}/{page?}", Name = "Registers")]
+        public ActionResult Registers(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var registers = this._managementRegisterService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Register>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = registers
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Register/{ID:int}", Name = "RegisterView")]
+        public ActionResult Register(int ID)
+        {
+            var register = this._managementRegisterService.Get(ID);
+            var model = new VMModel<Register>
+            {
+                Record = register,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Register", model);
+        }
+
+        [Route("Register/Edit/{ID:int}", Name = "RegisterEdit")]
+        public ActionResult RegisterEdit(int ID)
+        {
+            VMModel<Register> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Register>();
+            }
+            else
+            {
+                model = new VMModel<Register>
+                {
+                    Record = this._managementRegisterService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Register", model);
+        }
+
+        [Route("Register/New", Name = "RegisterNew")]
+        public ActionResult RegisterNew()
+        {
+            VMModel<Register> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Register>();
+            }
+            else
+            {
+                model = new VMModel<Register>
+                {
+                    Record = new Register(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Brand", model);
+        }
+
+        [HttpPost]
+        [Route("Register", Name = "RegisterPost")]
+        public ActionResult Register(VMModel<Register> model)
+        {
+            Func<int> postModel = () =>
+            {                
+                if (ModelState.IsValid)
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementRegisterService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementRegisterService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Register>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Register/Delete/{ID:int}", Name = "RegisterDelete")]
+        public ActionResult RegisterDelete(int ID)
+        {
+            try
+            {
+                this._managementRegisterService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Brands");
         }
 
         #endregion

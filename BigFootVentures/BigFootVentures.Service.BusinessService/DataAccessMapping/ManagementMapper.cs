@@ -19,6 +19,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new CompanyMapper();
             }
+            else if (type == typeof(Register))
+            {
+                return new RegisterMapper();
+            }
             else
             {
                 return null;
