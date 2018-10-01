@@ -442,7 +442,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 };
             }
 
-            return View("Brand", model);
+            return View("Register", model);
         }
 
         [HttpPost]
@@ -488,7 +488,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 //log exception here
             }
 
-            return RedirectToAction("Brands");
+            return RedirectToAction("Registers");
         }
 
         #endregion
