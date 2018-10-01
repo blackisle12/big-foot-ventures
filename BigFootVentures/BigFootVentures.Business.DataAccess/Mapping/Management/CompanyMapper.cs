@@ -19,9 +19,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 entities.Add(new Company
                 {
                     ID = (int)dataReader["ID"],
+
                     AccountRecordType = dataReader["AccountRecordType"] as string,
                     AccountOwner = dataReader["AccountOwner"] as string,
-                    //ParentAccountID
+
+                    ParentAccountID = dataReader["ParentAccountID"] as int?,
 
                     DisplayName = dataReader["DISPLAYNAME"] as string,
 
@@ -99,6 +101,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                 new MySqlParameter("pCompanyName", MySqlDbType.VarChar, 100) { Value = company.CompanyName, Direction = ParameterDirection.Input },
                 new MySqlParameter("pFormerName", MySqlDbType.VarChar, 100) { Value = company.FormerName, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pParentAccountID", MySqlDbType.Int32) { Value = company.ParentAccountID, Direction = ParameterDirection.Input },
 
                 new MySqlParameter("pLastName", MySqlDbType.VarChar, 100) { Value = company.LastName, Direction = ParameterDirection.Input },
                 new MySqlParameter("pFirstName", MySqlDbType.VarChar, 100) { Value = company.FirstName, Direction = ParameterDirection.Input },

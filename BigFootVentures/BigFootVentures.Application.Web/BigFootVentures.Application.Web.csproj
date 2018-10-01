@@ -184,6 +184,7 @@
     <Compile Include="Models\Utilities\PageUtils.cs" />
     <Compile Include="Models\Utilities\RouteUtils.cs" />
     <Compile Include="Models\Utilities\StringUtils.cs" />
+    <Compile Include="Models\ViewModels\VMJsonResult.cs" />
     <Compile Include="Models\ViewModels\VMModel.cs" />
     <Compile Include="Models\ViewModels\VMPageResult.cs" />
     <Compile Include="Models\ViewModels\VMSelectListItem.cs" />
@@ -217,6 +218,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -261,6 +263,7 @@
     <Content Include="Views\Home\Company.cshtml" />
     <Content Include="Views\Home\Registers.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Modals\_CompanyAssociateParentAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

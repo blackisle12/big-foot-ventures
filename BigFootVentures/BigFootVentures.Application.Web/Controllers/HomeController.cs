@@ -340,6 +340,32 @@ namespace BigFootVentures.Application.Web.Controllers
         }
 
         [HttpGet]
+        [Route("Company/Autocomplete/{keyword}", Name = "CompanyAutocomplete")]
+        public ActionResult CompanyAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementCompanyService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         [Route("Company/Delete/{ID:int}", Name = "CompanyDelete")]
         public ActionResult CompanyDelete(int ID)
         {

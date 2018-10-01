@@ -1,6 +1,4 @@
 ﻿$(function () {
-    InitScript();
-    
     $('[name="Button.Add.Categories"]').on('click', function () {
         var $categoriesAvailable = $('[name="Record.CategoriesAvailable"]');
         var $categoriesSelected = $('[name="Record.CategoriesSelected"]');
@@ -19,9 +17,5 @@
             $('[name="Record.CategoriesSelected"] option:contains("' + category + '")').remove();
             $categoriesAvailable.append($('<option>', { text: category }));
         });
-    });
+    });    
 });
-
-function InitScript() {    
-}
-
