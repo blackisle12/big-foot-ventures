@@ -214,6 +214,17 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult Company(int ID)
         {
             var company = this._managementCompanyService.Get(ID);
+
+            if (company.ParentAccountID != null)
+            {
+                var companyParent = this._managementCompanyService.Get(company.ParentAccountID.Value);
+
+                if (companyParent != null)
+                {                    
+                    company.ParentAccountName = companyParent.DisplayName;
+                }
+            }
+
             var model = new VMModel<Company>
             {
                 Record = company,
@@ -240,9 +251,21 @@ namespace BigFootVentures.Application.Web.Controllers
             }
             else
             {
+                var company = this._managementCompanyService.Get(ID);
+
+                if (company.ParentAccountID != null)
+                {
+                    var companyParent = this._managementCompanyService.Get(company.ParentAccountID.Value);
+
+                    if (companyParent != null)
+                    {
+                        company.ParentAccountName = companyParent.DisplayName;
+                    }
+                }
+
                 model = new VMModel<Company>
                 {
-                    Record = this._managementCompanyService.Get(ID),
+                    Record = company,
                     PageMode = PageMode.Edit
                 };
             }
