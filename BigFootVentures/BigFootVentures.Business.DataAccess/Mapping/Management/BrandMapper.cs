@@ -18,15 +18,19 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 entities.Add(new Brand
                 {
                     ID = (int)dataReader["ID"],
+
+                    OwnerName = dataReader["Owner_Name"] as string,
+
                     Name = dataReader["NAME"] as string,
                     Purpose = dataReader["PURPOSE"] as string,
                     Value = dataReader["VALUE"] as string,
                     HVT = dataReader["HVT"] as string,
                     EMV = dataReader["EMV"] as string,
+                    Category = dataReader["CATEGORY"] as string,
+
                     DeletionRequest = dataReader["DELETION_REQUEST"] as string,
                     DeletionRequestReason = dataReader["DELETION_REQUEST_REASON"] as string,
-                    Category = dataReader["CATEGORY"] as string,
-                    OwnerName = dataReader["Owner_Name"] as string,
+
                     Premium = dataReader["PREMIUM__C"] as string,
                     CharacterCount = dataReader["CHARACTER_COUNT__C"] as string,
                     BNF = dataReader["BNF__C"] as string
@@ -48,9 +52,10 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pValue", MySqlDbType.VarChar, 100) { Value = brand.Value, Direction = ParameterDirection.Input },
                 new MySqlParameter("pHVT", MySqlDbType.VarChar, 100) { Value = brand.HVTChk.ToString(), Direction = ParameterDirection.Input },
                 new MySqlParameter("pEMV", MySqlDbType.VarChar, 100) { Value = brand.EMV, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCategory", MySqlDbType.VarChar, 255) { Value = brand.Category, Direction = ParameterDirection.Input },
+
                 new MySqlParameter("pDeletionRequest", MySqlDbType.VarChar, 100) { Value = brand.DeletionRequestChk, Direction = ParameterDirection.Input },
-                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = brand.DeletionRequestReason, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCategory", MySqlDbType.VarChar, 255) { Value = brand.Category, Direction = ParameterDirection.Input }
+                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = brand.DeletionRequestReason, Direction = ParameterDirection.Input }
             });
 
             return parameters.ToArray();

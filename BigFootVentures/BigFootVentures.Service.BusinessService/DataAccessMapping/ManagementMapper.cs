@@ -23,6 +23,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new RegisterMapper();
             }
+            else if (type == typeof(DomainEnquiry))
+            {
+                return new DomainEnquiryMapper();
+            }
             else
             {
                 return null;

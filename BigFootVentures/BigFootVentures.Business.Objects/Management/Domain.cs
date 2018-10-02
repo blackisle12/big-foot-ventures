@@ -1,11 +1,15 @@
-﻿namespace BigFootVentures.Business.Objects.Management
-{
-    public sealed class Domain : BusinessBase
-    {
-        #region "Properties"
+﻿//namespace BigFootVentures.Business.Objects.Management
+//{
+//    public sealed class Domain : BusinessBase
+//    {
+//        #region "Properties"
 
-        public string BrandName { get; set; }        
+//        public string RegistrantCompanyName { get; set; }
+//        public int? RegistrantCompanyID { get; set; }
 
-        #endregion
-    }
-}
+//        [Required(ErrorMessage = "This field is required")]
+//        public string DomainName { get; set; }
+
+//        #endregion
+//    }
+//}
