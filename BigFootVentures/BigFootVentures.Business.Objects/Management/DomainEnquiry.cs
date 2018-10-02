@@ -22,12 +22,14 @@
         public string PrivateRegistrationEmail { get; set; }
         public string Registrant { get; set; }
         public string CaseOrigin { get; set; }
+        public string ReferenceNumber { get; set; }
 
         public string DomainName { get; set; }
         public string RegistrantCompanyName { get; set; }
         public int? RegistrantCompanyID { get; set; }
         public string RegistrantName { get; set; }
         public int? RegistrantID { get; set; }
+        public string RegistrantEmail { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }

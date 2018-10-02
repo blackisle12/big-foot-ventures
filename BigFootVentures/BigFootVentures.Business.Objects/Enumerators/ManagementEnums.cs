@@ -323,9 +323,6 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum StatusDomainEnquiry
             {
-                [Description("")]
-                NotSet,
-
                 [Description("To be contacted")]
                 ToBeContacted,
 
@@ -371,9 +368,6 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum StatusITSupport
             {
-                [Description("")]
-                NotSet,
-
                 [Description("New")]
                 New,
 

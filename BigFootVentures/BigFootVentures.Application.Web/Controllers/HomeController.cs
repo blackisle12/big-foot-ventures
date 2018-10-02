@@ -20,6 +20,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Brand> _managementBrandService = null;
         private readonly IManagementService<Company> _managementCompanyService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
+        private readonly IManagementService<DomainEnquiry> _managementDomainEnquiryService = null;
 
         #endregion
 
@@ -27,11 +28,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         public HomeController(IManagementService<Brand> managementBrandService,
             IManagementService<Company> managementCompanyService,
-            IManagementService<Register> managementRegisterService)
+            IManagementService<Register> managementRegisterService,
+            IManagementService<DomainEnquiry> managementDomainEnquiryService)
         {
             this._managementBrandService = managementBrandService;
             this._managementCompanyService = managementCompanyService;
             this._managementRegisterService = managementRegisterService;
+            this._managementDomainEnquiryService = managementDomainEnquiryService;
         }
 
         #endregion
@@ -92,27 +95,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return View("Brand", model);
         }
 
-        [Route("Brand/Edit/{ID:int}", Name = "BrandEdit")]
-        public ActionResult BrandEdit(int ID)
-        {
-            VMModel<Brand> model = null;
-
-            if (TempData.ContainsKey("ModelPosted"))
-            {
-                model = this.GetValidationErrors<Brand>();
-            }
-            else
-            {
-                model = new VMModel<Brand>
-                {
-                    Record = this._managementBrandService.Get(ID),
-                    PageMode = PageMode.Edit
-                };
-            }
-
-            return View("Brand", model);
-        }
-
         [Route("Brand/New", Name = "BrandNew")]
         public ActionResult BrandNew()
         {
@@ -133,6 +115,27 @@ namespace BigFootVentures.Application.Web.Controllers
 
             return View("Brand", model);
         }
+
+        [Route("Brand/Edit/{ID:int}", Name = "BrandEdit")]
+        public ActionResult BrandEdit(int ID)
+        {
+            VMModel<Brand> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Brand>();
+            }
+            else
+            {
+                model = new VMModel<Brand>
+                {
+                    Record = this._managementBrandService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Brand", model);
+        }        
 
         [HttpPost]
         [Route("Brand", Name = "BrandPost")]
@@ -240,6 +243,32 @@ namespace BigFootVentures.Application.Web.Controllers
             return View("Company", model);
         }
 
+        [Route("Company/New/{recordType}", Name = "CompanyNew")]
+        public ActionResult CompanyNew(string recordType)
+        {
+            if (!(string.Equals(recordType, ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
+                string.Equals(recordType, ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
+                string.Equals(recordType, ManagementEnums.Company.AccountRecordType.PersonAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase)))
+                throw new Exception(); //throw to error 500
+
+            VMModel<Company> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Company>();
+            }
+            else
+            {
+                model = new VMModel<Company>
+                {
+                    Record = new Company { AccountRecordType = recordType },
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Company", model);
+        }
+
         [Route("Company/Edit/{ID:int}", Name = "CompanyEdit")]
         public ActionResult CompanyEdit(int ID)
         {
@@ -284,33 +313,7 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult CompanyNewSelectRecordType(string recordType)
         {
             return RedirectToRoute("CompanyNew", new { recordType });
-        }
-
-        [Route("Company/New/{recordType}", Name = "CompanyNew")]
-        public ActionResult CompanyNew(string recordType)
-        {
-            if (!(string.Equals(recordType, ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
-                string.Equals(recordType, ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
-                string.Equals(recordType, ManagementEnums.Company.AccountRecordType.PersonAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase)))
-                throw new Exception(); //throw to error 500
-
-            VMModel<Company> model = null;
-
-            if (TempData.ContainsKey("ModelPosted"))
-            {
-                model = this.GetValidationErrors<Company>();
-            }
-            else
-            {
-                model = new VMModel<Company>
-                {
-                    Record = new Company { AccountRecordType = recordType },
-                    PageMode = PageMode.Edit
-                };
-            }
-
-            return View("Company", model);
-        }
+        }        
 
         [HttpPost]
         [Route("Company", Name = "CompanyPost")]
@@ -360,6 +363,24 @@ namespace BigFootVentures.Application.Web.Controllers
             };
 
             return RedirectPost<Company>(model, postModel);
+        }        
+
+        [HttpGet]
+        [Route("Company/Delete/{ID:int}", Name = "CompanyDelete")]
+        public ActionResult CompanyDelete(int ID)
+        {
+            try
+            {
+                this._managementCompanyService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Companies");
         }
 
         [HttpGet]
@@ -388,13 +409,149 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region "Domain Enquiries"
+
+        [Route("DomainEnquiries/{rowCount?}/{page?}", Name = "DomainEnquiries")]
+        public ActionResult DomainEnquiries(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var domainEnquiries = this._managementDomainEnquiryService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<DomainEnquiry>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = domainEnquiries
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("DomainEnquiry/{ID:int}", Name = "DomainEnquiryView")]
+        public ActionResult DomainEnquiry(int ID)
+        {
+            var domainEnquiry = this._managementDomainEnquiryService.Get(ID);
+
+            var model = new VMModel<DomainEnquiry>
+            {
+                Record = domainEnquiry,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("DomainEnquiry", model);
+        }
+
+        [Route("DomainEnquiry/New/{recordType}", Name = "DomainEnquiryNew")]
+        public ActionResult DomainEnquiryNew(string recordType)
+        {
+            if (!(string.Equals(recordType, ManagementEnums.DomainEnquiry.RecordType.DomainEnquiry.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
+                string.Equals(recordType, ManagementEnums.DomainEnquiry.RecordType.ITSupport.ToDescription(), StringComparison.InvariantCultureIgnoreCase)))
+                throw new Exception(); //throw to error 500
+
+            VMModel<DomainEnquiry> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<DomainEnquiry>();
+            }
+            else
+            {
+                model = new VMModel<DomainEnquiry>
+                {
+                    Record = new DomainEnquiry { RecordType = recordType },
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("DomainEnquiry", model);
+        }
+
+        [Route("DomainEnquiry/Edit/{ID:int}", Name = "DomainEnquiryEdit")]
+        public ActionResult DomainEnquiryEdit(int ID)
+        {
+            VMModel<DomainEnquiry> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<DomainEnquiry>();
+            }
+            else
+            {
+                var domainEnquiry = this._managementDomainEnquiryService.Get(ID);
+              
+                model = new VMModel<DomainEnquiry>
+                {
+                    Record = domainEnquiry,
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("DomainEnquiry", model);
+        }
+
+        [Route("DomainEnquiry/New/SelectRecordType", Name = "DomainEnquiryNewSelectRecordType")]
+        public ActionResult DomainEnquiryNewSelectRecordType()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("DomainEnquiryNewSelectRecordType", Name = "DomainEnquiryNewSelectRecordTypePost")]
+        public ActionResult DomainEnquiryNewSelectRecordType(string recordType)
+        {
+            return RedirectToRoute("DomainEnquiryNew", new { recordType });
+        }
+
+        [HttpPost]
+        [Route("DomainEnquiry", Name = "DomainEnquiryPost")]
+        public ActionResult DomainEnquiry(VMModel<DomainEnquiry> model)
+        {
+            Func<int> postModel = () =>
+            {                
+                if (ModelState.IsValid)
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementDomainEnquiryService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementDomainEnquiryService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<DomainEnquiry>(model, postModel);
+        }
+
         [HttpGet]
-        [Route("Company/Delete/{ID:int}", Name = "CompanyDelete")]
-        public ActionResult CompanyDelete(int ID)
+        [Route("DomainEnquiry/Delete/{ID:int}", Name = "DomainEnquiryDelete")]
+        public ActionResult DomainEnquiryDelete(int ID)
         {
             try
             {
-                this._managementCompanyService.Delete(ID);
+                this._managementDomainEnquiryService.Delete(ID);
 
                 TempData.Add("IsRedirectFromDelete", true);
             }
@@ -403,7 +560,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 //log exception here
             }
 
-            return RedirectToAction("Companies");
+            return RedirectToAction("DomainEnquiries");
         }
 
         #endregion
@@ -452,27 +609,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return View("Register", model);
         }
 
-        [Route("Register/Edit/{ID:int}", Name = "RegisterEdit")]
-        public ActionResult RegisterEdit(int ID)
-        {
-            VMModel<Register> model = null;
-
-            if (TempData.ContainsKey("ModelPosted"))
-            {
-                model = this.GetValidationErrors<Register>();
-            }
-            else
-            {
-                model = new VMModel<Register>
-                {
-                    Record = this._managementRegisterService.Get(ID),
-                    PageMode = PageMode.Edit
-                };
-            }
-
-            return View("Register", model);
-        }
-
         [Route("Register/New", Name = "RegisterNew")]
         public ActionResult RegisterNew()
         {
@@ -493,6 +629,27 @@ namespace BigFootVentures.Application.Web.Controllers
 
             return View("Register", model);
         }
+
+        [Route("Register/Edit/{ID:int}", Name = "RegisterEdit")]
+        public ActionResult RegisterEdit(int ID)
+        {
+            VMModel<Register> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Register>();
+            }
+            else
+            {
+                model = new VMModel<Register>
+                {
+                    Record = this._managementRegisterService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Register", model);
+        }        
 
         [HttpPost]
         [Route("Register", Name = "RegisterPost")]

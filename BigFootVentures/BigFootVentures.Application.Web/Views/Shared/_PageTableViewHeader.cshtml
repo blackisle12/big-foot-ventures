@@ -9,6 +9,10 @@
                 {
                     <button type="button" onclick="window.open('@Url.RouteUrl("CompanyNewSelectRecordType")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
                 }
+                else if (Model.Name == "DomainEnquiry")
+                {
+                    <button type="button" onclick="window.open('@Url.RouteUrl("DomainEnquiryNewSelectRecordType")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
+                }
                 else
                 {
                     <button type="button" onclick="window.open('@Url.RouteUrl($"{Model.Name}New")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
