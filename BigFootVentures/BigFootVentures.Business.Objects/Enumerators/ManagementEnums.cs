@@ -294,5 +294,140 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 Residential
             }
         }
+
+        public static class DomainEnquiry
+        {
+            public enum RecordType
+            {
+                [Description("Domain Enquiry")]
+                DomainEnquiry,
+
+                [Description("IT Support")]
+                ITSupport
+            }
+
+            public enum Priority
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Low")]
+                Low,
+
+                [Description("Medium")]
+                Medium,
+
+                [Description("High")]
+                High
+            }
+
+            public enum StatusDomainEnquiry
+            {
+                [Description("To be contacted")]
+                ToBeContacted,
+
+                [Description("Not Interested")]
+                NotInterested,
+
+                [Description("In Negotiations")]
+                InNegotiations,
+
+                [Description("Couldn't agree on terms")]
+                CouldntAgreeOnTerms,
+
+                [Description("Agreed keep in touch")]
+                AgreedKeepInTouch,
+
+                [Description("Follow up")]
+                FollowUp,
+
+                [Description("Acquired")]
+                Acquired,
+
+                [Description("Leased (BigFoot: Lessor)")]
+                LeasedBigFootLessor,
+
+                [Description("Leased (BigFoot: Lessee)")]
+                LeasedBigFootLessee,
+
+                [Description("Don't contact us again")]
+                DontContactUsAgain,
+
+                [Description("Sent Enquiry 1")]
+                SentEnquiry1,
+
+                [Description("Sent Enquiry 2")]
+                SentEnquiry2,
+
+                [Description("Sent Enquiry 3")]
+                SentEnquiry3,
+
+                [Description("Sent Enquiry 4")]
+                SentEnquiry4
+            }
+
+            public enum StatusITSupport
+            {
+                [Description("New")]
+                New,
+
+                [Description("On Hold")]
+                OnHold,
+
+                [Description("Escalated")]
+                Escalated,
+
+                [Description("Under Evaluation")]
+                UnderEvaluation,
+
+                [Description("Design/Development")]
+                DesignDevelopment,
+
+                [Description("Build Complete")]
+                BuildComplete,
+
+                [Description("Testing in Progress")]
+                TestingInProgress,
+
+                [Description("Closed")]
+                Closed
+            }
+
+            public enum CaseAssign
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Rajiv")]
+                Rajiv,
+
+                [Description("Shravan")]
+                Shravan
+            }
+
+            public enum CaseOrigin
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Close")]
+                Close,
+
+                [Description("Admin")]
+                Admin,
+
+                [Description("Email")]
+                Email,
+
+                [Description("Phone")]
+                Phone,
+
+                [Description("User")]
+                User,
+
+                [Description("Web")]
+                Web
+            }
+        }
     }
 }

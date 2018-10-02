@@ -1,5 +1,6 @@
 ﻿using BigFootVentures.Business.DataAccess.Mapping;
 using BigFootVentures.Business.Objects;
+using BigFootVentures.Business.Objects.Wrapper;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace BigFootVentures.Business.DataAccess
         ICollection<TEntity> Get(int startIndex, int rowCount, out int total);
 
         TEntity Get(int ID);
+
+        ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
 
         #endregion
 
@@ -114,6 +117,45 @@ namespace BigFootVentures.Business.DataAccess
                 }
 
                 return entity;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public ICollection<AutocompleteWrapper> GetAutocomplete(string keyword)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                var entities = new List<AutocompleteWrapper>();
+
+                using (var command = new MySqlCommand($"{this._entityName}_GetAutocomplete", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("keyword", MySqlDbType.VarChar, 100) { Value = keyword, Direction = ParameterDirection.Input });
+
+                    var dataReader = command.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        entities.Add(new AutocompleteWrapper
+                        {
+                            Text = dataReader["TEXT"] as string,
+                            Value = Convert.ToInt32(dataReader["VALUE"])
+                        });
+                    }
+
+                    dataReader.Close();
+                }
+
+                return entities;
             }
             catch
             {

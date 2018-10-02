@@ -1,0 +1,54 @@
+﻿<link href="~/Content/Views/Home/DomainEnquiries.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Domain Enquiries";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<DomainEnquiry>
+
+@using (Html.BeginForm("DomainEnquiries", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-case-number">Case Number</th>
+                        <th class="th-description">Description</th>
+                        <th class="th-reference-number">Reference Number</th>
+                        <th class="th-domain-name">Domain Name</th>
+                        <th class="th-do-not-contact">Do Not Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var domainEnquiry in Model.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("DomainEnquiryView", new { ID = domainEnquiry.ID })" target="_blank">@domainEnquiry.OldCaseNumber</a></td>
+                                <td>@domainEnquiry.Description</td>
+                                <td>@domainEnquiry.ReferenceNumber</td>
+                                <td>@domainEnquiry.DomainName</td>
+                                <td>@domainEnquiry.DoNotContact</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/DomainEnquiries.js"></script>
+}

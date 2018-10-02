@@ -1,0 +1,52 @@
+﻿<link href="~/Content/Views/Home/Companies.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Registers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<Register>
+
+@using (Html.BeginForm("Registers", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-name">Name</th>
+                        <th class="th-raa-year">RAA Year</th>
+                        <th class="th-country">Country</th>
+                        <th class="th-owner">Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var register in Model.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("RegisterView", new { ID = register.ID })" target="_blank">@register.Name</a></td>
+                                <td>@register.RAAYear</td>
+                                <td>@register.Country</td>
+                                <td>@register.OwnerName</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/Registers.js"></script>
+}

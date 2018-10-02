@@ -16,6 +16,7 @@
 @using (Html.BeginForm("Company", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.HiddenFor(m => m.Record.ID)
+    @Html.HiddenFor(m => m.Record.ParentAccountID)
 
     @Html.Partial("../Shared/_PageEditViewAlert")
 
@@ -45,7 +46,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Company Name</label>
                                     <div class="col-sm-4">
-                                        @Html.TextBoxFor(m => m.Record.CompanyName, new { @class = "form-control" })
+                                        @Html.TextBoxFor(m => m.Record.CompanyName, new { @class = "form-control required" })
                                         @Html.ValidationMessageFor(m => m.Record.CompanyName, "", new { @class = "text-danger" })
                                     </div>
 
@@ -68,6 +69,9 @@
                                     </div>
 
                                     <label class="col-sm-2 control-label">Parent Account</label>
+                                    <div class="col-sm-4 autocomplete">
+                                        @Html.TextBoxFor(m => m.Record.ParentAccountName, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
@@ -184,7 +188,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Last Name</label>
                                     <div class="col-sm-4">
-                                        @Html.TextBoxFor(m => m.Record.LastName, new { @class = "form-control" })
+                                        @Html.TextBoxFor(m => m.Record.LastName, new { @class = "form-control required" })
                                         @Html.ValidationMessageFor(m => m.Record.LastName, "", new { @class = "text-danger" })
                                     </div>
 
@@ -522,6 +526,8 @@
             @Html.Partial("../Shared/_PageEditViewFooter")
         </div>
     </div>
+
+    @Html.Partial("Modals/_CompanyAssociateParentAccount")
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>

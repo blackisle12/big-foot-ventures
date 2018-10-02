@@ -1,6 +1,7 @@
 ﻿using BigFootVentures.Business.DataAccess;
 using BigFootVentures.Business.DataAccess.Mapping;
 using BigFootVentures.Business.Objects;
+using BigFootVentures.Business.Objects.Wrapper;
 using BigFootVentures.Service.BusinessService.DataAccessMapping;
 using System.Collections.Generic;
 
@@ -13,6 +14,8 @@ namespace BigFootVentures.Service.BusinessService
         ICollection<TModel> Get(int startIndex, int rowCount, out int total);
 
         TModel Get(int ID);
+
+        ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
 
         #endregion
 
@@ -61,6 +64,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.Get(ID);
+            }
+        }
+
+        public ICollection<AutocompleteWrapper> GetAutocomplete(string keyword)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.GetAutocomplete(keyword);
             }
         }
 
