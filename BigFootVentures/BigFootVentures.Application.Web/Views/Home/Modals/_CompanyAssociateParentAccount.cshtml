@@ -8,9 +8,12 @@
             <div class="modal-body">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <div class="input-group center">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             <input class="form-control" name="Modal.Input.SearchAccount" placeholder="Search account by name.." />
+                            <span name="Modal.Input.Loader" class="form-control-feedback">
+                                <img src="~/Content/images/loader.gif" />
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -30,7 +33,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal">Close</button>
+                <button type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
             </div>
         </div>
     </div>
@@ -38,9 +41,9 @@
 
 <script type="text/javascript">
     $(function () {
-        $('[name="Record.ParentAccountName"]').on('click', function () {
+        $('[name="Button.ParentAccountName"]').on('click', function () {
             $('[name="Modal.Input.SearchAccount"]').val('');
-
+            $('[name="Modal.Input.Loader"]').hide();
             var currentParentAccountName = $('[name="Record.ParentAccountName"]').val();
             var tbody = '';
 
@@ -57,15 +60,16 @@
 
         $('[name="Modal.Input.SearchAccount"]').on('keyup', function () {
             var value = $(this).val();
-
+            
             if (value.length < 5) {
                 return;
             }
-
+            $('[name="Modal.Input.Loader"]').show();
             $.ajax({
                 type: 'GET',
                 url: '../../Company/Autocomplete/' + value,
                 success: function (response) {
+                    $('[name="Modal.Input.Loader"]').hide();
                     if (response.IsSuccess) {
                         var tbody = '';
                         var currentParentAccountID = $('[name="Record.ParentAccountID').val();
