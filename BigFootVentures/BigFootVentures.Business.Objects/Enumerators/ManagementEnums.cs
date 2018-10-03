@@ -432,5 +432,297 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 Web
             }
         }
+
+        public static class Domain
+        {
+            public enum BFStatus
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Hold")]
+                Hold,
+
+                [Description("Buy")]
+                Buy,
+
+                [Description("Sell")]
+                Sell,
+
+                [Description("UDRP")]
+                UDRP,
+
+                [Description("None")]
+                None,
+
+                [Description("Cease and Desist")]
+                CeaseAndDesist,
+
+                [Description("C&D and UDRP")]
+                CDAndUDRP
+            }
+
+            public enum BuysideFunnel
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Agreed keep in touch")]
+                AgreedKeepIntouch,
+
+                [Description("Ceased Negotiations")]
+                CeasedNegotiations,
+
+                [Description("In Negotiations")]
+                InNegotiations,
+
+                [Description("Not Interested")]
+                NotInterested,
+
+                [Description("Purchased")]
+                Purchased,
+
+                [Description("Registered")]
+                Registered,
+
+                [Description("Sent Enquiry")]
+                SentEnquiry,
+
+                [Description("To be contacted")]
+                ToBeContacted
+            }
+
+            public enum FMVOrderOfMagnitude
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("<$1K")]
+                LessThan1K,
+
+                [Description(">1K - <$10K")]
+                LessThan10K,
+
+                [Description("$10K - $20K")]
+                LessThanOrEqual20K,
+
+                [Description("$20K - $50K")]
+                LessThanOrEqual50K,
+
+                [Description("$50K - $100K")]
+                LessThanOrEqual100K,
+
+                [Description("$100K - $250K")]
+                LessThanOrEqual250K,
+
+                [Description("$250K")]
+                Equal250K
+            }
+
+            public enum Status
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Active")]
+                Active,
+
+                [Description("Bought")]
+                Bought,
+
+                [Description("Cancelled")]
+                Cancelled,
+
+                [Description("Expired")]
+                Expired,
+
+                [Description("Inactive")]
+                Inactive,
+
+                [Description("Leased (BigFoot: Lessee)")]
+                LeasedBigFootLessee,
+
+                [Description("Leased (BigFoot: Lessor)")]
+                LeasedBigFootLessor,
+
+                [Description("Registered")]
+                Registered,
+
+                [Description("Sold")]
+                Sold,
+
+                [Description("Update Pending")]
+                UpdatePending,
+
+                [Description("PendingDocumentValidation")]
+                PendingDocumentValidation
+            }
+
+            public enum WebsiteUse
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Active")]
+                Active,
+
+                [Description("Landing Page")]
+                LandingPage,
+
+                [Description("Link Farm")]
+                LinkFarm,
+
+                [Description("For Sale")]
+                ForSale,
+
+                [Description("Under Construction")]
+                UnderConstruction,
+
+                [Description("Redirects")]
+                Redirects,
+
+                [Description("Blank Page")]
+                BlankPage,
+
+                [Description("Parked")]
+                Parked,
+
+                [Description("Developed")]
+                Developed,
+
+                [Description("Developed External Frame")]
+                DevelopedExternalFrame,
+
+                [Description("Disallowed")]
+                Disallowed,
+
+                [Description("Jsoup Error - 200")]
+                JsoupError200,
+
+                [Description("Not Resolving")]
+                NotResolving,
+
+                [Description("Placeholder")]
+                Placeholder,
+
+                [Description("Undeveloped")]
+                Undeveloped,
+
+                [Description("Coming Soon")]
+                ComingSoon,
+
+                [Description("BigFoot Parking Page")]
+                BigFootParkingPage
+            }
+
+            public enum CDSentFrom
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("NYC")]
+                NYC,
+
+                [Description("Miami")]
+                Miami,
+
+                [Description("Antwerp")]
+                Antwerp,
+
+                [Description("HK")]
+                HK,
+
+                [Description("Singapore")]
+                Singapore,
+
+                [Description("Tokyo")]
+                Tokyo
+            }
+
+            public enum CDSentMethod
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Regular Post")]
+                RegularPost,
+
+                [Description("Registered Post")]
+                RegisteredPost,
+
+                [Description("Courier")]
+                Courier,
+
+                [Description("E-mail")]
+                Email
+            }
+
+            public enum CDCourier
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Fedex")]
+                Fedex,
+
+                [Description("UPS")]
+                UPS,
+
+                [Description("DHL")]
+                DHL,
+
+                [Description("Singpost")]
+                Singpost
+            }
+
+            public enum UDRPJurisdiction
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("WIPO")]
+                WIPO,
+
+                [Description("Asian Domain Name Dispute Resolution Centre")]
+                AsianDomainNameDisputeResolutionCentre,
+
+                [Description("National Arbitration Forum")]
+                NationalArbitrationForum,
+
+                [Description("The Czech Arbitration Court Arbitration Center for Internet Disputes")]
+                TheCzechArbitrationCourtArbitrationCenterForInternetDisputes,
+
+                [Description("Arab Center for Domain Name Dispute Resolution")]
+                ArabCenterForDomainNameDisputeResolution,
+            }
+
+            public enum LanguageOfProceedings
+            {
+                [Description("")]
+                NotSet,
+
+                EN,BG,CS,DA,DE,EL,ES,ET,FI,FR,HU,IT,NL,PL,PT,RO,SE,SK,SL,SV,LT,TR,KR,JP,NO,AF,AX,AL,DZ,EG,AS,AD,AO,AI,AQ,AG,AR,AM,AW,AU,AT,AZ,
+                BS,BH,BD,BB,BY,BE,BZ,BM,BT,BO,BQ,BA,BW,BV,BR,IO,BN,BF,BI,CV,KH,CM,CA,KY,CF,TD,CL,CN,CX,CC,CO,KM,CG,CD,CK,CR,CI,HR,CU,CW,CY,CZ,
+                DK,DJ,DM,DO,EC,GQ,ER,EE,FK,FO,FJ,GF,PF,TF,GA,GM,GE,GH,GI,GR,GL,GD,GP,GU,GT,GG,GN,GW,GY,HT,HM,VA,HN,HK,IS,IN,ID,IR,IQ,IE,IM,IL,
+                JM,JE,JO,KZ,KE,KI,KP,KW,KG,LA,LV,LB,LS,LR,LY,LI,LU,MO,MK,MG,MW,MY,MV,ML,MT,MH,MQ,MR,MU,YT,MX,FM,MD,MC,MN,ME,MS,MA,MZ,MM,NA,NR,
+                NP,NC,NZ,NI,NE,NG,NU,NF,MP,OM,PK,PW,PS,PA,PG,PY,PE,PH,PN,PR,QA,RE,RU,RW,BL,SH,KN,LC,MF,PM,VC,WS,SM,ST,SA,SN,RS,SC,SG,SX,SI,SB,
+                SO,ZA,GS,SS,LK,SD,SR,SJ,SZ,CH,SY,TW,TJ,TZ,TH,TL,TG,TK,TO,TT,TN,TM,TC,TV,UG,UA,AE,GB,US,UM,UY,UZ,VU,VE,VN,VG,VI,WF,EH,YE,ZM,ZW,
+
+                [Description("No Language")]
+                NoLanguage
+            }
+
+            public enum UDRPOutcome
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Successful")]
+                Successful,
+
+                [Description("Unsuccessful")]
+                Unsuccessful
+            }
+        }
     }
 }
