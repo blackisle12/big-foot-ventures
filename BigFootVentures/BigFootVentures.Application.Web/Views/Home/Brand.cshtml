@@ -19,7 +19,7 @@
     @Html.HiddenFor(m => m.Record.ID)
     @Html.HiddenFor(m => m.Record.Categories)
 
-    @Html.Partial("../Shared/_PageEditViewAlert")
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
 
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
@@ -117,7 +117,7 @@
             <!-- END: Deletion Request -->
         </div>
         <div class="panel-footer">
-            @Html.Partial("../Shared/_PageEditViewFooter")
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
         </div>
     </div>
 

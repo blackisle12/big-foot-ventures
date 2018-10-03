@@ -1,0 +1,112 @@
+﻿@using BigFootVentures.Application.Web.Models.ViewModels
+
+@model VMAssociation
+
+<div class="modal fade" role="dialog" name="@($"Modal.{Model.ParentName}{Model.ChildName}")">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Associate @Model.ChildName</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group center">
+                            <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
+                            <input class="form-control" name="@($"Modal.Input.Search{Model.ParentName}{Model.ChildName}")" placeholder="Search for @Model.ChildName.." />
+                            <span name="@($"Modal.Input.Loader{Model.ParentName}{Model.ChildName}")" class="form-control-feedback">
+                                <img src="~/Content/images/loader.gif" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" name="@($"Modal.Table.{Model.ParentName}{Model.ChildName}")">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('[name="Button.@Model.ChildNameContainer"]').on('click', function () {
+            $('[name="Modal.Input.Search@($"{Model.ParentName}{Model.ChildName}")"]').val('');
+            $('[name="Modal.Input.Loader@($"{Model.ParentName}{Model.ChildName}")"]').hide();
+
+            var currentName = $('[name="Record.@Model.ChildNameContainer"]').val();
+            var tbody = '';
+
+            if (currentName.length > 0) {
+                tbody += '<tr>';
+                tbody += '<td>' + currentName + '<span class="label label-primary pull-right">SELECTED</span></td>';
+                tbody += '</tr>';
+            }
+
+            $('[name="Modal.Table.@($"{Model.ParentName}{Model.ChildName}")"] tbody').html(tbody);
+
+            $('[name="Modal.@($"{Model.ParentName}{Model.ChildName}")"]').modal('show');
+        });
+
+        $('[name="Modal.Input.Search@($"{Model.ParentName}{Model.ChildName}")"]').on('keyup', function () {
+            var value = $(this).val();
+
+            if (value.length < 5) {
+                return;
+            }
+
+            $('[name="Modal.Input.Loader@($"{Model.ParentName}{Model.ChildName}")"]').show();
+
+            $.ajax({
+                type: 'GET',
+                url: '../../@Model.ChildName/Autocomplete/' + value,
+                success: function (response) {
+                    $('[name="Modal.Input.Loader@($"{Model.ParentName}{Model.ChildName}")"]').hide();
+
+                    if (response.IsSuccess) {
+                        var tbody = '';
+                        var currentName = $('[name="Record.@Model.ChildNameContainer"]').val();
+                        var currentValue = $('[name="Record.@Model.ChildIDContainer').val();                        
+
+                        if (currentName.length > 0) {
+                            tbody += '<tr>';
+                            tbody += '<td>' + currentName + '<span class="label label-primary pull-right">SELECTED</span></td>';
+                            tbody += '</tr>';
+                        }
+
+                        $.each(response.Result, function (key, entry) {
+                            if (entry.Value != currentValue) {
+                                tbody += '<tr>';
+                                tbody += '<td>' + entry.Text + '<button type="button" data-text="' + entry.Text + '" data-value="' + entry.Value + '" class="modal-table-select-account-btn pull-right">Select</button></td>';
+                                tbody += '</tr>';
+                            }
+                        });
+
+                        $('[name="Modal.Table.@($"{Model.ParentName}{Model.ChildName}")"] tbody').html(tbody);
+
+                        $('.modal-table-select-account-btn').on('click', function () {
+                            $('[name="Record.@Model.ChildNameContainer"]').val($(this).data('text'));
+                            $('[name="Record.@Model.ChildIDContainer"]').val($(this).data('value'));
+
+                            $('[name="Modal.@($"{Model.ParentName}{Model.ChildName}")"]').modal('hide');
+                        });
+                    }
+                    else {
+
+                    }
+                }
+            });
+        });
+    });
+</script>

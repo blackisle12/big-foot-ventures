@@ -184,6 +184,7 @@
     <Compile Include="Models\Utilities\PageUtils.cs" />
     <Compile Include="Models\Utilities\RouteUtils.cs" />
     <Compile Include="Models\Utilities\StringUtils.cs" />
+    <Compile Include="Models\ViewModels\VMAssociation.cs" />
     <Compile Include="Models\ViewModels\VMJsonResult.cs" />
     <Compile Include="Models\ViewModels\VMModel.cs" />
     <Compile Include="Models\ViewModels\VMPageResult.cs" />
@@ -238,10 +239,7 @@
     <Content Include="Scripts\Views\Home\Company.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
     <Content Include="Scripts\Utilites\CommonUtils.js" />
-    <Content Include="Scripts\Views\Home\_Components\Modals\_DomainEnquiryAssociateRegistrantCompany.js" />
-    <Content Include="Scripts\Views\Home\_Components\Modals\_DomainEnquiryAssociateRegistrant.js" />
-    <Content Include="Scripts\Views\Home\_Components\Modals\_CompanyAssociateParentAccount.js" />
-    <Content Include="Scripts\Views\Shared\_PageEditViewFooter.js" />
+    <Content Include="Scripts\Views\Shared\_Components\Page\_PageEditViewFooter.js" />
     <Content Include="Scripts\Views\Shared\_PanelHelper.js" />
     <Content Include="Scripts\Views\Shared\_Validator.js" />
     <Content Include="Scripts\Utilites\StringUtils.js" />
@@ -257,11 +255,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_PageEditViewAlert.cshtml" />
-    <Content Include="Views\Shared\_PageEditViewFooter.cshtml" />
-    <Content Include="Views\Shared\_PageTableViewAlert.cshtml" />
-    <Content Include="Views\Shared\_PageTableViewFooter.cshtml" />
-    <Content Include="Views\Shared\_PageTableViewHeader.cshtml" />
+    <Content Include="Views\Shared\_Components\Page\_PageEditViewAlert.cshtml" />
+    <Content Include="Views\Shared\_Components\Page\_PageEditViewFooter.cshtml" />
+    <Content Include="Views\Shared\_Components\Page\_PageTableViewAlert.cshtml" />
+    <Content Include="Views\Shared\_Components\Page\_PageTableViewFooter.cshtml" />
+    <Content Include="Views\Shared\_Components\Page\_PageTableViewHeader.cshtml" />
     <Content Include="Views\Home\Brand.cshtml" />
     <Content Include="Views\Home\Brands.cshtml" />
     <Content Include="Views\Home\Companies.cshtml" />
@@ -269,12 +267,10 @@
     <Content Include="Views\Home\Company.cshtml" />
     <Content Include="Views\Home\Registers.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Home\_Components\Modals\_CompanyAssociateParentAccount.cshtml" />
     <Content Include="Views\Home\DomainEnquiries.cshtml" />
     <Content Include="Views\Home\DomainEnquiryNewSelectRecordType.cshtml" />
     <Content Include="Views\Home\DomainEnquiry.cshtml" />
-    <Content Include="Views\Home\_Components\Modals\_DomainEnquiryAssociateRegistrant.cshtml" />
-    <Content Include="Views\Home\_Components\Modals\_DomainEnquiryAssociateRegistrantCompany.cshtml" />
+    <Content Include="Views\Shared\_Components\Modals\_AssociateParentChild.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
