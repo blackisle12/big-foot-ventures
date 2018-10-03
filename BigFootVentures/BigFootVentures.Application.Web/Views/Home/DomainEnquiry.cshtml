@@ -1,4 +1,5 @@
 ﻿@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Extensions
 @using BigFootVentures.Application.Web.Models.ViewModels
 @using BigFootVentures.Business.Objects.Enumerators
 @using BigFootVentures.Business.Objects.Management
@@ -29,199 +30,366 @@
             </span>
         </div>
         <div class="panel-body">
-            <!-- START: Information -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Owner</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control", @readonly = "readonly" })
-                            </div>
-                            <label class="col-sm-2 control-label">Priority</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.Priority, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.Priority>()), new { @class = "form-control" })
-                            </div>
+            @{
+                if (Model.Record.RecordType == ManagementEnums.DomainEnquiry.RecordType.DomainEnquiry.ToDescription())
+                {
+                    <!-- START: Information -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                Information
+                                <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                            </h4>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Negotiation BF Amount</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.NegotiationBFAmount, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Status</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.StatusDomainEnquiry>()), new { @class = "form-control required" })
-                            </div>
+                        <div class="panel-body">
+                            <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Owner</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Priority</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.Priority, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.Priority>()), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Negotiation BF Amount</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.NegotiationBFAmount, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Status</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.StatusDomainEnquiry>()), new { @class = "form-control required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Negotiation 3rd Party Amount</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.Negotiation3rdPartyAmount, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Send Email</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.SendEmail)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Old Case Number</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.OldCaseNumber, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Unread Email</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.UnreadEmail)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-offset-6 control-label">Do not contact</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.DoNotContact)
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Negotiation 3rd Party Amount</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Negotiation3rdPartyAmount, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Send Email</label>
-                            <div class="col-sm-4">
-                                @Html.CheckBoxFor(m => m.Record.SendEmail)
-                            </div>
+                    </div>
+                    <!-- END: Information -->
+                    <!-- START: Description -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                Description
+                                <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                            </h4>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Old Case Number</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.OldCaseNumber, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Unread Email</label>
-                            <div class="col-sm-4">
-                                @Html.CheckBoxFor(m => m.Record.UnreadEmail)
-                            </div>
+                        <div class="panel-body">
+                            <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Subject</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.Subject, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 col-sm-offset-6 control-label">Do not contact</label>
-                            <div class="col-sm-4">
-                                @Html.CheckBoxFor(m => m.Record.DoNotContact)
-                            </div>
+                    </div>
+                    <!-- END: Description -->
+                    <!-- START: System Information -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                System Information
+                                <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                            </h4>
                         </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: Information -->
-            <!-- START: Description -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Description
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Subject</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Subject, new { @class = "form-control" })
-                            </div>
+                        <div class="panel-body">
+                            <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Private Registration Email</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.PrivateRegistrationEmail, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Record Type</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.RecordType, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Registrant</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.Registrant, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Reference Number</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.ReferenceNumber, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: Description -->
-            <!-- START: System Information -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        System Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Private Registration Email</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.PrivateRegistrationEmail, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Record Type</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.RecordType, new { @class = "form-control", @readonly = "readonly" })
-                            </div>
+                    </div>
+                    <!-- END: System Information -->
+                    <!-- START: Owner -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                Owner
+                                <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                            </h4>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Registrant</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Registrant, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Reference Number</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.ReferenceNumber, new { @class = "form-control" })
-                            </div>
+                        <div class="panel-body">
+                            <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Domain Name</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.DomainName, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Registrar</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.Record.RegistrantName, new { @class = "form-control", @readonly = "readonly" })
+                                            <div class="input-group-btn">
+                                                <button type="button" name="Button.RegistrantName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Registrant Company</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.Record.RegistrantCompanyName, new { @class = "form-control", @readonly = "readonly" })
+                                            <div class="input-group-btn">
+                                                <button type="button" name="Button.RegistrantCompanyName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-2 control-label">Registrant Email</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.RegistrantEmail, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Street</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextAreaFor(m => m.Record.Street, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">City</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.City, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Street</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.State, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">City</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.PostalCode, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Country</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.Country, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Description</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextAreaFor(m => m.Record.Description, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Phone</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Fax</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.Fax, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: System Information -->
-            <!-- START: Owner -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Owner
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Domain Name</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.DomainName, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Registrar</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.RegistrantName, new { @class = "form-control", @readonly = "readonly" })
-                            </div>
+                    </div>
+                    <!-- END: Owner -->
+                }
+                else if (Model.Record.RecordType == ManagementEnums.DomainEnquiry.RecordType.ITSupport.ToDescription())
+                {
+                    <!-- START: Information -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                Information
+                                <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                            </h4>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Registrant Company</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.RegistrantCompanyName, new { @class = "form-control", @readonly = "readonly" })
-                            </div>
-                            <label class="col-sm-2 control-label">Registrant Email</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.RegistrantEmail, new { @class = "form-control" })
-                            </div>
+                        <div class="panel-body">
+                            <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">% of Completion</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.PercentOfCompletion, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Owner</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Old Case Number</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.OldCaseNumber, new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Status</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.StatusITSupport>()), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Case Assign</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.CaseAssign, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.CaseAssign>()), new { @class = "form-control" })
+                                    </div>
+                                    <label class="col-sm-2 control-label">Priority</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.Priority, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.Priority>()), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Street</label>
-                            <div class="col-sm-4">
-                                @Html.TextAreaFor(m => m.Record.Street, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">City</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.City, new { @class = "form-control" })
-                            </div>
+                    </div>
+                    <!-- END: Information -->
+                    <!-- START: Description -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                Description
+                                <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                            </h4>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Street</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.State, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">City</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.PostalCode, new { @class = "form-control" })
-                            </div>
+                        <div class="panel-body">
+                            <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Subject</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.Record.Subject, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Description</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Record.Description, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Field Name(s)</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Record.FieldNames, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Internal Comments</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Record.InternalComments, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Object Name(s)</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Record.ObjectNames, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Technical Assessment</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Record.TechnicalAssessment, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Country</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Country, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Description</label>
-                            <div class="col-sm-4">
-                                @Html.TextAreaFor(m => m.Record.Description, new { @class = "form-control" })
-                            </div>
+                    </div>
+                    <!-- END: Description -->
+                    <!-- START: Additional Information -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                Additional Information
+                                <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                            </h4>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Phone</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
-                            </div>
-                            <label class="col-sm-2 control-label">Fax</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.Fax, new { @class = "form-control" })
-                            </div>
+                        <div class="panel-body">
+                            <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Test Plan</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Record.TestPlan, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Steps to Test</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Record.StepsToTest, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Test Outcome</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Record.TestOutcome, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                    </fieldset>
-                </div>
-            </div>
-            <!-- END: Owner -->
+                    </div>
+                    <!-- END: Additional Information -->
+                    <!-- START: System Information -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                System Information
+                                <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Record Type</label>
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.Record.RecordType, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <!-- END: System Information -->
+                }
+            }
         </div>
         <div class="panel-footer">
             @Html.Partial("../Shared/_PageEditViewFooter")
         </div>
     </div>
+
+    @Html.Partial("_Components/Modals/_DomainEnquiryAssociateRegistrant")
+    @Html.Partial("_Components/Modals/_DomainEnquiryAssociateRegistrantCompany")
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>

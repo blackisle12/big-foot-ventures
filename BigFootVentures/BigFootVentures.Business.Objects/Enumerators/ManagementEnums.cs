@@ -368,6 +368,9 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum StatusITSupport
             {
+                [Description("")]
+                NotSet,
+
                 [Description("New")]
                 New,
 

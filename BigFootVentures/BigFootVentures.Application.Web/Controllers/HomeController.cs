@@ -441,6 +441,26 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var domainEnquiry = this._managementDomainEnquiryService.Get(ID);
 
+            if (domainEnquiry.RegistrantID != null)
+            {
+                var registrant = this._managementRegisterService.Get(domainEnquiry.RegistrantID.Value);
+
+                if (registrant != null)
+                {
+                    domainEnquiry.RegistrantName = registrant.Name;
+                }
+            }
+
+            if (domainEnquiry.RegistrantCompanyID != null)
+            {
+                var registrantCompany = this._managementCompanyService.Get(domainEnquiry.RegistrantCompanyID.Value);
+
+                if (registrantCompany != null)
+                {
+                    domainEnquiry.RegistrantCompanyName = registrantCompany.DisplayName;
+                }
+            }
+
             var model = new VMModel<DomainEnquiry>
             {
                 Record = domainEnquiry,
@@ -493,7 +513,27 @@ namespace BigFootVentures.Application.Web.Controllers
             else
             {
                 var domainEnquiry = this._managementDomainEnquiryService.Get(ID);
-              
+
+                if (domainEnquiry.RegistrantID != null)
+                {
+                    var registrant = this._managementRegisterService.Get(domainEnquiry.RegistrantID.Value);
+
+                    if (registrant != null)
+                    {
+                        domainEnquiry.RegistrantName = registrant.Name;
+                    }
+                }
+
+                if (domainEnquiry.RegistrantCompanyID != null)
+                {
+                    var registrantCompany = this._managementCompanyService.Get(domainEnquiry.RegistrantCompanyID.Value);
+
+                    if (registrantCompany != null)
+                    {
+                        domainEnquiry.RegistrantCompanyName = registrantCompany.DisplayName;
+                    }
+                }
+
                 model = new VMModel<DomainEnquiry>
                 {
                     Record = domainEnquiry,
@@ -695,6 +735,32 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return RedirectToAction("Registers");
+        }
+
+        [HttpGet]
+        [Route("Register/Autocomplete/{keyword}", Name = "RegisterAutocomplete")]
+        public ActionResult RegisterAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementRegisterService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

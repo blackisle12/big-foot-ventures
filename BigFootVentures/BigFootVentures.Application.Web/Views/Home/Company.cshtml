@@ -72,7 +72,7 @@
                                         <div class="input-group">
                                             @Html.TextBoxFor(m => m.Record.ParentAccountName, new { @class = "form-control", @readonly = "readonly" })
                                             <div class="input-group-btn">
-                                                <button type="button" name="Button.ParentAccountName" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                                <button type="button" name="Button.ParentAccountName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -531,7 +531,7 @@
         </div>
     </div>
 
-    @Html.Partial("Modals/_CompanyAssociateParentAccount")
+    @Html.Partial("_Components/Modals/_CompanyAssociateParentAccount")
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>

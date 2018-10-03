@@ -238,6 +238,9 @@
     <Content Include="Scripts\Views\Home\Company.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
     <Content Include="Scripts\Utilites\CommonUtils.js" />
+    <Content Include="Scripts\Views\Home\_Components\Modals\_DomainEnquiryAssociateRegistrantCompany.js" />
+    <Content Include="Scripts\Views\Home\_Components\Modals\_DomainEnquiryAssociateRegistrant.js" />
+    <Content Include="Scripts\Views\Home\_Components\Modals\_CompanyAssociateParentAccount.js" />
     <Content Include="Scripts\Views\Shared\_PageEditViewFooter.js" />
     <Content Include="Scripts\Views\Shared\_PanelHelper.js" />
     <Content Include="Scripts\Views\Shared\_Validator.js" />
@@ -266,10 +269,12 @@
     <Content Include="Views\Home\Company.cshtml" />
     <Content Include="Views\Home\Registers.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Home\Modals\_CompanyAssociateParentAccount.cshtml" />
+    <Content Include="Views\Home\_Components\Modals\_CompanyAssociateParentAccount.cshtml" />
     <Content Include="Views\Home\DomainEnquiries.cshtml" />
     <Content Include="Views\Home\DomainEnquiryNewSelectRecordType.cshtml" />
     <Content Include="Views\Home\DomainEnquiry.cshtml" />
+    <Content Include="Views\Home\_Components\Modals\_DomainEnquiryAssociateRegistrant.cshtml" />
+    <Content Include="Views\Home\_Components\Modals\_DomainEnquiryAssociateRegistrantCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
