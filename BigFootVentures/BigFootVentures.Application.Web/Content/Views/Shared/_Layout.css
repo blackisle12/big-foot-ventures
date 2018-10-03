@@ -169,6 +169,7 @@ input[type=checkbox], input[type=radio] {
 .form-control-feedback{
     z-index: 5;
 }
+
 .form-control-feedback > img {
     height: 30px;
     margin-bottom: 5px
