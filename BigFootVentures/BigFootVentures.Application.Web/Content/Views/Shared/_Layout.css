@@ -149,3 +149,33 @@ textarea {
 .required {
     border-left: 4px solid #a94442;
 }
+
+input[type=checkbox], input[type=radio] {
+    margin: 8px 0 0;
+}
+
+.input-group {
+    max-width: 280px;
+}
+
+.input-group > input {
+    max-width: 245px;
+}
+
+.input-group > .input-group-btn button {
+    height: 30px;
+    font-size: 11px;
+}
+.form-control-feedback{
+    z-index: 5;
+}
+
+.form-control-feedback > img {
+    height: 30px;
+    margin-bottom: 5px
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
