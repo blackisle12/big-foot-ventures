@@ -33,6 +33,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { ID = domainEnquiry.ID };
             }
+            else if (type == typeof(DomainN))
+            {
+                var domain = (DomainN)model;
+
+                return new { ID = domain.ID };
+            }
             else
             {
                 return null;
