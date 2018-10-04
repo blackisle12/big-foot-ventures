@@ -21,23 +21,29 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { recordType = company.AccountRecordType, ID = company.ID };
             }
-            else if (type == typeof(Register))
-            {
-                var register = (Register)model;
-
-                return new { ID = register.ID };
-            }
-            else if (type == typeof(Enquiry))
-            {
-                var domainEnquiry = (Enquiry)model;
-
-                return new { ID = domainEnquiry.ID };
-            }
             else if (type == typeof(DomainN))
             {
                 var domain = (DomainN)model;
 
                 return new { ID = domain.ID };
+            }
+            else if (type == typeof(Enquiry))
+            {
+                var enquiry = (Enquiry)model;
+
+                return new { ID = enquiry.ID };
+            }
+            else if (type == typeof(LoginInformation))
+            {
+                var loginInformation = (LoginInformation)model;
+
+                return new { ID = loginInformation.ID };
+            }
+            else if (type == typeof(Register))
+            {
+                var register = (Register)model;
+
+                return new { ID = register.ID };
             }
             else
             {

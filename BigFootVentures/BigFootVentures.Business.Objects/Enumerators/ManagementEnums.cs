@@ -724,5 +724,68 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 Web
             }
         }
+
+        public static class LoginInformation
+        {
+            public enum Country
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Australia")]
+                Austrailia,
+
+                [Description("Benelux")]
+                Benelux,
+
+                [Description("Canada")]
+                Canada,
+
+                [Description("China")]
+                China,
+
+                [Description("Columbia")]
+                Columbia,
+
+                [Description("European Union")]
+                EuropeanUnion,
+
+                [Description("France")]
+                France,
+
+                [Description("Germany")]
+                Germany,
+
+                [Description("Hong Kong")]
+                HongKong,
+
+                [Description("Italy")]
+                Italy,
+
+                [Description("Macau")]
+                Macau,
+
+                [Description("Malaysia")]
+                Malaysia,
+
+                [Description("New Zeland")]
+                NewZeland,
+
+                [Description("Singapore")]
+                Singapore,
+
+                [Description("Taiwan")]
+                Taiwan,
+
+                [Description("United Kingdom")]
+                UnitedKingdom,
+
+                [Description("USA")]
+                USA,
+
+                [Description("Vietnam")]
+                Vietnam
+            }
+        }
     }
 }

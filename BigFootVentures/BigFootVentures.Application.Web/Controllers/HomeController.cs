@@ -21,6 +21,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Company> _managementCompanyService = null;        
         private readonly IManagementService<DomainN> _managementDomainService = null;
         private readonly IManagementService<Enquiry> _managementEnquiryService = null;
+        private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
 
         #endregion
@@ -31,12 +32,14 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<Company> managementCompanyService,
             IManagementService<DomainN> managementDomainService,
             IManagementService<Enquiry> managementEnquiryService,
+            IManagementService<LoginInformation> managementLoginInformationService,
             IManagementService<Register> managementRegisterService)
         {
             this._managementBrandService = managementBrandService;
             this._managementCompanyService = managementCompanyService;
             this._managementDomainService = managementDomainService;
             this._managementEnquiryService = managementEnquiryService;
+            this._managementLoginInformationService = managementLoginInformationService;
             this._managementRegisterService = managementRegisterService;
         }
 
@@ -756,6 +759,140 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Login Information"
+
+        [Route("LoginInformations/{rowCount?}/{page?}", Name = "LoginInformations")]
+        public ActionResult LoginInformations(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var loginInformations = this._managementLoginInformationService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<LoginInformation>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = loginInformations
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("LoginInformation/{ID:int}", Name = "LoginInformationView")]
+        public ActionResult LoginInformation(int ID)
+        {
+            var loginInformation = this._managementLoginInformationService.Get(ID);
+            var model = new VMModel<LoginInformation>
+            {
+                Record = loginInformation,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("LoginInformation", model);
+        }
+
+        [Route("LoginInformation/New", Name = "LoginInformationNew")]
+        public ActionResult LoginInformationNew()
+        {
+            VMModel<LoginInformation> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<LoginInformation>();
+            }
+            else
+            {
+                model = new VMModel<LoginInformation>
+                {
+                    Record = new LoginInformation(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("LoginInformation", model);
+        }
+
+        [Route("LoginInformation/Edit/{ID:int}", Name = "LoginInformationEdit")]
+        public ActionResult LoginInformationEdit(int ID)
+        {
+            VMModel<LoginInformation> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<LoginInformation>();
+            }
+            else
+            {
+                model = new VMModel<LoginInformation>
+                {
+                    Record = this._managementLoginInformationService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("LoginInformation", model);
+        }
+
+        [HttpPost]
+        [Route("LoginInformation", Name = "LoginInformationPost")]
+        public ActionResult LoginInformation(VMModel<LoginInformation> model)
+        {
+            Func<int> postModel = () =>
+            {
+                if (ModelState.IsValid)
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementLoginInformationService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementLoginInformationService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<LoginInformation>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("LoginInformation/Delete/{ID:int}", Name = "LoginInformationDelete")]
+        public ActionResult LoginInformationDelete(int ID)
+        {
+            try
+            {
+                this._managementLoginInformationService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("LoginInformations");
+        }
+
+        #endregion
+
         #region "Registers"
 
         [Route("Registers/{rowCount?}/{page?}", Name = "Registers")]
@@ -914,7 +1051,7 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion
+        #endregion        
 
         #region "Private Methods"
 
