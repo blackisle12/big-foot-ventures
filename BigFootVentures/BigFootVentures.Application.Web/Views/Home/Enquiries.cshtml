@@ -1,16 +1,16 @@
-﻿<link href="~/Content/Views/Home/DomainEnquiries.css" rel="stylesheet" />
+﻿<link href="~/Content/Views/Home/Enquiries.css" rel="stylesheet" />
 
 @using BigFootVentures.Business.Objects.Management
 @using BigFootVentures.Application.Web.Models.ViewModels
 
 @{
-    ViewBag.Title = "Domain Enquiries";
+    ViewBag.Title = "Enquiries";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model VMPageResult<DomainEnquiry>
+@model VMPageResult<Enquiry>
 
-@using (Html.BeginForm("DomainEnquiries", "Home", FormMethod.Get))
+@using (Html.BeginForm("Enquiries", "Home", FormMethod.Get))
 {
     @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
 
@@ -31,14 +31,14 @@
                 </thead>
                 <tbody>
                     @{
-                        foreach (var domainEnquiry in Model.Records)
+                        foreach (var enquiry in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("DomainEnquiryView", new { ID = domainEnquiry.ID })" target="_blank">@domainEnquiry.OldCaseNumber</a></td>
-                                <td>@domainEnquiry.Description</td>
-                                <td>@domainEnquiry.ReferenceNumber</td>
-                                <td>@domainEnquiry.DomainName</td>
-                                <td>@domainEnquiry.DoNotContact</td>
+                                <td><a href="@Url.RouteUrl("EnquiryView", new { ID = enquiry.ID })" target="_blank">@enquiry.OldCaseNumber</a></td>
+                                <td>@enquiry.Description</td>
+                                <td>@enquiry.ReferenceNumber</td>
+                                <td>@enquiry.DomainName</td>
+                                <td>@enquiry.DoNotContact</td>
                             </tr>
                         }
                     }
@@ -50,5 +50,5 @@
         </div>
     </div>
 
-    <script src="~/Scripts/Views/Home/DomainEnquiries.js"></script>
+    <script src="~/Scripts/Views/Home/Enquiries.js"></script>
 }

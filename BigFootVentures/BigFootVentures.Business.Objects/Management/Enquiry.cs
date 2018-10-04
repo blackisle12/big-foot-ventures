@@ -1,6 +1,6 @@
 ﻿namespace BigFootVentures.Business.Objects.Management
 {
-    public sealed class DomainEnquiry : BusinessBase
+    public sealed class Enquiry : BusinessBase
     {
         #region "Properties"
 

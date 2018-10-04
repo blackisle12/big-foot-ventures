@@ -59,7 +59,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                     PurchasePriceUSD = dataReader["PurchasePriceUSD"] as string,
                     PurchaseDate = dataReader["PurchaseDate"] as string,
-                    SalePriceUSD = dataReader["SalePriceUSD"] as string,
+                    SalePriceUSD = dataReader["SalesPriceUSD"] as string,
                     SaleDate = dataReader["SaleDate"] as string,
 
                     CDDateSent = dataReader["CDDateSent"] as string,

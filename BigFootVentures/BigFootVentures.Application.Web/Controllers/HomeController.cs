@@ -18,9 +18,10 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Private Members"
 
         private readonly IManagementService<Brand> _managementBrandService = null;
-        private readonly IManagementService<Company> _managementCompanyService = null;
+        private readonly IManagementService<Company> _managementCompanyService = null;        
+        private readonly IManagementService<DomainN> _managementDomainService = null;
+        private readonly IManagementService<Enquiry> _managementEnquiryService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
-        private readonly IManagementService<DomainEnquiry> _managementDomainEnquiryService = null;
 
         #endregion
 
@@ -28,13 +29,15 @@ namespace BigFootVentures.Application.Web.Controllers
 
         public HomeController(IManagementService<Brand> managementBrandService,
             IManagementService<Company> managementCompanyService,
-            IManagementService<Register> managementRegisterService,
-            IManagementService<DomainEnquiry> managementDomainEnquiryService)
+            IManagementService<DomainN> managementDomainService,
+            IManagementService<Enquiry> managementEnquiryService,
+            IManagementService<Register> managementRegisterService)
         {
             this._managementBrandService = managementBrandService;
             this._managementCompanyService = managementCompanyService;
+            this._managementDomainService = managementDomainService;
+            this._managementEnquiryService = managementEnquiryService;
             this._managementRegisterService = managementRegisterService;
-            this._managementDomainEnquiryService = managementDomainEnquiryService;
         }
 
         #endregion
@@ -409,22 +412,22 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion
+        #endregion                
 
-        #region "Domain Enquiries"
+        #region "Domains"
 
-        [Route("DomainEnquiries/{rowCount?}/{page?}", Name = "DomainEnquiries")]
-        public ActionResult DomainEnquiries(int rowCount = 10, int page = 1)
+        [Route("Domains/{rowCount?}/{page?}", Name = "Domains")]
+        public ActionResult Domains(int rowCount = 10, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
-            var domainEnquiries = this._managementDomainEnquiryService.Get(startIndex, rowCount, out int total);
-            var pageResult = new VMPageResult<DomainEnquiry>
+            var domains = this._managementDomainService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<DomainN>
             {
                 StartIndex = startIndex,
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = domainEnquiries
+                Records = domains
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -436,34 +439,24 @@ namespace BigFootVentures.Application.Web.Controllers
             return View(pageResult);
         }
 
-        [Route("DomainEnquiry/{ID:int}", Name = "DomainEnquiryView")]
-        public ActionResult DomainEnquiry(int ID)
+        [Route("Domain/{ID:int}", Name = "DomainView")]
+        public ActionResult Domain(int ID)
         {
-            var domainEnquiry = this._managementDomainEnquiryService.Get(ID);
+            var company = this._managementCompanyService.Get(ID);
 
-            if (domainEnquiry.RegistrantID != null)
+            if (company.ParentAccountID != null)
             {
-                var registrant = this._managementRegisterService.Get(domainEnquiry.RegistrantID.Value);
+                var companyParent = this._managementCompanyService.Get(company.ParentAccountID.Value);
 
-                if (registrant != null)
+                if (companyParent != null)
                 {
-                    domainEnquiry.RegistrantName = registrant.Name;
+                    company.ParentAccountName = companyParent.DisplayName;
                 }
             }
 
-            if (domainEnquiry.RegistrantCompanyID != null)
+            var model = new VMModel<Company>
             {
-                var registrantCompany = this._managementCompanyService.Get(domainEnquiry.RegistrantCompanyID.Value);
-
-                if (registrantCompany != null)
-                {
-                    domainEnquiry.RegistrantCompanyName = registrantCompany.DisplayName;
-                }
-            }
-
-            var model = new VMModel<DomainEnquiry>
-            {
-                Record = domainEnquiry,
+                Record = company,
                 PageMode = PageMode.View
             };
 
@@ -473,105 +466,68 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("DomainEnquiry", model);
+            return View("Domain", model);
         }
 
-        [Route("DomainEnquiry/New/{recordType}", Name = "DomainEnquiryNew")]
-        public ActionResult DomainEnquiryNew(string recordType)
-        {
-            if (!(string.Equals(recordType, ManagementEnums.DomainEnquiry.RecordType.DomainEnquiry.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
-                string.Equals(recordType, ManagementEnums.DomainEnquiry.RecordType.ITSupport.ToDescription(), StringComparison.InvariantCultureIgnoreCase)))
-                throw new Exception(); //throw to error 500
-
-            VMModel<DomainEnquiry> model = null;
+        [Route("Domain/New", Name = "DomainNNew")]
+        public ActionResult DomainNew(string recordType)
+        {            
+            VMModel<DomainN> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<DomainEnquiry>();
+                model = this.GetValidationErrors<DomainN>();
             }
             else
             {
-                model = new VMModel<DomainEnquiry>
+                model = new VMModel<DomainN>
                 {
-                    Record = new DomainEnquiry { RecordType = recordType },
+                    Record = new DomainN(),
                     PageMode = PageMode.Edit
                 };
             }
 
-            return View("DomainEnquiry", model);
+            return View("Domain", model);
         }
 
-        [Route("DomainEnquiry/Edit/{ID:int}", Name = "DomainEnquiryEdit")]
-        public ActionResult DomainEnquiryEdit(int ID)
+        [Route("Domain/Edit/{ID:int}", Name = "DomainNEdit")]
+        public ActionResult DomainEdit(int ID)
         {
-            VMModel<DomainEnquiry> model = null;
+            VMModel<DomainN> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<DomainEnquiry>();
+                model = this.GetValidationErrors<DomainN>();
             }
             else
             {
-                var domainEnquiry = this._managementDomainEnquiryService.Get(ID);
+                var domain = this._managementDomainService.Get(ID);
 
-                if (domainEnquiry.RegistrantID != null)
+                model = new VMModel<DomainN>
                 {
-                    var registrant = this._managementRegisterService.Get(domainEnquiry.RegistrantID.Value);
-
-                    if (registrant != null)
-                    {
-                        domainEnquiry.RegistrantName = registrant.Name;
-                    }
-                }
-
-                if (domainEnquiry.RegistrantCompanyID != null)
-                {
-                    var registrantCompany = this._managementCompanyService.Get(domainEnquiry.RegistrantCompanyID.Value);
-
-                    if (registrantCompany != null)
-                    {
-                        domainEnquiry.RegistrantCompanyName = registrantCompany.DisplayName;
-                    }
-                }
-
-                model = new VMModel<DomainEnquiry>
-                {
-                    Record = domainEnquiry,
+                    Record = domain,
                     PageMode = PageMode.Edit
                 };
             }
 
-            return View("DomainEnquiry", model);
-        }
-
-        [Route("DomainEnquiry/New/SelectRecordType", Name = "DomainEnquiryNewSelectRecordType")]
-        public ActionResult DomainEnquiryNewSelectRecordType()
-        {
-            return View();
+            return View("Domain", model);
         }
 
         [HttpPost]
-        [Route("DomainEnquiryNewSelectRecordType", Name = "DomainEnquiryNewSelectRecordTypePost")]
-        public ActionResult DomainEnquiryNewSelectRecordType(string recordType)
-        {
-            return RedirectToRoute("DomainEnquiryNew", new { recordType });
-        }
-
-        [HttpPost]
-        [Route("DomainEnquiry", Name = "DomainEnquiryPost")]
-        public ActionResult DomainEnquiry(VMModel<DomainEnquiry> model)
+        [Route("Domain", Name = "DomainPost")]
+        public ActionResult Enquiry(VMModel<DomainN> model)
         {
             Func<int> postModel = () =>
-            {                
+            {
                 if (ModelState.IsValid)
                 {
                     if (model.Record.ID == 0)
                     {
-                        this._managementDomainEnquiryService.Insert(model.Record);
+                        this._managementDomainService.Insert(model.Record);
                     }
                     else
                     {
-                        this._managementDomainEnquiryService.Update(model.Record);
+                        this._managementDomainService.Update(model.Record);
                     }
 
                     return model.Record.ID;
@@ -582,16 +538,16 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
             };
 
-            return RedirectPost<DomainEnquiry>(model, postModel);
+            return RedirectPost<DomainN>(model, postModel);
         }
 
         [HttpGet]
-        [Route("DomainEnquiry/Delete/{ID:int}", Name = "DomainEnquiryDelete")]
-        public ActionResult DomainEnquiryDelete(int ID)
+        [Route("Domain/Delete/{ID:int}", Name = "DomainNDelete")]
+        public ActionResult DomainDelete(int ID)
         {
             try
             {
-                this._managementDomainEnquiryService.Delete(ID);
+                this._managementDomainService.Delete(ID);
 
                 TempData.Add("IsRedirectFromDelete", true);
             }
@@ -600,7 +556,202 @@ namespace BigFootVentures.Application.Web.Controllers
                 //log exception here
             }
 
-            return RedirectToAction("DomainEnquiries");
+            return RedirectToAction("Domains");
+        }
+
+
+        #endregion
+
+        #region "Enquiries"
+
+        [Route("Enquiries/{rowCount?}/{page?}", Name = "Enquiries")]
+        public ActionResult Enquiries(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var enquiries = this._managementEnquiryService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Enquiry>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = enquiries
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Enquiry/{ID:int}", Name = "EnquiryView")]
+        public ActionResult Enquiry(int ID)
+        {
+            var enquiry = this._managementEnquiryService.Get(ID);
+
+            if (enquiry.RegistrantID != null)
+            {
+                var registrant = this._managementRegisterService.Get(enquiry.RegistrantID.Value);
+
+                if (registrant != null)
+                {
+                    enquiry.RegistrantName = registrant.Name;
+                }
+            }
+
+            if (enquiry.RegistrantCompanyID != null)
+            {
+                var registrantCompany = this._managementCompanyService.Get(enquiry.RegistrantCompanyID.Value);
+
+                if (registrantCompany != null)
+                {
+                    enquiry.RegistrantCompanyName = registrantCompany.DisplayName;
+                }
+            }
+
+            var model = new VMModel<Enquiry>
+            {
+                Record = enquiry,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Enquiry", model);
+        }
+
+        [Route("Enquiry/New/{recordType}", Name = "EnquiryNew")]
+        public ActionResult EnquiryNew(string recordType)
+        {
+            if (!(string.Equals(recordType, ManagementEnums.Enquiry.RecordType.DomainEnquiry.ToDescription(), StringComparison.InvariantCultureIgnoreCase) ||
+                string.Equals(recordType, ManagementEnums.Enquiry.RecordType.ITSupport.ToDescription(), StringComparison.InvariantCultureIgnoreCase)))
+                throw new Exception(); //throw to error 500
+
+            VMModel<Enquiry> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Enquiry>();
+            }
+            else
+            {
+                model = new VMModel<Enquiry>
+                {
+                    Record = new Enquiry { RecordType = recordType },
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Enquiry", model);
+        }
+
+        [Route("Enquiry/Edit/{ID:int}", Name = "EnquiryEdit")]
+        public ActionResult EnquiryEdit(int ID)
+        {
+            VMModel<Enquiry> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Enquiry>();
+            }
+            else
+            {
+                var enquiry = this._managementEnquiryService.Get(ID);
+
+                if (enquiry.RegistrantID != null)
+                {
+                    var registrant = this._managementRegisterService.Get(enquiry.RegistrantID.Value);
+
+                    if (registrant != null)
+                    {
+                        enquiry.RegistrantName = registrant.Name;
+                    }
+                }
+
+                if (enquiry.RegistrantCompanyID != null)
+                {
+                    var registrantCompany = this._managementCompanyService.Get(enquiry.RegistrantCompanyID.Value);
+
+                    if (registrantCompany != null)
+                    {
+                        enquiry.RegistrantCompanyName = registrantCompany.DisplayName;
+                    }
+                }
+
+                model = new VMModel<Enquiry>
+                {
+                    Record = enquiry,
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Enquiry", model);
+        }
+
+        [Route("Enquiry/New/SelectRecordType", Name = "EnquiryNewSelectRecordType")]
+        public ActionResult EnquiryNewSelectRecordType()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("EnquiryNewSelectRecordType", Name = "EnquiryNewSelectRecordTypePost")]
+        public ActionResult EnquiryNewSelectRecordType(string recordType)
+        {
+            return RedirectToRoute("EnquiryNew", new { recordType });
+        }
+
+        [HttpPost]
+        [Route("Enquiry", Name = "EnquiryPost")]
+        public ActionResult Enquiry(VMModel<Enquiry> model)
+        {
+            Func<int> postModel = () =>
+            {
+                if (ModelState.IsValid)
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementEnquiryService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementEnquiryService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Enquiry>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Enquiry/Delete/{ID:int}", Name = "EnquiryDelete")]
+        public ActionResult EnquiryDelete(int ID)
+        {
+            try
+            {
+                this._managementEnquiryService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Enquiries");
         }
 
         #endregion

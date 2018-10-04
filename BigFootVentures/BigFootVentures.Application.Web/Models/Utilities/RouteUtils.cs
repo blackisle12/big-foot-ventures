@@ -27,9 +27,9 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { ID = register.ID };
             }
-            else if (type == typeof(DomainEnquiry))
+            else if (type == typeof(Enquiry))
             {
-                var domainEnquiry = (DomainEnquiry)model;
+                var domainEnquiry = (Enquiry)model;
 
                 return new { ID = domainEnquiry.ID };
             }

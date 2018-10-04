@@ -19,18 +19,22 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new CompanyMapper();
             }
+            else if (type == typeof(DomainN))
+            {
+                return new DomainMapper();
+            }
+            else if (type == typeof(Enquiry))
+            {
+                return new EnquiryMapper();
+            }
             else if (type == typeof(Register))
             {
                 return new RegisterMapper();
             }
-            else if (type == typeof(DomainEnquiry))
-            {
-                return new DomainEnquiryMapper();
-            }
             else
             {
                 return null;
-            }                
+            }
         }
 
         #endregion

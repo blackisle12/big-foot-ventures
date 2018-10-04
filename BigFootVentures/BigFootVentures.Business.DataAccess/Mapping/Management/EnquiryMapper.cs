@@ -6,7 +6,7 @@ using System.Data;
 
 namespace BigFootVentures.Business.DataAccess.Mapping.Management
 {
-    public sealed class DomainEnquiryMapper : IMapper
+    public sealed class EnquiryMapper : IMapper
     {
         #region "Public Methods"
 
@@ -16,7 +16,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             while (dataReader.Read())
             {
-                entities.Add(new DomainEnquiry
+                entities.Add(new Enquiry
                 {
                     ID = (int)dataReader["ID"],
 
@@ -69,7 +69,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
         public MySqlParameter[] CreateParameters(object entity)
         {
-            var domainEnquiry = (DomainEnquiry)entity;
+            var domainEnquiry = (Enquiry)entity;
             var parameters = new List<MySqlParameter>();
 
             parameters.AddRange(new MySqlParameter[]

@@ -6,13 +6,13 @@
 @using BigFootVentures.Business.Objects.Utilities
 
 @{
-    ViewBag.Title = "Domain Enquiry";
+    ViewBag.Title = "Enquiry";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model VMModel<DomainEnquiry>
+@model VMModel<Enquiry>
 
-@using (Html.BeginForm("DomainEnquiry", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Enquiry", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.HiddenFor(m => m.Record.ID)
     @Html.HiddenFor(m => m.Record.RegistrantCompanyID)
@@ -31,7 +31,7 @@
         </div>
         <div class="panel-body">
             @{
-                if (Model.Record.RecordType == ManagementEnums.DomainEnquiry.RecordType.DomainEnquiry.ToDescription())
+                if (Model.Record.RecordType == ManagementEnums.Enquiry.RecordType.DomainEnquiry.ToDescription())
                 {
                     <!-- START: Information -->
                     <div class="panel panel-default">
@@ -50,7 +50,7 @@
                                     </div>
                                     <label class="col-sm-2 control-label">Priority</label>
                                     <div class="col-sm-4">
-                                        @Html.DropDownListFor(m => m.Record.Priority, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.Priority>()), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Record.Priority, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Enquiry.Priority>()), new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -60,7 +60,7 @@
                                     </div>
                                     <label class="col-sm-2 control-label">Status</label>
                                     <div class="col-sm-4">
-                                        @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.StatusDomainEnquiry>()), new { @class = "form-control required" })
+                                        @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Enquiry.StatusDomainEnquiry>()), new { @class = "form-control required" })
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -232,7 +232,7 @@
                     </div>
                     <!-- END: Owner -->
                 }
-                else if (Model.Record.RecordType == ManagementEnums.DomainEnquiry.RecordType.ITSupport.ToDescription())
+                else if (Model.Record.RecordType == ManagementEnums.Enquiry.RecordType.ITSupport.ToDescription())
                 {
                     <!-- START: Information -->
                     <div class="panel panel-default">
@@ -261,17 +261,17 @@
                                     </div>
                                     <label class="col-sm-2 control-label">Status</label>
                                     <div class="col-sm-4">
-                                        @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.StatusITSupport>()), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Enquiry.StatusITSupport>()), new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Case Assign</label>
                                     <div class="col-sm-4">
-                                        @Html.DropDownListFor(m => m.Record.CaseAssign, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.CaseAssign>()), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Record.CaseAssign, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Enquiry.CaseAssign>()), new { @class = "form-control" })
                                     </div>
                                     <label class="col-sm-2 control-label">Priority</label>
                                     <div class="col-sm-4">
-                                        @Html.DropDownListFor(m => m.Record.Priority, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.DomainEnquiry.Priority>()), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Record.Priority, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Enquiry.Priority>()), new { @class = "form-control" })
                                     </div>
                                 </div>
                             </fieldset>
@@ -393,6 +393,6 @@
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
-    <script src="~/Scripts/Views/Home/DomainEnquiry.js"></script>
+    <script src="~/Scripts/Views/Home/Enquiry.js"></script>
 }
 
