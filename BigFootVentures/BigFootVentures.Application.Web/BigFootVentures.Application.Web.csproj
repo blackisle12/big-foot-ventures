@@ -273,6 +273,7 @@
     <Content Include="Views\Home\Enquiry.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\_AssociateParentChild.cshtml" />
     <Content Include="Views\Home\Domains.cshtml" />
+    <Content Include="Views\Home\Domain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
