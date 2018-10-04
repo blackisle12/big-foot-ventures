@@ -1,16 +1,16 @@
-﻿<link href="~/Content/Views/Home/Registers.css" rel="stylesheet" />
+﻿<link href="~/Content/Views/Home/OfficeStatuses.css" rel="stylesheet" />
 
 @using BigFootVentures.Business.Objects.Management
 @using BigFootVentures.Application.Web.Models.ViewModels
 
 @{
-    ViewBag.Title = "Registers";
+    ViewBag.Title = "Office Status";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model VMPageResult<Register>
+@model VMPageResult<OfficeStatus>
 
-@using (Html.BeginForm("Registers", "Home", FormMethod.Get))
+@using (Html.BeginForm("OfficeStatuses", "Home", FormMethod.Get))
 {
     @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
 
@@ -23,20 +23,18 @@
                 <thead>
                     <tr class="th-bg">
                         <th class="th-name">Name</th>
-                        <th class="th-raa-year">RAA Year</th>
-                        <th class="th-country">Country</th>
+                        <th class="th-status-grouping">Status Grouping</th>
                         <th class="th-owner">Owner</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{
-                        foreach (var register in Model.Records)
+                        foreach (var officeStatus in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("RegisterView", new { ID = register.ID })" target="_blank">@register.Name</a></td>
-                                <td>@register.RAAYear</td>
-                                <td>@register.Country</td>
-                                <td>@register.OwnerName</td>
+                                <td><a href="@Url.RouteUrl("OfficeStatusView", new { ID = officeStatus.ID })" target="_blank">@officeStatus.Name</a></td>
+                                <td>@officeStatus.StatusGrouping</td>
+                                <td>@officeStatus.OwnerName</td>
                             </tr>
                         }
                     }
@@ -48,5 +46,5 @@
         </div>
     </div>
 
-    <script src="~/Scripts/Views/Home/Registers.js"></script>
+    <script src="~/Scripts/Views/Home/OfficeStatus.js"></script>
 }

@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\packages\MySQL\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\MySql.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
 
