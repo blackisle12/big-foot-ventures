@@ -17,6 +17,7 @@ namespace BigFootVentures.Application.Web
 
             container.RegisterType<IManagementService<Brand>>(new InjectionFactory(c => new ManagementService<Brand>(connectionString)));
             container.RegisterType<IManagementService<Company>>(new InjectionFactory(c => new ManagementService<Company>(connectionString)));
+            container.RegisterType<IManagementService<Contact>>(new InjectionFactory(c => new ManagementService<Contact>(connectionString)));
             container.RegisterType<IManagementService<DomainN>>(new InjectionFactory(c => new ManagementService<DomainN>(connectionString)));
             container.RegisterType<IManagementService<Enquiry>>(new InjectionFactory(c => new ManagementService<Enquiry>(connectionString)));
             container.RegisterType<IManagementService<LoginInformation>>(new InjectionFactory(c => new ManagementService<LoginInformation>(connectionString)));

@@ -7,12 +7,11 @@
         public string OwnerName { get; set; }
 
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }        
+        public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Salutation { get; set; }
         public string Suffix { get; set; }
-        public int? CompanyID { get; set; }
-        public string CompanyName { get; set; }
+        public Company Company { get; set; }
         public string Title { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
@@ -21,8 +20,13 @@
         public string Department { get; set; }
         public string OHIMOwnerID { get; set; }
         public string OHIMNumTrademarks { get; set; }
-        public int? WebsiteIndividualID { get; set; }
-        public string WebsiteIndividualName { get; set; }
+        public DomainN WebsiteIndividual { get; set; }
+
+        public string MailingCountry { get; set; }
+        public string MailingStreet { get; set; }
+        public string MailingCity { get; set; }
+        public string MailingState { get; set; }
+        public string MailingPostalCode { get; set; }
 
         #endregion
     }

@@ -20,7 +20,8 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Private Members"
 
         private readonly IManagementService<Brand> _managementBrandService = null;
-        private readonly IManagementService<Company> _managementCompanyService = null;        
+        private readonly IManagementService<Company> _managementCompanyService = null;
+        private readonly IManagementService<Contact> _managementContactService = null;
         private readonly IManagementService<DomainN> _managementDomainService = null;
         private readonly IManagementService<Enquiry> _managementEnquiryService = null;
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
@@ -33,6 +34,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         public HomeController(IManagementService<Brand> managementBrandService,
             IManagementService<Company> managementCompanyService,
+            IManagementService<Contact> managementContactService,
             IManagementService<DomainN> managementDomainService,
             IManagementService<Enquiry> managementEnquiryService,
             IManagementService<LoginInformation> managementLoginInformationService,
@@ -41,6 +43,7 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             this._managementBrandService = managementBrandService;
             this._managementCompanyService = managementCompanyService;
+            this._managementContactService = managementContactService;
             this._managementDomainService = managementDomainService;
             this._managementEnquiryService = managementEnquiryService;
             this._managementLoginInformationService = managementLoginInformationService;
@@ -428,7 +431,197 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion                
+        #endregion
+
+        #region "Contacts"
+
+        [Route("Contacts/{rowCount?}/{page?}", Name = "Contacts")]
+        public ActionResult Contacts(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var contacts = this._managementContactService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Contact>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = contacts
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Contact/{ID:int}", Name = "ContactView")]
+        public ActionResult Contact(int ID)
+        {
+            var contact = this._managementContactService.Get(ID);
+
+            if (contact.Company != null)
+            {
+                contact.Company = this._managementCompanyService.Get(contact.Company.ID);
+            }
+
+            if (contact.WebsiteIndividual != null)
+            {
+                contact.WebsiteIndividual = this._managementDomainService.Get(contact.WebsiteIndividual.ID);
+            }
+
+            var model = new VMModel<Contact>
+            {
+                Record = contact,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Contact", model);
+        }
+
+        [Route("Contact/New", Name = "ContactNew")]
+        public ActionResult ContactNew()
+        {
+            VMModel<Contact> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Contact>();
+            }
+            else
+            {
+                model = new VMModel<Contact>
+                {
+                    Record = new Contact(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Contact", model);
+        }
+
+        [Route("Contact/Edit/{ID:int}", Name = "ContactEdit")]
+        public ActionResult ContactEdit(int ID)
+        {
+            VMModel<Contact> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Contact>();
+            }
+            else
+            {
+                var contact = this._managementContactService.Get(ID);
+
+                if (contact.Company != null)
+                {
+                    contact.Company = this._managementCompanyService.Get(contact.Company.ID);
+                }
+
+                if (contact.WebsiteIndividual != null)
+                {
+                    contact.WebsiteIndividual = this._managementDomainService.Get(contact.WebsiteIndividual.ID);
+                }
+
+                model = new VMModel<Contact>
+                {
+                    Record = contact,
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Contact", model);
+        }
+
+        [HttpPost]
+        [Route("Contact", Name = "ContactPost")]
+        public ActionResult Contact(VMModel<Contact> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (ContactValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementContactService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementContactService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Contact>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Contact/Delete/{ID:int}", Name = "ContactDelete")]
+        public ActionResult ContactDelete(int ID)
+        {
+            try
+            {
+                this._managementContactService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Contacts");
+        }
+
+        [HttpGet]
+        [Route("Contact/Autocomplete/{keyword}", Name = "ContactAutocomplete")]
+        public ActionResult ContactAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementContactService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
 
         #region "Domains"
 

@@ -200,6 +200,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\loader.gif" />
     <Content Include="Content\Views\Home\Brand.css" />
+    <Content Include="Content\Views\Home\Contacts.css" />
     <Content Include="Content\Views\Home\LoginInformations.css" />
     <Content Include="Content\Views\Home\Enquiries.css" />
     <Content Include="Content\Views\Home\Registers.css" />
@@ -234,6 +235,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Views\Home\Brands.js" />
+    <Content Include="Scripts\Views\Home\Contacts.js" />
     <Content Include="Scripts\Views\Home\Domains.js" />
     <Content Include="Scripts\Views\Home\Enquiries.js" />
     <Content Include="Scripts\Views\Home\LoginInformations.js" />

@@ -295,6 +295,30 @@ namespace BigFootVentures.Business.Objects.Enumerators
             }
         }
 
+        public static class Contact
+        {
+            public enum Salutation
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Mr.")]
+                Mr,
+
+                [Description("Ms.")]
+                Ms,
+
+                [Description("Mrs.")]
+                Mrs,
+
+                [Description("Dr.")]
+                Dr,
+
+                [Description("Prof.")]
+                Prof
+            }
+        }
+
         public static class Domain
         {
             public enum BFStrategy
