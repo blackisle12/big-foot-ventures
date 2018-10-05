@@ -15,8 +15,7 @@ namespace BigFootVentures.Business.Objects.Management
         public string AccountRecordType { get; set; }
         public string AccountOwner { get; set; }
 
-        public int? ParentAccountID { get; set; }
-        public string ParentAccountName { get; set; }
+        public Company ParentAccount { get; set; }        
 
         public string CompanyName { get; set; }
         public string FormerName { get; set; }

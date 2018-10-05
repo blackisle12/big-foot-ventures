@@ -253,9 +253,9 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var company = this._managementCompanyService.Get(ID);
 
-            if (company.ParentAccountID != null)
+            if (company.ParentAccount != null)
             {
-                company.ParentAccountName = this._managementCompanyService.Get(company.ParentAccountID.Value)?.DisplayName;
+                company.ParentAccount = this._managementCompanyService.Get(company.ParentAccount.ID);
             }
 
             var model = new VMModel<Company>
@@ -312,9 +312,9 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 var company = this._managementCompanyService.Get(ID);
 
-                if (company.ParentAccountID != null)
+                if (company.ParentAccount != null)
                 {
-                    company.ParentAccountName = this._managementCompanyService.Get(company.ParentAccountID.Value)?.DisplayName;
+                    company.ParentAccount = this._managementCompanyService.Get(company.ParentAccount.ID);
                 }
 
                 model = new VMModel<Company>
@@ -663,14 +663,14 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var enquiry = this._managementEnquiryService.Get(ID);
 
-            if (enquiry.RegistrantID != null)
+            if (enquiry.Registrar != null)
             {
-                enquiry.RegistrantName = this._managementRegisterService.Get(enquiry.RegistrantID.Value)?.Name;
+                enquiry.Registrar = this._managementRegisterService.Get(enquiry.Registrar.ID);
             }
 
-            if (enquiry.RegistrantCompanyID != null)
+            if (enquiry.RegistrantCompany != null)
             {
-                enquiry.RegistrantCompanyName = this._managementCompanyService.Get(enquiry.RegistrantCompanyID.Value)?.DisplayName;
+                enquiry.RegistrantCompany = this._managementCompanyService.Get(enquiry.RegistrantCompany.ID);
             }
 
             var model = new VMModel<Enquiry>
@@ -726,14 +726,14 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 var enquiry = this._managementEnquiryService.Get(ID);
 
-                if (enquiry.RegistrantID != null)
+                if (enquiry.Registrar != null)
                 {
-                    enquiry.RegistrantName = this._managementRegisterService.Get(enquiry.RegistrantID.Value)?.Name;
+                    enquiry.Registrar = this._managementRegisterService.Get(enquiry.Registrar.ID);
                 }
 
-                if (enquiry.RegistrantCompanyID != null)
+                if (enquiry.RegistrantCompany != null)
                 {
-                    enquiry.RegistrantCompanyName = this._managementCompanyService.Get(enquiry.RegistrantCompanyID.Value)?.DisplayName;
+                    enquiry.RegistrantCompany = this._managementCompanyService.Get(enquiry.RegistrantCompany.ID);
                 }
 
                 model = new VMModel<Enquiry>

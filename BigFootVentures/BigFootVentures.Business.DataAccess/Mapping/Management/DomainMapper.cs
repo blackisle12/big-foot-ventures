@@ -16,7 +16,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             while (dataReader.Read())
             {
-                entities.Add(new DomainN
+                var entity = new DomainN
                 {
                     ID = (int)dataReader["ID"],
 
@@ -81,78 +81,80 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                     DeletionRequest = (Convert.ToSByte(dataReader["DeletionRequest"]) == 1),
                     DeletionRequestReason = dataReader["DeletionRequestReason"] as string
-                });
+                };
+
+                entities.Add(entity);
             }
 
             return entities;
         }
 
-        public MySqlParameter[] CreateParameters(object entity)
+        public MySqlParameter[] CreateParameters(object model)
         {
-            var domain = (DomainN)entity;
+            var entity = (DomainN)model;
             var parameters = new List<MySqlParameter>();
 
             parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("pRegistrantCompanyID", MySqlDbType.Int32) { Value = domain.RegistrantCompanyID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrantCompanyID", MySqlDbType.Int32) { Value = entity.RegistrantCompanyID, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = domain.Name, Direction = ParameterDirection.Input },
-                new MySqlParameter("pDomainEnquiryID", MySqlDbType.Int32) { Value = domain.DomainEnquiryID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pBrandID", MySqlDbType.Int32) { Value = domain.BrandID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pBFStrategy", MySqlDbType.VarChar, 45) { Value = domain.BFStrategy, Direction = ParameterDirection.Input },
-                new MySqlParameter("pBuysideFunnel", MySqlDbType.VarChar, 45) { Value = domain.BuysideFunnel, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRemarks", MySqlDbType.VarChar, 255) { Value = domain.Remarks, Direction = ParameterDirection.Input },
-                new MySqlParameter("pFMVOrderOfMagnitude", MySqlDbType.VarChar, 45) { Value = domain.FMVOrderOfMagnitude, Direction = ParameterDirection.Input },
-                new MySqlParameter("pStatus", MySqlDbType.VarChar, 45) { Value = domain.Status, Direction = ParameterDirection.Input },
-                new MySqlParameter("pVersion", MySqlDbType.VarChar, 45) { Value = domain.Version, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCategory", MySqlDbType.VarChar, 45) { Value = domain.Category, Direction = ParameterDirection.Input },
-                new MySqlParameter("pAccountID", MySqlDbType.VarChar, 45) { Value = domain.AccountID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pWebsiteCurrent", domain.WebsiteCurrent ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pLocked", domain.Locked ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pWebsiteUse", MySqlDbType.VarChar, 45) { Value = domain.WebsiteUse, Direction = ParameterDirection.Input },
-                new MySqlParameter("pWebsiteDescription", MySqlDbType.VarChar, 255) { Value = domain.WebsiteDescription, Direction = ParameterDirection.Input },
-                new MySqlParameter("pWebsiteRedirect", MySqlDbType.VarChar, 255) { Value = domain.WebsiteRedirect, Direction = ParameterDirection.Input },
-                new MySqlParameter("pExpirationDate", MySqlDbType.VarChar, 45) { Value = domain.ExpirationDate, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCompanyWebsite", domain.CompanyWebsite ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pAutoRenew", domain.AutoRenew ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pWHOIS", MySqlDbType.VarChar, 45) { Value = domain.WHOIS, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRegistrationPriceUSD", MySqlDbType.VarChar, 45) { Value = domain.RegistrationPriceUSD, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRegistrationDate", MySqlDbType.VarChar, 45) { Value = domain.RegistrationDate, Direction = ParameterDirection.Input },
-                new MySqlParameter("pBigFootParkingPage", MySqlDbType.VarChar, 45) { Value = domain.BigFootParkingPage, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPrivacyProtected", domain.PrivacyProtected ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDomainEnquiryID", MySqlDbType.Int32) { Value = entity.DomainEnquiryID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pBrandID", MySqlDbType.Int32) { Value = entity.BrandID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pBFStrategy", MySqlDbType.VarChar, 45) { Value = entity.BFStrategy, Direction = ParameterDirection.Input },
+                new MySqlParameter("pBuysideFunnel", MySqlDbType.VarChar, 45) { Value = entity.BuysideFunnel, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRemarks", MySqlDbType.VarChar, 255) { Value = entity.Remarks, Direction = ParameterDirection.Input },
+                new MySqlParameter("pFMVOrderOfMagnitude", MySqlDbType.VarChar, 45) { Value = entity.FMVOrderOfMagnitude, Direction = ParameterDirection.Input },
+                new MySqlParameter("pStatus", MySqlDbType.VarChar, 45) { Value = entity.Status, Direction = ParameterDirection.Input },
+                new MySqlParameter("pVersion", MySqlDbType.VarChar, 45) { Value = entity.Version, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCategory", MySqlDbType.VarChar, 45) { Value = entity.Category, Direction = ParameterDirection.Input },
+                new MySqlParameter("pAccountID", MySqlDbType.VarChar, 45) { Value = entity.AccountID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pWebsiteCurrent", entity.WebsiteCurrent ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pLocked", entity.Locked ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pWebsiteUse", MySqlDbType.VarChar, 45) { Value = entity.WebsiteUse, Direction = ParameterDirection.Input },
+                new MySqlParameter("pWebsiteDescription", MySqlDbType.VarChar, 255) { Value = entity.WebsiteDescription, Direction = ParameterDirection.Input },
+                new MySqlParameter("pWebsiteRedirect", MySqlDbType.VarChar, 255) { Value = entity.WebsiteRedirect, Direction = ParameterDirection.Input },
+                new MySqlParameter("pExpirationDate", MySqlDbType.VarChar, 45) { Value = entity.ExpirationDate, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCompanyWebsite", entity.CompanyWebsite ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pAutoRenew", entity.AutoRenew ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pWHOIS", MySqlDbType.VarChar, 45) { Value = entity.WHOIS, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrationPriceUSD", MySqlDbType.VarChar, 45) { Value = entity.RegistrationPriceUSD, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrationDate", MySqlDbType.VarChar, 45) { Value = entity.RegistrationDate, Direction = ParameterDirection.Input },
+                new MySqlParameter("pBigFootParkingPage", MySqlDbType.VarChar, 45) { Value = entity.BigFootParkingPage, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPrivacyProtected", entity.PrivacyProtected ? 1 : 0) { Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pRegistrarID", MySqlDbType.Int32) { Value = domain.RegistrarID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrarID", MySqlDbType.Int32) { Value = entity.RegistrarID, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pRegistrantID", MySqlDbType.Int32) { Value = domain.RegistrantID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPreviousRegistrantID", MySqlDbType.Int32) { Value = domain.PreviousRegistrantID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRegistrantEmail", MySqlDbType.VarChar, 100) { Value = domain.RegistrantEmail, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPrivateRegistrationEmail", MySqlDbType.VarChar, 100) { Value = domain.PrivateRegistrationEmail, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPreviousRegistrantChangedOn", MySqlDbType.VarChar, 45) { Value = domain.PreviousRegistrantChangedOn, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrantID", MySqlDbType.Int32) { Value = entity.RegistrantID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPreviousRegistrantID", MySqlDbType.Int32) { Value = entity.PreviousRegistrantID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrantEmail", MySqlDbType.VarChar, 100) { Value = entity.RegistrantEmail, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPrivateRegistrationEmail", MySqlDbType.VarChar, 100) { Value = entity.PrivateRegistrationEmail, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPreviousRegistrantChangedOn", MySqlDbType.VarChar, 45) { Value = entity.PreviousRegistrantChangedOn, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pPurchasePriceUSD", MySqlDbType.VarChar, 45) { Value = domain.PurchasePriceUSD, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPurchaseDate", MySqlDbType.VarChar, 45) { Value = domain.PurchaseDate, Direction = ParameterDirection.Input },
-                new MySqlParameter("pSalePriceUSD", MySqlDbType.VarChar, 45) { Value = domain.SalePriceUSD, Direction = ParameterDirection.Input },
-                new MySqlParameter("pSaleDate", MySqlDbType.VarChar, 45) { Value = domain.SaleDate, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPurchasePriceUSD", MySqlDbType.VarChar, 45) { Value = entity.PurchasePriceUSD, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPurchaseDate", MySqlDbType.VarChar, 45) { Value = entity.PurchaseDate, Direction = ParameterDirection.Input },
+                new MySqlParameter("pSalePriceUSD", MySqlDbType.VarChar, 45) { Value = entity.SalePriceUSD, Direction = ParameterDirection.Input },
+                new MySqlParameter("pSaleDate", MySqlDbType.VarChar, 45) { Value = entity.SaleDate, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pCDDateSent", MySqlDbType.VarChar, 45) { Value = domain.CDDateSent, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCDSentFrom", MySqlDbType.VarChar, 45) { Value = domain.CDSentFrom, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCDSentMethod", MySqlDbType.VarChar, 45) { Value = domain.CDSentMethod, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCDCourier", MySqlDbType.VarChar, 45) { Value = domain.CDCourier, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCDTrackingNumber", MySqlDbType.VarChar, 45) { Value = domain.CDTrackingNumber, Direction = ParameterDirection.Input },
-                new MySqlParameter("pTrademarkUsedInTheUDRPID", MySqlDbType.Int32) { Value = domain.TrademarkUsedInTheUDRPID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pUDRPFilingDate", MySqlDbType.VarChar, 45) { Value = domain.UDRPFilingDate, Direction = ParameterDirection.Input },
-                new MySqlParameter("pUDRPCostInUSD", MySqlDbType.VarChar, 45) { Value = domain.UDRPCostInUSD, Direction = ParameterDirection.Input },
-                new MySqlParameter("pUDRPCostOtherThanUSD", MySqlDbType.VarChar, 45) { Value = domain.UDRPCostOtherThanUSD, Direction = ParameterDirection.Input },
-                new MySqlParameter("pUDRPCaseNumber", MySqlDbType.VarChar, 45) { Value = domain.UDRPCaseNumber, Direction = ParameterDirection.Input },
-                new MySqlParameter("pArbitratorName", MySqlDbType.VarChar, 45) { Value = domain.ArbitratorName, Direction = ParameterDirection.Input },
-                new MySqlParameter("pUDRPJurisdiction", MySqlDbType.VarChar, 100) { Value = domain.UDRPJurisdiction, Direction = ParameterDirection.Input },
-                new MySqlParameter("pLanguageOfProceedings", MySqlDbType.VarChar, 45) { Value = domain.LanguageOfProceedings, Direction = ParameterDirection.Input },
-                new MySqlParameter("pLegalActionRelatedProceedings", domain.LegalActionRelatedProceedings ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pUDRPOutcome", MySqlDbType.VarChar, 45) { Value = domain.UDRPOutcome, Direction = ParameterDirection.Input },
-                new MySqlParameter("pUDRPComment", MySqlDbType.VarChar, 255) { Value = domain.UDRPComment, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCDDateSent", MySqlDbType.VarChar, 45) { Value = entity.CDDateSent, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCDSentFrom", MySqlDbType.VarChar, 45) { Value = entity.CDSentFrom, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCDSentMethod", MySqlDbType.VarChar, 45) { Value = entity.CDSentMethod, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCDCourier", MySqlDbType.VarChar, 45) { Value = entity.CDCourier, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCDTrackingNumber", MySqlDbType.VarChar, 45) { Value = entity.CDTrackingNumber, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTrademarkUsedInTheUDRPID", MySqlDbType.Int32) { Value = entity.TrademarkUsedInTheUDRPID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pUDRPFilingDate", MySqlDbType.VarChar, 45) { Value = entity.UDRPFilingDate, Direction = ParameterDirection.Input },
+                new MySqlParameter("pUDRPCostInUSD", MySqlDbType.VarChar, 45) { Value = entity.UDRPCostInUSD, Direction = ParameterDirection.Input },
+                new MySqlParameter("pUDRPCostOtherThanUSD", MySqlDbType.VarChar, 45) { Value = entity.UDRPCostOtherThanUSD, Direction = ParameterDirection.Input },
+                new MySqlParameter("pUDRPCaseNumber", MySqlDbType.VarChar, 45) { Value = entity.UDRPCaseNumber, Direction = ParameterDirection.Input },
+                new MySqlParameter("pArbitratorName", MySqlDbType.VarChar, 45) { Value = entity.ArbitratorName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pUDRPJurisdiction", MySqlDbType.VarChar, 100) { Value = entity.UDRPJurisdiction, Direction = ParameterDirection.Input },
+                new MySqlParameter("pLanguageOfProceedings", MySqlDbType.VarChar, 45) { Value = entity.LanguageOfProceedings, Direction = ParameterDirection.Input },
+                new MySqlParameter("pLegalActionRelatedProceedings", entity.LegalActionRelatedProceedings ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pUDRPOutcome", MySqlDbType.VarChar, 45) { Value = entity.UDRPOutcome, Direction = ParameterDirection.Input },
+                new MySqlParameter("pUDRPComment", MySqlDbType.VarChar, 255) { Value = entity.UDRPComment, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pDeletionRequest", domain.DeletionRequest ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = domain.DeletionRequestReason, Direction = ParameterDirection.Input }
+                new MySqlParameter("pDeletionRequest", entity.DeletionRequest ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = entity.DeletionRequestReason, Direction = ParameterDirection.Input }
             });
 
             return parameters.ToArray();

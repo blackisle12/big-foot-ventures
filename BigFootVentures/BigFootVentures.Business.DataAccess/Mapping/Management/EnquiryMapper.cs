@@ -16,7 +16,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             while (dataReader.Read())
             {
-                entities.Add(new Enquiry
+                var entity = new Enquiry
                 {
                     ID = (int)dataReader["ID"],
 
@@ -40,9 +40,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     CaseOrigin = dataReader["CaseOrigin"] as string,
                     ReferenceNumber = dataReader["ReferenceNumber"] as string,
 
-                    DomainName = dataReader["DomainName"] as string,
-                    RegistrantCompanyID = dataReader["RegistrantCompanyID"] as int?,
-                    RegistrantID = dataReader["RegistrantID"] as int?,
+                    DomainName = dataReader["DomainName"] as string,                    
                     RegistrantEmail = dataReader["RegistrantEmail"] as string,
                     Street = dataReader["Street"] as string,
                     City = dataReader["City"] as string,
@@ -61,59 +59,71 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     TestPlan = dataReader["TestPlan"] as string,
                     StepsToTest = dataReader["StepsToTest"] as string,
                     TestOutcome = dataReader["TestOutcome"] as string
-                });
+                };
+
+                if (int.TryParse((dataReader["RegistrantCompanyID"] as int?)?.ToString(), out int registrantCompanyID))
+                {
+                    entity.RegistrantCompany = new Company { ID = registrantCompanyID };
+                }
+
+                if (int.TryParse((dataReader["RegistrantID"] as int?)?.ToString(), out int registrantID))
+                {
+                    entity.Registrar = new Register { ID = registrantID };
+                }
+
+                entities.Add(entity);
             }
 
             return entities;
         }
 
-        public MySqlParameter[] CreateParameters(object entity)
+        public MySqlParameter[] CreateParameters(object model)
         {
-            var domainEnquiry = (Enquiry)entity;
+            var entity  = (Enquiry)model;
             var parameters = new List<MySqlParameter>();
 
             parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("pRecordType", MySqlDbType.VarChar, 100) { Value = domainEnquiry.RecordType, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRecordType", MySqlDbType.VarChar, 100) { Value = entity.RecordType, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pNegotiationBFAmount", MySqlDbType.VarChar, 100) { Value = domainEnquiry.NegotiationBFAmount, Direction = ParameterDirection.Input },
-                new MySqlParameter("pNegotiation3rdPartyAmount", MySqlDbType.VarChar, 100) { Value = domainEnquiry.Negotiation3rdPartyAmount, Direction = ParameterDirection.Input },
-                new MySqlParameter("pOldCaseNumber", MySqlDbType.VarChar, 100) { Value = domainEnquiry.OldCaseNumber, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPriority", MySqlDbType.VarChar, 45) { Value = domainEnquiry.Priority, Direction = ParameterDirection.Input },
-                new MySqlParameter("pStatus", MySqlDbType.VarChar, 100) { Value = domainEnquiry.Status, Direction = ParameterDirection.Input },
-                new MySqlParameter("pSendEmail", domainEnquiry.SendEmail ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pUnreadEmail", domainEnquiry.UnreadEmail ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pDoNotContact", domainEnquiry.DoNotContact ? 1 : 0) { Direction = ParameterDirection.Input },
-                new MySqlParameter("pSubject", MySqlDbType.VarChar, 100) { Value = domainEnquiry.Subject, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPercentOfCompletion", MySqlDbType.VarChar, 100) { Value = domainEnquiry.PercentOfCompletion, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCaseAssign", MySqlDbType.VarChar, 45) { Value = domainEnquiry.CaseAssign, Direction = ParameterDirection.Input },
+                new MySqlParameter("pNegotiationBFAmount", MySqlDbType.VarChar, 100) { Value = entity.NegotiationBFAmount, Direction = ParameterDirection.Input },
+                new MySqlParameter("pNegotiation3rdPartyAmount", MySqlDbType.VarChar, 100) { Value = entity.Negotiation3rdPartyAmount, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOldCaseNumber", MySqlDbType.VarChar, 100) { Value = entity.OldCaseNumber, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPriority", MySqlDbType.VarChar, 45) { Value = entity.Priority, Direction = ParameterDirection.Input },
+                new MySqlParameter("pStatus", MySqlDbType.VarChar, 100) { Value = entity.Status, Direction = ParameterDirection.Input },
+                new MySqlParameter("pSendEmail", entity.SendEmail ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pUnreadEmail", entity.UnreadEmail ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pDoNotContact", entity.DoNotContact ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pSubject", MySqlDbType.VarChar, 100) { Value = entity.Subject, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPercentOfCompletion", MySqlDbType.VarChar, 100) { Value = entity.PercentOfCompletion, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCaseAssign", MySqlDbType.VarChar, 45) { Value = entity.CaseAssign, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pPrivateRegistrationEmail", MySqlDbType.VarChar, 100) { Value = domainEnquiry.PrivateRegistrationEmail, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRegistrant", MySqlDbType.VarChar, 100) { Value = domainEnquiry.Registrant, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCaseOrigin", MySqlDbType.VarChar, 45) { Value = domainEnquiry.CaseOrigin, Direction = ParameterDirection.Input },
-                new MySqlParameter("pReferenceNumber", MySqlDbType.VarChar, 100) { Value = domainEnquiry.ReferenceNumber, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPrivateRegistrationEmail", MySqlDbType.VarChar, 100) { Value = entity.PrivateRegistrationEmail, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrant", MySqlDbType.VarChar, 100) { Value = entity.Registrant, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCaseOrigin", MySqlDbType.VarChar, 45) { Value = entity.CaseOrigin, Direction = ParameterDirection.Input },
+                new MySqlParameter("pReferenceNumber", MySqlDbType.VarChar, 100) { Value = entity.ReferenceNumber, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pDomainName", MySqlDbType.VarChar, 100) { Value = domainEnquiry.DomainName, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRegistrantCompanyID", MySqlDbType.Int32) { Value = domainEnquiry.RegistrantCompanyID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRegistrantID", MySqlDbType.Int32) { Value = domainEnquiry.RegistrantID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRegistrantEmail", MySqlDbType.VarChar, 100) { Value = domainEnquiry.RegistrantEmail, Direction = ParameterDirection.Input },
-                new MySqlParameter("pStreet", MySqlDbType.VarChar, 100) { Value = domainEnquiry.Street, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCity", MySqlDbType.VarChar, 100) { Value = domainEnquiry.City, Direction = ParameterDirection.Input },
-                new MySqlParameter("pState", MySqlDbType.VarChar, 100) { Value = domainEnquiry.State, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCountry", MySqlDbType.VarChar, 100) { Value = domainEnquiry.Country, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPostalCode", MySqlDbType.VarChar, 45) { Value = domainEnquiry.PostalCode, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPhone", MySqlDbType.VarChar, 45) { Value = domainEnquiry.Phone, Direction = ParameterDirection.Input },
-                new MySqlParameter("pFax", MySqlDbType.VarChar, 45) { Value = domainEnquiry.Fax, Direction = ParameterDirection.Input },
-                new MySqlParameter("pDescription", MySqlDbType.VarChar, 255) { Value = domainEnquiry.Description, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDomainName", MySqlDbType.VarChar, 100) { Value = entity.DomainName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrantCompanyID", MySqlDbType.Int32) { Value = entity.RegistrantCompany?.ID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrantID", MySqlDbType.Int32) { Value = entity.Registrar?.ID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrantEmail", MySqlDbType.VarChar, 100) { Value = entity.RegistrantEmail, Direction = ParameterDirection.Input },
+                new MySqlParameter("pStreet", MySqlDbType.VarChar, 100) { Value = entity.Street, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCity", MySqlDbType.VarChar, 100) { Value = entity.City, Direction = ParameterDirection.Input },
+                new MySqlParameter("pState", MySqlDbType.VarChar, 100) { Value = entity.State, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCountry", MySqlDbType.VarChar, 100) { Value = entity.Country, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPostalCode", MySqlDbType.VarChar, 45) { Value = entity.PostalCode, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPhone", MySqlDbType.VarChar, 45) { Value = entity.Phone, Direction = ParameterDirection.Input },
+                new MySqlParameter("pFax", MySqlDbType.VarChar, 45) { Value = entity.Fax, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDescription", MySqlDbType.VarChar, 255) { Value = entity.Description, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pFieldNames", MySqlDbType.VarChar, 255) { Value = domainEnquiry.FieldNames, Direction = ParameterDirection.Input },
-                new MySqlParameter("pInternalComments", MySqlDbType.VarChar, 255) { Value = domainEnquiry.InternalComments, Direction = ParameterDirection.Input },
-                new MySqlParameter("pObjectNames", MySqlDbType.VarChar, 255) { Value = domainEnquiry.ObjectNames, Direction = ParameterDirection.Input },
-                new MySqlParameter("pTechnicalAssessment", MySqlDbType.VarChar, 255) { Value = domainEnquiry.TechnicalAssessment, Direction = ParameterDirection.Input },
+                new MySqlParameter("pFieldNames", MySqlDbType.VarChar, 255) { Value = entity.FieldNames, Direction = ParameterDirection.Input },
+                new MySqlParameter("pInternalComments", MySqlDbType.VarChar, 255) { Value = entity.InternalComments, Direction = ParameterDirection.Input },
+                new MySqlParameter("pObjectNames", MySqlDbType.VarChar, 255) { Value = entity.ObjectNames, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTechnicalAssessment", MySqlDbType.VarChar, 255) { Value = entity.TechnicalAssessment, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pTestPlan", MySqlDbType.VarChar, 255) { Value = domainEnquiry.TestPlan, Direction = ParameterDirection.Input },
-                new MySqlParameter("pStepsToTest", MySqlDbType.VarChar, 255) { Value = domainEnquiry.StepsToTest, Direction = ParameterDirection.Input },
-                new MySqlParameter("pTestOutcome", MySqlDbType.VarChar, 255) { Value = domainEnquiry.TestOutcome, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTestPlan", MySqlDbType.VarChar, 255) { Value = entity.TestPlan, Direction = ParameterDirection.Input },
+                new MySqlParameter("pStepsToTest", MySqlDbType.VarChar, 255) { Value = entity.StepsToTest, Direction = ParameterDirection.Input },
+                new MySqlParameter("pTestOutcome", MySqlDbType.VarChar, 255) { Value = entity.TestOutcome, Direction = ParameterDirection.Input },
             });
 
             return parameters.ToArray();

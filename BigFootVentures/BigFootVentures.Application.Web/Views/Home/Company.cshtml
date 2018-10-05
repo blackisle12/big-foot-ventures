@@ -16,7 +16,7 @@
 @using (Html.BeginForm("Company", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.HiddenFor(m => m.Record.ID)
-    @Html.HiddenFor(m => m.Record.ParentAccountID)
+    @Html.HiddenFor(m => m.Record.ParentAccount.ID)
 
     @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
 
@@ -70,9 +70,9 @@
                                     <label class="col-sm-2 control-label">Parent Account</label>
                                     <div class="col-sm-4 autocomplete">
                                         <div class="input-group">
-                                            @Html.TextBoxFor(m => m.Record.ParentAccountName, new { @class = "form-control", @readonly = "readonly" })
+                                            @Html.TextBoxFor(m => m.Record.ParentAccount.DisplayName, new { @class = "form-control", @readonly = "readonly" })
                                             <div class="input-group-btn">
-                                                <button type="button" name="Button.ParentAccountName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                                <button type="button" name="Button.ParentAccount.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -531,7 +531,7 @@
         </div>
     </div>
     
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = Model.Name, ChildIDContainer = nameof(Model.Record.ParentAccountID), ChildNameContainer = nameof(Model.Record.ParentAccountName) })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = Model.Name, ChildIDContainer = "ParentAccount.ID", ChildNameContainer = "ParentAccount.DisplayName" })
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>

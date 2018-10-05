@@ -15,8 +15,8 @@
 @using (Html.BeginForm("Enquiry", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.HiddenFor(m => m.Record.ID)
-    @Html.HiddenFor(m => m.Record.RegistrantCompanyID)
-    @Html.HiddenFor(m => m.Record.RegistrantID)
+    @Html.HiddenFor(m => m.Record.RegistrantCompany.ID)
+    @Html.HiddenFor(m => m.Record.Registrar.ID)
 
     @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
 
@@ -165,9 +165,9 @@
                                     <label class="col-sm-2 control-label">Registrar</label>
                                     <div class="col-sm-4">
                                         <div class="input-group">
-                                            @Html.TextBoxFor(m => m.Record.RegistrantName, new { @class = "form-control", @readonly = "readonly" })
+                                            @Html.TextBoxFor(m => m.Record.Registrar.Name, new { @class = "form-control", @readonly = "readonly" })
                                             <div class="input-group-btn">
-                                                <button type="button" name="Button.RegistrantName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                                <button type="button" name="Button.Registrar.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -176,9 +176,9 @@
                                     <label class="col-sm-2 control-label">Registrant Company</label>
                                     <div class="col-sm-4">
                                         <div class="input-group">
-                                            @Html.TextBoxFor(m => m.Record.RegistrantCompanyName, new { @class = "form-control", @readonly = "readonly" })
+                                            @Html.TextBoxFor(m => m.Record.RegistrantCompany.DisplayName, new { @class = "form-control", @readonly = "readonly" })
                                             <div class="input-group-btn">
-                                                <button type="button" name="Button.RegistrantCompanyName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                                <button type="button" name="Button.RegistrantCompany.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -388,8 +388,8 @@
         </div>
     </div>
     
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Register), ChildIDContainer = nameof(Model.Record.RegistrantID), ChildNameContainer = nameof(Model.Record.RegistrantName) })
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = nameof(Model.Record.RegistrantCompanyID), ChildNameContainer = nameof(Model.Record.RegistrantCompanyName) })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Register), ChildIDContainer = "Registrar.ID", ChildNameContainer = "Registrar.Name" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "RegistrantCompany.ID", ChildNameContainer = "RegistrantCompany.DisplayName" })
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>

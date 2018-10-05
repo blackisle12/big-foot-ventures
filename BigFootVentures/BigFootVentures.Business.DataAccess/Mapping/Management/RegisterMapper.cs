@@ -15,7 +15,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             while (dataReader.Read())
             {
-                entities.Add(new Register
+                var entity = new Register
                 {
                     ID = (int)dataReader["ID"],
                     Name = dataReader["Name"] as string,
@@ -23,24 +23,26 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     Country = dataReader["Country"] as string,
                     AccreditedTLDs = dataReader["Accredited TLDs"] as string,
                     OwnerName = dataReader["Owner Name"] as string
-                });
+                };
+
+                entities.Add(entity);
             }
 
             return entities;
         }
 
-        public MySqlParameter[] CreateParameters(object entity)
+        public MySqlParameter[] CreateParameters(object model)
         {
-            var register = (Register)entity;
+            var entity = (Register)model;
             var parameters = new List<MySqlParameter>();
 
             parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = register.Name, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRAAYear", MySqlDbType.VarChar, 100) { Value = register.RAAYear, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCountry", MySqlDbType.VarChar, 100) { Value = register.Country, Direction = ParameterDirection.Input },
-                new MySqlParameter("pAccreditedTLDs", MySqlDbType.VarChar, 255) { Value = register.AccreditedTLDs, Direction = ParameterDirection.Input },
-                new MySqlParameter("pOwnerName", MySqlDbType.VarChar, 100) { Value = register.OwnerName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRAAYear", MySqlDbType.VarChar, 100) { Value = entity.RAAYear, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCountry", MySqlDbType.VarChar, 100) { Value = entity.Country, Direction = ParameterDirection.Input },
+                new MySqlParameter("pAccreditedTLDs", MySqlDbType.VarChar, 255) { Value = entity.AccreditedTLDs, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOwnerName", MySqlDbType.VarChar, 100) { Value = entity.OwnerName, Direction = ParameterDirection.Input },
             });
 
             return parameters.ToArray();

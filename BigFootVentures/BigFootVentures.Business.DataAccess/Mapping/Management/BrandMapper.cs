@@ -15,7 +15,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             while (dataReader.Read())
             {
-                entities.Add(new Brand
+                var entity = new Brand
                 {
                     ID = (int)dataReader["ID"],
 
@@ -34,28 +34,30 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     Premium = dataReader["PREMIUM__C"] as string,
                     CharacterCount = dataReader["CHARACTER_COUNT__C"] as string,
                     BNF = dataReader["BNF__C"] as string
-                });
+                };
+
+                entities.Add(entity);
             }
 
             return entities;
         }
 
-        public MySqlParameter[] CreateParameters(object entity)
+        public MySqlParameter[] CreateParameters(object model)
         {
-            var brand = (Brand)entity;
+            var entity = (Brand)model;
             var parameters = new List<MySqlParameter>();
 
             parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = brand.Name, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPurpose", MySqlDbType.VarChar, 100) { Value = brand.Purpose, Direction = ParameterDirection.Input },
-                new MySqlParameter("pValue", MySqlDbType.VarChar, 100) { Value = brand.Value, Direction = ParameterDirection.Input },
-                new MySqlParameter("pHVT", MySqlDbType.VarChar, 100) { Value = brand.HVTChk.ToString(), Direction = ParameterDirection.Input },
-                new MySqlParameter("pEMV", MySqlDbType.VarChar, 100) { Value = brand.EMV, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCategory", MySqlDbType.VarChar, 255) { Value = brand.Category, Direction = ParameterDirection.Input },
+                new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPurpose", MySqlDbType.VarChar, 100) { Value = entity.Purpose, Direction = ParameterDirection.Input },
+                new MySqlParameter("pValue", MySqlDbType.VarChar, 100) { Value = entity.Value, Direction = ParameterDirection.Input },
+                new MySqlParameter("pHVT", MySqlDbType.VarChar, 100) { Value = entity.HVTChk.ToString(), Direction = ParameterDirection.Input },
+                new MySqlParameter("pEMV", MySqlDbType.VarChar, 100) { Value = entity.EMV, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCategory", MySqlDbType.VarChar, 255) { Value = entity.Category, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pDeletionRequest", MySqlDbType.VarChar, 100) { Value = brand.DeletionRequestChk, Direction = ParameterDirection.Input },
-                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = brand.DeletionRequestReason, Direction = ParameterDirection.Input }
+                new MySqlParameter("pDeletionRequest", MySqlDbType.VarChar, 100) { Value = entity.DeletionRequestChk, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = entity.DeletionRequestReason, Direction = ParameterDirection.Input }
             });
 
             return parameters.ToArray();

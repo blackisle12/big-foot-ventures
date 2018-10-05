@@ -13,32 +13,34 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             while (dataReader.Read())
             {
-                entities.Add(new OfficeStatus
+                var entity = new OfficeStatus
                 {
                     ID = (int)dataReader["ID"],
                     Name = dataReader["Name"] as string,
                     StatusDescription = dataReader["StatusDescription"] as string,
                     StatusGrouping = dataReader["StatusGrouping"] as string,
-               
+
                     OwnerName = dataReader["OwnerName"] as string
-                });
+                };
+
+                entities.Add(entity);
             }
 
             return entities;
         }
 
-        public MySqlParameter[] CreateParameters(object entity)
+        public MySqlParameter[] CreateParameters(object model)
         {
-            var officeStatus = (OfficeStatus)entity;
+            var entity = (OfficeStatus)model;
             var parameters = new List<MySqlParameter>();
 
             parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = officeStatus.Name, Direction = ParameterDirection.Input },
-                new MySqlParameter("pStatusDescription", MySqlDbType.VarChar, 255) { Value = officeStatus.StatusDescription, Direction = ParameterDirection.Input },
-                new MySqlParameter("pStatusGrouping", MySqlDbType.VarChar, 100) { Value = officeStatus.StatusGrouping, Direction = ParameterDirection.Input },
+                new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
+                new MySqlParameter("pStatusDescription", MySqlDbType.VarChar, 255) { Value = entity.StatusDescription, Direction = ParameterDirection.Input },
+                new MySqlParameter("pStatusGrouping", MySqlDbType.VarChar, 100) { Value = entity.StatusGrouping, Direction = ParameterDirection.Input },
                 
-                new MySqlParameter("pOwnerName", MySqlDbType.VarChar, 100) { Value = officeStatus.OwnerName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOwnerName", MySqlDbType.VarChar, 100) { Value = entity.OwnerName, Direction = ParameterDirection.Input },
             });
 
             return parameters.ToArray();
