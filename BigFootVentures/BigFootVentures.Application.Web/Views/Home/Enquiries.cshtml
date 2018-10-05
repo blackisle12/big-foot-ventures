@@ -37,8 +37,8 @@
                                 <td><a href="@Url.RouteUrl("EnquiryView", new { ID = enquiry.ID })" target="_blank">@enquiry.OldCaseNumber</a></td>
                                 <td>@enquiry.Description</td>
                                 <td>@enquiry.ReferenceNumber</td>
-                                <td>@enquiry.DomainName</td>
-                                <td>@enquiry.DoNotContact</td>
+                                <td>@enquiry.DomainName</td>                                
+                                <td><input type="checkbox" @(enquiry.DoNotContact ? "checked" : string.Empty) disabled /></td>
                             </tr>
                         }
                     }

@@ -23,7 +23,7 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Domain Enquiry
+                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Enquiry <strong>@Model.Record.OldCaseNumber</strong>
             </span>
             <span class="panel-title pull-right">
                 <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>

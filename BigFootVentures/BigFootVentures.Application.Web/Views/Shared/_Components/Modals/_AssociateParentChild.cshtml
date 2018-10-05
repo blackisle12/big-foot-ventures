@@ -2,7 +2,7 @@
 
 @model VMAssociation
 
-<div class="modal fade" role="dialog" name="@($"Modal.{Model.ParentName}{Model.ChildName}")">
+<div class="modal fade" role="dialog" name="@($"Modal.{Model.ChildNameContainer}")">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,18 +14,18 @@
                     <div class="col-sm-12">
                         <div class="input-group center">
                             <span class="input-group-addon"><i class="fa fa-address-book-o"></i></span>
-                            <input class="form-control" name="@($"Modal.Input.Search{Model.ParentName}{Model.ChildName}")" placeholder="Search for @Model.ChildName.." />
-                            <span name="@($"Modal.Input.Loader{Model.ParentName}{Model.ChildName}")" class="form-control-feedback">
+                            <input class="form-control" name="@($"Modal.Input.Search{Model.ChildNameContainer}")" placeholder="Search for @Model.ChildName.." />
+                            <span name="@($"Modal.Input.Loader{Model.ChildNameContainer}")" class="form-control-feedback">
                                 <img src="~/Content/images/loader.gif" />
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" name="@($"Modal.Table.{Model.ParentName}{Model.ChildName}")">
+                    <table class="table table-striped table-hover" name="@($"Modal.Table.{Model.ChildNameContainer}")">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>@Model.ChildProperty</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -41,11 +41,11 @@
 
 <script type="text/javascript">
     $(function () {
-        $('[name="Button.@Model.ChildNameContainer"]').on('click', function () {
-            $('[name="Modal.Input.Search@($"{Model.ParentName}{Model.ChildName}")"]').val('');
-            $('[name="Modal.Input.Loader@($"{Model.ParentName}{Model.ChildName}")"]').hide();
+        $('[name="Button.@(Model.ChildNameContainer)"]').on('click', function () {
+            $('[name="Modal.Input.Search@(Model.ChildNameContainer)"]').val('');
+            $('[name="Modal.Input.Loader@(Model.ChildNameContainer)"]').hide();
 
-            var currentName = $('[name="Record.@Model.ChildNameContainer"]').val();
+            var currentName = $('[name="Record.@(Model.ChildNameContainer)"]').val();
             var tbody = '';
 
             if (currentName.length > 0) {
@@ -54,30 +54,30 @@
                 tbody += '</tr>';
             }
 
-            $('[name="Modal.Table.@($"{Model.ParentName}{Model.ChildName}")"] tbody').html(tbody);
+            $('[name="Modal.Table.@(Model.ChildNameContainer)"] tbody').html(tbody);
 
-            $('[name="Modal.@($"{Model.ParentName}{Model.ChildName}")"]').modal('show');
+            $('[name="Modal.@(Model.ChildNameContainer)"]').modal('show');
         });
 
-        $('[name="Modal.Input.Search@($"{Model.ParentName}{Model.ChildName}")"]').on('keyup', function () {
+        $('[name="Modal.Input.Search@(Model.ChildNameContainer)"]').on('keyup', function () {
             var value = $(this).val();
 
             if (value.length < 5) {
                 return;
             }
 
-            $('[name="Modal.Input.Loader@($"{Model.ParentName}{Model.ChildName}")"]').show();
+            $('[name="Modal.Input.Loader@(Model.ChildNameContainer)"]').show();
 
             $.ajax({
                 type: 'GET',
-                url: '../../@Model.ChildName/Autocomplete/' + value,
+                url: location.origin + '/Home/@(Model.ChildName)/Autocomplete/' + value,
                 success: function (response) {
-                    $('[name="Modal.Input.Loader@($"{Model.ParentName}{Model.ChildName}")"]').hide();
+                    $('[name="Modal.Input.Loader@(Model.ChildNameContainer)"]').hide();
 
                     if (response.IsSuccess) {
                         var tbody = '';
-                        var currentName = $('[name="Record.@Model.ChildNameContainer"]').val();
-                        var currentValue = $('[name="Record.@Model.ChildIDContainer').val();                        
+                        var currentName = $('[name="Record.@(Model.ChildNameContainer)"]').val();
+                        var currentValue = $('[name="Record.@(Model.ChildIDContainer)"]').val();
 
                         if (currentName.length > 0) {
                             tbody += '<tr>';
@@ -93,13 +93,13 @@
                             }
                         });
 
-                        $('[name="Modal.Table.@($"{Model.ParentName}{Model.ChildName}")"] tbody').html(tbody);
+                        $('[name="Modal.Table.@(Model.ChildNameContainer)"] tbody').html(tbody);
 
                         $('.modal-table-select-account-btn').on('click', function () {
-                            $('[name="Record.@Model.ChildNameContainer"]').val($(this).data('text'));
-                            $('[name="Record.@Model.ChildIDContainer"]').val($(this).data('value'));
+                            $('[name="Record.@(Model.ChildNameContainer)"]').val($(this).data('text'));
+                            $('[name="Record.@(Model.ChildIDContainer)"]').val($(this).data('value'));
 
-                            $('[name="Modal.@($"{Model.ParentName}{Model.ChildName}")"]').modal('hide');
+                            $('[name="Modal.@(Model.ChildNameContainer)"]').modal('hide');
                         });
                     }
                     else {

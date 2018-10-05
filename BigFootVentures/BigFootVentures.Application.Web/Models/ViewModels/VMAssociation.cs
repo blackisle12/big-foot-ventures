@@ -9,6 +9,7 @@
         public string ChildName { get; set; }
         public string ChildNameContainer { get; set; }
         public string ChildIDContainer { get; set; }
+        public string ChildProperty { get; set; } = "Name";
 
         #endregion
     }

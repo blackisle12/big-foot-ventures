@@ -195,6 +195,32 @@ namespace BigFootVentures.Application.Web.Controllers
             return RedirectToAction("Brands");
         }
 
+        [HttpGet]
+        [Route("Brand/Autocomplete/{keyword}", Name = "BrandAutocomplete")]
+        public ActionResult BrandAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementBrandService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region "Companies"
@@ -229,12 +255,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
             if (company.ParentAccountID != null)
             {
-                var companyParent = this._managementCompanyService.Get(company.ParentAccountID.Value);
-
-                if (companyParent != null)
-                {                    
-                    company.ParentAccountName = companyParent.DisplayName;
-                }
+                company.ParentAccountName = this._managementCompanyService.Get(company.ParentAccountID.Value)?.DisplayName;
             }
 
             var model = new VMModel<Company>
@@ -293,12 +314,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
                 if (company.ParentAccountID != null)
                 {
-                    var companyParent = this._managementCompanyService.Get(company.ParentAccountID.Value);
-
-                    if (companyParent != null)
-                    {
-                        company.ParentAccountName = companyParent.DisplayName;
-                    }
+                    company.ParentAccountName = this._managementCompanyService.Get(company.ParentAccountID.Value)?.DisplayName;
                 }
 
                 model = new VMModel<Company>
@@ -445,24 +461,41 @@ namespace BigFootVentures.Application.Web.Controllers
             return View(pageResult);
         }
 
-        [Route("Domain/{ID:int}", Name = "DomainView")]
+        [Route("Domain/{ID:int}", Name = "DomainNView")]
         public ActionResult Domain(int ID)
         {
-            var company = this._managementCompanyService.Get(ID);
+            var domain = this._managementDomainService.Get(ID);
 
-            if (company.ParentAccountID != null)
+            if (domain.RegistrantCompanyID != null)
             {
-                var companyParent = this._managementCompanyService.Get(company.ParentAccountID.Value);
-
-                if (companyParent != null)
-                {
-                    company.ParentAccountName = companyParent.DisplayName;
-                }
+                domain.RegistrantCompanyName = this._managementCompanyService.Get(domain.RegistrantCompanyID.Value)?.DisplayName;
             }
 
-            var model = new VMModel<Company>
+            if (domain.DomainEnquiryID != null)
             {
-                Record = company,
+                domain.DomainEnquiryCaseNumber = this._managementEnquiryService.Get(domain.RegistrantCompanyID.Value)?.OldCaseNumber;
+            }
+
+            domain.BrandName = this._managementBrandService.Get(domain.BrandID.Value).Name;
+
+            if (domain.RegistrarID != null)
+            {
+                domain.RegistrarName = this._managementRegisterService.Get(domain.RegistrarID.Value).Name;
+            }
+
+            if (domain.RegistrantID != null)
+            {
+                domain.RegistrantName = this._managementCompanyService.Get(domain.RegistrantID.Value)?.DisplayName;
+            }
+
+            if (domain.PreviousRegistrantID != null)
+            {
+                domain.PreviousRegistrantName = this._managementCompanyService.Get(domain.PreviousRegistrantID.Value)?.DisplayName;
+            }
+
+            var model = new VMModel<DomainN>
+            {
+                Record = domain,
                 PageMode = PageMode.View
             };
 
@@ -509,6 +542,33 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 var domain = this._managementDomainService.Get(ID);
 
+                if (domain.RegistrantCompanyID != null)
+                {
+                    domain.RegistrantCompanyName = this._managementCompanyService.Get(domain.RegistrantCompanyID.Value)?.DisplayName;
+                }
+
+                if (domain.DomainEnquiryID != null)
+                {
+                    domain.DomainEnquiryCaseNumber = this._managementEnquiryService.Get(domain.RegistrantCompanyID.Value)?.OldCaseNumber;
+                }
+
+                domain.BrandName = this._managementBrandService.Get(domain.BrandID.Value).Name;
+
+                if (domain.RegistrarID != null)
+                {
+                    domain.RegistrarName = this._managementRegisterService.Get(domain.RegistrarID.Value).Name;
+                }
+
+                if (domain.RegistrantID != null)
+                {
+                    domain.RegistrantName = this._managementCompanyService.Get(domain.RegistrantID.Value)?.DisplayName;
+                }
+
+                if (domain.PreviousRegistrantID != null)
+                {
+                    domain.PreviousRegistrantName = this._managementCompanyService.Get(domain.PreviousRegistrantID.Value)?.DisplayName;
+                }
+
                 model = new VMModel<DomainN>
                 {
                     Record = domain,
@@ -554,7 +614,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         [HttpGet]
         [Route("Domain/Delete/{ID:int}", Name = "DomainNDelete")]
-        public ActionResult DomainDelete(int ID)
+        public ActionResult DomainNDelete(int ID)
         {
             try
             {
@@ -605,22 +665,12 @@ namespace BigFootVentures.Application.Web.Controllers
 
             if (enquiry.RegistrantID != null)
             {
-                var registrant = this._managementRegisterService.Get(enquiry.RegistrantID.Value);
-
-                if (registrant != null)
-                {
-                    enquiry.RegistrantName = registrant.Name;
-                }
+                enquiry.RegistrantName = this._managementRegisterService.Get(enquiry.RegistrantID.Value)?.Name;
             }
 
             if (enquiry.RegistrantCompanyID != null)
             {
-                var registrantCompany = this._managementCompanyService.Get(enquiry.RegistrantCompanyID.Value);
-
-                if (registrantCompany != null)
-                {
-                    enquiry.RegistrantCompanyName = registrantCompany.DisplayName;
-                }
+                enquiry.RegistrantCompanyName = this._managementCompanyService.Get(enquiry.RegistrantCompanyID.Value)?.DisplayName;
             }
 
             var model = new VMModel<Enquiry>
@@ -678,22 +728,12 @@ namespace BigFootVentures.Application.Web.Controllers
 
                 if (enquiry.RegistrantID != null)
                 {
-                    var registrant = this._managementRegisterService.Get(enquiry.RegistrantID.Value);
-
-                    if (registrant != null)
-                    {
-                        enquiry.RegistrantName = registrant.Name;
-                    }
+                    enquiry.RegistrantName = this._managementRegisterService.Get(enquiry.RegistrantID.Value)?.Name;
                 }
 
                 if (enquiry.RegistrantCompanyID != null)
                 {
-                    var registrantCompany = this._managementCompanyService.Get(enquiry.RegistrantCompanyID.Value);
-
-                    if (registrantCompany != null)
-                    {
-                        enquiry.RegistrantCompanyName = registrantCompany.DisplayName;
-                    }
+                    enquiry.RegistrantCompanyName = this._managementCompanyService.Get(enquiry.RegistrantCompanyID.Value)?.DisplayName;
                 }
 
                 model = new VMModel<Enquiry>

@@ -28,7 +28,7 @@
                         foreach (var domain in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("DomainView", new { ID = domain.ID })" target="_blank">@domain.Name</a></td>                                
+                                <td><a href="@Url.RouteUrl("DomainNView", new { ID = domain.ID })" target="_blank">@domain.Name</a></td>                                
                             </tr>
                         }
                     }

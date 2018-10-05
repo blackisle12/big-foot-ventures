@@ -460,7 +460,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">UDRP Comment</label>
+                            <label class="col-sm-2 control-label">Deletion Request Reason</label>
                             <div class="col-sm-10">
                                 @Html.TextAreaFor(m => m.Record.DeletionRequestReason, new { @class = "form-control" })
                             </div>
@@ -494,6 +494,13 @@
             @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
         </div>
     </div>
+
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = nameof(Model.Record.RegistrantCompanyID), ChildNameContainer = nameof(Model.Record.RegistrantCompanyName) })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Enquiry), ChildIDContainer = nameof(Model.Record.DomainEnquiryID), ChildNameContainer = nameof(Model.Record.DomainEnquiryCaseNumber), ChildProperty = "Case Number" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Brand), ChildIDContainer = nameof(Model.Record.BrandID), ChildNameContainer = nameof(Model.Record.BrandName) })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Register), ChildIDContainer = nameof(Model.Record.RegistrarID), ChildNameContainer = nameof(Model.Record.RegistrarName) })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = nameof(Model.Record.RegistrantID), ChildNameContainer = nameof(Model.Record.RegistrantName) })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = nameof(Model.Record.PreviousRegistrantID), ChildNameContainer = nameof(Model.Record.PreviousRegistrantName) })
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
