@@ -16,6 +16,7 @@
 @using (Html.BeginForm("Domain", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.HiddenFor(m => m.Record.ID)
+    @Html.HiddenFor(m => m.Record.RegistrantCompanyID)
     @Html.HiddenFor(m => m.Record.DomainEnquiryID)
     @Html.HiddenFor(m => m.Record.BrandID)
     @Html.HiddenFor(m => m.Record.RegistrarID)
@@ -36,21 +37,465 @@
         </div>
         <div class="panel-body">
             <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Registrant Company</label>
+                            <div class="col-sm-4 autocomplete">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.RegistrantCompanyName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.RegistrantCompanyName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <!-- END: Information -->
             <!-- START: Domain Detail -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Domain Detail
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Domain Name</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Name, new { @class = "form-control required" })
+                                @Html.ValidationMessageFor(m => m.Record.Name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Website Current</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.WebsiteCurrent, new { @class = "input-neutral" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Domain Enquiry</label>
+                            <div class="col-sm-4 autocomplete">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.DomainEnquiryCaseNumber, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.DomainEnquiryCaseNumber" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-2 control-label">Locked</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.Locked)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Brand</label>
+                            <div class="col-sm-4 autocomplete">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.BrandName, new { @class = "form-control required", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.BrandName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Record.BrandName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Website Use</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.WebsiteUse, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.WebsiteUse>()), new { @class = "form-control input-neutral" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">BF Strategy</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.BFStrategy, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.BFStrategy>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Website Description</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.WebsiteDescription, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Buyside Funnel</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.BuysideFunnel, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.BuysideFunnel>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Website Redirect</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.WebsiteRedirect, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Remarks</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.Remarks, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Expiration Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.ExpirationDate, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">FMV Order of Magnitude</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.FMVOrderOfMagnitude, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.FMVOrderOfMagnitude>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Company Website</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.CompanyWebsite)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.BuysideFunnel, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.Status>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Auto Renew</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.AutoRenew)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Version</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Version, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">WHOIS</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.WHOIS, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Category</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Category, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Registration Price USD</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.RegistrationPriceUSD, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Account ID</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.AccountID, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Registration Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.RegistrationDate, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">Big Foot Parking Page</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.BigFootParkingPage, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">Privacy Protected</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.PrivacyProtected)
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <!-- END: Domain Detail -->
             <!-- START: Registrar -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Registrar
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Registrar</label>
+                            <div class="col-sm-4 autocomplete">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.RegistrarName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.RegistrarName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <!-- END: Registrar -->
             <!-- START: Current Registrant -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Current Registrant
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Registrant</label>
+                            <div class="col-sm-4 autocomplete">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.RegistrantName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.RegistrantName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-2 control-label">Previous Registrant</label>
+                            <div class="col-sm-4 autocomplete">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.PreviousRegistrantName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.PreviousRegistrantName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Registrant Email</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.RegistrantEmail, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Previous Registrant changed on</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.PreviousRegistrantChangedOn, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Private Registration Email</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.PrivateRegistrationEmail, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <!-- END: Current Registrant -->
             <!-- START: Domain Transactions -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Domain Transactions
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Purchase Price USD</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.PurchasePriceUSD, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Sale Price USD</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.SalePriceUSD, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Purchase Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.PurchaseDate, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Sale Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.SaleDate, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <!-- END: Domain Transactions -->
             <!-- START: Legal Section -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Legal Section
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">C&D Date Sent</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CDDateSent, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Trademark used in the UDRP</label>
+                            <div class="col-sm-4 autocomplete">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.TrademarkUsedInTheUDRPName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.TrademarkUsedInTheUDRPName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">C&D Sent From</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.CDSentFrom, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.CDSentFrom>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">UDRP Filing Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.UDRPFilingDate, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">C&D Sent Method</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.CDSentMethod, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.CDSentMethod>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">UDRP cost (in USD)</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.UDRPCostInUSD, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">C&D Courier</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.CDCourier, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.CDCourier>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">UDRP cost (other than USD)</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.UDRPCostOtherThanUSD, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">C&D Tracking Number</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CDTrackingNumber, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">UDRP Case Number</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.UDRPCaseNumber, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">Arbitrator Name</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.ArbitratorName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">UDRP Jurisdiction</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.UDRPJurisdiction, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.UDRPJurisdiction>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">Language of Proceedings</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.LanguageOfProceedings, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.LanguageOfProceedings>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">Legal action/Related proceedings</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.LegalActionRelatedProceedings)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">UDRP Outcome</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.UDRPOutcome, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.UDRPOutcome>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">UDRP Comment</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.UDRPComment, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <!-- END: Legal Section -->
             <!-- START: Deletion Request -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Deletion Request
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Deletion Request</label>
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Record.DeletionRequest)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">UDRP Comment</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.DeletionRequestReason, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <!-- END: Deletion Request -->
             <!-- START: System Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        System Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-offset-6 col-sm-2 control-label">Owner</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <!-- END: System Information -->
         </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
     </div>
+
+    <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
+    <script src="~/Scripts/Views/Home/Domain.js"></script>
 }

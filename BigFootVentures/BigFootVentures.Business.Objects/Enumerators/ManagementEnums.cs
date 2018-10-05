@@ -297,7 +297,7 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
         public static class Domain
         {
-            public enum BFStatus
+            public enum BFStrategy
             {
                 [Description("")]
                 NotSet,

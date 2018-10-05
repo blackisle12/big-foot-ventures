@@ -236,6 +236,8 @@
     <Content Include="Scripts\Views\Home\Brands.js" />
     <Content Include="Scripts\Views\Home\Domains.js" />
     <Content Include="Scripts\Views\Home\Enquiries.js" />
+    <Content Include="Scripts\Views\Home\LoginInformations.js" />
+    <Content Include="Scripts\Views\Home\OfficeStatuses.js" />
     <Content Include="Scripts\Views\Home\Registers.js" />
     <Content Include="Scripts\Views\Home\Companies.js" />
     <Content Include="Scripts\Views\Home\Company.js" />

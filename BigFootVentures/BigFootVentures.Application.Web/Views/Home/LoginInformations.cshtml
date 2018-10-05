@@ -2,7 +2,7 @@
 @using BigFootVentures.Application.Web.Models.ViewModels
 
 @{
-    ViewBag.Title = "LoginInformations";
+    ViewBag.Title = "Login Information";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -30,7 +30,7 @@
                         foreach (var loginInformation in Model.Records)
                         {
                             <tr class="th-bg">
-                                <td class="th-account-name"><a href="@Url.RouteUrl("LoginInformationView", new { ID = loginInformation.ID })" target="_blank">@loginInformation.AccountName</a></td>                                
+                                <td class="th-account-name"><a href="@Url.RouteUrl("LoginInformationView", new { ID = loginInformation.ID })" target="_blank">@loginInformation.AccountName</a></td>
                                 <td class="th-login-information-id">@loginInformation.LoginInformationID</td>
                                 <td class="th-email-address">@loginInformation.EmailAddress</td>
                             </tr>
@@ -44,4 +44,5 @@
         </div>
     </div>
 
+    <script src="~/Scripts/Views/Home/OfficeStatuses.js"></script>
 }

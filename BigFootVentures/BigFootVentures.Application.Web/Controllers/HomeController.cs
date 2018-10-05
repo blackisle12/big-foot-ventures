@@ -525,6 +525,11 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
+                if (string.IsNullOrWhiteSpace(model.Record.BrandName))
+                {
+                    ModelState.AddModelError("Record.BrandName", "This field is required");
+                }
+
                 if (ModelState.IsValid)
                 {
                     if (model.Record.ID == 0)
