@@ -1,0 +1,211 @@
+﻿<link href="~/Content/Views/Home/Contact.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Contact - " + (Model.Record.LastName ?? "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Contact>
+
+@using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+    @Html.HiddenFor(m => m.Record.Company.ID)
+    @Html.HiddenFor(m => m.Record.WebsiteIndividual.ID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Contact <strong>@Model.Record.FirstName @Model.Record.LastName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Contact Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Contact Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Salutation</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Salutation, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Contact.Salutation>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Owner</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control input-neutral", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.FirstName, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Reports To</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Middle Name</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.MiddleName, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Department</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Department, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">LastName</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.LastName, new { @class = "form-control required" })
+                                @Html.ValidationMessageFor(m => m.Record.LastName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Fax</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Fax, new { @class = "form-control input-neutral" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Suffix</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Suffix, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Company</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.Company.DisplayName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.Company.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Title</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Title, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Mobile</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Mobile, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">OHIM Owner ID</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.OHIMOwnerID, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">OHIM Num Trademarks</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.OHIMNumTrademarks, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Website Individual</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.WebsiteIndividual.Name, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.WebsiteIndividual.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Contact Information -->
+            <!-- START: Address Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Contact Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Mailing Country</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(m => m.Record.MailingCountry, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Mailing Street</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.MailingStreet, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Mailing City</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.MailingCity, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Mailing State</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.MailingState, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Mailing Postal Code</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.MailingPostalCode, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Address Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "Company.ID", ChildNameContainer = "Company.DisplayName" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(DomainN), ChildIDContainer = "WebsiteIndividual.ID", ChildNameContainer = "WebsiteIndividual.Name" })
+
+    <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
+    <script src="~/Scripts/Views/Home/Register.js"></script>
+}

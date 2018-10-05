@@ -825,6 +825,31 @@ namespace BigFootVentures.Application.Web.Controllers
             return RedirectToAction("Domains");
         }
 
+        [HttpGet]
+        [Route("DomainN/Autocomplete/{keyword}", Name = "DomainAutocomplete")]
+        public ActionResult DomainNAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementDomainService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 

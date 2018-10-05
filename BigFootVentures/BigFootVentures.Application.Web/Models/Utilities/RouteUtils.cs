@@ -21,6 +21,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { recordType = company.AccountRecordType, ID = company.ID };
             }
+            else if (type == typeof(Contact))
+            {
+                var contact = (Contact)model;
+
+                return new { ID = contact.ID };
+            }
             else if (type == typeof(DomainN))
             {
                 var domain = (DomainN)model;

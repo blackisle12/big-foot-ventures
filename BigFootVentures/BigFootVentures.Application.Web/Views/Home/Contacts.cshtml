@@ -1,0 +1,48 @@
+﻿<link href="~/Content/Views/Home/Contacts.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Contacts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<Contact>
+
+@using (Html.BeginForm("Contacts", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-name">Name</th>
+                        <th class="th-department">Department</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var contact in Model.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("ContactView", new { ID = contact.ID })" target="_blank">@($"{contact.LastName}, {contact.FirstName}")</a></td>
+                                <td>@contact.Department</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/Contacts.js"></script>
+}

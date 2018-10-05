@@ -8,8 +8,7 @@ namespace BigFootVentures.Business.Objects.Management
 
         public string OwnerName { get; set; }
 
-        public Company RegistrantCompany { get; set; }        
-        [Required(ErrorMessage = "This field is required")]
+        public Company RegistrantCompany { get; set; }                
         public string Name { get; set; }
         public Enquiry DomainEnquiry { get; set; }        
         public Brand Brand { get; set; }        
