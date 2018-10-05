@@ -14,8 +14,7 @@ namespace BigFootVentures.Business.Objects.Management
         #endregion
 
         #region "Properties"
-
-        [Required(ErrorMessage = "This field is required")]
+        
         public string Name { get; set; }
         public string Purpose { get; set; }
         public string Value { get; set; }

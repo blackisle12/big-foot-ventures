@@ -5,7 +5,9 @@ using BigFootVentures.Business.Objects;
 using BigFootVentures.Business.Objects.Enumerators;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
+using BigFootVentures.Service.BusinessService.Validators;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
@@ -155,8 +157,10 @@ namespace BigFootVentures.Application.Web.Controllers
                 if (model.Record.CategoriesSelected != null)
                     model.Record.Category = string.Join(";", model.Record.CategoriesSelected);
 
-                if (ModelState.IsValid)
-                {                    
+                var validationResult = new Dictionary<string, string>();
+
+                if (BrandValidator.IsValid(model.Record, out validationResult))
+                {
                     if (model.Record.ID == 0)
                     {
                         this._managementBrandService.Insert(model.Record);
@@ -170,6 +174,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
                 else
                 {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
                     throw new Exception("error on validation.."); //will rework on this
                 }
             };
@@ -346,29 +355,9 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
-                if (string.Equals(model.Record.AccountRecordType, ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    if (string.IsNullOrWhiteSpace(model.Record.CompanyName))
-                    {
-                        ModelState.AddModelError("Record.CompanyName", "This field is required");
-                    }
-                }
-                else if (string.Equals(model.Record.AccountRecordType, ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription(), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    if (string.IsNullOrWhiteSpace(model.Record.CompanyName))
-                    {
-                        ModelState.AddModelError("Record.CompanyName", "This field is required");
-                    }
-                }
-                else if (string.Equals(model.Record.AccountRecordType, ManagementEnums.Company.AccountRecordType.PersonAccount.ToDescription(), StringComparison.InvariantCultureIgnoreCase))
-                {
-                    if (string.IsNullOrWhiteSpace(model.Record.LastName))
-                    {
-                        ModelState.AddModelError("Record.LastName", "This field is required");
-                    }
-                }
+                var validationResult = new Dictionary<string, string>();
 
-                if (ModelState.IsValid)
+                if (CompanyValidator.IsValid(model.Record, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
@@ -383,6 +372,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
                 else
                 {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
                     throw new Exception("error on validation.."); //will rework on this
                 }
             };
@@ -466,31 +460,34 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var domain = this._managementDomainService.Get(ID);
 
-            if (domain.RegistrantCompanyID != null)
+            if (domain.RegistrantCompany != null)
             {
-                domain.RegistrantCompanyName = this._managementCompanyService.Get(domain.RegistrantCompanyID.Value)?.DisplayName;
+                domain.RegistrantCompany = this._managementCompanyService.Get(domain.RegistrantCompany.ID);
             }
 
-            if (domain.DomainEnquiryID != null)
+            if (domain.DomainEnquiry != null)
             {
-                domain.DomainEnquiryCaseNumber = this._managementEnquiryService.Get(domain.RegistrantCompanyID.Value)?.OldCaseNumber;
+                domain.DomainEnquiry = this._managementEnquiryService.Get(domain.DomainEnquiry.ID);
             }
 
-            domain.BrandName = this._managementBrandService.Get(domain.BrandID.Value).Name;
-
-            if (domain.RegistrarID != null)
+            if (domain.Brand != null)
             {
-                domain.RegistrarName = this._managementRegisterService.Get(domain.RegistrarID.Value).Name;
+                domain.Brand = this._managementBrandService.Get(domain.Brand.ID);
             }
 
-            if (domain.RegistrantID != null)
+            if (domain.Registrar != null)
             {
-                domain.RegistrantName = this._managementCompanyService.Get(domain.RegistrantID.Value)?.DisplayName;
+                domain.Registrar = this._managementRegisterService.Get(domain.Registrar.ID);
             }
 
-            if (domain.PreviousRegistrantID != null)
+            if (domain.Registrant != null)
             {
-                domain.PreviousRegistrantName = this._managementCompanyService.Get(domain.PreviousRegistrantID.Value)?.DisplayName;
+                domain.Registrant = this._managementCompanyService.Get(domain.Registrant.ID);
+            }
+
+            if (domain.PreviousRegistrant != null)
+            {
+                domain.PreviousRegistrant = this._managementCompanyService.Get(domain.PreviousRegistrant.ID);
             }
 
             var model = new VMModel<DomainN>
@@ -542,31 +539,34 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 var domain = this._managementDomainService.Get(ID);
 
-                if (domain.RegistrantCompanyID != null)
+                if (domain.RegistrantCompany != null)
                 {
-                    domain.RegistrantCompanyName = this._managementCompanyService.Get(domain.RegistrantCompanyID.Value)?.DisplayName;
+                    domain.RegistrantCompany = this._managementCompanyService.Get(domain.RegistrantCompany.ID);
                 }
 
-                if (domain.DomainEnquiryID != null)
+                if (domain.DomainEnquiry != null)
                 {
-                    domain.DomainEnquiryCaseNumber = this._managementEnquiryService.Get(domain.RegistrantCompanyID.Value)?.OldCaseNumber;
+                    domain.DomainEnquiry = this._managementEnquiryService.Get(domain.DomainEnquiry.ID);
                 }
 
-                domain.BrandName = this._managementBrandService.Get(domain.BrandID.Value).Name;
-
-                if (domain.RegistrarID != null)
+                if (domain.Brand != null)
                 {
-                    domain.RegistrarName = this._managementRegisterService.Get(domain.RegistrarID.Value).Name;
+                    domain.Brand = this._managementBrandService.Get(domain.Brand.ID);
                 }
 
-                if (domain.RegistrantID != null)
+                if (domain.Registrar != null)
                 {
-                    domain.RegistrantName = this._managementCompanyService.Get(domain.RegistrantID.Value)?.DisplayName;
+                    domain.Registrar = this._managementRegisterService.Get(domain.Registrar.ID);
                 }
 
-                if (domain.PreviousRegistrantID != null)
+                if (domain.Registrant != null)
                 {
-                    domain.PreviousRegistrantName = this._managementCompanyService.Get(domain.PreviousRegistrantID.Value)?.DisplayName;
+                    domain.Registrant = this._managementCompanyService.Get(domain.Registrant.ID);
+                }
+
+                if (domain.PreviousRegistrant != null)
+                {
+                    domain.PreviousRegistrant = this._managementCompanyService.Get(domain.PreviousRegistrant.ID);
                 }
 
                 model = new VMModel<DomainN>
@@ -585,12 +585,9 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
-                if (string.IsNullOrWhiteSpace(model.Record.BrandName))
-                {
-                    ModelState.AddModelError("Record.BrandName", "This field is required");
-                }
+                var validationResult = new Dictionary<string, string>();
 
-                if (ModelState.IsValid)
+                if (DomainValidator.IsValid(model.Record, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
@@ -605,6 +602,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
                 else
                 {
+                    foreach(var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
                     throw new Exception("error on validation.."); //will rework on this
                 }
             };
@@ -765,7 +767,9 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
-                if (ModelState.IsValid)
+                var validationResult = new Dictionary<string, string>();
+
+                if (EnquiryValidator.IsValid(model.Record, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
@@ -780,6 +784,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
                 else
                 {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
                     throw new Exception("error on validation.."); //will rework on this
                 }
             };
@@ -899,7 +908,9 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
-                if (ModelState.IsValid)
+                var validationResult = new Dictionary<string, string>();
+
+                if (LoginInformationValidator.IsValid(model.Record, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
@@ -914,6 +925,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
                 else
                 {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
                     throw new Exception("error on validation.."); //will rework on this
                 }
             };
@@ -1033,7 +1049,9 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
-                if (ModelState.IsValid)
+                var validationResult = new Dictionary<string, string>();
+
+                if (OfficeStatusValidator.IsValid(model.Record, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
@@ -1048,6 +1066,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
                 else
                 {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
                     throw new Exception("error on validation.."); //will rework on this
                 }
             };
@@ -1166,8 +1189,10 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult Register(VMModel<Register> model)
         {
             Func<int> postModel = () =>
-            {                
-                if (ModelState.IsValid)
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (RegisterValidator.IsValid(model.Record, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
@@ -1182,6 +1207,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
                 else
                 {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
                     throw new Exception("error on validation.."); //will rework on this
                 }
             };

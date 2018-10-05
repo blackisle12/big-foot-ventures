@@ -8,15 +8,11 @@ namespace BigFootVentures.Business.Objects.Management
 
         public string OwnerName { get; set; }
 
-        public int? RegistrantCompanyID { get; set; }
-        public string RegistrantCompanyName { get; set; }
+        public Company RegistrantCompany { get; set; }        
         [Required(ErrorMessage = "This field is required")]
         public string Name { get; set; }
-        public int? DomainEnquiryID { get; set; }
-        public string DomainEnquiryCaseNumber { get; set; }
-        [Required(ErrorMessage = "This field is required")]
-        public int? BrandID { get; set; }
-        public string BrandName { get; set; }
+        public Enquiry DomainEnquiry { get; set; }        
+        public Brand Brand { get; set; }        
         public string BFStrategy { get; set; }
         public string BuysideFunnel { get; set; }
         public string Remarks { get; set; }
@@ -39,13 +35,10 @@ namespace BigFootVentures.Business.Objects.Management
         public string BigFootParkingPage { get; set; }
         public bool PrivacyProtected { get; set; }
 
-        public int? RegistrarID { get; set; }
-        public string RegistrarName { get; set; }
+        public Register Registrar { get; set; }        
 
-        public int? RegistrantID { get; set; }
-        public string RegistrantName { get; set; }
-        public int? PreviousRegistrantID { get; set; }
-        public string PreviousRegistrantName { get; set; }
+        public Company Registrant { get; set; }
+        public Company PreviousRegistrant { get; set; }        
         public string RegistrantEmail { get; set; }
         public string PrivateRegistrationEmail { get; set; }
         public string PreviousRegistrantChangedOn { get; set; }

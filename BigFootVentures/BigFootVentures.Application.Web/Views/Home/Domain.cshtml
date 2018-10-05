@@ -16,12 +16,12 @@
 @using (Html.BeginForm("Domain", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     @Html.HiddenFor(m => m.Record.ID)
-    @Html.HiddenFor(m => m.Record.RegistrantCompanyID)
-    @Html.HiddenFor(m => m.Record.DomainEnquiryID)
-    @Html.HiddenFor(m => m.Record.BrandID)
-    @Html.HiddenFor(m => m.Record.RegistrarID)
-    @Html.HiddenFor(m => m.Record.RegistrantID)
-    @Html.HiddenFor(m => m.Record.PreviousRegistrantID)
+    @Html.HiddenFor(m => m.Record.RegistrantCompany.ID)
+    @Html.HiddenFor(m => m.Record.DomainEnquiry.ID)
+    @Html.HiddenFor(m => m.Record.Brand.ID)
+    @Html.HiddenFor(m => m.Record.Registrar.ID)
+    @Html.HiddenFor(m => m.Record.Registrant.ID)
+    @Html.HiddenFor(m => m.Record.PreviousRegistrant.ID)
     @Html.HiddenFor(m => m.Record.TrademarkUsedInTheUDRPID)
 
     @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
@@ -50,9 +50,9 @@
                             <label class="col-sm-2 control-label">Registrant Company</label>
                             <div class="col-sm-4 autocomplete">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.RegistrantCompanyName, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.Record.RegistrantCompany.DisplayName, new { @class = "form-control", @readonly = "readonly" })
                                     <div class="input-group-btn">
-                                        <button type="button" name="Button.RegistrantCompanyName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                        <button type="button" name="Button.RegistrantCompany.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -87,9 +87,9 @@
                             <label class="col-sm-2 control-label">Domain Enquiry</label>
                             <div class="col-sm-4 autocomplete">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.DomainEnquiryCaseNumber, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.Record.DomainEnquiry.OldCaseNumber, new { @class = "form-control", @readonly = "readonly" })
                                     <div class="input-group-btn">
-                                        <button type="button" name="Button.DomainEnquiryCaseNumber" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                        <button type="button" name="Button.DomainEnquiry.OldCaseNumber" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -103,12 +103,12 @@
                             <label class="col-sm-2 control-label">Brand</label>
                             <div class="col-sm-4 autocomplete">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.BrandName, new { @class = "form-control required", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.Record.Brand.Name, new { @class = "form-control required", @readonly = "readonly" })
                                     <div class="input-group-btn">
-                                        <button type="button" name="Button.BrandName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                        <button type="button" name="Button.Brand.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                     </div>
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Record.BrandName, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(m => m.Record.Brand.Name, "", new { @class = "text-danger" })
                             </div>
 
                             <label class="col-sm-2 control-label text-neutral">Website Use</label>
@@ -234,9 +234,9 @@
                             <label class="col-sm-2 control-label">Registrar</label>
                             <div class="col-sm-4 autocomplete">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.RegistrarName, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.Record.Registrar.Name, new { @class = "form-control", @readonly = "readonly" })
                                     <div class="input-group-btn">
-                                        <button type="button" name="Button.RegistrarName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                        <button type="button" name="Button.Registrar.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -259,9 +259,9 @@
                             <label class="col-sm-2 control-label">Registrant</label>
                             <div class="col-sm-4 autocomplete">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.RegistrantName, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.Record.Registrant.DisplayName, new { @class = "form-control", @readonly = "readonly" })
                                     <div class="input-group-btn">
-                                        <button type="button" name="Button.RegistrantName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                        <button type="button" name="Button.Registrant.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -269,9 +269,9 @@
                             <label class="col-sm-2 control-label">Previous Registrant</label>
                             <div class="col-sm-4 autocomplete">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.PreviousRegistrantName, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.Record.PreviousRegistrant.DisplayName, new { @class = "form-control", @readonly = "readonly" })
                                     <div class="input-group-btn">
-                                        <button type="button" name="Button.PreviousRegistrantName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                        <button type="button" name="Button.PreviousRegistrant.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -495,12 +495,12 @@
         </div>
     </div>
 
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = nameof(Model.Record.RegistrantCompanyID), ChildNameContainer = nameof(Model.Record.RegistrantCompanyName) })
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Enquiry), ChildIDContainer = nameof(Model.Record.DomainEnquiryID), ChildNameContainer = nameof(Model.Record.DomainEnquiryCaseNumber), ChildProperty = "Case Number" })
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Brand), ChildIDContainer = nameof(Model.Record.BrandID), ChildNameContainer = nameof(Model.Record.BrandName) })
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Register), ChildIDContainer = nameof(Model.Record.RegistrarID), ChildNameContainer = nameof(Model.Record.RegistrarName) })
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = nameof(Model.Record.RegistrantID), ChildNameContainer = nameof(Model.Record.RegistrantName) })
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = nameof(Model.Record.PreviousRegistrantID), ChildNameContainer = nameof(Model.Record.PreviousRegistrantName) })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "RegistrantCompany.ID", ChildNameContainer = "RegistrantCompany.DisplayName" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Enquiry), ChildIDContainer = "DomainEnquiry.ID", ChildNameContainer = "DomainEnquiry.OldCaseNumber", ChildProperty = "Case Number" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Brand), ChildIDContainer = "Brand.ID", ChildNameContainer = "Brand.Name" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Register), ChildIDContainer = "Registrar.ID", ChildNameContainer = "Registrar.Name" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "Registrant.ID", ChildNameContainer = "Registrant.DisplayName" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "PreviousRegistrant.ID", ChildNameContainer = "PreviousRegistrant.DisplayName" })
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>

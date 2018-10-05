@@ -22,11 +22,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                     OwnerName = dataReader["OwnerName"] as string,
 
-                    RegistrantCompanyID = dataReader["RegistrantCompanyID"] as int?,
-
-                    Name = dataReader["Name"] as string,
-                    DomainEnquiryID = dataReader["DomainEnquiryID"] as int?,
-                    BrandID = dataReader["BrandID"] as int?,
+                    Name = dataReader["Name"] as string,                                        
                     BFStrategy = dataReader["BFStrategy"] as string,
                     BuysideFunnel = dataReader["BuysideFunnel"] as string,
                     Remarks = dataReader["Remarks"] as string,
@@ -48,11 +44,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     RegistrationDate = dataReader["RegistrationDate"] as string,
                     BigFootParkingPage = dataReader["BigFootParkingPage"] as string,
                     PrivacyProtected = (Convert.ToSByte(dataReader["PrivacyProtected"]) == 1),
-
-                    RegistrarID = dataReader["RegistrarID"] as int?,
-
-                    RegistrantID = dataReader["RegistrantID"] as int?,
-                    PreviousRegistrantID = dataReader["PreviousRegistrantID"] as int?,
+                    
                     RegistrantEmail = dataReader["RegistrantEmail"] as string,
                     PrivateRegistrationEmail = dataReader["PrivateRegistrationEmail"] as string,
                     PreviousRegistrantChangedOn = dataReader["PreviousRegistrantChangedOn"] as string,
@@ -83,6 +75,36 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     DeletionRequestReason = dataReader["DeletionRequestReason"] as string
                 };
 
+                if (int.TryParse((dataReader["RegistrantCompanyID"] as int?)?.ToString(), out int registrantCompanyID))
+                {
+                    entity.RegistrantCompany = new Company { ID = registrantCompanyID };
+                }
+
+                if (int.TryParse((dataReader["DomainEnquiryID"] as int?)?.ToString(), out int domainEnquiryID))
+                {
+                    entity.DomainEnquiry = new Enquiry { ID = registrantCompanyID };
+                }
+
+                if (int.TryParse((dataReader["BrandID"] as int?)?.ToString(), out int brandID))
+                {
+                    entity.Brand = new Brand { ID = brandID };
+                }
+
+                if (int.TryParse((dataReader["RegistrarID"] as int?)?.ToString(), out int registrarID))
+                {
+                    entity.Registrar = new Register { ID = registrarID };
+                }
+
+                if (int.TryParse((dataReader["RegistrantID"] as int?)?.ToString(), out int registrantID))
+                {
+                    entity.Registrant = new Company { ID = registrantID };
+                }
+
+                if (int.TryParse((dataReader["PreviousRegistrantID"] as int?)?.ToString(), out int previousRegistrantID))
+                {
+                    entity.PreviousRegistrant = new Company { ID = previousRegistrantID };
+                }
+
                 entities.Add(entity);
             }
 
@@ -96,11 +118,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("pRegistrantCompanyID", MySqlDbType.Int32) { Value = entity.RegistrantCompanyID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrantCompanyID", MySqlDbType.Int32) { Value = entity.RegistrantCompany?.ID, Direction = ParameterDirection.Input },
 
                 new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
-                new MySqlParameter("pDomainEnquiryID", MySqlDbType.Int32) { Value = entity.DomainEnquiryID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pBrandID", MySqlDbType.Int32) { Value = entity.BrandID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDomainEnquiryID", MySqlDbType.Int32) { Value = entity.DomainEnquiry?.ID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pBrandID", MySqlDbType.Int32) { Value = entity.Brand?.ID, Direction = ParameterDirection.Input },
                 new MySqlParameter("pBFStrategy", MySqlDbType.VarChar, 45) { Value = entity.BFStrategy, Direction = ParameterDirection.Input },
                 new MySqlParameter("pBuysideFunnel", MySqlDbType.VarChar, 45) { Value = entity.BuysideFunnel, Direction = ParameterDirection.Input },
                 new MySqlParameter("pRemarks", MySqlDbType.VarChar, 255) { Value = entity.Remarks, Direction = ParameterDirection.Input },
@@ -123,10 +145,10 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pBigFootParkingPage", MySqlDbType.VarChar, 45) { Value = entity.BigFootParkingPage, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPrivacyProtected", entity.PrivacyProtected ? 1 : 0) { Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pRegistrarID", MySqlDbType.Int32) { Value = entity.RegistrarID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrarID", MySqlDbType.Int32) { Value = entity.Registrar.ID, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pRegistrantID", MySqlDbType.Int32) { Value = entity.RegistrantID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPreviousRegistrantID", MySqlDbType.Int32) { Value = entity.PreviousRegistrantID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrantID", MySqlDbType.Int32) { Value = entity.Registrant?.ID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPreviousRegistrantID", MySqlDbType.Int32) { Value = entity.PreviousRegistrant?.ID, Direction = ParameterDirection.Input },
                 new MySqlParameter("pRegistrantEmail", MySqlDbType.VarChar, 100) { Value = entity.RegistrantEmail, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPrivateRegistrationEmail", MySqlDbType.VarChar, 100) { Value = entity.PrivateRegistrationEmail, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPreviousRegistrantChangedOn", MySqlDbType.VarChar, 45) { Value = entity.PreviousRegistrantChangedOn, Direction = ParameterDirection.Input },
