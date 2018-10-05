@@ -521,7 +521,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         [HttpPost]
         [Route("Domain", Name = "DomainPost")]
-        public ActionResult Enquiry(VMModel<DomainN> model)
+        public ActionResult Domain(VMModel<DomainN> model)
         {
             Func<int> postModel = () =>
             {
@@ -774,7 +774,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 StartIndex = startIndex,
                 RowCount = rowCount,
                 Page = page,
-                Total = total,                
+                Total = total,
                 Records = loginInformations
             };
 
@@ -850,7 +850,7 @@ namespace BigFootVentures.Application.Web.Controllers
         
         [HttpPost]
         [Route("LoginInformation", Name = "LoginInformationPost")]
-        public ActionResult OfficeStatus(VMModel<LoginInformation> model)
+        public ActionResult LoginInformation(VMModel<LoginInformation> model)
         {
             Func<int> postModel = () =>
             {
@@ -859,7 +859,7 @@ namespace BigFootVentures.Application.Web.Controllers
                     if (model.Record.ID == 0)
                     {
                         this._managementLoginInformationService.Insert(model.Record);
-                    }                  
+                    }
                     else
                     {
                         this._managementLoginInformationService.Update(model.Record);
@@ -908,7 +908,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 StartIndex = startIndex,
                 RowCount = rowCount,
                 Page = page,
-                Total = total,                
+                Total = total,
                 Records = officeStatuses
             };
 
@@ -938,7 +938,7 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return View("OfficeStatus", model);
-        }        
+        }
 
         [Route("OfficeStatus/New", Name = "OfficeStatusNew")]
         public ActionResult OfficeStatusNew()
@@ -959,7 +959,7 @@ namespace BigFootVentures.Application.Web.Controllers
             }
             
             return View("OfficeStatus", model);
-        }        
+        }
 
         [Route("OfficeStatus/Edit/{ID:int}", Name = "OfficeStatusEdit")]
         public ActionResult OfficeStatusEdit(int ID)
@@ -993,7 +993,7 @@ namespace BigFootVentures.Application.Web.Controllers
                     if (model.Record.ID == 0)
                     {
                         this._managementOfficeStatusService.Insert(model.Record);
-                    }                  
+                    }
                     else
                     {
                         this._managementOfficeStatusService.Update(model.Record);

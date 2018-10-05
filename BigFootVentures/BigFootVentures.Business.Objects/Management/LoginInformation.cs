@@ -19,6 +19,7 @@
         public string CompanyRegistrationNo { get; set; }
         public string Balance { get; set; }
         public string EmailAddress { get; set; }
+
         #endregion
     }
 }

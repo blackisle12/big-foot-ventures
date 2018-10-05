@@ -29,10 +29,10 @@
                     @{
                         foreach (var loginInformation in Model.Records)
                         {
-                            <tr>
-                                <td><a href="@Url.RouteUrl("LoginInformationView", new { ID = loginInformation.ID })" target="_blank">@loginInformation.AccountName</a></td>                                
-                                <td>@loginInformation.LoginInformationID</td>
-                                <td>@loginInformation.EmailAddress</td>
+                            <tr class="th-bg">
+                                <td class="th-account-name"><a href="@Url.RouteUrl("LoginInformationView", new { ID = loginInformation.ID })" target="_blank">@loginInformation.AccountName</a></td>                                
+                                <td class="th-login-information-id">@loginInformation.LoginInformationID</td>
+                                <td class="th-email-address">@loginInformation.EmailAddress</td>
                             </tr>
                         }
                     }
