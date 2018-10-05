@@ -272,8 +272,10 @@
     <Content Include="Views\Home\EnquiryNewSelectRecordType.cshtml" />
     <Content Include="Views\Home\Enquiry.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\_AssociateParentChild.cshtml" />
+    <Content Include="Views\Home\Domain.cshtml" />
     <Content Include="Views\Home\Domains.cshtml" />
-	<Content Include="Views\Home\Domain.cshtml" />
+    <Content Include="Views\Home\LoginInformation.cshtml" />
+    <Content Include="Views\Home\LoginInformations.cshtml" />	  
     <Content Include="Views\Home\OfficeStatuses.cshtml" />
     <Content Include="Views\Home\OfficeStatus.cshtml" />    
   </ItemGroup>

@@ -33,6 +33,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { ID = enquiry.ID };
             }
+            else if (type == typeof(LoginInformation))
+            {
+                var loginInformation = (LoginInformation)model;
+
+                return new { ID = loginInformation.ID };
+            }
             else if (type == typeof(OfficeStatus))
             {
                 var officeStatus = (OfficeStatus)model;

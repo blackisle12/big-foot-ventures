@@ -27,6 +27,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new EnquiryMapper();
             }
+            else if (type == typeof(LoginInformation))
+            {
+                return new LoginInformationMapper();
+            }
             else if (type == typeof(OfficeStatus))
             {
                 return new OfficeStatusMapper();
