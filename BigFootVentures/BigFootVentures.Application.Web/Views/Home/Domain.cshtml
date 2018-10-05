@@ -1,0 +1,46 @@
+﻿@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Extensions
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Domain - " + (Model.Record.Name ?? "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<DomainN>
+
+@using (Html.BeginForm("Domain", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+    @Html.HiddenFor(m => m.Record.DomainEnquiryID)
+    @Html.HiddenFor(m => m.Record.BrandID)
+    @Html.HiddenFor(m => m.Record.RegistrarID)
+    @Html.HiddenFor(m => m.Record.RegistrantID)
+    @Html.HiddenFor(m => m.Record.PreviousRegistrantID)
+    @Html.HiddenFor(m => m.Record.TrademarkUsedInTheUDRPID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Domain <strong>@(Model.Record.Name ?? string.Empty)</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <!-- END: Information -->
+            <!-- START: Domain Detail -->
+            <!-- END: Domain Detail -->
+            <!-- START: Registrar -->
+            <!-- END: Registrar -->
+        </div>
+    </div>
+}

@@ -39,6 +39,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { ID = loginInformation.ID };
             }
+            else if (type == typeof(OfficeStatus))
+            {
+                var officeStatus = (OfficeStatus)model;
+
+                return new { ID = officeStatus.ID };
+            }
             else if (type == typeof(Register))
             {
                 var register = (Register)model;

@@ -731,7 +731,7 @@ namespace BigFootVentures.Business.Objects.Enumerators
             {
                 [Description("")]
                 NotSet,
-
+              
                 [Description("Australia")]
                 Austrailia,
 
@@ -785,6 +785,54 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
                 [Description("Vietnam")]
                 Vietnam
+            }
+        }
+      
+        public static class OfficeStatus
+        {
+            public enum StatusGrouping
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Under Examination")]
+                UnderExamination,
+
+                [Description("Published")]
+                Published,
+
+                [Description("Refused")]
+                Refused,
+
+                [Description("Opposed")]
+                Opposed,
+
+                [Description("Registered")]
+                Registered,
+
+                [Description("Appealed")]
+                Appealed,
+
+                [Description("Withdrawn")]
+                Withdrawn,
+
+                [Description("Surrended")]
+                Surrended,
+
+                [Description("Converted")]
+                Converted,
+
+                [Description("Cancelled")]
+                Cancelled,
+
+                [Description("Interrupted")]
+                Interrupted,
+
+                [Description("Expired")]
+                Expired,
+
+                [Description("Removed")]
+                Removed,
             }
         }
     }
