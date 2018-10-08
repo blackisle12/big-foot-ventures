@@ -235,6 +235,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Views\Home\Brands.js" />
+    <Content Include="Scripts\Views\Home\Leads.js" />
     <Content Include="Scripts\Views\Home\Contacts.js" />
     <Content Include="Scripts\Views\Home\Domains.js" />
     <Content Include="Scripts\Views\Home\Enquiries.js" />
@@ -285,6 +286,7 @@
     <Content Include="Views\Home\OfficeStatus.cshtml" />
     <Content Include="Views\Home\Contacts.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Leads.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
