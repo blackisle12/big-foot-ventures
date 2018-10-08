@@ -200,6 +200,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\loader.gif" />
     <Content Include="Content\Views\Home\Brand.css" />
+    <Content Include="Content\Views\Home\Leads.css" />
     <Content Include="Content\Views\Home\Contacts.css" />
     <Content Include="Content\Views\Home\LoginInformations.css" />
     <Content Include="Content\Views\Home\Enquiries.css" />
