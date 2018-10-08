@@ -1100,7 +1100,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 };
             }
 
-            return View("Contact", model);
+            return View("Lead", model);
         }
 
         [Route("Lead/Edit/{ID:int}", Name = "LeadEdit")]
