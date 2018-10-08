@@ -1038,6 +1038,173 @@ namespace BigFootVentures.Application.Web.Controllers
         #endregion
 
         #region "Lead"
+
+        [Route("Leads/{rowCount?}/{page?}", Name = "Leads")]
+        public ActionResult Leads(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var leads = this._managementLeadService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Lead>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = leads
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Lead/{ID:int}", Name = "LeadView")]
+        public ActionResult Lead(int ID)
+        {
+            var lead = this._managementLeadService.Get(ID);
+            
+            var model = new VMModel<Lead>
+            {
+                Record = lead,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Lead", model);
+        }
+
+        [Route("Lead/New", Name = "LeadNew")]
+        public ActionResult LeadNew()
+        {
+            VMModel<Lead> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Lead>();
+            }
+            else
+            {
+                model = new VMModel<Lead>
+                {
+                    Record = new Lead(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Contact", model);
+        }
+
+        [Route("Lead/Edit/{ID:int}", Name = "LeadEdit")]
+        public ActionResult LeadEdit(int ID)
+        {
+            VMModel<Lead> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Lead>();
+            }
+            else
+            {
+                var lead = this._managementLeadService.Get(ID);
+                
+                model = new VMModel<Lead>
+                {
+                    Record = lead,
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Lead", model);
+        }
+
+        [HttpPost]
+        [Route("Lead", Name = "LeadPost")]
+        public ActionResult Lead(VMModel<Lead> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (LeadValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementLeadService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementLeadService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Lead>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Lead/Delete/{ID:int}", Name = "LeadDelete")]
+        public ActionResult LeadDelete(int ID)
+        {
+            try
+            {
+                this._managementLeadService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Leads");
+        }
+
+        [HttpGet]
+        [Route("Lead/Autocomplete/{keyword}", Name = "LeadAutocomplete")]
+        public ActionResult LeadAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementLeadService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region "Login Information"
