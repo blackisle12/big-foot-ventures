@@ -24,6 +24,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Contact> _managementContactService = null;
         private readonly IManagementService<DomainN> _managementDomainService = null;
         private readonly IManagementService<Enquiry> _managementEnquiryService = null;
+        private readonly IManagementService<Lead> _managementLeadService = null;
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
@@ -37,6 +38,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<Contact> managementContactService,
             IManagementService<DomainN> managementDomainService,
             IManagementService<Enquiry> managementEnquiryService,
+            IManagementService<Lead> managementLeadService,
             IManagementService<LoginInformation> managementLoginInformationService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
             IManagementService<Register> managementRegisterService)
@@ -46,6 +48,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementContactService = managementContactService;
             this._managementDomainService = managementDomainService;
             this._managementEnquiryService = managementEnquiryService;
+            this._managementLeadService = managementLeadService;
             this._managementLoginInformationService = managementLoginInformationService;
             this._managementOfficeStatusService = managementOfficeStatusService;
             this._managementRegisterService = managementRegisterService;
@@ -1032,6 +1035,9 @@ namespace BigFootVentures.Application.Web.Controllers
             return RedirectToAction("Enquiries");
         }
 
+        #endregion
+
+        #region "Lead"
         #endregion
 
         #region "Login Information"

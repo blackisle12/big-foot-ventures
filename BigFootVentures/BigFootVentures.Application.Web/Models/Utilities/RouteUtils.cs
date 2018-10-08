@@ -39,6 +39,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { ID = enquiry.ID };
             }
+            else if (type == typeof(Lead))
+            {
+                var lead = (Lead)model;
+
+                return new { ID = lead.ID };
+            }
             else if (type == typeof(LoginInformation))
             {
                 var loginInformation = (LoginInformation)model;
