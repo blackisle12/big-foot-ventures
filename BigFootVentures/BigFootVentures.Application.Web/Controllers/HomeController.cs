@@ -19,6 +19,7 @@ namespace BigFootVentures.Application.Web.Controllers
     {
         #region "Private Members"
 
+        private readonly IManagementService<Agreement> _managementAgreementService = null;
         private readonly IManagementService<Brand> _managementBrandService = null;
         private readonly IManagementService<Company> _managementCompanyService = null;
         private readonly IManagementService<Contact> _managementContactService = null;
@@ -33,7 +34,8 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Constructors"
 
-        public HomeController(IManagementService<Brand> managementBrandService,
+        public HomeController(IManagementService<Agreement> managementAgreementService,
+            IManagementService<Brand> managementBrandService,
             IManagementService<Company> managementCompanyService,
             IManagementService<Contact> managementContactService,
             IManagementService<DomainN> managementDomainService,
@@ -43,6 +45,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<OfficeStatus> managementOfficeStatusService,
             IManagementService<Register> managementRegisterService)
         {
+            this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
             this._managementCompanyService = managementCompanyService;
             this._managementContactService = managementContactService;
@@ -68,7 +71,174 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Brands"
+        #region "Agreement"
+
+        [Route("Agreements/{rowCount?}/{page?}", Name = "Agreements")]
+        public ActionResult Agreements(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var agreements = this._managementAgreementService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Agreement>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = agreements
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Agreement/{ID:int}", Name = "AgreementView")]
+        public ActionResult Agreement(int ID)
+        {
+            var agreement = this._managementAgreementService.Get(ID);
+            var model = new VMModel<Agreement>
+            {
+                Record = agreement,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Agreement", model);
+        }
+
+        [Route("Agreement/New", Name = "AgreementNew")]
+        public ActionResult AgreementNew()
+        {
+            VMModel<Agreement> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Agreement>();
+            }
+            else
+            {
+                model = new VMModel<Agreement>
+                {
+                    Record = new Agreement(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Agreement", model);
+        }
+
+        [Route("Agreement/Edit/{ID:int}", Name = "AgreementEdit")]
+        public ActionResult AgreementEdit(int ID)
+        {
+            VMModel<Agreement> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Agreement>();
+            }
+            else
+            {
+                model = new VMModel<Agreement>
+                {
+                    Record = this._managementAgreementService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Agreement", model);
+        }
+
+        [HttpPost]
+        [Route("Agreement", Name = "AgreementPost")]
+        public ActionResult Agreement(VMModel<Agreement> model)
+        {
+            Func<int> postModel = () =>
+            {                
+                var validationResult = new Dictionary<string, string>();
+
+                if (AgreementValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementAgreementService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementAgreementService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Agreement>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Agreement/Delete/{ID:int}", Name = "AgreementDelete")]
+        public ActionResult AgreementDelete(int ID)
+        {
+            try
+            {
+                this._managementAgreementService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Agreements");
+        }
+
+        [HttpGet]
+        [Route("Agreement/Autocomplete/{keyword}", Name = "AgreementAutocomplete")]
+        public ActionResult AgreementAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementAgreementService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region "Brand"
 
         [Route("Brands/{rowCount?}/{page?}", Name = "Brands")]
         public ActionResult Brands(int rowCount = 10, int page = 1)
@@ -238,7 +408,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Companies"
+        #region "Company"
 
         [Route("Companies/{rowCount?}/{page?}", Name = "Companies")]
         public ActionResult Companies(int rowCount = 10, int page = 1)
@@ -436,7 +606,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Contacts"
+        #region "Contact"
 
         [Route("Contacts/{rowCount?}/{page?}", Name = "Contacts")]
         public ActionResult Contacts(int rowCount = 10, int page = 1)
@@ -626,7 +796,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Domains"
+        #region "Domain"
 
         [Route("Domains/{rowCount?}/{page?}", Name = "Domains")]
         public ActionResult Domains(int rowCount = 10, int page = 1)
@@ -856,7 +1026,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Enquiries"
+        #region "Enquiry"
 
         [Route("Enquiries/{rowCount?}/{page?}", Name = "Enquiries")]
         public ActionResult Enquiries(int rowCount = 10, int page = 1)
@@ -1489,7 +1659,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Registers"
+        #region "Register"
 
         [Route("Registers/{rowCount?}/{page?}", Name = "Registers")]
         public ActionResult Registers(int rowCount = 10, int page = 1)
