@@ -4,6 +4,42 @@ namespace BigFootVentures.Business.Objects.Enumerators
 {
     public static class ManagementEnums
     {
+        public static class Agreement
+        {
+            public enum ObjectOfAgreement
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Trademarks")]
+                Trademarks,
+
+                [Description("Domains")]
+                Domains,
+
+                [Description("Trademarks & Domains")]
+                TrademarksAndDomains
+            }
+
+            public enum Type
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Coexist")]
+                Coexist,
+
+                [Description("Assignment")]
+                Assignment,
+
+                [Description("Consent")]
+                Consent,
+
+                [Description("Undertakings")]
+                Undertakings
+            }
+        }
+
         public static class Brand
         {
             public enum Purpose
