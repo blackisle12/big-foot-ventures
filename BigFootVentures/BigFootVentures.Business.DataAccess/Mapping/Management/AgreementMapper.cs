@@ -15,7 +15,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             while (dataReader.Read())
             {
-                var entity = new Agreement
+                var entity = new AgreementT
                 {
                     ID = (int)dataReader["ID"],
 
@@ -50,7 +50,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
         public MySqlParameter[] CreateParameters(object model)
         {
-            var entity = (Agreement)model;
+            var entity = (AgreementT)model;
             var parameters = new List<MySqlParameter>();
 
             parameters.AddRange(new MySqlParameter[]

@@ -1,6 +1,6 @@
 ﻿namespace BigFootVentures.Business.Objects.Management
 {
-    public sealed class Agreement : BusinessBase
+    public sealed class AgreementT : BusinessBase
     {
         #region "Properties"
 

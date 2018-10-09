@@ -200,6 +200,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\loader.gif" />
     <Content Include="Content\Views\Home\Brand.css" />
+    <Content Include="Content\Views\Home\Agreements.css" />
     <Content Include="Content\Views\Home\Leads.css" />
     <Content Include="Content\Views\Home\Contacts.css" />
     <Content Include="Content\Views\Home\LoginInformations.css" />
@@ -236,6 +237,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Views\Home\Brands.js" />
+    <Content Include="Scripts\Views\Home\Agreements.js" />
     <Content Include="Scripts\Views\Home\Leads.js" />
     <Content Include="Scripts\Views\Home\Contacts.js" />
     <Content Include="Scripts\Views\Home\Domains.js" />
@@ -291,6 +293,7 @@
     <Content Include="Views\Home\Lead.cshtml" />
     <Content Include="Views\Home\Office.cshtml" />
     <Content Include="Views\Home\Offices.cshtml" />
+    <Content Include="Views\Home\Agreements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

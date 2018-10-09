@@ -15,7 +15,7 @@ namespace BigFootVentures.Application.Web
             var container = new UnityContainer();
             var connectionString = ConfigurationManager.ConnectionStrings["bigfootventures_dev"].ConnectionString;
 
-            container.RegisterType<IManagementService<Agreement>>(new InjectionFactory(c => new ManagementService<Agreement>(connectionString)));
+            container.RegisterType<IManagementService<AgreementT>>(new InjectionFactory(c => new ManagementService<AgreementT>(connectionString)));
             container.RegisterType<IManagementService<Brand>>(new InjectionFactory(c => new ManagementService<Brand>(connectionString)));
             container.RegisterType<IManagementService<Company>>(new InjectionFactory(c => new ManagementService<Company>(connectionString)));
             container.RegisterType<IManagementService<Contact>>(new InjectionFactory(c => new ManagementService<Contact>(connectionString)));

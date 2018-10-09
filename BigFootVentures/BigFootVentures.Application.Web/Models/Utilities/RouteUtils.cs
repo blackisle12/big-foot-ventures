@@ -9,9 +9,9 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
         public static dynamic GetRouteMapping(Type type, object model)
         {
-            if (type == typeof(Agreement))
+            if (type == typeof(AgreementT))
             {
-                var agreement = (Agreement)model;
+                var agreement = (AgreementT)model;
 
                 return new { ID = agreement.ID };
             }
