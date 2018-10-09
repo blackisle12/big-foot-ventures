@@ -33,7 +33,7 @@ namespace BigFootVentures.Business.Objects.Management
         public string OppositionPeriodMonths { get; set; }
         public string SearchUrl { get; set; }
         public string OfficeStatusesSource { get; set; }
-        public string OfficeNameArchieve { get; set; }
+        public string OfficeNameArchive { get; set; }
         public bool NationalNumberAssigned { get; set; }
         public string Points { get; set; }
         public bool PCT { get; set; }

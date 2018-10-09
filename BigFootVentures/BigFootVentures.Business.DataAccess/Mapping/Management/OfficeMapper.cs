@@ -36,7 +36,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     OppositionPeriodMonths = dataReader["OppositionPeriondMonths"] as string,
                     SearchUrl = dataReader["SearchUrl"] as string,
                     OfficeStatusesSource = dataReader["OfficeStatusesSource"] as string,
-                    OfficeNameArchieve = dataReader["OfficeNameArchieve"] as string,
+                    OfficeNameArchive = dataReader["OfficeNameArchive"] as string,
                     NationalNumberAssigned = (Convert.ToSByte(dataReader["NationalNumberAssigned"]) == 1),
                     Points = dataReader["Points"] as string,
                     PCT = (Convert.ToSByte(dataReader["PCT"]) == 1),
@@ -79,12 +79,18 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pRegistrationDateComments", MySqlDbType.VarChar, 255) { Value = entity.RegistrationDateComments, Direction = ParameterDirection.Input },
                 new MySqlParameter("pSearchUrl", MySqlDbType.VarChar, 100) { Value = entity.SearchUrl, Direction = ParameterDirection.Input },
                 new MySqlParameter("pOfficeStatusesSource", MySqlDbType.VarChar, 100) { Value = entity.OfficeStatusesSource, Direction = ParameterDirection.Input },
-                new MySqlParameter("pOfficeNameArchieve", MySqlDbType.VarChar, 100) { Value = entity.OfficeNameArchieve, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOfficeNameArchive", MySqlDbType.VarChar, 100) { Value = entity.OfficeNameArchive, Direction = ParameterDirection.Input },
                 new MySqlParameter("pNationalNumberAssined", entity.NationalNumberAssigned ? 1 : 0) { Direction = ParameterDirection.Input },
                 new MySqlParameter("pPoints", MySqlDbType.VarChar, 100) { Value = entity.Points, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPCT", entity.PCT ? 1 : 0) { Direction = ParameterDirection.Input },
                 new MySqlParameter("pParis", entity.Paris ? 1 : 0) { Direction = ParameterDirection.Input },
                 new MySqlParameter("pWTO", entity.WTO ? 1 : 0) { Direction = ParameterDirection.Input },
+
+                new MySqlParameter("RegistrationPaymentNotification", MySqlDbType.VarChar, 100) { Value = entity.RegistrationPaymentNotification, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrationPaymentMethod", MySqlDbType.VarChar, 100) { Value = entity.RegistrationPaymentMethod, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOppositionPaymentNotification", MySqlDbType.VarChar, 100) { Value = entity.OppositionPaymentNotification, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOppositionPaymentMethod", MySqlDbType.VarChar, 100) { Value = entity.OppositionPaymentMethod, Direction = ParameterDirection.Input },
+
             });
 
             return parameters.ToArray();

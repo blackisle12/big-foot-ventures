@@ -43,6 +43,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<Enquiry> managementEnquiryService,
             IManagementService<Lead> managementLeadService,
             IManagementService<LoginInformation> managementLoginInformationService,
+            IManagementService<Office> managementOfficeService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
             IManagementService<Register> managementRegisterService)
         {
@@ -54,6 +55,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementEnquiryService = managementEnquiryService;
             this._managementLeadService = managementLeadService;
             this._managementLoginInformationService = managementLoginInformationService;
+            this._managementOfficeService = managementOfficeService;
             this._managementOfficeStatusService = managementOfficeStatusService;
             this._managementRegisterService = managementRegisterService;
         }
@@ -1520,6 +1522,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #endregion
 
         #region "Office"
+
         [Route("Offices/{rowCount?}/{page?}", Name = "Offices")]
         public ActionResult Offices(int rowCount = 10, int page = 1)
         {
