@@ -8,7 +8,7 @@ namespace BigFootVentures.Service.BusinessService.Validators
     {
         #region "Public Methods"
 
-        public static bool IsValid(Agreement agreement, out Dictionary<string, string> validationResult)
+        public static bool IsValid(AgreementT agreement, out Dictionary<string, string> validationResult)
         {
             validationResult = new Dictionary<string, string>();
 

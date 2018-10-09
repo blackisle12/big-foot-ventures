@@ -1,0 +1,48 @@
+﻿<link href="~/Content/Views/Home/Agreements.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Agreements";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<AgreementT>
+
+@using (Html.BeginForm("Agreements", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-name">Name</th>
+                        <th class="th-type">Type</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var agreement in Model.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("AgreementView", new { ID = agreement.ID })" target="_blank">@agreement.Name</a></td>
+                                <td>@agreement.Type</td>                                
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/Agreements.js"></script>
+}

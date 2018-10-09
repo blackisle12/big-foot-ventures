@@ -11,7 +11,7 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
 
         public static IMapper GetMapper(Type type)
         {
-            if (type == typeof(Agreement))
+            if (type == typeof(AgreementT))
             {
                 return new AgreementMapper();
             }

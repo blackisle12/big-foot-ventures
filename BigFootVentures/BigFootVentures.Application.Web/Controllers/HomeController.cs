@@ -19,7 +19,7 @@ namespace BigFootVentures.Application.Web.Controllers
     {
         #region "Private Members"
 
-        private readonly IManagementService<Agreement> _managementAgreementService = null;
+        private readonly IManagementService<AgreementT> _managementAgreementService = null;
         private readonly IManagementService<Brand> _managementBrandService = null;
         private readonly IManagementService<Company> _managementCompanyService = null;
         private readonly IManagementService<Contact> _managementContactService = null;
@@ -34,7 +34,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Constructors"
 
-        public HomeController(IManagementService<Agreement> managementAgreementService,
+        public HomeController(IManagementService<AgreementT> managementAgreementService,
             IManagementService<Brand> managementBrandService,
             IManagementService<Company> managementCompanyService,
             IManagementService<Contact> managementContactService,
@@ -78,7 +78,7 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var startIndex = (page - 1) * rowCount;
             var agreements = this._managementAgreementService.Get(startIndex, rowCount, out int total);
-            var pageResult = new VMPageResult<Agreement>
+            var pageResult = new VMPageResult<AgreementT>
             {
                 StartIndex = startIndex,
                 RowCount = rowCount,
@@ -96,11 +96,11 @@ namespace BigFootVentures.Application.Web.Controllers
             return View(pageResult);
         }
 
-        [Route("Agreement/{ID:int}", Name = "AgreementView")]
+        [Route("Agreement/{ID:int}", Name = "AgreementTView")]
         public ActionResult Agreement(int ID)
         {
             var agreement = this._managementAgreementService.Get(ID);
-            var model = new VMModel<Agreement>
+            var model = new VMModel<AgreementT>
             {
                 Record = agreement,
                 PageMode = PageMode.View
@@ -115,20 +115,20 @@ namespace BigFootVentures.Application.Web.Controllers
             return View("Agreement", model);
         }
 
-        [Route("Agreement/New", Name = "AgreementNew")]
+        [Route("Agreement/New", Name = "AgreementTNew")]
         public ActionResult AgreementNew()
         {
-            VMModel<Agreement> model = null;
+            VMModel<AgreementT> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<Agreement>();
+                model = this.GetValidationErrors<AgreementT>();
             }
             else
             {
-                model = new VMModel<Agreement>
+                model = new VMModel<AgreementT>
                 {
-                    Record = new Agreement(),
+                    Record = new AgreementT(),
                     PageMode = PageMode.Edit
                 };
             }
@@ -136,18 +136,18 @@ namespace BigFootVentures.Application.Web.Controllers
             return View("Agreement", model);
         }
 
-        [Route("Agreement/Edit/{ID:int}", Name = "AgreementEdit")]
+        [Route("Agreement/Edit/{ID:int}", Name = "AgreementTEdit")]
         public ActionResult AgreementEdit(int ID)
         {
-            VMModel<Agreement> model = null;
+            VMModel<AgreementT> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<Agreement>();
+                model = this.GetValidationErrors<AgreementT>();
             }
             else
             {
-                model = new VMModel<Agreement>
+                model = new VMModel<AgreementT>
                 {
                     Record = this._managementAgreementService.Get(ID),
                     PageMode = PageMode.Edit
@@ -158,8 +158,8 @@ namespace BigFootVentures.Application.Web.Controllers
         }
 
         [HttpPost]
-        [Route("Agreement", Name = "AgreementPost")]
-        public ActionResult Agreement(VMModel<Agreement> model)
+        [Route("Agreement", Name = "AgreementTPost")]
+        public ActionResult Agreement(VMModel<AgreementT> model)
         {
             Func<int> postModel = () =>
             {                
@@ -189,11 +189,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
             };
 
-            return RedirectPost<Agreement>(model, postModel);
+            return RedirectPost<AgreementT>(model, postModel);
         }
 
         [HttpGet]
-        [Route("Agreement/Delete/{ID:int}", Name = "AgreementDelete")]
+        [Route("Agreement/Delete/{ID:int}", Name = "AgreementTDelete")]
         public ActionResult AgreementDelete(int ID)
         {
             try
