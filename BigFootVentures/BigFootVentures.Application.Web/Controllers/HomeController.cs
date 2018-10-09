@@ -1657,7 +1657,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 //log exception here
             }
 
-            return RedirectToAction("OfficeStatuses");
+            return RedirectToAction("Offices");
         }
         #endregion
 
