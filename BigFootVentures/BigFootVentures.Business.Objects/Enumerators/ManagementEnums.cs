@@ -1059,15 +1059,15 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 Tier1US,
 
                 [Description("Tier 2 - Developed Countries")]
-                Tier2DevelopingCountries,
+                Tier2DevelopedCountries,
 
                 [Description("Tier 3 - Developing")]
                 Tier3Developing,
             }
             public enum RegistrationPaymentNotification
             {
-                [Description("None")]
-                None,
+                [Description("")]
+                NotSet,
 
                 [Description("Email")]
                 Email,
@@ -1081,8 +1081,8 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum RegistrationPaymentMethod
             {
-                [Description("None")]
-                None,
+                [Description("")]
+                NotSet,
 
                 [Description("IBAN")]
                 IBAN,
@@ -1091,7 +1091,7 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 OnlineLocalCC,
 
                 [Description("Online - International CC")]
-                OnlineInternationCC,
+                OnlineInternationalCC,
 
                 [Description("Check")]
                 Check,
@@ -1114,8 +1114,8 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum OppositionPaymentNotification
             {
-                [Description("None")]
-                None,
+                [Description("")]
+                NotSet,
 
                 [Description("Email")]
                 Email,
@@ -1129,8 +1129,8 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum OppositionPaymentMethod
             {
-                [Description("None")]
-                None,
+                [Description("")]
+                NotSet,
 
                 [Description("IBAN")]
                 IBAN,
