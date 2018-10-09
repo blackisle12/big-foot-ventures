@@ -26,7 +26,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     Salutation = dataReader["Salutation"] as string,
                     FirstName = dataReader["FirstName"] as string,
                     MiddleName = dataReader["MiddleName"] as string,
-                    LastName = dataReader["LastName"] as string,                    
+                    LastName = dataReader["LastName"] as string,
                     Suffix = dataReader["Suffix"] as string,
                     Title = dataReader["Title"] as string,
                     Email = dataReader["Email"] as string,
@@ -42,7 +42,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     State = dataReader["State"] as string,
                     PostalCode = dataReader["PostalCode"] as string,
 
-                    AssignUsingActiveAssignmentRule = (Convert.ToSByte(dataReader["AssignUsingActiveAssignmentRule"]) == 1)
+                    AssignUsingActiveAssignmentRule = (dataReader["AssignUsingActiveAssignmentRule"] as sbyte? ?? 0) == 1
                 };
 
                 entities.Add(entity);
@@ -60,7 +60,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             {
                 new MySqlParameter("pOwnerName", MySqlDbType.VarChar, 100) { Value = entity.OwnerName, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pStatus", MySqlDbType.VarChar, 45) { Value = entity.Salutation, Direction = ParameterDirection.Input },
+                new MySqlParameter("pStatus", MySqlDbType.VarChar, 45) { Value = entity.Status, Direction = ParameterDirection.Input },
                 new MySqlParameter("pSalutation", MySqlDbType.VarChar, 45) { Value = entity.Salutation, Direction = ParameterDirection.Input },
                 new MySqlParameter("pFirstName", MySqlDbType.VarChar, 100) { Value = entity.FirstName, Direction = ParameterDirection.Input },
                 new MySqlParameter("pMiddleName", MySqlDbType.VarChar, 100) { Value = entity.MiddleName, Direction = ParameterDirection.Input },
@@ -69,10 +69,10 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pTitle", MySqlDbType.VarChar, 45) { Value = entity.Title, Direction = ParameterDirection.Input },
                 new MySqlParameter("pEmail", MySqlDbType.VarChar, 100) { Value = entity.Email, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPhone", MySqlDbType.VarChar, 100) { Value = entity.Phone, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCompany", MySqlDbType.VarChar, 100) { Value = entity.Salutation, Direction = ParameterDirection.Input },
-                new MySqlParameter("pIndustry", MySqlDbType.VarChar, 45) { Value = entity.Salutation, Direction = ParameterDirection.Input },
-                new MySqlParameter("pNoOfEmployees", MySqlDbType.VarChar, 45) { Value = entity.Salutation, Direction = ParameterDirection.Input },
-                new MySqlParameter("pSource", MySqlDbType.VarChar, 45) { Value = entity.Salutation, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCompany", MySqlDbType.VarChar, 100) { Value = entity.Company, Direction = ParameterDirection.Input },
+                new MySqlParameter("pIndustry", MySqlDbType.VarChar, 45) { Value = entity.Industry, Direction = ParameterDirection.Input },
+                new MySqlParameter("pNoOfEmployees", MySqlDbType.VarChar, 45) { Value = entity.NoOfEmployees, Direction = ParameterDirection.Input },
+                new MySqlParameter("pSource", MySqlDbType.VarChar, 45) { Value = entity.Source, Direction = ParameterDirection.Input },
 
                 new MySqlParameter("pCountry", MySqlDbType.VarChar, 100) { Value = entity.Country, Direction = ParameterDirection.Input },
                 new MySqlParameter("pStreet", MySqlDbType.VarChar, 255) { Value = entity.Street, Direction = ParameterDirection.Input },

@@ -1,0 +1,195 @@
+﻿@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Lead";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Lead>
+
+@using (Html.BeginForm("Lead", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+<div class="panel panel-default panel-parent">
+    <div class="panel-heading">
+        <span class="panel-title">
+            You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Lead <strong>@Model.Record.FirstName @Model.Record.LastName</strong>
+        </span>
+        <span class="panel-title pull-right">
+            <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+        </span>
+    </div>
+    <div class="panel-body">
+        <!-- START: Lead Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Lead Information
+                    <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Lead Status</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Status>()), new { @class = "form-control required" })
+                        </div>
+
+                        <label class="col-sm-2 control-label text-neutral">Lead Owner</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control input-neutral", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label text-neutral">Salutation</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(m => m.Record.Salutation, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Salutation>()), new { @class = "form-control input-neutral" })
+                        </div>
+
+                        <label class="col-sm-2 control-label">Company</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Record.Company, new { @class = "form-control required" })
+                            @Html.ValidationMessageFor(m => m.Record.Company, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">First Name</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Record.FirstName, new { @class = "form-control" })
+                        </div>
+
+                        <label class="col-sm-2 control-label">Industry</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Industry>()), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Middle Name</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Record.MiddleName, new { @class = "form-control" })
+                        </div>
+
+                        <label class="col-sm-2 control-label">No. of Employees</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Record.NoOfEmployees, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Last Name</label>
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(m => m.Record.LastName, new { @class = "form-control required" })
+                            @Html.ValidationMessageFor(m => m.Record.LastName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="col-sm-2 control-label text-neutral">Lead Source</label>
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Source>()), new { @class = "form-control input-neutral" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Suffix</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.Suffix, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.Title, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Phone</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <!-- END: Lead Information -->
+        <!-- START: Address Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Address Information
+                    <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Country</label>
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(m => m.Record.Country, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Street</label>
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(m => m.Record.Street, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">City</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.City, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">State/Province</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.State, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Zip/Postal Code</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.Record.PostalCode, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <!-- END: Address Information -->
+        <!-- START: Optional -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Optional
+                    <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Assign using active assignment rule</label>
+                        <div class="col-sm-10">
+                            @Html.CheckBoxFor(m => m.Record.AssignUsingActiveAssignmentRule)
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <!-- END: Optional -->
+    </div>
+    <div class="panel-footer">
+        @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+    </div>
+</div>
+}
