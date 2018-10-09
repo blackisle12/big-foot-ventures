@@ -27,6 +27,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Enquiry> _managementEnquiryService = null;
         private readonly IManagementService<Lead> _managementLeadService = null;
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
+        private readonly IManagementService<Office> _managementOfficeService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
 
@@ -1515,9 +1516,148 @@ namespace BigFootVentures.Application.Web.Controllers
 
             return RedirectToAction("LoginInformations");
         }
-        
+
         #endregion
-            
+
+        #region "Office"
+        [Route("Offices/{rowCount?}/{page?}", Name = "Offices")]
+        public ActionResult Offices(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var offices = this._managementOfficeService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Office>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = offices
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Office/{ID:int}", Name = "OfficeView")]
+        public ActionResult Office(int ID)
+        {
+            var office = this._managementOfficeService.Get(ID);
+            var model = new VMModel<Office>
+            {
+                Record = office,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Office", model);
+        }
+
+        [Route("Office/New", Name = "OfficeNew")]
+        public ActionResult OfficeNew()
+        {
+            VMModel<Office> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Office>();
+            }
+            else
+            {
+                model = new VMModel<Office>
+                {
+                    Record = new Office(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Office", model);
+        }
+
+        [Route("Office/Edit/{ID:int}", Name = "OfficeEdit")]
+        public ActionResult OfficeEdit(int ID)
+        {
+            VMModel<Office> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Office>();
+            }
+            else
+            {
+                model = new VMModel<Office>
+                {
+                    Record = this._managementOfficeService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Office", model);
+        }
+
+        [HttpPost]
+        [Route("Office", Name = "OfficePost")]
+        public ActionResult Office(VMModel<Office> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (OfficeValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementOfficeService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementOfficeService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Office>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Office/Delete/{ID:int}", Name = "OfficeDelete")]
+        public ActionResult OfficeDelete(int ID)
+        {
+            try
+            {
+                this._managementOfficeService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("OfficeStatuses");
+        }
+        #endregion
+
         #region "Office Status"
 
         [Route("OfficeStatuses/{rowCount?}/{page?}", Name = "OfficeStatuses")]
