@@ -1,0 +1,265 @@
+﻿<link href="~/Content/Views/Home/Office.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Office - " + (Model.Record.OfficeName ?? "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Office>
+
+@using (Html.BeginForm("Office", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Office <strong>@Model.Record.OfficeName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Office Name</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.OfficeName, new { @class = "form-control required" })
+                                @Html.ValidationMessageFor(m => m.Record.OfficeName, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label">Owner</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">External ID</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.ExternalID, new { @class = "form-control" })
+                            </div>
+                            <label class="col-sm-2 control-label">PCT</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.PCT)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Geography Type</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.GeographyType, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Office.GeographyType>()), new { @class = "form-control" })
+                            </div>
+                            <label class="col-sm-2 control-label">Paris</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.Paris)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">State</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.State, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">State Abbreviation</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.StateAbbreviation, new { @class = "form-control" })
+                            </div>
+                            <label class="col-sm-2 control-label">WTO</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.WTO)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Office</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.OfficeProperty, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Office URL</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.OfficeUrl, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">State Abbreviation</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.StateAbbreviation, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Office Value Category</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(m => m.Record.GeographyType, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Office.OfficeValueCategory>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Online</label>
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Record.Online)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Online Comments</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.OnlineComments, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Country Manager</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.CountryManager, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.CountryManager" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Publication Date Comments</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.PublicationDateComments, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Registration Date Comments</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.RegistrationDateComments, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Opposition Period Months</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.OppositionPeriodMonths, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Search URL</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.SearchUrl, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Offline Statuses Source</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.OfficeStatusesSource, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Office Name Archieve</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.OfficeNameArchieve, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">National Number Assigned</label>
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Record.NationalNumberAssigned)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Points</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Points, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: Payment and Tracking -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Payment and Tracking
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group display-flex">
+                            <label class="col-sm-2 control-label">Registration Payment Notification</label>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.RegistrationPaymentNotificationsAvailable, InputUtils.GetMultiSelectList(EnumUtils.GetDescriptions<ManagementEnums.Office.RegistrationPaymentNotification>(Model.Record.RegistrationPaymentNotifications)), new { @class = "form-control pick-list-box" })
+                            </div>
+                            <div class="col-sm-1 vertical-align">
+                                <button type="button" name="Button.Add.Categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" name="Button.Remove.Categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-left"></i></button>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.RegistrationPaymentNotificationsSelected, InputUtils.GetMultiSelectList(Model.Record.RegistrationPaymentNotifications), new { @class = "form-control pick-list-box" })
+                            </div>
+                        </div>
+                        <div class="form-group display-flex">
+                            <label class="col-sm-2 control-label">Registration Payment Methods</label>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.RegistrationPaymentMethodsAvailable, InputUtils.GetMultiSelectList(EnumUtils.GetDescriptions<ManagementEnums.Office.RegistrationPaymentMethod>(Model.Record.RegistrationPaymentMethods)), new { @class = "form-control pick-list-box" })
+                            </div>
+                            <div class="col-sm-1 vertical-align">
+                                <button type="button" name="Button.Add.Categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" name="Button.Remove.Categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-left"></i></button>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.RegistrationPaymentMethodsSelected, InputUtils.GetMultiSelectList(Model.Record.RegistrationPaymentMethods), new { @class = "form-control pick-list-box" })
+                            </div>
+                        </div>
+                        <div class="form-group display-flex">
+                            <label class="col-sm-2 control-label">Opposition Payment Notification</label>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.OppositionPaymentNotificationsAvailable, InputUtils.GetMultiSelectList(EnumUtils.GetDescriptions<ManagementEnums.Office.RegistrationPaymentNotification>(Model.Record.RegistrationPaymentMethods)), new { @class = "form-control pick-list-box" })
+                            </div>
+                            <div class="col-sm-1 vertical-align">
+                                <button type="button" name="Button.Add.Categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" name="Button.Remove.Categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-left"></i></button>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.OppositionPaymentNotificationsSelected, InputUtils.GetMultiSelectList(Model.Record.OppositionPaymentNotifications), new { @class = "form-control pick-list-box" })
+                            </div>
+                        </div>
+                        <div class="form-group display-flex">
+                            <label class="col-sm-2 control-label">Opposition Payment Methods</label>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.OppositionPaymentMethodsAvailable, InputUtils.GetMultiSelectList(EnumUtils.GetDescriptions<ManagementEnums.Office.OppositionPaymentMethod>(Model.Record.OppositionPaymentMethods)), new { @class = "form-control pick-list-box" })
+                            </div>
+                            <div class="col-sm-1 vertical-align">
+                                <button type="button" name="Button.Add.Categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" name="Button.Remove.Categories" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-left"></i></button>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.OppositionPaymentMethodsSelected, InputUtils.GetMultiSelectList(Model.Record.RegistrationPaymentMethods), new { @class = "form-control pick-list-box" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END:Payment and Tracking -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
+    <script src="~/Scripts/Views/Home/OfficeStatus.js"></script>
+}
+

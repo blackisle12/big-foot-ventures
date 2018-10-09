@@ -25,6 +25,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<DomainN> _managementDomainService = null;
         private readonly IManagementService<Enquiry> _managementEnquiryService = null;
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
+        private readonly IManagementService<Office> _managementOfficeService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
 
@@ -1034,20 +1035,19 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Login Information"
-
-        [Route("LoginInformations/{rowCount?}/{page?}", Name = "LoginInformations")]
-        public ActionResult LoginInformations(int rowCount = 10, int page = 1)
+        #region "Office"
+        [Route("Offices/{rowCount?}/{page?}", Name = "Offices")]
+        public ActionResult Offices(int rowCount = 10, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
-            var loginInformations = this._managementLoginInformationService.Get(startIndex, rowCount, out int total);
-            var pageResult = new VMPageResult<LoginInformation>
+            var offices = this._managementOfficeService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Office>
             {
                 StartIndex = startIndex,
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = loginInformations
+                Records = offices
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -1058,85 +1058,85 @@ namespace BigFootVentures.Application.Web.Controllers
 
             return View(pageResult);
         }
-        
-        [Route("LoginInformation/{ID:int}", Name = "LoginInformationView")]
-        public ActionResult LoginInformation(int ID)
+
+        [Route("Office/{ID:int}", Name = "OfficeView")]
+        public ActionResult Office(int ID)
         {
-            var loginInformation = this._managementLoginInformationService.Get(ID);
-            var model = new VMModel<LoginInformation>
+            var office = this._managementOfficeService.Get(ID);
+            var model = new VMModel<Office>
             {
-                Record = loginInformation,
+                Record = office,
                 PageMode = PageMode.View
             };
-            
+
             if (TempData.ContainsKey("IsPosted"))
             {
                 model.PageMode = PageMode.PersistSuccess;
                 TempData.Remove("IsPosted");
             }
 
-            return View("LoginInformation", model);
+            return View("Office", model);
         }
-        
-        [Route("LoginInformation/New", Name = "LoginInformationNew")]
-        public ActionResult LoginInformationNew()
+
+        [Route("Office/New", Name = "OfficeNew")]
+        public ActionResult OfficeNew()
         {
-            VMModel<LoginInformation> model = null;
+            VMModel<Office> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<LoginInformation>();
+                model = this.GetValidationErrors<Office>();
             }
             else
             {
-                model = new VMModel<LoginInformation>
+                model = new VMModel<Office>
                 {
-                    Record = new LoginInformation(),
+                    Record = new Office(),
                     PageMode = PageMode.Edit
                 };
             }
-            
-            return View("LoginInformation", model);
+
+            return View("Office", model);
         }
-        
-        [Route("LoginInformation/Edit/{ID:int}", Name = "LoginInformationEdit")]
-        public ActionResult LoginInformationEdit(int ID)
+
+        [Route("Office/Edit/{ID:int}", Name = "OfficeEdit")]
+        public ActionResult OfficeEdit(int ID)
         {
-            VMModel<LoginInformation> model = null;
+            VMModel<Office> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<LoginInformation>();
+                model = this.GetValidationErrors<Office>();
             }
             else
             {
-                model = new VMModel<LoginInformation>
+                model = new VMModel<Office>
                 {
-                    Record = this._managementLoginInformationService.Get(ID),
+                    Record = this._managementOfficeService.Get(ID),
                     PageMode = PageMode.Edit
                 };
             }
-            
-            return View("LoginInformation", model);
+
+            return View("Office", model);
         }
-        
+
         [HttpPost]
-        [Route("LoginInformation", Name = "LoginInformationPost")]
-        public ActionResult LoginInformation(VMModel<LoginInformation> model)
+        [Route("Office", Name = "OfficePost")]
+        public ActionResult Office(VMModel<Office> model)
         {
             Func<int> postModel = () =>
             {
                 var validationResult = new Dictionary<string, string>();
 
-                if (LoginInformationValidator.IsValid(model.Record, out validationResult))
+                if (OfficeValidator.IsValid(model.Record, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
-                        this._managementLoginInformationService.Insert(model.Record);
+                        this._managementOfficeService.Insert(model.Record);
                     }
                     else
                     {
-                        this._managementLoginInformationService.Update(model.Record);
+                        this._managementOfficeService.Update(model.Record);
                     }
 
                     return model.Record.ID;
@@ -1152,16 +1152,16 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
             };
 
-            return RedirectPost<LoginInformation>(model, postModel);
+            return RedirectPost<Office>(model, postModel);
         }
-        
+
         [HttpGet]
-        [Route("LoginInformation/Delete/{ID:int}", Name = "LoginInformationDelete")]
-        public ActionResult LoginInformationDelete(int ID)
+        [Route("Office/Delete/{ID:int}", Name = "OfficeDelete")]
+        public ActionResult OfficeDelete(int ID)
         {
             try
             {
-                this._managementLoginInformationService.Delete(ID);
+                this._managementOfficeService.Delete(ID);
 
                 TempData.Add("IsRedirectFromDelete", true);
             }
@@ -1170,11 +1170,10 @@ namespace BigFootVentures.Application.Web.Controllers
                 //log exception here
             }
 
-            return RedirectToAction("LoginInformations");
+            return RedirectToAction("OfficeStatuses");
         }
-        
         #endregion
-            
+
         #region "Office Status"
 
         [Route("OfficeStatuses/{rowCount?}/{page?}", Name = "OfficeStatuses")]

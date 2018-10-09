@@ -285,6 +285,8 @@
     <Content Include="Views\Home\OfficeStatus.cshtml" />
     <Content Include="Views\Home\Contacts.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Office.cshtml" />
+    <Content Include="Views\Home\Offices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

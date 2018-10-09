@@ -1,0 +1,45 @@
+﻿<link href="~/Content/Views/Home/Offices.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Offices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<Office>
+
+@using (Html.BeginForm("Offices", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-office-name">Office Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var office in Model.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("OfficeView", new { ID = office.ID })" target="_blank">@office.OfficeName</a></td>                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/OfficeStatuses.js"></script>
+}
