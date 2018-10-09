@@ -1033,6 +1033,133 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 Vietnam
             }
         }
+
+        public static class Office
+        {
+            public enum GeographyType
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Country")]
+                Country,
+
+                [Description("Regional")]
+                Regional,
+            }
+            public enum OfficeValueCategory
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Tier 1 - EU")]
+                Tier1EU,
+
+                [Description("Tier 1 - US")]
+                Tier1US,
+
+                [Description("Tier 2 - Developed Countries")]
+                Tier2DevelopedCountries,
+
+                [Description("Tier 3 - Developing")]
+                Tier3Developing,
+            }
+            public enum RegistrationPaymentNotification
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Email")]
+                Email,
+
+                [Description("Letter")]
+                Letter,
+
+                [Description("Online")]
+                Online,
+            }
+
+            public enum RegistrationPaymentMethod
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("IBAN")]
+                IBAN,
+
+                [Description("Online - Local CC")]
+                OnlineLocalCC,
+
+                [Description("Online - International CC")]
+                OnlineInternationalCC,
+
+                [Description("Check")]
+                Check,
+
+                [Description("ACH")]
+                ACH,
+
+                [Description("Phone - CC")]
+                PhoneCC,
+
+                [Description("Cash")]
+                Cash,
+
+                [Description("Office - Current Account")]
+                OfficeCurrentAccount,
+
+                [Description("Revenue Stamp")]
+                RevenueStamp,
+            }
+
+            public enum OppositionPaymentNotification
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Email")]
+                Email,
+
+                [Description("Letter")]
+                Letter,
+
+                [Description("Online")]
+                Online,
+            }
+
+            public enum OppositionPaymentMethod
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("IBAN")]
+                IBAN,
+
+                [Description("Online")]
+                Online,
+
+                [Description("Check")]
+                Check,
+
+                [Description("In Person")]
+                InPeson,
+
+                [Description("ACH")]
+                ACH,
+
+                [Description("Phone - CC")]
+                PhoneCC,
+
+                [Description("Cash")]
+                Cash,
+
+                [Description("Office - Current Account")]
+                OfficeCurrentAccount,
+
+                [Description("Revenue Stamp")]
+                RevenueStamp,
+            }
+        }
       
         public static class OfficeStatus
         {

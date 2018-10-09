@@ -291,6 +291,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Leads.cshtml" />
     <Content Include="Views\Home\Lead.cshtml" />
+    <Content Include="Views\Home\Office.cshtml" />
+    <Content Include="Views\Home\Offices.cshtml" />
     <Content Include="Views\Home\Agreements.cshtml" />
   </ItemGroup>
   <ItemGroup>

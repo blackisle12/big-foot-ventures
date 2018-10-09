@@ -43,6 +43,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new LoginInformationMapper();
             }
+            else if (type == typeof(Office))
+            {
+                return new OfficeMapper();
+            }
             else if (type == typeof(OfficeStatus))
             {
                 return new OfficeStatusMapper();
