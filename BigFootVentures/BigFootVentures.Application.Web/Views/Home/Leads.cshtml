@@ -1,16 +1,16 @@
-﻿<link href="~/Content/Views/Home/Contacts.css" rel="stylesheet" />
+﻿<link href="~/Content/Views/Home/Leads.css" rel="stylesheet" />
 
 @using BigFootVentures.Business.Objects.Management
 @using BigFootVentures.Application.Web.Models.ViewModels
 
 @{
-    ViewBag.Title = "Contacts";
+    ViewBag.Title = "Leads";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model VMPageResult<Contact>
+@model VMPageResult<Lead>
 
-@using (Html.BeginForm("Contacts", "Home", FormMethod.Get))
+@using (Html.BeginForm("Leads", "Home", FormMethod.Get))
 {
     @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
 
@@ -23,16 +23,18 @@
                 <thead>
                     <tr class="th-bg">
                         <th class="th-name">Name</th>
-                        <th class="th-department">Department</th>                        
+                        <th class="th-company">Company</th>
+                        <th class="th-status">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{
-                        foreach (var contact in Model.Records)
+                        foreach (var lead in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("ContactView", new { ID = contact.ID })" target="_blank">@($"{contact.FirstName} {contact.LastName}")</a></td>
-                                <td>@contact.Department</td>
+                                <td><a href="@Url.RouteUrl("LeadView", new { ID = lead.ID })" target="_blank">@($"{lead.FirstName} {lead.LastName}")</a></td>
+                                <td>@lead.Company</td>
+                                <td>@lead.Status</td>
                             </tr>
                         }
                     }
@@ -44,5 +46,5 @@
         </div>
     </div>
 
-    <script src="~/Scripts/Views/Home/Contacts.js"></script>
+    <script src="~/Scripts/Views/Home/Leads.js"></script>
 }

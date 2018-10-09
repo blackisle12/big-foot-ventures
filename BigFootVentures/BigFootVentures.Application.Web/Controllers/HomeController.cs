@@ -19,13 +19,14 @@ namespace BigFootVentures.Application.Web.Controllers
     {
         #region "Private Members"
 
+        private readonly IManagementService<Agreement> _managementAgreementService = null;
         private readonly IManagementService<Brand> _managementBrandService = null;
         private readonly IManagementService<Company> _managementCompanyService = null;
         private readonly IManagementService<Contact> _managementContactService = null;
         private readonly IManagementService<DomainN> _managementDomainService = null;
         private readonly IManagementService<Enquiry> _managementEnquiryService = null;
+        private readonly IManagementService<Lead> _managementLeadService = null;
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
-        private readonly IManagementService<Office> _managementOfficeService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
 
@@ -33,20 +34,24 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Constructors"
 
-        public HomeController(IManagementService<Brand> managementBrandService,
+        public HomeController(IManagementService<Agreement> managementAgreementService,
+            IManagementService<Brand> managementBrandService,
             IManagementService<Company> managementCompanyService,
             IManagementService<Contact> managementContactService,
             IManagementService<DomainN> managementDomainService,
             IManagementService<Enquiry> managementEnquiryService,
+            IManagementService<Lead> managementLeadService,
             IManagementService<LoginInformation> managementLoginInformationService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
             IManagementService<Register> managementRegisterService)
         {
+            this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
             this._managementCompanyService = managementCompanyService;
             this._managementContactService = managementContactService;
             this._managementDomainService = managementDomainService;
             this._managementEnquiryService = managementEnquiryService;
+            this._managementLeadService = managementLeadService;
             this._managementLoginInformationService = managementLoginInformationService;
             this._managementOfficeStatusService = managementOfficeStatusService;
             this._managementRegisterService = managementRegisterService;
@@ -66,7 +71,174 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Brands"
+        #region "Agreement"
+
+        [Route("Agreements/{rowCount?}/{page?}", Name = "Agreements")]
+        public ActionResult Agreements(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var agreements = this._managementAgreementService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Agreement>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = agreements
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Agreement/{ID:int}", Name = "AgreementView")]
+        public ActionResult Agreement(int ID)
+        {
+            var agreement = this._managementAgreementService.Get(ID);
+            var model = new VMModel<Agreement>
+            {
+                Record = agreement,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Agreement", model);
+        }
+
+        [Route("Agreement/New", Name = "AgreementNew")]
+        public ActionResult AgreementNew()
+        {
+            VMModel<Agreement> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Agreement>();
+            }
+            else
+            {
+                model = new VMModel<Agreement>
+                {
+                    Record = new Agreement(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Agreement", model);
+        }
+
+        [Route("Agreement/Edit/{ID:int}", Name = "AgreementEdit")]
+        public ActionResult AgreementEdit(int ID)
+        {
+            VMModel<Agreement> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Agreement>();
+            }
+            else
+            {
+                model = new VMModel<Agreement>
+                {
+                    Record = this._managementAgreementService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Agreement", model);
+        }
+
+        [HttpPost]
+        [Route("Agreement", Name = "AgreementPost")]
+        public ActionResult Agreement(VMModel<Agreement> model)
+        {
+            Func<int> postModel = () =>
+            {                
+                var validationResult = new Dictionary<string, string>();
+
+                if (AgreementValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementAgreementService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementAgreementService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Agreement>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Agreement/Delete/{ID:int}", Name = "AgreementDelete")]
+        public ActionResult AgreementDelete(int ID)
+        {
+            try
+            {
+                this._managementAgreementService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Agreements");
+        }
+
+        [HttpGet]
+        [Route("Agreement/Autocomplete/{keyword}", Name = "AgreementAutocomplete")]
+        public ActionResult AgreementAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementAgreementService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region "Brand"
 
         [Route("Brands/{rowCount?}/{page?}", Name = "Brands")]
         public ActionResult Brands(int rowCount = 10, int page = 1)
@@ -236,7 +408,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Companies"
+        #region "Company"
 
         [Route("Companies/{rowCount?}/{page?}", Name = "Companies")]
         public ActionResult Companies(int rowCount = 10, int page = 1)
@@ -434,7 +606,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Contacts"
+        #region "Contact"
 
         [Route("Contacts/{rowCount?}/{page?}", Name = "Contacts")]
         public ActionResult Contacts(int rowCount = 10, int page = 1)
@@ -624,7 +796,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Domains"
+        #region "Domain"
 
         [Route("Domains/{rowCount?}/{page?}", Name = "Domains")]
         public ActionResult Domains(int rowCount = 10, int page = 1)
@@ -854,7 +1026,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Enquiries"
+        #region "Enquiry"
 
         [Route("Enquiries/{rowCount?}/{page?}", Name = "Enquiries")]
         public ActionResult Enquiries(int rowCount = 10, int page = 1)
@@ -1035,19 +1207,20 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Office"
-        [Route("Offices/{rowCount?}/{page?}", Name = "Offices")]
-        public ActionResult Offices(int rowCount = 10, int page = 1)
+        #region "Lead"
+
+        [Route("Leads/{rowCount?}/{page?}", Name = "Leads")]
+        public ActionResult Leads(int rowCount = 10, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
-            var offices = this._managementOfficeService.Get(startIndex, rowCount, out int total);
-            var pageResult = new VMPageResult<Office>
+            var leads = this._managementLeadService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Lead>
             {
                 StartIndex = startIndex,
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = offices
+                Records = leads
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -1059,13 +1232,14 @@ namespace BigFootVentures.Application.Web.Controllers
             return View(pageResult);
         }
 
-        [Route("Office/{ID:int}", Name = "OfficeView")]
-        public ActionResult Office(int ID)
+        [Route("Lead/{ID:int}", Name = "LeadView")]
+        public ActionResult Lead(int ID)
         {
-            var office = this._managementOfficeService.Get(ID);
-            var model = new VMModel<Office>
+            var lead = this._managementLeadService.Get(ID);
+            
+            var model = new VMModel<Lead>
             {
-                Record = office,
+                Record = lead,
                 PageMode = PageMode.View
             };
 
@@ -1075,68 +1249,70 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Office", model);
+            return View("Lead", model);
         }
 
-        [Route("Office/New", Name = "OfficeNew")]
-        public ActionResult OfficeNew()
+        [Route("Lead/New", Name = "LeadNew")]
+        public ActionResult LeadNew()
         {
-            VMModel<Office> model = null;
+            VMModel<Lead> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<Office>();
+                model = this.GetValidationErrors<Lead>();
             }
             else
             {
-                model = new VMModel<Office>
+                model = new VMModel<Lead>
                 {
-                    Record = new Office(),
+                    Record = new Lead(),
                     PageMode = PageMode.Edit
                 };
             }
 
-            return View("Office", model);
+            return View("Lead", model);
         }
 
-        [Route("Office/Edit/{ID:int}", Name = "OfficeEdit")]
-        public ActionResult OfficeEdit(int ID)
+        [Route("Lead/Edit/{ID:int}", Name = "LeadEdit")]
+        public ActionResult LeadEdit(int ID)
         {
-            VMModel<Office> model = null;
+            VMModel<Lead> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<Office>();
+                model = this.GetValidationErrors<Lead>();
             }
             else
             {
-                model = new VMModel<Office>
+                var lead = this._managementLeadService.Get(ID);
+                
+                model = new VMModel<Lead>
                 {
-                    Record = this._managementOfficeService.Get(ID),
+                    Record = lead,
                     PageMode = PageMode.Edit
                 };
             }
 
-            return View("Office", model);
+            return View("Lead", model);
         }
 
         [HttpPost]
-        [Route("Office", Name = "OfficePost")]
-        public ActionResult Office(VMModel<Office> model)
+        [Route("Lead", Name = "LeadPost")]
+        public ActionResult Lead(VMModel<Lead> model)
         {
             Func<int> postModel = () =>
             {
                 var validationResult = new Dictionary<string, string>();
 
-                if (OfficeValidator.IsValid(model.Record, out validationResult))
+                if (LeadValidator.IsValid(model.Record, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
-                        this._managementOfficeService.Insert(model.Record);
+                        this._managementLeadService.Insert(model.Record);
                     }
                     else
                     {
-                        this._managementOfficeService.Update(model.Record);
+                        this._managementLeadService.Update(model.Record);
                     }
 
                     return model.Record.ID;
@@ -1152,16 +1328,16 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
             };
 
-            return RedirectPost<Office>(model, postModel);
+            return RedirectPost<Lead>(model, postModel);
         }
 
         [HttpGet]
-        [Route("Office/Delete/{ID:int}", Name = "OfficeDelete")]
-        public ActionResult OfficeDelete(int ID)
+        [Route("Lead/Delete/{ID:int}", Name = "LeadDelete")]
+        public ActionResult LeadDelete(int ID)
         {
             try
             {
-                this._managementOfficeService.Delete(ID);
+                this._managementLeadService.Delete(ID);
 
                 TempData.Add("IsRedirectFromDelete", true);
             }
@@ -1170,10 +1346,178 @@ namespace BigFootVentures.Application.Web.Controllers
                 //log exception here
             }
 
-            return RedirectToAction("OfficeStatuses");
+            return RedirectToAction("Leads");
         }
+
+        [HttpGet]
+        [Route("Lead/Autocomplete/{keyword}", Name = "LeadAutocomplete")]
+        public ActionResult LeadAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementLeadService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
+        #region "Login Information"
+
+        [Route("LoginInformations/{rowCount?}/{page?}", Name = "LoginInformations")]
+        public ActionResult LoginInformations(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var loginInformations = this._managementLoginInformationService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<LoginInformation>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = loginInformations
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+        
+        [Route("LoginInformation/{ID:int}", Name = "LoginInformationView")]
+        public ActionResult LoginInformation(int ID)
+        {
+            var loginInformation = this._managementLoginInformationService.Get(ID);
+            var model = new VMModel<LoginInformation>
+            {
+                Record = loginInformation,
+                PageMode = PageMode.View
+            };
+            
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("LoginInformation", model);
+        }
+        
+        [Route("LoginInformation/New", Name = "LoginInformationNew")]
+        public ActionResult LoginInformationNew()
+        {
+            VMModel<LoginInformation> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<LoginInformation>();
+            }
+            else
+            {
+                model = new VMModel<LoginInformation>
+                {
+                    Record = new LoginInformation(),
+                    PageMode = PageMode.Edit
+                };
+            }
+            
+            return View("LoginInformation", model);
+        }
+        
+        [Route("LoginInformation/Edit/{ID:int}", Name = "LoginInformationEdit")]
+        public ActionResult LoginInformationEdit(int ID)
+        {
+            VMModel<LoginInformation> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<LoginInformation>();
+            }
+            else
+            {
+                model = new VMModel<LoginInformation>
+                {
+                    Record = this._managementLoginInformationService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+            
+            return View("LoginInformation", model);
+        }
+        
+        [HttpPost]
+        [Route("LoginInformation", Name = "LoginInformationPost")]
+        public ActionResult LoginInformation(VMModel<LoginInformation> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (LoginInformationValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementLoginInformationService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementLoginInformationService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<LoginInformation>(model, postModel);
+        }
+        
+        [HttpGet]
+        [Route("LoginInformation/Delete/{ID:int}", Name = "LoginInformationDelete")]
+        public ActionResult LoginInformationDelete(int ID)
+        {
+            try
+            {
+                this._managementLoginInformationService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("LoginInformations");
+        }
+        
+        #endregion
+            
         #region "Office Status"
 
         [Route("OfficeStatuses/{rowCount?}/{page?}", Name = "OfficeStatuses")]
@@ -1315,7 +1659,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Registers"
+        #region "Register"
 
         [Route("Registers/{rowCount?}/{page?}", Name = "Registers")]
         public ActionResult Registers(int rowCount = 10, int page = 1)

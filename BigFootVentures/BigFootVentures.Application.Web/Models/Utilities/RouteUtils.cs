@@ -9,7 +9,13 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
         public static dynamic GetRouteMapping(Type type, object model)
         {
-            if (type == typeof(Brand))
+            if (type == typeof(Agreement))
+            {
+                var agreement = (Agreement)model;
+
+                return new { ID = agreement.ID };
+            }
+            else if (type == typeof(Brand))
             {
                 var brand = (Brand)model;
 
@@ -38,6 +44,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities
                 var enquiry = (Enquiry)model;
 
                 return new { ID = enquiry.ID };
+            }
+            else if (type == typeof(Lead))
+            {
+                var lead = (Lead)model;
+
+                return new { ID = lead.ID };
             }
             else if (type == typeof(LoginInformation))
             {

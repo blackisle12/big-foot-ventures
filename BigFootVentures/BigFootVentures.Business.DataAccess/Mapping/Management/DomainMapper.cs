@@ -31,19 +31,19 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     Version = dataReader["Version"] as string,
                     Category = dataReader["Category"] as string,
                     AccountID = dataReader["AccountID"] as string,
-                    WebsiteCurrent = (Convert.ToSByte(dataReader["WebsiteCurrent"]) == 1),
-                    Locked = (Convert.ToSByte(dataReader["Locked"]) == 1),
+                    WebsiteCurrent = (dataReader["WebsiteCurrent"] as sbyte? ?? 0) == 1,
+                    Locked = (dataReader["Locked"] as sbyte? ?? 0) == 1,
                     WebsiteUse = dataReader["WebsiteUse"] as string,
                     WebsiteDescription = dataReader["WebsiteDescription"] as string,
                     WebsiteRedirect = dataReader["WebsiteRedirect"] as string,
                     ExpirationDate = dataReader["ExpirationDate"] as string,
-                    CompanyWebsite = (Convert.ToSByte(dataReader["CompanyWebsite"]) == 1),
-                    AutoRenew = (Convert.ToSByte(dataReader["AutoRenew"]) == 1),
+                    CompanyWebsite = (dataReader["CompanyWebsite"] as sbyte? ?? 0) == 1,
+                    AutoRenew = (dataReader["AutoRenew"] as sbyte? ?? 0) == 1,
                     WHOIS = dataReader["WHOIS"] as string,
                     RegistrationPriceUSD = dataReader["RegistrationPriceUSD"] as string,
                     RegistrationDate = dataReader["RegistrationDate"] as string,
                     BigFootParkingPage = dataReader["BigFootParkingPage"] as string,
-                    PrivacyProtected = (Convert.ToSByte(dataReader["PrivacyProtected"]) == 1),
+                    PrivacyProtected = (dataReader["PrivacyProtected"] as sbyte? ?? 0) == 1,
                     
                     RegistrantEmail = dataReader["RegistrantEmail"] as string,
                     PrivateRegistrationEmail = dataReader["PrivateRegistrationEmail"] as string,
@@ -67,11 +67,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     ArbitratorName = dataReader["ArbitratorName"] as string,
                     UDRPJurisdiction = dataReader["UDRPJurisdiction"] as string,
                     LanguageOfProceedings = dataReader["LanguageOfProceedings"] as string,
-                    LegalActionRelatedProceedings = (Convert.ToSByte(dataReader["LegalActionRelatedProceedings"]) == 1),
+                    LegalActionRelatedProceedings = (dataReader["LegalActionRelatedProceedings"] as sbyte? ?? 0) == 1,
                     UDRPOutcome = dataReader["UDRPOutcome"] as string,
                     UDRPComment = dataReader["UDRPComment"] as string,
 
-                    DeletionRequest = (Convert.ToSByte(dataReader["DeletionRequest"]) == 1),
+                    DeletionRequest = (dataReader["DeletionRequest"] as sbyte? ?? 0) == 1,
                     DeletionRequestReason = dataReader["DeletionRequestReason"] as string
                 };
 

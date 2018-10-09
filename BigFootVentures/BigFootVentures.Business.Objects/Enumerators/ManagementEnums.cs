@@ -4,6 +4,42 @@ namespace BigFootVentures.Business.Objects.Enumerators
 {
     public static class ManagementEnums
     {
+        public static class Agreement
+        {
+            public enum ObjectOfAgreement
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Trademarks")]
+                Trademarks,
+
+                [Description("Domains")]
+                Domains,
+
+                [Description("Trademarks & Domains")]
+                TrademarksAndDomains
+            }
+
+            public enum Type
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Coexist")]
+                Coexist,
+
+                [Description("Assignment")]
+                Assignment,
+
+                [Description("Consent")]
+                Consent,
+
+                [Description("Undertakings")]
+                Undertakings
+            }
+        }
+
         public static class Brand
         {
             public enum Purpose
@@ -746,6 +782,192 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
                 [Description("Web")]
                 Web
+            }
+        }
+
+        public static class Lead
+        {
+            public enum Status
+            {
+                [Description("Contacted")]
+                Contacted,
+
+                [Description("Open")]
+                Open,
+
+                [Description("Qualified")]
+                Qualified,
+
+                [Description("Unqualified")]
+                Unqualified
+            }
+
+            public enum Salutation
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Mr.")]
+                Mr,
+
+                [Description("Ms.")]
+                Ms,
+
+                [Description("Mrs.")]
+                Mrs,
+
+                [Description("Dr.")]
+                Dr,
+
+                [Description("Prof.")]
+                Prof
+            }
+
+            public enum Industry
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Domain Broker")]
+                DomainBroker,
+
+                [Description("Lawfirm")]
+                Lawfirm,
+
+                [Description("Agriculture")]
+                Agriculture,
+
+                [Description("Apparel")]
+                Apparel,
+
+                [Description("Banking")]
+                Banking,
+
+                [Description("Biotechnology")]
+                Biotechnology,
+
+                [Description("Chemicals")]
+                Chemicals,
+
+                [Description("Communications")]
+                Communications,
+
+                [Description("Construction")]
+                Construction,
+
+                [Description("Consulting")]
+                Consulting,
+
+                [Description("Education")]
+                Education,
+
+                [Description("Electronics")]
+                Electronics,
+
+                [Description("Energy")]
+                Energy,
+
+                [Description("Engineering")]
+                Engineering,
+
+                [Description("Entertainment")]
+                Entertainment,
+
+                [Description("Environmental")]
+                Environmental,
+
+                [Description("Finance")]
+                Finance,
+
+                [Description("Food & Beverage")]
+                FoodAndBeverage,
+
+                [Description("Government")]
+                Government,
+
+                [Description("Healthcare")]
+                Healthcare,
+
+                [Description("Hospitality")]
+                Hospitality,
+
+                [Description("Insurance")]
+                Insurance,
+
+                [Description("Machinery")]
+                Machinery,
+
+                [Description("Manufacturing")]
+                Manufacturing,
+
+                [Description("Media")]
+                Media,
+
+                [Description("Not For Profit")]
+                NotForProfit,
+
+                [Description("Other")]
+                Other,
+
+                [Description("Recreation")]
+                Recreation,
+
+                [Description("Retail")]
+                Retail,
+
+                [Description("Shipping")]
+                Shipping,
+
+                [Description("Technology")]
+                Technology,
+
+                [Description("Telecommunications")]
+                Telecommunications,
+
+                [Description("Transportation")]
+                Transportation,
+
+                [Description("Utilities")]
+                Utilities
+            }
+
+            public enum Source
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Advertisement")]
+                Advertisement,
+
+                [Description("Employee Referral")]
+                EmployeeReferral,
+
+                [Description("External Referral")]
+                ExternalReferral,
+
+                [Description("Partner")]
+                Partner,
+
+                [Description("Public Relations")]
+                PublicRelations,
+
+                [Description("Seminar - Internal")]
+                SeminarInternal,
+
+                [Description("Seminar - Partner")]
+                SeminarPartner,
+
+                [Description("Trade Show")]
+                TradeShow,
+
+                [Description("Web")]
+                Web,
+
+                [Description("Word of mouth")]
+                WordOfMouth,
+
+                [Description("Other")]
+                Other
             }
         }
 

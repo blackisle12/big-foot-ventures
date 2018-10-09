@@ -11,7 +11,11 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
 
         public static IMapper GetMapper(Type type)
         {
-            if (type == typeof(Brand))
+            if (type == typeof(Agreement))
+            {
+                return new AgreementMapper();
+            }
+            else if (type == typeof(Brand))
             {
                 return new BrandMapper();
             }
@@ -30,6 +34,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             else if (type == typeof(Enquiry))
             {
                 return new EnquiryMapper();
+            }
+            else if (type == typeof(Lead))
+            {
+                return new LeadMapper();
             }
             else if (type == typeof(LoginInformation))
             {
