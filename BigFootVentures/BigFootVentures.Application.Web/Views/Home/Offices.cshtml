@@ -30,7 +30,8 @@
                         foreach (var office in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("OfficeView", new { ID = office.ID })" target="_blank">@office.OfficeName</a></td>                            </tr>
+                                <td><a href="@Url.RouteUrl("OfficeView", new { ID = office.ID })" target="_blank">@office.OfficeName</a></td>
+                            </tr>
                         }
                     }
                 </tbody>

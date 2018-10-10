@@ -199,6 +199,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\loader.gif" />
+    <Content Include="Content\Views\Home\Office.css" />
     <Content Include="Content\Views\Home\Brand.css" />
     <Content Include="Content\Views\Home\Agreements.css" />
     <Content Include="Content\Views\Home\Leads.css" />
@@ -236,6 +237,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Views\Home\Office.js" />
     <Content Include="Scripts\Views\Home\Brands.js" />
     <Content Include="Scripts\Views\Home\Agreements.js" />
     <Content Include="Scripts\Views\Home\Leads.js" />

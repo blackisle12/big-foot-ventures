@@ -1636,6 +1636,18 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
+                if (model.Record.RegistrationPaymentNotificationsSelected != null)
+                    model.Record.RegistrationPaymentNotification = string.Join(";", model.Record.RegistrationPaymentNotificationsSelected);
+
+                if (model.Record.RegistrationPaymentMethodsSelected != null)
+                    model.Record.RegistrationPaymentMethod = string.Join(";", model.Record.RegistrationPaymentMethodsSelected);
+
+                if (model.Record.OppositionPaymentNotificationsSelected != null)
+                    model.Record.OppositionPaymentNotification = string.Join(";", model.Record.OppositionPaymentNotificationsSelected);
+
+                if (model.Record.OppositionPaymentMethodsSelected != null)
+                    model.Record.OppositionPaymentMethod = string.Join(";", model.Record.OppositionPaymentMethodsSelected);
+
                 var validationResult = new Dictionary<string, string>();
 
                 if (OfficeValidator.IsValid(model.Record, out validationResult))

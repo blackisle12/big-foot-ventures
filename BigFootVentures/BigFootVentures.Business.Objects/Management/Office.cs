@@ -13,7 +13,7 @@ namespace BigFootVentures.Business.Objects.Management
 
         #endregion
 
-        #region "Public Methods"
+        #region "Properties"
 
         public string OwnerName { get; set; }
 
@@ -25,9 +25,9 @@ namespace BigFootVentures.Business.Objects.Management
         public string OfficeProperty { get; set; }
         public string OfficeUrl { get; set; }
         public string OfficeValueCategory { get; set; }
-        public bool Online { get; set; }
+        public bool IsOnline { get; set; }
         public string OnlineComments { get; set; }
-        public string CountryManager { get; set; }
+        //public string CountryManager { get; set; }
         public string PublicationDateComments { get; set; }
         public string RegistrationDateComments { get; set; }
         public string OppositionPeriodMonths { get; set; }

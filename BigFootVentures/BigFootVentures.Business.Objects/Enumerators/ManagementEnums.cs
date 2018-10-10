@@ -1044,6 +1044,7 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 [Description("Regional")]
                 Regional,
             }
+
             public enum OfficeValueCategory
             {
                 [Description("")]
@@ -1061,11 +1062,9 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 [Description("Tier 3 - Developing")]
                 Tier3Developing,
             }
+
             public enum RegistrationPaymentNotification
             {
-                [Description("")]
-                NotSet,
-
                 [Description("Email")]
                 Email,
 
@@ -1078,9 +1077,6 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum RegistrationPaymentMethod
             {
-                [Description("")]
-                NotSet,
-
                 [Description("IBAN")]
                 IBAN,
 
@@ -1111,9 +1107,6 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum OppositionPaymentNotification
             {
-                [Description("")]
-                NotSet,
-
                 [Description("Email")]
                 Email,
 
@@ -1126,9 +1119,6 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum OppositionPaymentMethod
             {
-                [Description("")]
-                NotSet,
-
                 [Description("IBAN")]
                 IBAN,
 
