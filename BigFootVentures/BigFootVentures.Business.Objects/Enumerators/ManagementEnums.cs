@@ -8,9 +8,6 @@ namespace BigFootVentures.Business.Objects.Enumerators
         {
             public enum ObjectOfAgreement
             {
-                [Description("")]
-                NotSet,
-
                 [Description("Trademarks")]
                 Trademarks,
 

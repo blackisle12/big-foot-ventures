@@ -294,6 +294,7 @@
     <Content Include="Views\Home\Office.cshtml" />
     <Content Include="Views\Home\Offices.cshtml" />
     <Content Include="Views\Home\Agreements.cshtml" />
+    <Content Include="Views\Home\Agreement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

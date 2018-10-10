@@ -31,7 +31,7 @@
                         foreach (var agreement in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("AgreementView", new { ID = agreement.ID })" target="_blank">@agreement.Name</a></td>
+                                <td><a href="@Url.RouteUrl("AgreementTView", new { ID = agreement.ID })" target="_blank">@agreement.Name</a></td>
                                 <td>@agreement.Type</td>                                
                             </tr>
                         }

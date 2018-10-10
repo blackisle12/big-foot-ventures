@@ -103,6 +103,17 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult Agreement(int ID)
         {
             var agreement = this._managementAgreementService.Get(ID);
+
+            if (agreement.BFCompany != null)
+            {
+                agreement.BFCompany = this._managementCompanyService.Get(agreement.BFCompany.ID);
+            }
+
+            if (agreement.Counterpart != null)
+            {
+                agreement.Counterpart = this._managementCompanyService.Get(agreement.Counterpart.ID);
+            }
+
             var model = new VMModel<AgreementT>
             {
                 Record = agreement,
@@ -150,9 +161,21 @@ namespace BigFootVentures.Application.Web.Controllers
             }
             else
             {
+                var agreement = this._managementAgreementService.Get(ID);
+
+                if (agreement.BFCompany != null)
+                {
+                    agreement.BFCompany = this._managementCompanyService.Get(agreement.BFCompany.ID);
+                }
+
+                if (agreement.Counterpart != null)
+                {
+                    agreement.Counterpart = this._managementCompanyService.Get(agreement.Counterpart.ID);
+                }
+
                 model = new VMModel<AgreementT>
                 {
-                    Record = this._managementAgreementService.Get(ID),
+                    Record = agreement,
                     PageMode = PageMode.Edit
                 };
             }
