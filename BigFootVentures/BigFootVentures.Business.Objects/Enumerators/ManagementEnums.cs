@@ -644,6 +644,18 @@ namespace BigFootVentures.Business.Objects.Enumerators
             }
         }
 
+        public static class EmailResponse
+        {
+            public enum Status
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Received")]
+                Received,
+            }
+        }
+
         public static class Enquiry
         {
             public enum RecordType
