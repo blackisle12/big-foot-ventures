@@ -968,6 +968,57 @@ namespace BigFootVentures.Business.Objects.Enumerators
             }
         }
 
+        public static class LegalCase
+        {
+            public enum TypeOfCase
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("C&D Letter")]
+                CAndDLetter,
+
+                [Description("Cancellation")]
+                Cancellation,
+
+                [Description("Cancellation - Appeal")]
+                CancellationAppeal,
+
+                [Description("External Clients")]
+                ExternalClients,
+
+                [Description("Limitation")]
+                Limitation,
+
+                [Description("Negotiations")]
+                Negotiations,
+
+                [Description("Notice of Threatened Opposition - C&D Letter")]
+                NoticeOfThreatenedOppositionCAndDLetter,
+
+                [Description("Opposition")]
+                Opposition,
+
+                [Description("Opposition / Negotiation")]
+                OppositionNegotiation,
+
+                [Description("Others")]
+                Others,
+
+                [Description("Potential Opposition")]
+                PotentialOpposition,
+
+                [Description("Provisional Refusal")]
+                ProvisionalRefusal,
+
+                [Description("Recordal")]
+                Recordal,
+
+                [Description("Registration Order")]
+                RegistrationOrder,
+            }
+        }
+
         public static class LoginInformation
         {
             public enum Country

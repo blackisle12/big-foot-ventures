@@ -39,6 +39,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new LeadMapper();
             }
+            else if (type == typeof(LegalCase))
+            {
+                return new LegalCaseMapper();
+            }
             else if (type == typeof(LoginInformation))
             {
                 return new LoginInformationMapper();

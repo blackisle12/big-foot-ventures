@@ -1,0 +1,205 @@
+﻿<link href="~/Content/Views/Home/LegalCase.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "LegalCase - " + (Model.Record.TypeOfCase ?? "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<LegalCase>
+
+@using (Html.BeginForm("LegalCase", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) LegalCase
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Type Of Case</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(m => m.Record.TypeOfCase, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.LegalCase.TypeOfCase>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Type Of External Clients</label>
+                            <div class="col-sm-10">
+                                <select disabled>
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Trademark</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.Trademark, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.Trademark" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Trademark Number</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.TrademarkNumber, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">To Be Assigned To</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.TobeAssignedTo, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.TobeAssignedTo" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Opposition</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.Opposition, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.Opposition" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Execution</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.CancellationExecution, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.CancellationExecution" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Keywords</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.Keywords, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Date Assigned</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.DateAssigned, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Court URL</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.CourtUrl, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Plantiff</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.Plantiff, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.Plantiff" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Defendant</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.Defendant, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.Defendant" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Plantiff Representative</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.PlantiffRepresentative, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.PlantiffRepresentative" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Defendant Representative</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.DefendantRepresentative, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.DefendantRepresentative" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">In Charge Of Tracking</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.InChangeOfTracking, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.InChangeOfTracking" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Deletion Request</label>
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Record.DeletionRequest)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Deletion Request Reason</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.DeletionRequestReason, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
+    <script src="~/Scripts/Views/Home/LegalCase.js"></script>
+}
