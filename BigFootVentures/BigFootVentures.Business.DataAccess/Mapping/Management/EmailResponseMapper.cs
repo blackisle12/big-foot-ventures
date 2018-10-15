@@ -21,7 +21,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                     OwnerName = dataReader["OwnerName"] as string,
 
-                    Name = dataReader["Name"] as string,                    
+                    Name = dataReader["Name"] as string,
                     Description = dataReader["Description"] as string,
                     Email = dataReader["Email"] as string,
                     Status = dataReader["Status"] as string,
@@ -47,6 +47,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             parameters.AddRange(new MySqlParameter[]
             {
+                new MySqlParameter("pOwerName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
+
                 new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
                 new MySqlParameter("pEnquiryID", MySqlDbType.Int32) { Value = entity.Enquiry?.ID, Direction = ParameterDirection.Input },
                 new MySqlParameter("pDescription", MySqlDbType.VarChar, 100) { Value = entity.Description, Direction = ParameterDirection.Input },
