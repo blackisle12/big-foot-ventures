@@ -24,6 +24,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Company> _managementCompanyService = null;
         private readonly IManagementService<Contact> _managementContactService = null;
         private readonly IManagementService<DomainN> _managementDomainService = null;
+        private readonly IManagementService<EmailResponse> _managementEmailResponseService = null;
         private readonly IManagementService<Enquiry> _managementEnquiryService = null;
         private readonly IManagementService<Lead> _managementLeadService = null;
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
@@ -40,6 +41,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<Company> managementCompanyService,
             IManagementService<Contact> managementContactService,
             IManagementService<DomainN> managementDomainService,
+            IManagementService<EmailResponse> managementEmailResponseService,
             IManagementService<Enquiry> managementEnquiryService,
             IManagementService<Lead> managementLeadService,
             IManagementService<LoginInformation> managementLoginInformationService,
@@ -52,6 +54,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementCompanyService = managementCompanyService;
             this._managementContactService = managementContactService;
             this._managementDomainService = managementDomainService;
+            this._managementEmailResponseService = managementEmailResponseService;
             this._managementEnquiryService = managementEnquiryService;
             this._managementLeadService = managementLeadService;
             this._managementLoginInformationService = managementLoginInformationService;
@@ -1036,6 +1039,173 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     IsSuccess = true,
                     Result = this._managementDomainService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region "Email Response"
+
+        [Route("EmailResponses/{rowCount?}/{page?}", Name = "EmailResponses")]
+        public ActionResult EmailResponses(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var emailResponse = this._managementEmailResponseService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<EmailResponse>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = emailResponse
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("EmailResponse/{ID:int}", Name = "EmailResponseView")]
+        public ActionResult EmailResponse(int ID)
+        {
+            var emailResponse = this._managementEmailResponseService.Get(ID);
+            var model = new VMModel<EmailResponse>
+            {
+                Record = emailResponse,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("EmailResponse", model);
+        }
+
+        [Route("EmailResponse/New", Name = "EmailResponseNew")]
+        public ActionResult EmailResponseNew()
+        {
+            VMModel<EmailResponse> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<EmailResponse>();
+            }
+            else
+            {
+                model = new VMModel<EmailResponse>
+                {
+                    Record = new EmailResponse(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("EmailResponse", model);
+        }
+
+        [Route("EmailResponse/Edit/{ID:int}", Name = "EmailResponseEdit")]
+        public ActionResult EmailResponseEdit(int ID)
+        {
+            VMModel<EmailResponse> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<EmailResponse>();
+            }
+            else
+            {
+                model = new VMModel<EmailResponse>
+                {
+                    Record = this._managementEmailResponseService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("EmailResponse", model);
+        }
+
+        [HttpPost]
+        [Route("EmailResponse", Name = "EmailResponsePost")]
+        public ActionResult EmailResponse(VMModel<EmailResponse> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (EmailResponseValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementEmailResponseService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementEmailResponseService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<EmailResponse>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("EmailResponse/Delete/{ID:int}", Name = "EmailResponseDelete")]
+        public ActionResult EmailResponseDelete(int ID)
+        {
+            try
+            {
+                this._managementEmailResponseService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("EmailResponses");
+        }
+
+        [HttpGet]
+        [Route("EmailResponse/Autocomplete/{keyword}", Name = "EmailResponseAutocomplete")]
+        public ActionResult EmailResponseAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementEmailResponseService.GetAutocomplete(keyword)
                 };
             }
             catch (Exception ex)

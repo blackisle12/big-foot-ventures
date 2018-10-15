@@ -31,6 +31,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new DomainMapper();
             }
+            else if (type == typeof(EmailResponse))
+            {
+                return new EmailResponseMapper();
+            }
             else if (type == typeof(Enquiry))
             {
                 return new EnquiryMapper();
