@@ -39,6 +39,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { ID = domain.ID };
             }
+            else if (type == typeof(EmailResponse))
+            {
+                var emailResponse = (EmailResponse)model;
+
+                return new { iD = emailResponse.ID };
+            }
             else if (type == typeof(Enquiry))
             {
                 var enquiry = (Enquiry)model;
