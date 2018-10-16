@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BigFootVentures.Business.Objects.Management
+﻿namespace BigFootVentures.Business.Objects.Management
 {
     public sealed class OfficeStatus : BusinessBase
     {
@@ -9,5 +7,6 @@ namespace BigFootVentures.Business.Objects.Management
         public string Name { get; set; }
         public string StatusDescription { get; set; }
         public string StatusGrouping { get; set; }
+        public Office Office { get; set; }
     }
 }

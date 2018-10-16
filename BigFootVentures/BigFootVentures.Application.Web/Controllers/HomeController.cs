@@ -1877,6 +1877,32 @@ namespace BigFootVentures.Application.Web.Controllers
 
             return RedirectToAction("Offices");
         }
+
+        [HttpGet]
+        [Route("Office/Autocomplete/{keyword}", Name = "OfficeAutocomplete")]
+        public ActionResult OfficeAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementOfficeService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region "Office Status"
@@ -1908,6 +1934,12 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult OfficeStatus(int ID)
         {
             var officeStatus = this._managementOfficeStatusService.Get(ID);
+
+            if (officeStatus.Office != null)
+            {
+                officeStatus.Office = this._managementOfficeService.Get(officeStatus.Office.ID);
+            }
+
             var model = new VMModel<OfficeStatus>
             {
                 Record = officeStatus,
@@ -1955,9 +1987,16 @@ namespace BigFootVentures.Application.Web.Controllers
             }
             else
             {
+                var officeStatus = this._managementOfficeStatusService.Get(ID);
+
+                if (officeStatus.Office != null)
+                {
+                    officeStatus.Office = this._managementOfficeService.Get(officeStatus.Office.ID);
+                }
+
                 model = new VMModel<OfficeStatus>
                 {
-                    Record = this._managementOfficeStatusService.Get(ID),
+                    Record = officeStatus,
                     PageMode = PageMode.Edit
                 };
             }

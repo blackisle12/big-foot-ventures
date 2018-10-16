@@ -23,6 +23,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     OwnerName = dataReader["OwnerName"] as string
                 };
 
+                if (int.TryParse((dataReader["OfficeID"] as int?)?.ToString(), out int officeID))
+                {
+                    entity.Office = new Office { ID = officeID };
+                }
+
                 entities.Add(entity);
             }
 
@@ -39,7 +44,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
                 new MySqlParameter("pStatusDescription", MySqlDbType.VarChar, 255) { Value = entity.StatusDescription, Direction = ParameterDirection.Input },
                 new MySqlParameter("pStatusGrouping", MySqlDbType.VarChar, 100) { Value = entity.StatusGrouping, Direction = ParameterDirection.Input },
-                
+                new MySqlParameter("pOfficeID", MySqlDbType.Int32) { Value = entity.Office?.ID, Direction = ParameterDirection.Input },
+
                 new MySqlParameter("pOwnerName", MySqlDbType.VarChar, 100) { Value = entity.OwnerName, Direction = ParameterDirection.Input },
             });
 
