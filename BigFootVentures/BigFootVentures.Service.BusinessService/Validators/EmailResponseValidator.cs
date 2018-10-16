@@ -14,7 +14,7 @@ namespace BigFootVentures.Service.BusinessService.Validators
 
             if (string.IsNullOrWhiteSpace(emailResponse.Name))
             {
-                validationResult.Add("EmailResponse.Name", ValidationMessages.REQUIRED);
+                validationResult.Add("Record.Name", ValidationMessages.REQUIRED);
             }
 
             return !validationResult.Any();

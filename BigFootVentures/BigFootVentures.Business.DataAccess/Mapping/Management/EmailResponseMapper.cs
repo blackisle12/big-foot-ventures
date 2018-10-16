@@ -47,7 +47,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("pOwerName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
+                new MySqlParameter("pOwnerName", MySqlDbType.VarChar, 100) { Value = entity.OwnerName, Direction = ParameterDirection.Input },
 
                 new MySqlParameter("pName", MySqlDbType.VarChar, 100) { Value = entity.Name, Direction = ParameterDirection.Input },
                 new MySqlParameter("pEnquiryID", MySqlDbType.Int32) { Value = entity.Enquiry?.ID, Direction = ParameterDirection.Input },

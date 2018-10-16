@@ -1084,6 +1084,12 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult EmailResponse(int ID)
         {
             var emailResponse = this._managementEmailResponseService.Get(ID);
+
+            if (emailResponse.Enquiry != null)
+            {
+                emailResponse.Enquiry = this._managementEnquiryService.Get(emailResponse.Enquiry.ID);
+            }
+
             var model = new VMModel<EmailResponse>
             {
                 Record = emailResponse,
@@ -1131,9 +1137,16 @@ namespace BigFootVentures.Application.Web.Controllers
             }
             else
             {
+                var emailResponse = this._managementEmailResponseService.Get(ID);
+
+                if (emailResponse.Enquiry != null)
+                {
+                    emailResponse.Enquiry = this._managementEnquiryService.Get(emailResponse.Enquiry.ID);
+                }
+
                 model = new VMModel<EmailResponse>
                 {
-                    Record = this._managementEmailResponseService.Get(ID),
+                    Record = emailResponse,
                     PageMode = PageMode.Edit
                 };
             }
@@ -1373,6 +1386,32 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return RedirectToAction("Enquiries");
+        }
+
+        [HttpGet]
+        [Route("Enquiry/Autocomplete/{keyword}", Name = "EnquiryAutocomplete")]
+        public ActionResult EnquiryAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementEnquiryService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

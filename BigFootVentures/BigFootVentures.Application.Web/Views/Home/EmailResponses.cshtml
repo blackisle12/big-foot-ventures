@@ -30,7 +30,7 @@
                         foreach (var emailResponse in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("EmailResponsesView", new { ID = emailResponse.ID })" target="_blank">@emailResponse.Name</a></td>
+                                <td><a href="@Url.RouteUrl("EmailResponseView", new { ID = emailResponse.ID })" target="_blank">@emailResponse.Name</a></td>
                             </tr>
                         }
                     }
