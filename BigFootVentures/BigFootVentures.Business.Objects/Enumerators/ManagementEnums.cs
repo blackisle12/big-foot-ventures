@@ -1261,6 +1261,39 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 Combined
             }
 
+            public enum Geography
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("EU")]
+                EU,
+
+                [Description("US")]
+                US,
+
+                [Description("France")]
+                France,
+
+                [Description("UK")]
+                UK
+            }
+
+            public enum BigfootGroupOwned
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Unknown")]
+                Unknown,
+
+                [Description("Yes")]
+                Yes,
+
+                [Description("No")]
+                No
+            }
+
             public enum OpenSimilarityResearchTask
             {
                 [Description("")]
