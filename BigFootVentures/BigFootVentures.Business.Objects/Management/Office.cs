@@ -6,10 +6,10 @@ namespace BigFootVentures.Business.Objects.Management
     {
         #region "Private Members"
 
-        private string _registrationPaymentNotification { get; set; }
-        private string _registrationPaymentMethod { get; set; }
-        private string _oppositionPaymentNotification { get; set; }
-        private string _oppositionPaymentMethod { get; set; }
+        private string _registrationPaymentNotification;
+        private string _registrationPaymentMethod;
+        private string _oppositionPaymentNotification;
+        private string _oppositionPaymentMethod;
 
         #endregion
 

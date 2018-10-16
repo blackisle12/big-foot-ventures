@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BigFootVentures.Business.Objects.Management
+﻿namespace BigFootVentures.Business.Objects.Management
 {
     public sealed class DomainN : BusinessBase
     {

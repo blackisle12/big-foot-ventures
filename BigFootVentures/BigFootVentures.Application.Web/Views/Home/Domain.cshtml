@@ -418,7 +418,7 @@
                         <div class="form-group">
                             <label class="col-sm-offset-6 col-sm-2 control-label">Language of Proceedings</label>
                             <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.LanguageOfProceedings, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Domain.LanguageOfProceedings>()), new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.Record.LanguageOfProceedings, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Generic.Language>()), new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">

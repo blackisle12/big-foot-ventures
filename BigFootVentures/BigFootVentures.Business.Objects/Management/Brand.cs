@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace BigFootVentures.Business.Objects.Management
 {
@@ -7,9 +6,9 @@ namespace BigFootVentures.Business.Objects.Management
     {
         #region "Private Members"
 
-        private string _category { get; set; }
-        private string _hvt { get; set; }
-        private string _deletionRequest { get; set; }
+        private string _category;
+        private string _hvt;
+        private string _deletionRequest;
 
         #endregion
 

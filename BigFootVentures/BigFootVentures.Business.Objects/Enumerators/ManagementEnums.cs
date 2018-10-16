@@ -4,6 +4,25 @@ namespace BigFootVentures.Business.Objects.Enumerators
 {
     public static class ManagementEnums
     {
+        public static class Generic
+        {
+            public enum Language
+            {
+                [Description("")]
+                NotSet,
+
+                EN, BG, CS, DA, DE, EL, ES, ET, FI, FR, HU, IT, NL, PL, PT, RO, SE, SK, SL, SV, LT, TR, KR, JP, NO, AF, AX, AL, DZ, EG, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ,
+                BS, BH, BD, BB, BY, BE, BZ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BF, BI, CV, KH, CM, CA, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ,
+                DK, DJ, DM, DO, EC, GQ, ER, EE, FK, FO, FJ, GF, PF, TF, GA, GM, GE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, IS, IN, ID, IR, IQ, IE, IM, IL,
+                JM, JE, JO, KZ, KE, KI, KP, KW, KG, LA, LV, LB, LS, LR, LY, LI, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR,
+                NP, NC, NZ, NI, NE, NG, NU, NF, MP, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PR, QA, RE, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SG, SX, SI, SB,
+                SO, ZA, GS, SS, LK, SD, SR, SJ, SZ, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW,
+
+                [Description("No Language")]
+                NoLanguage
+            }
+        }
+
         public static class Agreement
         {
             public enum ObjectOfAgreement
@@ -615,22 +634,6 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 ArabCenterForDomainNameDisputeResolution,
             }
 
-            public enum LanguageOfProceedings
-            {
-                [Description("")]
-                NotSet,
-
-                EN,BG,CS,DA,DE,EL,ES,ET,FI,FR,HU,IT,NL,PL,PT,RO,SE,SK,SL,SV,LT,TR,KR,JP,NO,AF,AX,AL,DZ,EG,AS,AD,AO,AI,AQ,AG,AR,AM,AW,AU,AT,AZ,
-                BS,BH,BD,BB,BY,BE,BZ,BM,BT,BO,BQ,BA,BW,BV,BR,IO,BN,BF,BI,CV,KH,CM,CA,KY,CF,TD,CL,CN,CX,CC,CO,KM,CG,CD,CK,CR,CI,HR,CU,CW,CY,CZ,
-                DK,DJ,DM,DO,EC,GQ,ER,EE,FK,FO,FJ,GF,PF,TF,GA,GM,GE,GH,GI,GR,GL,GD,GP,GU,GT,GG,GN,GW,GY,HT,HM,VA,HN,HK,IS,IN,ID,IR,IQ,IE,IM,IL,
-                JM,JE,JO,KZ,KE,KI,KP,KW,KG,LA,LV,LB,LS,LR,LY,LI,LU,MO,MK,MG,MW,MY,MV,ML,MT,MH,MQ,MR,MU,YT,MX,FM,MD,MC,MN,ME,MS,MA,MZ,MM,NA,NR,
-                NP,NC,NZ,NI,NE,NG,NU,NF,MP,OM,PK,PW,PS,PA,PG,PY,PE,PH,PN,PR,QA,RE,RU,RW,BL,SH,KN,LC,MF,PM,VC,WS,SM,ST,SA,SN,RS,SC,SG,SX,SI,SB,
-                SO,ZA,GS,SS,LK,SD,SR,SJ,SZ,CH,SY,TW,TJ,TZ,TH,TL,TG,TK,TO,TT,TN,TM,TC,TV,UG,UA,AE,GB,US,UM,UY,UZ,VU,VE,VN,VG,VI,WF,EH,YE,ZM,ZW,
-
-                [Description("No Language")]
-                NoLanguage
-            }
-
             public enum UDRPOutcome
             {
                 [Description("")]
@@ -1205,6 +1208,228 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
                 [Description("Removed")]
                 Removed,
+            }
+        }
+
+        public static class Trademark
+        {
+            public enum OfficeStatus
+            {
+                [Description("Cancelled")]
+                Cancelled,
+
+                [Description("Expired")]
+                Expired,
+
+                [Description("Filed")]
+                Filed,
+
+                [Description("Opposed")]
+                Opposed,
+
+                [Description("Published")]
+                Published,
+
+                [Description("Refused")]
+                Refused,
+
+                [Description("Registered")]
+                Registered,
+
+                [Description("Surrendered")]
+                Surrendered,
+
+                [Description("Terminated")]
+                Terminated,
+
+                [Description("Under Cancellation")]
+                UnderCancellation
+            }
+
+            public enum TrademarkType
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Word")]
+                Word,
+
+                [Description("Figurative")]
+                Figurative,
+
+                [Description("Combined (Word & Figurative)")]
+                Combined
+            }
+
+            public enum OpenSimilarityResearchTask
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Yes")]
+                Yes,
+
+                [Description("No")]
+                No
+            }
+
+            public enum OppositionResearch
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("To Be Done")]
+                ToBeDone,
+
+                [Description("Done")]
+                Done,
+
+                [Description("Not Applicable")]
+                NotApplicable
+            }
+
+            public enum CancellationStrategy
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Proceed")]
+                Proceed,
+
+                [Description("Dead")]
+                Dead
+            }
+
+            public enum MarkUse
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Active")]
+                Active,
+
+                [Description("Inactive")]
+                Inactive,
+
+                [Description("Slightly Active")]
+                SlightlyActive,
+
+                [Description("Don't know")]
+                DontKnow
+            }
+
+            public enum OwnerDefense
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Strong - MNC")]
+                StrongMNC,
+
+                [Description("Medium")]
+                Medium,
+
+                [Description("Weak")]
+                Weak,
+
+                [Description("Unknown")]
+                Unknown
+            }
+
+            public enum BFStrategy
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Cancellation Assessment")]
+                CancellationAssessment
+            }
+
+            public enum NameValue
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("<$1K")]
+                LessThan1k,
+
+                [Description(">$1K - <$10K")]
+                LessThan10k,
+
+                [Description(">$10K - <$100K")]
+                LessThan100k,
+
+                [Description(">$100K")]
+                GreaterThan100k
+            }
+
+            public enum InvalidityActionOutcome
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Unsuccessful")]
+                Unsuccessful,
+
+                [Description("Successful")]
+                Successful,
+
+                [Description("Withdrawn by us")]
+                WithdrawnByUs,
+
+                [Description("Invalid - TM expired")]
+                InvalidTMExpired,
+
+                [Description("Revoked")]
+                Revoked
+            }
+
+            public enum LetterOrigin
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Cebu")]
+                Cebu,
+
+                [Description("Hongkong")]
+                Hongkong,
+
+                [Description("Tokyo")]
+                Tokyo
+            }
+
+            public enum LetterSendingMethod
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Courier")]
+                Courier,
+
+                [Description("Registered post")]
+                RegisteredPost,
+
+                [Description("Regular post")]
+                RegularPost
+            }
+
+            public enum LetterOutcome
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("No answer")]
+                NoAnswer,
+
+                [Description("In negotiations")]
+                InNegotations,
+
+                [Description("Accepted")]
+                Accepted,
+
+                [Description("Refused")]
+                Refused
             }
         }
     }
