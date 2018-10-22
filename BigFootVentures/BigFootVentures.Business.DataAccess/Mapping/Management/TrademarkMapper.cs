@@ -12,7 +12,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         public ICollection<object> ParseData(MySqlDataReader dataReader)
         {
             var entities = new List<object>();
-
+            
             while (dataReader.Read())
             {
                 var entity = new Trademark
@@ -233,6 +233,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             return entities;
         }
 
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public MySqlParameter[] CreateParameters(object model)
         {
             var entity = (Trademark)model;
@@ -404,13 +409,13 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                 new MySqlParameter("pRevocationReferenceExternal", MySqlDbType.VarChar, 100) { Value = entity.RevocationReferenceExternal, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pInvalidityNumber", MySqlDbType.VarChar, 100) { Value = entity.InvalidityNumber, Direction = ParameterDirection.Input },
+                new MySqlParameter("pInvalidityNumber", MySqlDbType.VarChar, 45) { Value = entity.InvalidityNumber, Direction = ParameterDirection.Input },
                 new MySqlParameter("pInvalidityApplicantID", MySqlDbType.Int32) { Value = entity.InvalidityApplicant?.ID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pInvalidityInvokedGround", MySqlDbType.VarChar, 100) { Value = entity.InvalidityInvokedGround, Direction = ParameterDirection.Input },
+                new MySqlParameter("pInvalidityInvokedGround", MySqlDbType.VarChar, 255) { Value = entity.InvalidityInvokedGround, Direction = ParameterDirection.Input },
                 new MySqlParameter("pInvalidityDate", MySqlDbType.VarChar, 45) { Value = entity.InvalidityDate, Direction = ParameterDirection.Input },
                 new MySqlParameter("pInvalidityActionOutcome", MySqlDbType.VarChar, 45) { Value = entity.InvalidityActionOutcome, Direction = ParameterDirection.Input },
 
-                new MySqlParameter("pLetterReference", MySqlDbType.VarChar, 100) { Value = entity.LetterReference, Direction = ParameterDirection.Input },
+                new MySqlParameter("pLetterReference", MySqlDbType.VarChar, 45) { Value = entity.LetterReference, Direction = ParameterDirection.Input },
                 new MySqlParameter("pLetterOrigin", MySqlDbType.VarChar, 45) { Value = entity.LetterOrigin, Direction = ParameterDirection.Input },
                 new MySqlParameter("pLetterSendingMethod", MySqlDbType.VarChar, 45) { Value = entity.LetterSendingMethod, Direction = ParameterDirection.Input },
                 new MySqlParameter("pLetterSentOn", MySqlDbType.VarChar, 45) { Value = entity.LetterSentOn, Direction = ParameterDirection.Input },
@@ -419,9 +424,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             });
 
             return parameters.ToArray();
-        }
+        }        
 
         #endregion
-
     }
 }

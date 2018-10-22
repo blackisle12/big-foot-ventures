@@ -1,6 +1,5 @@
 ﻿using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -88,6 +87,29 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     entity.ParentAccount = new Company { ID = parentAccountID };
                 }
+
+                entities.Add(entity);
+            }
+
+            return entities;
+        }
+
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new Company
+                {
+                    ID = (int)dataReader["ID"],
+
+                    AccountRecordType = dataReader["AccountRecordType"] as string,
+
+                    DisplayName = dataReader["DISPLAYNAME"] as string,
+
+                    Type = dataReader["TYPE"] as string,
+                };
 
                 entities.Add(entity);
             }

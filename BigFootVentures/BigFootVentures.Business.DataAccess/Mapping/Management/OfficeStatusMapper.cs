@@ -16,6 +16,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 var entity = new OfficeStatus
                 {
                     ID = (int)dataReader["ID"],
+
                     Name = dataReader["Name"] as string,
                     StatusDescription = dataReader["StatusDescription"] as string,
                     StatusGrouping = dataReader["StatusGrouping"] as string,
@@ -27,6 +28,28 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     entity.Office = new Office { ID = officeID };
                 }
+
+                entities.Add(entity);
+            }
+
+            return entities;
+        }
+
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new OfficeStatus
+                {
+                    ID = (int)dataReader["ID"],
+
+                    Name = dataReader["Name"] as string,
+                    StatusGrouping = dataReader["StatusGrouping"] as string,
+
+                    OwnerName = dataReader["OwnerName"] as string
+                };
 
                 entities.Add(entity);
             }

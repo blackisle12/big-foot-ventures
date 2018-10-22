@@ -18,11 +18,36 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 var entity = new Register
                 {
                     ID = (int)dataReader["ID"],
+
+                    OwnerName = dataReader["Owner Name"] as string,
+
                     Name = dataReader["Name"] as string,
                     RAAYear = dataReader["RAA Year"] as string,
                     Country = dataReader["Country"] as string,
                     AccreditedTLDs = dataReader["Accredited TLDs"] as string,
-                    OwnerName = dataReader["Owner Name"] as string
+                };
+
+                entities.Add(entity);
+            }
+
+            return entities;
+        }
+
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new Register
+                {
+                    ID = (int)dataReader["ID"],
+
+                    OwnerName = dataReader["Owner Name"] as string,
+
+                    Name = dataReader["Name"] as string,
+                    RAAYear = dataReader["RAA Year"] as string,
+                    Country = dataReader["Country"] as string
                 };
 
                 entities.Add(entity);

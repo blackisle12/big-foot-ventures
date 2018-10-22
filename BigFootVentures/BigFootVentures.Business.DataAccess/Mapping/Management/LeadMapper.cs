@@ -1,6 +1,5 @@
 ﻿using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -51,6 +50,28 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             return entities;
         }
 
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new Lead
+                {
+                    ID = (int)dataReader["ID"],
+                    
+                    Status = dataReader["Status"] as string,
+                    FirstName = dataReader["FirstName"] as string,
+                    LastName = dataReader["LastName"] as string,
+                    Company = dataReader["Company"] as string,
+                };
+
+                entities.Add(entity);
+            }
+
+            return entities;
+        }
+
         public MySqlParameter[] CreateParameters(object model)
         {
             var entity = (Lead)model;
@@ -64,8 +85,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pSalutation", MySqlDbType.VarChar, 45) { Value = entity.Salutation, Direction = ParameterDirection.Input },
                 new MySqlParameter("pFirstName", MySqlDbType.VarChar, 100) { Value = entity.FirstName, Direction = ParameterDirection.Input },
                 new MySqlParameter("pMiddleName", MySqlDbType.VarChar, 100) { Value = entity.MiddleName, Direction = ParameterDirection.Input },
-                new MySqlParameter("pLastName", MySqlDbType.VarChar, 100) { Value = entity.LastName, Direction = ParameterDirection.Input },                
-                new MySqlParameter("pSuffix", MySqlDbType.VarChar, 45) { Value = entity.Suffix, Direction = ParameterDirection.Input },                
+                new MySqlParameter("pLastName", MySqlDbType.VarChar, 100) { Value = entity.LastName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pSuffix", MySqlDbType.VarChar, 45) { Value = entity.Suffix, Direction = ParameterDirection.Input },
                 new MySqlParameter("pTitle", MySqlDbType.VarChar, 45) { Value = entity.Title, Direction = ParameterDirection.Input },
                 new MySqlParameter("pEmail", MySqlDbType.VarChar, 100) { Value = entity.Email, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPhone", MySqlDbType.VarChar, 100) { Value = entity.Phone, Direction = ParameterDirection.Input },

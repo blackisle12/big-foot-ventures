@@ -9,6 +9,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping
 
         ICollection<object> ParseData(MySqlDataReader dataReader);
 
+        ICollection<object> ParseDataMin(MySqlDataReader dataReader);
+
         MySqlParameter[] CreateParameters(object model);
 
         #endregion

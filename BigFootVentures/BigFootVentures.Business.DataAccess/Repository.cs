@@ -72,7 +72,7 @@ namespace BigFootVentures.Business.DataAccess
 
                     var dataReader = command.ExecuteReader();
 
-                    foreach (var entity in this._mapper.ParseData(dataReader))
+                    foreach (var entity in this._mapper.ParseDataMin(dataReader))
                     {
                         entities.Add((TEntity)entity);
                     }

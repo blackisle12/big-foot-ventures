@@ -8,6 +8,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
     public sealed class OfficeMapper : IMapper
     {
         #region "Public Methods"
+
         public ICollection<object> ParseData(MySqlDataReader dataReader)
         {
             var entities = new List<object>();
@@ -46,6 +47,25 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     RegistrationPaymentMethod = dataReader["RegistrationPaymentMethod"] as string,
                     OppositionPaymentNotification = dataReader["OppositionPaymentNotification"] as string,
                     OppositionPaymentMethod = dataReader["OppositionPaymentMethod"] as string,
+                };
+
+                entities.Add(entity);
+            }
+
+            return entities;
+        }
+
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new Office
+                {
+                    ID = (int)dataReader["ID"],
+
+                    OfficeName = dataReader["OfficeName"] as string
                 };
 
                 entities.Add(entity);

@@ -42,6 +42,30 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             return entities;
         }
 
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new Brand
+                {
+                    ID = (int)dataReader["ID"],
+
+                    Name = dataReader["NAME"] as string,
+                    Purpose = dataReader["PURPOSE"] as string,
+                    Value = dataReader["VALUE"] as string,
+                    HVT = dataReader["HVT"] as string,
+                    EMV = dataReader["EMV"] as string,
+                    Category = dataReader["CATEGORY"] as string,
+                };
+
+                entities.Add(entity);
+            }
+
+            return entities;
+        }
+
         public MySqlParameter[] CreateParameters(object model)
         {
             var entity = (Brand)model;

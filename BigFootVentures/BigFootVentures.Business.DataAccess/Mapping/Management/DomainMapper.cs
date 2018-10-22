@@ -111,6 +111,25 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             return entities;
         }
 
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new DomainN
+                {
+                    ID = (int)dataReader["ID"],
+
+                    Name = dataReader["Name"] as string,
+                };
+
+                entities.Add(entity);
+            }
+
+            return entities;
+        }
+
         public MySqlParameter[] CreateParameters(object model)
         {
             var entity = (DomainN)model;

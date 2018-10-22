@@ -1,6 +1,5 @@
 ﻿using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -70,6 +69,31 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     entity.Registrar = new Register { ID = registrantID };
                 }
+
+                entities.Add(entity);
+            }
+
+            return entities;
+        }
+
+        public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
+        {
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new Enquiry
+                {
+                    ID = (int)dataReader["ID"],
+                    
+                    OldCaseNumber = dataReader["OldCaseNumber"] as string,
+                    DoNotContact = (dataReader["DoNotContact"] as sbyte? ?? 0) == 1,
+                    
+                    ReferenceNumber = dataReader["ReferenceNumber"] as string,
+
+                    DomainName = dataReader["DomainName"] as string,
+                    Description = dataReader["Description"] as string,
+                };
 
                 entities.Add(entity);
             }
