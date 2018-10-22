@@ -206,6 +206,7 @@
     <Content Include="Content\Views\Home\Contacts.css" />
     <Content Include="Content\Views\Home\LoginInformations.css" />
     <Content Include="Content\Views\Home\Enquiries.css" />
+    <Content Include="Content\Views\Home\Trademarks.css" />
     <Content Include="Content\Views\Home\Registers.css" />
     <Content Include="Content\Views\Home\Companies.css" />
     <Content Include="Content\Views\Home\Brands.css" />
@@ -247,6 +248,7 @@
     <Content Include="Scripts\Views\Home\Enquiries.js" />
     <Content Include="Scripts\Views\Home\LoginInformations.js" />
     <Content Include="Scripts\Views\Home\OfficeStatuses.js" />
+    <Content Include="Scripts\Views\Home\Trademarks.js" />
     <Content Include="Scripts\Views\Home\Registers.js" />
     <Content Include="Scripts\Views\Home\Companies.js" />
     <Content Include="Scripts\Views\Home\Company.js" />
@@ -300,6 +302,7 @@
     <Content Include="Views\Home\Agreement.cshtml" />
     <Content Include="Views\Home\EmailResponses.cshtml" />
     <Content Include="Views\Home\EmailResponse.cshtml" />
+    <Content Include="Views\Home\Trademarks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

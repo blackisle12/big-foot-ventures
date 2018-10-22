@@ -31,6 +31,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Office> _managementOfficeService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
+        private readonly IManagementService<Trademark> _managementTrademarkService = null;
 
         #endregion
 
@@ -47,7 +48,8 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<LoginInformation> managementLoginInformationService,
             IManagementService<Office> managementOfficeService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
-            IManagementService<Register> managementRegisterService)
+            IManagementService<Register> managementRegisterService,
+            IManagementService<Trademark> managementTrademarkService)
         {
             this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
@@ -61,6 +63,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementOfficeService = managementOfficeService;
             this._managementOfficeStatusService = managementOfficeStatusService;
             this._managementRegisterService = managementRegisterService;
+            this._managementTrademarkService = managementTrademarkService;
         }
 
         #endregion
@@ -2224,7 +2227,177 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion        
+        #endregion
+
+        #region "Trademark"
+
+        [Route("Trademarks/{rowCount?}/{page?}", Name = "Trademarks")]
+        public ActionResult Trademarks(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var trademarks = this._managementTrademarkService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Trademark>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = trademarks
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Trademark/{ID:int}", Name = "TrademarkView")]
+        public ActionResult Trademark(int ID)
+        {
+            var trademark = this._managementTrademarkService.Get(ID);
+            
+            var model = new VMModel<Trademark>
+            {
+                Record = trademark,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Trademark", model);
+        }
+
+        [Route("Trademark/New", Name = "TrademarkNew")]
+        public ActionResult TrademarkNew()
+        {
+            VMModel<Trademark> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Trademark>();
+            }
+            else
+            {
+                model = new VMModel<Trademark>
+                {
+                    Record = new Trademark(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Trademark", model);
+        }
+
+        [Route("Trademark/Edit/{ID:int}", Name = "TrademarkEdit")]
+        public ActionResult TrademarkEdit(int ID)
+        {
+            VMModel<Trademark> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Trademark>();
+            }
+            else
+            {
+                var trademark = this._managementTrademarkService.Get(ID);
+
+                model = new VMModel<Trademark>
+                {
+                    Record = trademark,
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Trademark", model);
+        }
+
+        [HttpPost]
+        [Route("Trademark", Name = "TrademarkPost")]
+        public ActionResult Trademark(VMModel<Trademark> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (TrademarkValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementTrademarkService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementTrademarkService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Trademark>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Trademark/Delete/{ID:int}", Name = "TrademarkDelete")]
+        public ActionResult TrademarkDelete(int ID)
+        {
+            try
+            {
+                this._managementTrademarkService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Trademarks");
+        }
+
+        [HttpGet]
+        [Route("Trademark/Autocomplete/{keyword}", Name = "TrademarkAutocomplete")]
+        public ActionResult TrademarkAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementTrademarkService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
 
         #region "Private Methods"
 

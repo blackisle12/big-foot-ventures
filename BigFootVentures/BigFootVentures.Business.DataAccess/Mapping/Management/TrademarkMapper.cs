@@ -235,7 +235,21 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
         public ICollection<object> ParseDataMin(MySqlDataReader dataReader)
         {
-            throw new System.NotImplementedException();
+            var entities = new List<object>();
+
+            while (dataReader.Read())
+            {
+                var entity = new Trademark
+                {
+                    ID = (int)dataReader["ID"],
+
+                    Name = dataReader["Name"] as string,
+                };
+
+                entities.Add(entity);
+            }
+
+            return entities;
         }
 
         public MySqlParameter[] CreateParameters(object model)
@@ -424,7 +438,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             });
 
             return parameters.ToArray();
-        }        
+        }
 
         #endregion
     }

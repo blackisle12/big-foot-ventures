@@ -81,6 +81,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
                 return new { ID = register.ID };
             }
+            else if (type == typeof(Trademark))
+            {
+                var trademark = (Trademark)model;
+
+                return new { ID = trademark.ID };
+            }
             else
             {
                 return null;
