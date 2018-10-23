@@ -1,4 +1,5 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.Objects;
+using BigFootVentures.Business.Objects.Management;
 using System;
 
 namespace BigFootVentures.Application.Web.Models.Utilities
@@ -9,87 +10,17 @@ namespace BigFootVentures.Application.Web.Models.Utilities
 
         public static dynamic GetRouteMapping(Type type, object model)
         {
-            if (type == typeof(AgreementT))
-            {
-                var agreement = (AgreementT)model;
-
-                return new { ID = agreement.ID };
-            }
-            else if (type == typeof(Brand))
-            {
-                var brand = (Brand)model;
-
-                return new { ID = brand.ID };
-            }
-            else if (type == typeof(Company))
+            if (type == typeof(Company))
             {
                 var company = (Company)model;
 
                 return new { recordType = company.AccountRecordType, ID = company.ID };
             }
-            else if (type == typeof(Contact))
-            {
-                var contact = (Contact)model;
-
-                return new { ID = contact.ID };
-            }
-            else if (type == typeof(DomainN))
-            {
-                var domain = (DomainN)model;
-
-                return new { ID = domain.ID };
-            }
-            else if (type == typeof(EmailResponse))
-            {
-                var emailResponse = (EmailResponse)model;
-
-                return new { iD = emailResponse.ID };
-            }
-            else if (type == typeof(Enquiry))
-            {
-                var enquiry = (Enquiry)model;
-
-                return new { ID = enquiry.ID };
-            }
-            else if (type == typeof(Lead))
-            {
-                var lead = (Lead)model;
-
-                return new { ID = lead.ID };
-            }
-            else if (type == typeof(LoginInformation))
-            {
-                var loginInformation = (LoginInformation)model;
-
-                return new { ID = loginInformation.ID };
-            }
-            else if (type == typeof(Office))
-            {
-                var office = (Office)model;
-
-                return new { ID = office.ID };
-            }
-            else if (type == typeof(OfficeStatus))
-            {
-                var officeStatus = (OfficeStatus)model;
-
-                return new { ID = officeStatus.ID };
-            }
-            else if (type == typeof(Register))
-            {
-                var register = (Register)model;
-
-                return new { ID = register.ID };
-            }
-            else if (type == typeof(Trademark))
-            {
-                var trademark = (Trademark)model;
-
-                return new { ID = trademark.ID };
-            }
             else
             {
-                return null;
+                var baseObj = (BusinessBase)model;
+
+                return new { ID = baseObj.ID };
             }
         }
 

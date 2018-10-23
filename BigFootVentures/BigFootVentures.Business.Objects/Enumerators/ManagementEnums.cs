@@ -1464,6 +1464,243 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 [Description("Refused")]
                 Refused
             }
+
+            public enum WIPO
+            {
+                [Description("Afghanistan (AF)")]
+                Afghanistan,
+
+                [Description("Africa (OAPI")]
+                Africa,
+
+                [Description("Aland Islands (AX)")]
+                AlandIslands,
+
+                [Description("Albania (AL")]
+                Albania,
+
+                [Description("Algeria (DZ)")]
+                Algeria,
+
+                [Description("American Samoa (AS)")]
+                AmericanSamoa,
+
+                [Description("Andorra (AD)")]
+                Andorra,
+
+                [Description("Angola (AO)")]
+                Angola,
+
+                [Description("Anguilla (AI)")]
+                Anguilla,
+
+                [Description("Antartica (AQ)")]
+                Antartica,
+
+                [Description("Antigua and Barbuda (AG)")]
+                AntiguaAndBarbuda,
+
+                [Description("Argentina (AR)")]
+                Argentina,
+
+                [Description("Armenia (AM)")]
+                Armenia,
+
+                [Description("Aruba (AW)")]
+                Aruba,
+
+                [Description("Australia (AU)")]
+                Australia,
+
+                [Description("Austria (AT)")]
+                Austria,
+
+                [Description("Azerbaijan (AZ)")]
+                Azerbaijan,
+
+                [Description("Bahamas (BS)")]
+                Bahamas,
+
+                [Description("Bahrain (BH)")]
+                Bahrain,
+
+                [Description("Bangladesh (BD)")]
+                Bangladesh,
+
+                [Description("Barbados (BB)")]
+                Barbados,
+
+                [Description("Belarus (BY)")]
+                Belarus,
+
+                [Description("Belgium (BE)")]
+                Belgium,
+
+                [Description("Belize (BZ)")]
+                Belize,
+
+                [Description("Benelux (BOIP)")]
+                Benelux,
+
+                [Description("Benin (BJ)")]
+                Benin,
+
+                [Description("Bermuna (BM)")]
+                Bermuna,
+
+                [Description("Bhutan (BT)")]
+                Bhutan,
+
+                [Description("Bolivia (Plurinational State of) (BO)")]
+                Bolivia,
+
+                [Description("Bonaire, Sint Eustatius and Saba (BQ)")]
+                Bonaire,
+
+                [Description("Bosnia and Herzegovina (BA)")]
+                BosniaAndHerzegovina,
+
+                [Description("Botswana (BW)")]
+                Botswana,
+
+                [Description("Bouvet Island (BV)")]
+                BouvetIsland,
+
+                [Description("Brazil (BR)")]
+                Brazil,
+
+                [Description("British Indian Ocean Territory (IO)")]
+                BritishIndianOceanTerritory,
+
+                [Description("Brunei Darussalam (BN)")]
+                BruneiDarussalam,
+
+                [Description("Bulgaria (BG)")]
+                Bulgaria,
+
+                [Description("Burkina Faso (BF)")]
+                BurkinaFaso,
+
+                [Description("Burundi (BI)")]
+                Burundi,
+
+                [Description("Carbo Verde (CV)")]
+                CarboVerde,
+
+                [Description("Cambodia (KH)")]
+                Cambodia,
+
+                [Description("Cameroon (CM)")]
+                Cameroon,
+
+                [Description("Canada (CA)")]
+                Canada,
+
+                [Description("Cayman Islands (KY)")]
+                CaymanIslands,
+
+                [Description("Central African Republic (CF)")]
+                CentralAfricanRepublic,
+
+                [Description("Chad (TD)")]
+                Chad,
+
+                [Description("Chile (CL)")]
+                Chile,
+
+                [Description("China (CN)")]
+                China,
+
+                [Description("Christmas Island (CX)")]
+                ChristmasIsland,
+
+                [Description("Cocos (Keeling) Islands (CC)")]
+                CocosIslands,
+
+                [Description("Colombia (CO)")]
+                Colombia,
+
+                [Description("Comoros (KM)")]
+                Comoros,
+
+                [Description("Congo (CG)")]
+                Congo,
+
+                [Description("Congo (Democratic Republic of the) (CD)")]
+                CongoDemocratic,
+
+                [Description("Cook Islands (CK)")]
+                CookIslands,
+
+                [Description("Costa Rica (CR)")]
+                CostaRica,
+
+                [Description("Cote d'Ioire (CI)")]
+                CoteDIviore,
+
+                [Description("Croatia (HR)")]
+                Croatia,
+
+                [Description("Cuba (CU)")]
+                Cuba,
+
+                [Description("Curacao (CW)")]
+                Curacao,
+
+                [Description("Cyprus (CY)")]
+                Cyprus,
+
+                [Description("Czech Republic (CZ)")]
+                CzechRepublic,
+
+                [Description("Democratic People's Republic of Korea (KP)")]
+                DemocraticPeopleRepublicOfKorea,
+
+                [Description("Denmark (DK)")]
+                Denmark,
+
+                [Description("Djibouti (DJ)")]
+                Djibouti,
+
+                [Description("Dominica (DM)")]
+                Dominica,
+
+                [Description("Dominican Republic (DO)")]
+                DominicanRepublic,
+
+                [Description("Ecuador (EC)")]
+                Ecuador
+            }
+
+            public enum ARIPO
+            {
+                [Description("BW - Botswana")]
+                Botswana,
+
+                [Description("LR - Liberia")]
+                Liberia,
+
+                [Description("LS - Lesotho")]
+                Lesotho,
+
+                [Description("MW - Malawi")]
+                Malawi,
+
+                [Description("NA - Namibia")]
+                Namibia,
+
+                [Description("SZ - Swaziland")]
+                Swaziland,
+
+                [Description("TZ - United Republic of Tanzania")]
+                UnitedRepublicOfTanzania,
+
+                [Description("UG - Uganda")]
+                Uganda,
+
+                [Description("ZW - Zimbabwe")]
+                Zimbabwe
+            }
         }
     }
 }

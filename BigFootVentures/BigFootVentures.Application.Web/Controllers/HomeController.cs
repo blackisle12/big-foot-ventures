@@ -2258,7 +2258,35 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult Trademark(int ID)
         {
             var trademark = this._managementTrademarkService.Get(ID);
-            
+
+            trademark.Office = this._managementOfficeService.Get(trademark.Office.ID);
+            trademark.Brand = this._managementBrandService.Get(trademark.Brand.ID);
+
+            if (trademark.OriginalOffice != null)
+            {
+                trademark.OriginalOffice = this._managementOfficeService.Get(trademark.OriginalOffice.ID);
+            }
+
+            if (trademark.TMWebsite != null)
+            {
+                trademark.TMWebsite = this._managementDomainService.Get(trademark.TMWebsite.ID);
+            }
+
+            if (trademark.OwnerWebsite != null)
+            {
+                trademark.OwnerWebsite = this._managementDomainService.Get(trademark.OwnerWebsite.ID);
+            }
+
+            if (trademark.ComWebsite != null)
+            {
+                trademark.ComWebsite = this._managementDomainService.Get(trademark.ComWebsite.ID);
+            }
+
+            if (trademark.InvalidityApplicant != null)
+            {
+                trademark.InvalidityApplicant = this._managementCompanyService.Get(trademark.InvalidityApplicant.ID);
+            }
+
             var model = new VMModel<Trademark>
             {
                 Record = trademark,
@@ -2307,6 +2335,34 @@ namespace BigFootVentures.Application.Web.Controllers
             else
             {
                 var trademark = this._managementTrademarkService.Get(ID);
+
+                trademark.Office = this._managementOfficeService.Get(trademark.Office.ID);
+                trademark.Brand = this._managementBrandService.Get(trademark.Brand.ID);
+
+                if (trademark.OriginalOffice != null)
+                {
+                    trademark.OriginalOffice = this._managementOfficeService.Get(trademark.OriginalOffice.ID);
+                }
+
+                if (trademark.TMWebsite != null)
+                {
+                    trademark.TMWebsite = this._managementDomainService.Get(trademark.TMWebsite.ID);
+                }
+
+                if (trademark.OwnerWebsite != null)
+                {
+                    trademark.OwnerWebsite = this._managementDomainService.Get(trademark.OwnerWebsite.ID);
+                }
+
+                if (trademark.ComWebsite != null)
+                {
+                    trademark.ComWebsite = this._managementDomainService.Get(trademark.ComWebsite.ID);
+                }
+
+                if (trademark.InvalidityApplicant != null)
+                {
+                    trademark.InvalidityApplicant = this._managementCompanyService.Get(trademark.InvalidityApplicant.ID);
+                }
 
                 model = new VMModel<Trademark>
                 {

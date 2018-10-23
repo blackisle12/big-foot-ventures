@@ -17,6 +17,11 @@ namespace BigFootVentures.Service.BusinessService.Validators
                 validationResult.Add("Record.Name", ValidationMessages.REQUIRED);
             }
 
+            if (trademark.Office == null || string.IsNullOrWhiteSpace(trademark.Office.OfficeName))
+            {
+                validationResult.Add("Record.Office.OfficeName", ValidationMessages.REQUIRED);
+            }
+
             if (string.IsNullOrWhiteSpace(trademark.TrademarkNumber))
             {
                 validationResult.Add("Record.TrademarkNumber", ValidationMessages.REQUIRED);
@@ -27,9 +32,9 @@ namespace BigFootVentures.Service.BusinessService.Validators
                 validationResult.Add("Record.FilingNumber", ValidationMessages.REQUIRED);
             }
 
-            if (trademark.Brand != null && trademark.Brand.ID > 0)
+            if (trademark.Brand == null || string.IsNullOrWhiteSpace(trademark.Brand.Name))
             {
-                validationResult.Add("Record.Brand.ID", ValidationMessages.REQUIRED);
+                validationResult.Add("Record.Brand.Name", ValidationMessages.REQUIRED);
             }
 
             if (string.IsNullOrWhiteSpace(trademark.FilingDateValue))
