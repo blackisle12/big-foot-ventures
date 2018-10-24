@@ -36,7 +36,7 @@ textarea {
     -moz-box-shadow: 5px 5px 5px #666;
     -webkit-box-shadow: 1px 1px 1px #666;
     border-color: transparent;
-    background-color: #434343;
+    background-color: #24292e;
 }
 
 .navbar-default .navbar-brand {
@@ -51,7 +51,7 @@ textarea {
     color: #ffffffbf;
 }
 
-.navbar-default .navbar-nav > li > a:hover {
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:visited {
     color: #ffffff;
 }
 
@@ -65,7 +65,7 @@ textarea {
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-    background-color: #434343;
+    background-color: #24292e;
     color: #ffffff;
     border-bottom: 5px solid #329FDA;
 }
