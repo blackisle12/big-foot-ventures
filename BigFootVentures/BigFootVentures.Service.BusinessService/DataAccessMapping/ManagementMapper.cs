@@ -59,6 +59,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new RegisterMapper();
             }
+            else if (type == typeof(SimilarTrademark))
+            {
+                return new SimilarTrademarkMapper();
+            }
             else if (type == typeof(Trademark))
             {
                 return new TrademarkMapper();
