@@ -198,7 +198,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\images\jquery-te.png" />
     <Content Include="Content\images\loader.gif" />
+    <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\Views\Home\Office.css" />
     <Content Include="Content\Views\Home\Brand.css" />
     <Content Include="Content\Views\Home\Agreements.css" />
@@ -227,6 +229,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-te-1.4.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -238,7 +241,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\nicEdit.js" />
+    <Content Include="Content\images\nicEditorIcons.gif" />
+    <Content Include="Scripts\Views\Home\EmailResponse.js" />
     <Content Include="Scripts\Views\Home\Trademark.js" />
     <Content Include="Scripts\Views\Home\Office.js" />
     <Content Include="Scripts\Views\Home\Brands.js" />

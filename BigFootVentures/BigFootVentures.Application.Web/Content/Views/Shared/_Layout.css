@@ -179,3 +179,23 @@ input[type=checkbox], input[type=radio] {
     margin-left: auto;
     margin-right: auto;
 }
+
+.jqte {
+    max-width: 280px;
+    border: 1px solid #ccc !important;
+}
+.jqte_tool.jqte_tool_1 .jqte_tool_label {
+    height: 22px !important;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1570px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 1370px;
+    }
+}
