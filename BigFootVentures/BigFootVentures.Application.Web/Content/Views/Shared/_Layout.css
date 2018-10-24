@@ -180,9 +180,15 @@ input[type=checkbox], input[type=radio] {
     margin-right: auto;
 }
 
-.jqte {
+.col-sm-10 > .jqte {
     max-width: 280px;
-    border: 1px solid #ccc !important;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 .jqte_tool.jqte_tool_1 .jqte_tool_label {
     height: 22px !important;
