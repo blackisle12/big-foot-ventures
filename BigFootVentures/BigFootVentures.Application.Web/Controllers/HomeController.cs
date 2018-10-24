@@ -32,6 +32,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
         private readonly IManagementService<Trademark> _managementTrademarkService = null;
+        private readonly IManagementService<TrademarkOwner> _managementTrademarkOwnerService = null;
 
         #endregion
 
@@ -49,7 +50,8 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<Office> managementOfficeService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
             IManagementService<Register> managementRegisterService,
-            IManagementService<Trademark> managementTrademarkService)
+            IManagementService<Trademark> managementTrademarkService,
+            IManagementService<TrademarkOwner> managementTrademarkOwnerService)
         {
             this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
@@ -64,6 +66,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementOfficeStatusService = managementOfficeStatusService;
             this._managementRegisterService = managementRegisterService;
             this._managementTrademarkService = managementTrademarkService;
+            this._managementTrademarkOwnerService = managementTrademarkOwnerService;
         }
 
         #endregion
@@ -2439,6 +2442,173 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     IsSuccess = true,
                     Result = this._managementTrademarkService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region "TrademarkOwner"
+
+        [Route("TrademarkOwners/{rowCount?}/{page?}", Name = "TrademarkOwners")]
+        public ActionResult TrademarkOwners(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var trademarkOwners = this._managementTrademarkOwnerService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<TrademarkOwner>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = trademarkOwners
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("TrademarkOwner/{ID:int}", Name = "TrademarkOwnerView")]
+        public ActionResult TrademarkOwner(int ID)
+        {
+            var trademarkOwner = this._managementTrademarkOwnerService.Get(ID);
+            var model = new VMModel<TrademarkOwner>
+            {
+                Record = trademarkOwner,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("TrademarkOwner", model);
+        }
+
+        [Route("TrademarkOwner/New", Name = "TrademarkOwnerNew")]
+        public ActionResult TrademarkOwnerNew()
+        {
+            VMModel<TrademarkOwner> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<TrademarkOwner>();
+            }
+            else
+            {
+                model = new VMModel<TrademarkOwner>
+                {
+                    Record = new TrademarkOwner(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("TrademarkOwner", model);
+        }
+
+        [Route("TrademarkOwner/Edit/{ID:int}", Name = "TrademarkOwnerEdit")]
+        public ActionResult TrademarkOwnerEdit(int ID)
+        {
+            VMModel<TrademarkOwner> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<TrademarkOwner>();
+            }
+            else
+            {
+                model = new VMModel<TrademarkOwner>
+                {
+                    Record = this._managementTrademarkOwnerService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("TrademarkOwner", model);
+        }
+
+        [HttpPost]
+        [Route("TrademarkOwner", Name = "TrademarkOwnerPost")]
+        public ActionResult TrademarkOwner(VMModel<TrademarkOwner> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (TrademarkOwnerValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementTrademarkOwnerService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementTrademarkOwnerService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<TrademarkOwner>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("TrademarkOwner/Delete/{ID:int}", Name = "TrademarkOwnerDelete")]
+        public ActionResult TrademarkOwnerDelete(int ID)
+        {
+            try
+            {
+                this._managementTrademarkOwnerService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("TrademarkOwners");
+        }
+
+        [HttpGet]
+        [Route("TrademarkOwner/Autocomplete/{keyword}", Name = "TrademarkOwnerAutocomplete")]
+        public ActionResult TrademarkOwnerAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementTrademarkOwnerService.GetAutocomplete(keyword)
                 };
             }
             catch (Exception ex)
