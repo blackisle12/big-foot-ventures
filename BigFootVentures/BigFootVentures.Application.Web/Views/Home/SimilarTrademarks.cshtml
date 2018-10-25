@@ -1,0 +1,48 @@
+﻿<link href="~/Content/Views/Home/SimilarTrademarks.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Similar Trademarks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<SimilarTrademark>
+
+@using (Html.BeginForm("SimilarTrademarks", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-trademark-name">Trademark</th>
+                        <th class="th-trademark-similar-name">Trademark Similar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var similarTrademark in Model.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("SimilarTrademarkView", new { ID = similarTrademark.ID })" target="_blank">@similarTrademark.Trademark.Name</a></td>
+                                <td>@similarTrademark.TrademarkSimilar.Name</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/SimilarTrademarks.js"></script>
+}
