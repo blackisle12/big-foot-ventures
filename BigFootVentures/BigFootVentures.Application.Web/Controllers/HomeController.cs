@@ -2750,32 +2750,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return RedirectToAction("TrademarkOwners");
         }
 
-        [HttpGet]
-        [Route("TrademarkOwner/Autocomplete/{keyword}", Name = "TrademarkOwnerAutocomplete")]
-        public ActionResult TrademarkOwnerAutocomplete(string keyword)
-        {
-            VMJsonResult result = null;
-
-            try
-            {
-                result = new VMJsonResult
-                {
-                    IsSuccess = true,
-                    Result = this._managementTrademarkOwnerService.GetAutocomplete(keyword)
-                };
-            }
-            catch (Exception ex)
-            {
-                result = new VMJsonResult
-                {
-                    IsSuccess = false,
-                    ErrorMessage = ex.Message
-                };
-            }
-
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
         #endregion
 
         #region "Private Methods"

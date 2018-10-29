@@ -46,24 +46,24 @@
                             <label class="col-sm-2 control-label">Trademark</label>
                             <div class="col-sm-10">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.Trademark.ID, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.Record.Trademark.Name, new { @class = "form-control required", @readonly = "readonly" })
                                     <div class="input-group-btn">
-                                        <button type="button" name="Button.Trademark.ID" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                        <button type="button" name="Button.Trademark.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                     </div>
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Record.Trademark, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(m => m.Record.Trademark.Name, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Company</label>
                             <div class="col-sm-10">
                                 <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.Company.ID, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.Record.Company.DisplayName, new { @class = "form-control required", @readonly = "readonly" })
                                     <div class="input-group-btn">
-                                        <button type="button" name="Button.Company.ID" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                        <button type="button" name="Button.Company.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
                                     </div>
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Record.Company, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(m => m.Record.Company.DisplayName, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </fieldset>
@@ -76,8 +76,8 @@
         </div>
     </div>
 
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Trademark), ChildIDContainer = "Trademark.ID", ChildNameContainer = "Trademark.ID" })
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "Company.ID", ChildNameContainer = "Company.ID" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Trademark), ChildIDContainer = "Trademark.ID", ChildNameContainer = "Trademark.Name" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "Company.ID", ChildNameContainer = "Company.DisplayName" })
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>

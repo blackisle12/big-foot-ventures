@@ -254,6 +254,7 @@
     <Content Include="Scripts\Views\Home\LoginInformations.js" />
     <Content Include="Scripts\Views\Home\OfficeStatuses.js" />
     <Content Include="Scripts\Views\Home\SimilarTrademarks.js" />
+    <Content Include="Scripts\Views\Home\TrademarkOwners.js" />
     <Content Include="Scripts\Views\Home\Trademarks.js" />
     <Content Include="Scripts\Views\Home\Registers.js" />
     <Content Include="Scripts\Views\Home\Companies.js" />

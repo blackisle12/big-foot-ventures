@@ -12,14 +12,14 @@ namespace BigFootVentures.Service.BusinessService.Validators
         {
             validationResult = new Dictionary<string, string>();
 
-            if (trademarkOwner.Trademark == null)
+            if (trademarkOwner.Trademark == null || string.IsNullOrWhiteSpace(trademarkOwner.Trademark.Name))
             {
-                validationResult.Add("Record.Trademark", ValidationMessages.REQUIRED);
+                validationResult.Add("Record.Trademark.Name", ValidationMessages.REQUIRED);
             }
 
-            if (trademarkOwner.Company == null)
+            if (trademarkOwner.Company == null || string.IsNullOrWhiteSpace(trademarkOwner.Company.DisplayName))
             {
-                validationResult.Add("Record.Company", ValidationMessages.REQUIRED);
+                validationResult.Add("Record.Company.DisplayName", ValidationMessages.REQUIRED);
             }
 
             return !validationResult.Any();

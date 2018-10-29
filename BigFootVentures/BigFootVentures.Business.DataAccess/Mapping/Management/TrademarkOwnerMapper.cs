@@ -1,5 +1,6 @@
 ﻿using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -8,6 +9,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
     public sealed class TrademarkOwnerMapper: IMapper
     {
         #region"Public Methods"
+
         public ICollection<object> ParseData(MySqlDataReader dataReader)
         {
             var entities = new List<object>();
@@ -17,17 +19,18 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 var entity = new TrademarkOwner
                 {
                     ID = (int)dataReader["ID"],
+
+                    Trademark = new Trademark
+                    {
+                        ID = Convert.ToInt32(dataReader["TrademarkID"]),
+                        Name = dataReader["TrademarkName"] as string
+                    },
+                    Company = new Company
+                    {
+                        ID = Convert.ToInt32(dataReader["CompanyID"]),
+                        DisplayName = dataReader["CompanyName"] as string
+                    }
                 };
-
-                if (int.TryParse((dataReader["TrademarkID"] as int?)?.ToString(), out int trademarkID))
-                {
-                    entity.Trademark = new Trademark { ID = trademarkID };
-                }
-
-                if (int.TryParse((dataReader["CompanyID"] as int?)?.ToString(), out int companyID))
-                {
-                    entity.Company = new Company { ID = companyID };
-                }
 
                 entities.Add(entity);
             }
@@ -44,6 +47,17 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 var entity = new TrademarkOwner
                 {
                     ID = (int)dataReader["ID"],
+
+                    Trademark = new Trademark
+                    {
+                        ID = Convert.ToInt32(dataReader["TrademarkID"]),
+                        Name = dataReader["TrademarkName"] as string
+                    },
+                    Company = new Company
+                    {
+                        ID = Convert.ToInt32(dataReader["CompanyID"]),
+                        DisplayName = dataReader["CompanyName"] as string
+                    }
                 };
 
                 entities.Add(entity);
@@ -59,8 +73,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             parameters.AddRange(new MySqlParameter[]
             {
-                new MySqlParameter("pTrademarkID", MySqlDbType.Int32) { Value = entity.Trademark?.ID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCompanyID", MySqlDbType.Int32) { Value = entity.Company?.ID, Direction = ParameterDirection.Input }
+                new MySqlParameter("pTrademarkID", MySqlDbType.Int32) { Value = entity.Trademark.ID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pCompanyID", MySqlDbType.Int32) { Value = entity.Company.ID, Direction = ParameterDirection.Input }
             });
 
             return parameters.ToArray();
