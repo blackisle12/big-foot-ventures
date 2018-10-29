@@ -67,6 +67,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new TrademarkMapper();
             }
+            else if (type == typeof(TrademarkOwner))
+            {
+                return new TrademarkOwnerMapper();
+            }
             else
             {
                 return null;

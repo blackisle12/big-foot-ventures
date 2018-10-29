@@ -2,6 +2,7 @@
 {
     public sealed class EmailResponse: BusinessBase
     {
+        #region "Properties"
         public string OwnerName { get; set; }
 
         public string Name { get; set; }
@@ -11,5 +12,7 @@
         public string Status { get; set; }
         public string Subject { get; set; }
         public string MessageDate { get; set; }
+
+        #endregion
     }
 }

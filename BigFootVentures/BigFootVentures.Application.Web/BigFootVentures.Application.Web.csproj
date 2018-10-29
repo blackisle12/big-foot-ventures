@@ -310,6 +310,8 @@
     <Content Include="Views\Home\EmailResponse.cshtml" />
     <Content Include="Views\Home\Trademarks.cshtml" />
     <Content Include="Views\Home\Trademark.cshtml" />
+    <Content Include="Views\Home\TrademarkOwner.cshtml" />
+    <Content Include="Views\Home\TrademarkOwners.cshtml" />
     <Content Include="Views\Home\SimilarTrademarks.cshtml" />
     <Content Include="Views\Home\SimilarTrademark.cshtml" />
   </ItemGroup>
