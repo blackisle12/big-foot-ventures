@@ -31,6 +31,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Office> _managementOfficeService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
+        private readonly IManagementService<SimilarTrademark> _managementSimilarTrademarkService = null;
         private readonly IManagementService<Trademark> _managementTrademarkService = null;
         private readonly IManagementService<TrademarkOwner> _managementTrademarkOwnerService = null;
 
@@ -50,6 +51,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<Office> managementOfficeService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
             IManagementService<Register> managementRegisterService,
+            IManagementService<SimilarTrademark> managementSimilarTrademarkService,
             IManagementService<Trademark> managementTrademarkService,
             IManagementService<TrademarkOwner> managementTrademarkOwnerService)
         {
@@ -65,6 +67,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementOfficeService = managementOfficeService;
             this._managementOfficeStatusService = managementOfficeStatusService;
             this._managementRegisterService = managementRegisterService;
+            this._managementSimilarTrademarkService = managementSimilarTrademarkService;
             this._managementTrademarkService = managementTrademarkService;
             this._managementTrademarkOwnerService = managementTrademarkOwnerService;
         }
@@ -2232,6 +2235,156 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Similar Trademark"
+
+        [Route("SimilarTrademarks/{rowCount?}/{page?}", Name = "SimilarTrademarks")]
+        public ActionResult SimilarTrademarks(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var similarTrademarks = this._managementSimilarTrademarkService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<SimilarTrademark>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = similarTrademarks
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("SimilarTrademark/{ID:int}", Name = "SimilarTrademarkView")]
+        public ActionResult SimilarTrademark(int ID)
+        {
+            var similarTrademark = this._managementSimilarTrademarkService.Get(ID);
+
+            similarTrademark.Trademark = this._managementTrademarkService.Get(similarTrademark.Trademark.ID);
+            similarTrademark.TrademarkSimilar = this._managementTrademarkService.Get(similarTrademark.TrademarkSimilar.ID);
+
+            var model = new VMModel<SimilarTrademark>
+            {
+                Record = similarTrademark,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("SimilarTrademark", model);
+        }
+
+        [Route("SimilarTrademark/New", Name = "SimilarTrademarkNew")]
+        public ActionResult SimilarTrademarkNew()
+        {
+            VMModel<SimilarTrademark> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<SimilarTrademark>();
+            }
+            else
+            {
+                model = new VMModel<SimilarTrademark>
+                {
+                    Record = new SimilarTrademark(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("SimilarTrademark", model);
+        }
+
+        [Route("SimilarTrademark/Edit/{ID:int}", Name = "SimilarTrademarkEdit")]
+        public ActionResult SimilarTrademarkEdit(int ID)
+        {
+            VMModel<SimilarTrademark> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<SimilarTrademark>();
+            }
+            else
+            {
+                var similarTrademark = this._managementSimilarTrademarkService.Get(ID);
+
+                similarTrademark.Trademark = this._managementTrademarkService.Get(similarTrademark.Trademark.ID);
+                similarTrademark.TrademarkSimilar = this._managementTrademarkService.Get(similarTrademark.TrademarkSimilar.ID);
+
+                model = new VMModel<SimilarTrademark>
+                {
+                    Record = similarTrademark,
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("SimilarTrademark", model);
+        }
+
+        [HttpPost]
+        [Route("SimilarTrademark", Name = "SimlarTrademarkPost")]
+        public ActionResult SimilarTrademark(VMModel<SimilarTrademark> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (SimilarTrademarkValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementSimilarTrademarkService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementSimilarTrademarkService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<SimilarTrademark>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("SimilarTrademark/Delete/{ID:int}", Name = "SimilarTrademarkDelete")]
+        public ActionResult SimilarTrademarkDelete(int ID)
+        {
+            try
+            {
+                this._managementSimilarTrademarkService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("SimilarTrademarks");
+        }
+
+        #endregion
+
         #region "Trademark"
 
         [Route("Trademarks/{rowCount?}/{page?}", Name = "Trademarks")]
@@ -2458,7 +2611,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "TrademarkOwner"
+        #region "Trademark Owner"
 
         [Route("TrademarkOwners/{rowCount?}/{page?}", Name = "TrademarkOwners")]
         public ActionResult TrademarkOwners(int rowCount = 10, int page = 1)

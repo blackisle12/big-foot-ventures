@@ -1,0 +1,174 @@
+﻿<link href="~/Content/Views/Home/SimilarTrademark.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Similar Trademark - " + (Model.Record.ID > 0 ? string.Empty : "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<SimilarTrademark>
+
+@using (Html.BeginForm("SimilarTrademark", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+    @Html.HiddenFor(m => m.Record.Trademark.ID)
+    @Html.HiddenFor(m => m.Record.TrademarkSimilar.ID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Similar Trademark
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Trademark Name</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.Trademark.Name, new { @class = "form-control required", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.Trademark.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Record.Trademark.Name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Owner</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control input-neutral", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-neutral">Comment</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.Comment, new { @class = "form-control input-neutral" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Trademark Similar Name</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.TrademarkSimilar.Name, new { @class = "form-control required", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.TrademarkSimilar.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Record.TrademarkSimilar.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-offset-6 control-label">Conflict</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.Conflict)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-offset-6 control-label">Create Opposition Check</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.CreateOppositionCheck)
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: System Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        System Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Class Summary TM</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.ClassSummaryTM, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Class Summary Similar TM</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.ClassSummarySimilarTM, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: System Information -->
+            <!-- START: Potential Opposition -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Potential Opposition
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Remarks</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Remarks, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Opposition Evaluation</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.OppositionEvaluation, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Generic.Evaluation>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Refiling Evaluation</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.RefilingEvaluation, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Generic.Evaluation>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Opposition Comment</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OppositionComment, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Refiling Comment</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.RefilingComment, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Potential Opposition -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Trademark), ChildIDContainer = "Trademark.ID", ChildNameContainer = "Trademark.Name" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Trademark), ChildIDContainer = "TrademarkSimilar.ID", ChildNameContainer = "TrademarkSimilar.Name" })
+
+    <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
+    <script src="~/Scripts/Views/Home/SimilarTrademark.js"></script>
+}

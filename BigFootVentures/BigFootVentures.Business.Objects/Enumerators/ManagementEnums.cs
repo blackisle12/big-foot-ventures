@@ -21,6 +21,18 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 [Description("No Language")]
                 NoLanguage
             }
+
+            public enum Evaluation
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Pass")]
+                Pass,
+
+                [Description("Fail")]
+                Fail
+            }
         }
 
         public static class Agreement
