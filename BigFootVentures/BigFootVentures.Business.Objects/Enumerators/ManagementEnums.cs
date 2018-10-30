@@ -995,6 +995,78 @@ namespace BigFootVentures.Business.Objects.Enumerators
             }
         }
 
+        public static class LegalCase
+        {
+            public enum TypeOfCase
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("C&D Letter")]
+                CDLetter,
+
+                [Description("Cancellation")]
+                Cancellation,
+
+                [Description("Cancellation - Appeal")]
+                CancellationAppeal,
+
+                [Description("External clients")]
+                ExternalClients,
+
+                [Description("Limitation")]
+                Limitation,
+
+                [Description("Negotiations")]
+                Negotiations,
+
+                [Description("Notice of threatened opposition - C&D Letter")]
+                Notice,
+
+                [Description("Opposition")]
+                Opposition,
+
+                [Description("Opposition / Negotiation")]
+                OppositionNegotiation,
+
+                [Description("Others")]
+                Others,
+
+                [Description("Potential Opposition")]
+                PotentialOpposition,
+
+                [Description("Provisional refusal")]
+                ProvisionalRefusal,
+
+                [Description("Recordal")]
+                Recordal,
+
+                [Description("Registration Order")]
+                RegistrationOrder,
+            }
+
+            public enum TypeOfCaseExternalClients
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Registration Order")]
+                RegistrationOrder,
+
+                [Description("Comprehensive Study")]
+                ComprehensiveStudy,
+
+                [Description("Opposition")]
+                Opposition,
+
+                [Description("Provisional refusal")]
+                ProvisionalRefusal,
+
+                [Description("Recordal")]
+                Recordal,
+            }
+        }
+
         public static class LoginInformation
         {
             public enum Country
