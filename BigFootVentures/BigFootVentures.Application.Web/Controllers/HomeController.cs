@@ -27,6 +27,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<EmailResponse> _managementEmailResponseService = null;
         private readonly IManagementService<Enquiry> _managementEnquiryService = null;
         private readonly IManagementService<Lead> _managementLeadService = null;
+        private readonly IManagementService<LegalCase> _managementLegalCaseService = null;
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
         private readonly IManagementService<Office> _managementOfficeService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
@@ -47,6 +48,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<EmailResponse> managementEmailResponseService,
             IManagementService<Enquiry> managementEnquiryService,
             IManagementService<Lead> managementLeadService,
+            IManagementService<LegalCase> managementLegalCaseService,
             IManagementService<LoginInformation> managementLoginInformationService,
             IManagementService<Office> managementOfficeService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
@@ -63,6 +65,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementEmailResponseService = managementEmailResponseService;
             this._managementEnquiryService = managementEnquiryService;
             this._managementLeadService = managementLeadService;
+            this._managementLegalCaseService = managementLegalCaseService;
             this._managementLoginInformationService = managementLoginInformationService;
             this._managementOfficeService = managementOfficeService;
             this._managementOfficeStatusService = managementOfficeStatusService;
@@ -1591,6 +1594,147 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region "Legal Case"
+
+        [Route("LegalCases/{rowCount?}/{page?}", Name = "LegalCases")]
+        public ActionResult LegalCases(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var legalCases = this._managementLegalCaseService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<LegalCase>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = legalCases
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("LegalCase/{ID:int}", Name = "LegalCaseView")]
+        public ActionResult LegalCase(int ID)
+        {
+            var legalCase = this._managementLegalCaseService.Get(ID);
+            var model = new VMModel<LegalCase>
+            {
+                Record = legalCase,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("LegalCase", model);
+        }
+
+        [Route("LegalCase/New", Name = "LegalCaseNew")]
+        public ActionResult LegalCaseNew()
+        {
+            VMModel<LegalCase> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<LegalCase>();
+            }
+            else
+            {
+                model = new VMModel<LegalCase>
+                {
+                    Record = new LegalCase(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("LegalCase", model);
+        }
+
+        [Route("LegalCase/Edit/{ID:int}", Name = "LegalCaseEdit")]
+        public ActionResult LegalCaseEdit(int ID)
+        {
+            VMModel<LegalCase> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<LegalCase>();
+            }
+            else
+            {
+                model = new VMModel<LegalCase>
+                {
+                    Record = this._managementLegalCaseService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("LegalCase", model);
+        }
+
+        [HttpPost]
+        [Route("LegalCase", Name = "LegalCasePost")]
+        public ActionResult TrademarkOwner(VMModel<LegalCase> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (LegalCaseValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementLegalCaseService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementLegalCaseService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<LegalCase>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("LegalCase/Delete/{ID:int}", Name = "LegalCaseDelete")]
+        public ActionResult LegalCaseDelete(int ID)
+        {
+            try
+            {
+                this._managementLegalCaseService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("LegalCases");
         }
 
         #endregion
