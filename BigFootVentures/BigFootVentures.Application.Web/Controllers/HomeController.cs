@@ -33,6 +33,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
         private readonly IManagementService<SimilarTrademark> _managementSimilarTrademarkService = null;
+        private readonly IManagementService<TMRepresentative> _managementTMRepresentativeService = null;
         private readonly IManagementService<Trademark> _managementTrademarkService = null;
         private readonly IManagementService<TrademarkOwner> _managementTrademarkOwnerService = null;
 
@@ -54,6 +55,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<OfficeStatus> managementOfficeStatusService,
             IManagementService<Register> managementRegisterService,
             IManagementService<SimilarTrademark> managementSimilarTrademarkService,
+            IManagementService<TMRepresentative> managementTMRepresentativeService,
             IManagementService<Trademark> managementTrademarkService,
             IManagementService<TrademarkOwner> managementTrademarkOwnerService)
         {
@@ -69,8 +71,9 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementLoginInformationService = managementLoginInformationService;
             this._managementOfficeService = managementOfficeService;
             this._managementOfficeStatusService = managementOfficeStatusService;
-            this._managementRegisterService = managementRegisterService;
+            this._managementRegisterService = managementRegisterService;            
             this._managementSimilarTrademarkService = managementSimilarTrademarkService;
+            this._managementTMRepresentativeService = managementTMRepresentativeService;
             this._managementTrademarkService = managementTrademarkService;
             this._managementTrademarkOwnerService = managementTrademarkOwnerService;
         }
@@ -2525,6 +2528,147 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return RedirectToAction("SimilarTrademarks");
+        }
+
+        #endregion
+
+        #region "TM Representative"
+
+        [Route("TMRepresentatives/{rowCount?}/{page?}", Name = "TMRepresentatives")]
+        public ActionResult TMRepresentatives(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var TMRepresentatives = this._managementTMRepresentativeService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<TMRepresentative>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = TMRepresentatives
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("TMRepresentative/{ID:int}", Name = "TMRepresentativeView")]
+        public ActionResult TMRepresentative(int ID)
+        {
+            var TMRepresentative = this._managementTMRepresentativeService.Get(ID);
+            var model = new VMModel<TMRepresentative>
+            {
+                Record = TMRepresentative,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("TMRepresentative", model);
+        }
+
+        [Route("TMRepresentative/New", Name = "TMRepresentativeNew")]
+        public ActionResult TMRepresentativeNew()
+        {
+            VMModel<TMRepresentative> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<TMRepresentative>();
+            }
+            else
+            {
+                model = new VMModel<TMRepresentative>
+                {
+                    Record = new TMRepresentative(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("TMRepresentative", model);
+        }
+
+        [Route("TMRepresentative/Edit/{ID:int}", Name = "TMRepresentativeEdit")]
+        public ActionResult TMRepresentativeEdit(int ID)
+        {
+            VMModel<TMRepresentative> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<TMRepresentative>();
+            }
+            else
+            {
+                model = new VMModel<TMRepresentative>
+                {
+                    Record = this._managementTMRepresentativeService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("TMRepresentative", model);
+        }
+
+        [HttpPost]
+        [Route("TMRepresentative", Name = "TMRepresentativePost")]
+        public ActionResult TMRepresentative(VMModel<TMRepresentative> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (TMRepresentativeValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementTMRepresentativeService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementTMRepresentativeService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<TMRepresentative>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("TMRepresentative/Delete/{ID:int}", Name = "TMRepresentativeDelete")]
+        public ActionResult TMRepresentativeDelete(int ID)
+        {
+            try
+            {
+                this._managementTMRepresentativeService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("TMRepresentatives");
         }
 
         #endregion
