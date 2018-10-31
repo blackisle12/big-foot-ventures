@@ -243,6 +243,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Views\Home\EmailResponse.js" />
+    <Content Include="Scripts\Views\Home\LegalCases.js" />
     <Content Include="Scripts\Views\Home\Trademark.js" />
     <Content Include="Scripts\Views\Home\Office.js" />
     <Content Include="Scripts\Views\Home\Brands.js" />
@@ -315,6 +316,8 @@
     <Content Include="Views\Home\TrademarkOwners.cshtml" />
     <Content Include="Views\Home\SimilarTrademarks.cshtml" />
     <Content Include="Views\Home\SimilarTrademark.cshtml" />
+    <Content Include="Views\Home\LegalCases.cshtml" />
+    <Content Include="Views\Home\LegalCase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,50 @@
+﻿<link href="~/Content/Views/Home/LegalCases.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Legal Cases";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<LegalCase>
+
+@using (Html.BeginForm("LegalCases", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-type-of-case">Type of Case</th>
+                        <th class="th-trademark-name">Trademark</th>
+                        <th class="th-trademark-number">Trademark Number</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var legalCase in Model.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("LegalCaseView", new { ID = legalCase.ID })" target="_blank">@legalCase.TypeOfCase</a></td>
+                                <td>@legalCase.Trademark.Name</td>
+                                <td>@legalCase.TrademarkNumber</td>                                
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/LegalCases.js"></script>
+}

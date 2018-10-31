@@ -1686,7 +1686,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         [HttpPost]
         [Route("LegalCase", Name = "LegalCasePost")]
-        public ActionResult TrademarkOwner(VMModel<LegalCase> model)
+        public ActionResult LegalCase(VMModel<LegalCase> model)
         {
             Func<int> postModel = () =>
             {

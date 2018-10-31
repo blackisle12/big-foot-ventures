@@ -128,7 +128,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pDefendantID", MySqlDbType.Int32) { Value = entity.Defendant?.ID, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPlaintiffRepresentativeID", MySqlDbType.Int32) { Value = entity.PlaintiffRepresentative?.ID, Direction = ParameterDirection.Input },
                 new MySqlParameter("pDefendantRepresentativeID", MySqlDbType.Int32) { Value = entity.DefendantRepresentative?.ID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pDeletionReqeust", entity.DeletionRequest ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pDeletionRequest", entity.DeletionRequest ? 1 : 0) { Direction = ParameterDirection.Input },
                 new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = entity.DeletionRequestReason, Direction = ParameterDirection.Input },
             });
 
