@@ -255,6 +255,7 @@
     <Content Include="Scripts\Views\Home\LoginInformations.js" />
     <Content Include="Scripts\Views\Home\OfficeStatuses.js" />
     <Content Include="Scripts\Views\Home\SimilarTrademarks.js" />
+    <Content Include="Scripts\Views\Home\TMRepresentatives.js" />
     <Content Include="Scripts\Views\Home\TrademarkOwners.js" />
     <Content Include="Scripts\Views\Home\Trademarks.js" />
     <Content Include="Scripts\Views\Home\Registers.js" />
@@ -318,6 +319,7 @@
     <Content Include="Views\Home\SimilarTrademark.cshtml" />
     <Content Include="Views\Home\LegalCases.cshtml" />
     <Content Include="Views\Home\LegalCase.cshtml" />
+    <Content Include="Views\Home\TMRepresentatives.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

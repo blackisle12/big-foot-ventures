@@ -49,6 +49,7 @@
                     <li class="@(Request.RawUrl.IndexOf("/Home/OfficeStatus", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("OfficeStatuses", "Home")">Office Status</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Register", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Registers", "Home")">Registers</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/SimilarTrademark", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("SimilarTrademarks", "Home")">Similar Trademarks</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/TMRepresentative", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TMRepresentatives", "Home")">TM Representative</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Trademark", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")"><a href="@Url.Action("Trademarks", "Home")">Trademarks</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TrademarkOwners", "Home")">Trademark Owners</a></li>
                 </ul>

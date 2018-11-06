@@ -21,6 +21,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         private readonly IManagementService<AgreementT> _managementAgreementService = null;
         private readonly IManagementService<Brand> _managementBrandService = null;
+        private readonly IManagementService<Cancellation> _managementCancellationService = null;
         private readonly IManagementService<Company> _managementCompanyService = null;
         private readonly IManagementService<Contact> _managementContactService = null;
         private readonly IManagementService<DomainN> _managementDomainService = null;
@@ -450,6 +451,9 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
+        #region "Cancellation"
         #endregion
 
         #region "Company"

@@ -1,16 +1,16 @@
-﻿<link href="~/Content/Views/Home/TrademarkOwners.css" rel="stylesheet" />
+﻿<link href="~/Content/Views/Home/TMRepresentatives.css" rel="stylesheet" />
 
 @using BigFootVentures.Business.Objects.Management
 @using BigFootVentures.Application.Web.Models.ViewModels
 
 @{
-    ViewBag.Title = "Trademark Owners";
+    ViewBag.Title = "TM Representatives";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model VMPageResult<TrademarkOwner>
+@model VMPageResult<TMRepresentative>
 
-@using (Html.BeginForm("TrademarkOwners", "Home", FormMethod.Get))
+@using (Html.BeginForm("TMRepresentatives", "Home", FormMethod.Get))
 {
     @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
 
@@ -22,17 +22,17 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-trademark-name">Trademark</th>
+                        <th class="th-trademark">Trademark</th>
                         <th class="th-company-display-name">Company</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{
-                        foreach (var trademarkOwner in Model.Records)
+                        foreach (var TMRepresentative in Model.Records)
                         {
                     <tr>
-                        <td><a href="@Url.RouteUrl("TrademarkOwnerView", new { ID = trademarkOwner.ID })" target="_blank">@trademarkOwner.Trademark.Name</a></td>
-                        <td>@trademarkOwner.Company.DisplayName</td>
+                        <td><a href="@Url.RouteUrl("TMRepresentativeView", new { ID = TMRepresentative.ID })" target="_blank">@TMRepresentative.Trademark.Name</a></td>
+                        <td>@TMRepresentative.Company.DisplayName</td>
                     </tr>
                         }
                     }
@@ -44,5 +44,5 @@
         </div>
     </div>
 
-    <script src="~/Scripts/Views/Home/TrademarkOwners.js"></script>
+    <script src="~/Scripts/Views/Home/TMRepresentatives.js"></script>
 }

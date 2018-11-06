@@ -19,6 +19,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new BrandMapper();
             }
+            else if (type == typeof(Cancellation))
+            {
+                return new CancellationMapper();
+            }
             else if (type == typeof(Company))
             {
                 return new CompanyMapper();
