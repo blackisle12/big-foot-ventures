@@ -44,6 +44,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         public HomeController(IManagementService<AgreementT> managementAgreementService,
             IManagementService<Brand> managementBrandService,
+            IManagementService<Cancellation> managementCancellationService,
             IManagementService<Company> managementCompanyService,
             IManagementService<Contact> managementContactService,
             IManagementService<DomainN> managementDomainService,
@@ -62,6 +63,7 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
+            this._managementCancellationService = managementCancellationService;
             this._managementCompanyService = managementCompanyService;
             this._managementContactService = managementContactService;
             this._managementDomainService = managementDomainService;
@@ -454,6 +456,144 @@ namespace BigFootVentures.Application.Web.Controllers
         #endregion
 
         #region "Cancellation"
+
+        [Route("Cancellations/{rowCount?}/{page?}", Name = "Cancellations")]
+        public ActionResult Cancellations(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var cancellations = this._managementCancellationService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Cancellation>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = cancellations
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Cancellation/{ID:int}", Name = "CancellationView")]
+        public ActionResult Cancellation(int ID)
+        {
+            var cancellation = this._managementCancellationService.Get(ID);
+            var model = new VMModel<Cancellation>
+            {
+                Record = cancellation,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Cancellation", model);
+        }
+
+        [Route("Cancellation/New", Name = "CancellationNew")]
+        public ActionResult CancellationNew()
+        {
+            VMModel<Cancellation> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Cancellations>();
+            }
+            else
+            {
+                model = new VMModel<Cancellation>
+                {
+                    Record = new Cancellation(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Cancellation", model);
+        }
+
+        [Route("Cancellation/Edit/{ID:int}", Name = "CancellationEdit")]
+        public ActionResult CancellationEdit(int ID)
+        {
+            VMModel<Cancellation> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Cancellation>();
+            }
+            else
+            {
+                model = new VMModel<Cancellation>
+                {
+                    Record = this._managementCancellationService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Cancellation", model);
+        }
+
+        [HttpPost]
+        [Route("Cancellation", Name = "CancellationPost")]
+        public ActionResult Cancellation(VMModel<Cancellation> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (CancellationValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementCancellationService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementCancellationService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Cancellation>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Cancellation/Delete/{ID:int}", Name = "CancellationDelete")]
+        public ActionResult CancellationDelete(int ID)
+        {
+            try
+            {
+                this._managementCancellationService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Cancellations");
+        }
+
         #endregion
 
         #region "Company"
@@ -2828,6 +2968,15 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
+                if (model.Record.ARIPODesignatedStatesSelected != null)
+                    model.Record.ARIPODesignatedState = string.Join(";", model.Record.ARIPODesignatedStatesSelected);
+
+                if (model.Record.WIPOBasicApplicationISOsSelected != null)
+                    model.Record.WIPOBasicApplicationISO = string.Join(";", model.Record.WIPOBasicApplicationISOsSelected);
+
+                if (model.Record.WIPODesignatedProtectionsSelected != null)
+                    model.Record.WIPODesignatedProtection = string.Join(";", model.Record.WIPODesignatedProtectionsSelected);
+
                 var validationResult = new Dictionary<string, string>();
 
                 if (TrademarkValidator.IsValid(model.Record, out validationResult))
