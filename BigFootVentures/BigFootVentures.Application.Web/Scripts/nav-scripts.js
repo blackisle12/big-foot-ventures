@@ -7,7 +7,7 @@
     });
 
     $('[name="overlay"]').on('click', function () {
-        $('#sidebar').toggleClass('active');
+        $('[name="sidebar"]').toggleClass('active');
         $('[name="overlay"]').toggleClass('active');
     });
 }); 
