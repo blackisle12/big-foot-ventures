@@ -506,7 +506,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
             if (TempData.ContainsKey("ModelPosted"))
             {
-                model = this.GetValidationErrors<Cancellations>();
+                model = this.GetValidationErrors<Cancellation>();
             }
             else
             {
