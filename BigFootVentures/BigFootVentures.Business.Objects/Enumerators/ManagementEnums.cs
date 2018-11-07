@@ -146,6 +146,147 @@ namespace BigFootVentures.Business.Objects.Enumerators
             }
         }
 
+        public static class Cancellation
+        {
+            public enum Status
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Open")]
+                Open,
+
+                [Description("Suspended")]
+                Suspended,
+
+                [Description("Closed")]
+                Closed
+            }
+
+            public enum SubmissionMethod
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Tokyo - Regular Mail")]
+                TokyoRegularMail,
+
+                [Description("Online")]
+                Online,
+
+                [Description("HK - Regular Mail")]
+                HKRegularMail,
+
+                [Description("Singapore - Regular Mail")]
+                SingaporeRegularMail,
+
+                [Description("Cebu - Regular Mail")]
+                CebuRegularMail
+            }
+
+            public enum ResearchPerformance
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Good - Owner cannot show use")]
+                Good,
+
+                [Description("Poor - Owner can show use")]
+                Poor
+            }
+
+            public enum AcquisitionLetterSentOrigin
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Antwerp")]
+                Antwerp,
+
+                [Description("HK")]
+                HK,
+
+                [Description("New York")]
+                NewYork,
+
+                [Description("Tokyo")]
+                Tokyo,
+
+                [Description("Cebu")]
+                Cebu
+            }
+
+            public enum AcquisitionLetterSentMethod
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Regular")]
+                Regular,
+
+                [Description("Registered")]
+                Registered,
+
+                [Description("Courier")]
+                Courier
+            }
+
+            public enum OwnerResponseAcquisitionLetter
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Surrender")]
+                Surrender,
+
+                [Description("Not Surrender")]
+                NotSurrender,
+
+                [Description("Negotiation")]
+                Negotiation,
+
+                [Description("None")]
+                None
+            }
+
+            public enum Outcome
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Unsuccessful")]
+                Unsuccessful,
+
+                [Description("Successful")]
+                Successful,
+
+                [Description("Withdrawn by us")]
+                WithdrawnByUs,
+
+                [Description("Partially revoked")]
+                PartiallyRevoked,
+
+                [Description("Revoked")]
+                Revoked,
+
+                [Description("Invalid - TM expired")]
+                InvalidTMExpired
+            }
+
+            public enum UDRPStrategy
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Proceed")]
+                Proceed,
+
+                [Description("Dead")]
+                Dead
+            }
+        }
+
         public static class Company
         {
             public enum AccountRecordType

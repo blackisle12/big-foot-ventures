@@ -37,6 +37,7 @@
                     <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Agreement", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Agreements", "Home")">Agreements</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Brand", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Brands", "Home")">Brands</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Cancellation", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Cancellations", "Home")">Cancellation</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Compan", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Companies", "Home")">Companies</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Contact", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Contacts", "Home")">Contacts</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Domain", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Domains", "Home")">Domains</a></li>

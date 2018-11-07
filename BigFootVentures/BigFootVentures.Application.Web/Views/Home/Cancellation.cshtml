@@ -1,0 +1,306 @@
+﻿<link href="~/Content/Views/Home/Cancellation.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Cancellation - " + (Model.Record.ReferenceInternal ?? "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Cancellation>
+
+@using (Html.BeginForm("Cancellation", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+    @Html.HiddenFor(m => m.Record.Trademark.ID)
+    @Html.HiddenFor(m => m.Record.Applicant.ID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Cancellation <strong>@Model.Record.ReferenceInternal</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Reference Internal</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.ReferenceInternal, new { @class = "form-control required" })
+                                @Html.ValidationMessageFor(m => m.Record.ReferenceInternal, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Cancellation Reference External</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.ReferenceExternal, new { @class = "form-control input-neutral" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Sent Origin</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.SentOrigin, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Internal Case Number</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.InternalCaseNumber, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Receipt Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.ReceiptDate, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Submission Method</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.SubmissionMethod, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.SubmissionMethod>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Payment Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.PaymentDate, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Applicant</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.Applicant.DisplayName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.Applicant.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Filing Cost</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.FilingCost, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Payment Reference</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.PaymentReference, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Trademark</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.Trademark.Name, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.Trademark.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Research Performance</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.ResearchPerformance, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.ResearchPerformance>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Status</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.Status>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Comments</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.Comments, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-offset-6 control-label">Owner</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: Relevant Dates -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Relevant Dates
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Admissible Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.AdmissibleDate, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Owner Response Deadline Ext</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerResponseDeadlineExt, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Owner Response Deadline</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerResponseDeadline, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Observation Deadline Ext</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.ObservationDeadlineExt, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Observation Deadline</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.ObservationDeadline, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Relevant Dates -->
+            <!-- START: Acquisition -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Acquisition
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Acquisition Letter Sent Origin</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.AcquisitionLetterSentOrigin, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.AcquisitionLetterSentOrigin>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Trademark Assignment Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.TrademarkAssignmentDate, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Acquisition Letter Sent Method</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.AcquisitionLetterSentMethod, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.AcquisitionLetterSentMethod>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Trademark Acquisition Cost</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.TrademarkAcquisitionCost, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Acquisition Letter Date Sent</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.AcquisitionLetterDateSent, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">UDRP Strategy</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.UDRPStrategy, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.UDRPStrategy>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Owner Response Acquisition Letter</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.OwnerResponseAcquisitionLetter, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.OwnerResponseAcquisitionLetter>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">UDRP Strategy Comment</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.UDRPStrategyComment, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Domain Enquiry</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.DomainEnquiry)
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Negotiation Comments</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.NegotiationComments, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Domain Enquiry Notes</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.DomainEnquiryNotes, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Withdrawal Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.WithdrawalDate, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Outcome</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Outcome, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.Outcome>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Expense Claim Received Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.ExpenseClaimReceivedDate, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Outcome Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OutcomeDate, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Cancellation Cost Refund</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CostRefund, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cancellation Withdrawal Reason</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.WithdrawalReason, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Acquisition -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Trademark), ChildIDContainer = "Trademark.ID", ChildNameContainer = "Trademark.Name" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "Applicant.ID", ChildNameContainer = "Applicant.DisplayName" })
+
+    <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
+    <script src="~/Scripts/Views/Home/Cancellation.js"></script>
+}
+

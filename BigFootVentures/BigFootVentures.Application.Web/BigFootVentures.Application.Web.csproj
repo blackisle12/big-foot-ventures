@@ -209,6 +209,7 @@
     <Content Include="Content\Views\Home\LoginInformations.css" />
     <Content Include="Content\Views\Home\Enquiries.css" />
     <Content Include="Content\Views\Home\SimilarTrademarks.css" />
+    <Content Include="Content\Views\Home\Cancellations.css" />
     <Content Include="Content\Views\Home\Trademarks.css" />
     <Content Include="Content\Views\Home\Registers.css" />
     <Content Include="Content\Views\Home\Companies.css" />
@@ -257,6 +258,7 @@
     <Content Include="Scripts\Views\Home\SimilarTrademarks.js" />
     <Content Include="Scripts\Views\Home\TMRepresentatives.js" />
     <Content Include="Scripts\Views\Home\TrademarkOwners.js" />
+    <Content Include="Scripts\Views\Home\Cancellations.js" />
     <Content Include="Scripts\Views\Home\Trademarks.js" />
     <Content Include="Scripts\Views\Home\Registers.js" />
     <Content Include="Scripts\Views\Home\Companies.js" />
@@ -320,6 +322,8 @@
     <Content Include="Views\Home\LegalCases.cshtml" />
     <Content Include="Views\Home\LegalCase.cshtml" />
     <Content Include="Views\Home\TMRepresentatives.cshtml" />
+    <Content Include="Views\Home\Cancellations.cshtml" />
+    <Content Include="Views\Home\Cancellation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
