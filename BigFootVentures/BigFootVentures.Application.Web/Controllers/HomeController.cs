@@ -32,6 +32,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
         private readonly IManagementService<Office> _managementOfficeService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
+        private readonly IManagementService<PreFilingSimilarityResearch> _managementPreFilingSimilarityResearchService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
         private readonly IManagementService<SimilarTrademark> _managementSimilarTrademarkService = null;
         private readonly IManagementService<TMRepresentative> _managementTMRepresentativeService = null;
@@ -55,6 +56,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<LoginInformation> managementLoginInformationService,
             IManagementService<Office> managementOfficeService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
+            IManagementService<PreFilingSimilarityResearch> managementPreFilingSimilarityResearchService,
             IManagementService<Register> managementRegisterService,
             IManagementService<SimilarTrademark> managementSimilarTrademarkService,
             IManagementService<TMRepresentative> managementTMRepresentativeService,
@@ -74,6 +76,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementLoginInformationService = managementLoginInformationService;
             this._managementOfficeService = managementOfficeService;
             this._managementOfficeStatusService = managementOfficeStatusService;
+            this._managementPreFilingSimilarityResearchService = managementPreFilingSimilarityResearchService;
             this._managementRegisterService = managementRegisterService;            
             this._managementSimilarTrademarkService = managementSimilarTrademarkService;
             this._managementTMRepresentativeService = managementTMRepresentativeService;
