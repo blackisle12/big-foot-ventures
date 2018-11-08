@@ -201,6 +201,7 @@
     <Content Include="Content\images\jquery-te.png" />
     <Content Include="Content\images\loader.gif" />
     <Content Include="Content\jquery-te-1.4.0.css" />
+    <Content Include="Content\nav-css.css" />
     <Content Include="Content\Views\Home\Office.css" />
     <Content Include="Content\Views\Home\Brand.css" />
     <Content Include="Content\Views\Home\Agreements.css" />
@@ -243,6 +244,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\nav-scripts.js" />
     <Content Include="Scripts\Views\Home\EmailResponse.js" />
     <Content Include="Scripts\Views\Home\LegalCases.js" />
     <Content Include="Scripts\Views\Home\Trademark.js" />

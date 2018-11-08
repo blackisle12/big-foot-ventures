@@ -1,0 +1,256 @@
+﻿/*
+    DEMO STYLE
+*/
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x:hidden;
+}
+
+.side-nav::-webkit-scrollbar {
+    width: 1em;
+}
+
+.side-nav::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.side-nav::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #24292e;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+.side-nav {
+    z-index:9999;
+}
+.side-nav {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #24292e;
+    color: #fff;
+    transition: all 0.3s;
+    overflow-y: auto;
+}
+
+.side-nav.active {
+    margin-left: -250px;
+}
+
+.side-nav .sidebar-header {
+    padding: 20px;
+    background: #24292e;
+}
+
+.side-nav ul.components {
+    border-bottom: 1px solid #47748b;
+}
+
+.side-nav ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+.side-nav ul li a {
+    padding: 10px;
+    font-size: 9pt;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.side-nav ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+.side-nav ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
+.close-nav {
+    color:#ffffff;
+}
+
+.close-nav:hover {
+    color: #ffffff;
+    cursor:pointer;
+}
+
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 998;
+    transition: all 0.5s ease-in-out;
+}
+
+.side-nav-heading {
+    font-size: 18px;
+    color:#ffffff;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}
+
+a[aria-expanded="true"]::before {
+    content: '\e260';
+}
+
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #7386D5;
+}
+
+a.article, a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
+@media (max-width: 768px) {
+    .side-nav {
+        margin-left: -250px;
+    }
+
+    .side-nav.active {
+        margin-left: 0;
+    }
+
+    .side-navCollapse span {
+        display: none;
+    }
+}
+
+.toggle-div {
+    margin-left: 30px;
+}
+
+.toggle-div .btn {
+    font-size: 30px;
+}
+
+.main-nav-toggle {
+    margin-top: 8px;
+    margin-right: 5px;
+    background-color: #24292e;
+    color: #ffffff;
+}
+
+.main-nav-toggle:hover {
+    color: #ffffff;
+}
+
+.main-nav-toggle:visited {
+    color: #ffffff;
+}
+
+/*Main Navbar styles*/
+
+.navbar {
+    z-index:2;
+}
+
+.navbar-default {
+    border-radius: 0px;
+    box-shadow: 5px 5px 5px #666;
+    -moz-box-shadow: 5px 5px 5px #666;
+    -webkit-box-shadow: 1px 1px 1px #666;
+    border-color: transparent;
+    background-color: #24292e;
+}
+
+.navbar-default .navbar-brand {
+    color: #ffffffbf;
+}
+
+    .navbar-default .navbar-brand:hover {
+        color: #ffffff;
+    }
+
+.navbar-default .navbar-nav > li > a {
+    color: #ffffffbf;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:visited {
+    color: #ffffff;
+}
+
+.navbar-header {
+    border-right: 1px solid #99999966;
+    margin-right: 10px !important;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    background-color: #24292e;
+    color: #ffffff;
+    border-bottom: 5px solid #329FDA;
+}
