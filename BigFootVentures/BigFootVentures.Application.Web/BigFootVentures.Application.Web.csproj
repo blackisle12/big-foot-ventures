@@ -259,6 +259,7 @@
     <Content Include="Scripts\Views\Home\OfficeStatuses.js" />
     <Content Include="Scripts\Views\Home\SimilarTrademarks.js" />
     <Content Include="Scripts\Views\Home\TMRepresentatives.js" />
+    <Content Include="Scripts\Views\Home\PreFilingSimilarityResearchs.js" />
     <Content Include="Scripts\Views\Home\TrademarkOwners.js" />
     <Content Include="Scripts\Views\Home\Cancellations.js" />
     <Content Include="Scripts\Views\Home\Trademarks.js" />
@@ -326,6 +327,7 @@
     <Content Include="Views\Home\TMRepresentatives.cshtml" />
     <Content Include="Views\Home\Cancellations.cshtml" />
     <Content Include="Views\Home\Cancellation.cshtml" />
+    <Content Include="Views\Home\PreFilingSimilarityResearchs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

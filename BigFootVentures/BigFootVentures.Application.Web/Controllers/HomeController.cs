@@ -2362,6 +2362,150 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Pre-Filing Similarity Research"
+
+        [Route("PreFilingSimilarityResearchs/{rowCount?}/{page?}", Name = "PreFilingSimilarityResearchs")]
+        public ActionResult PreFilingSimilarityResearchs(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var preFilingSimilarityResearchs = this._managementPreFilingSimilarityResearchService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<PreFilingSimilarityResearch>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = preFilingSimilarityResearchs
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("PreFilingSimilarityResearch/{ID:int}", Name = "PreFilingSimilarityResearchView")]
+        public ActionResult PreFilingSimilarityResearch(int ID)
+        {
+            var preFilingSimilarityResearch = this._managementPreFilingSimilarityResearchService.Get(ID);
+          
+            var model = new VMModel<PreFilingSimilarityResearch>
+            {
+                Record = preFilingSimilarityResearch,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("PreFilingSimilarityResearch", model);
+        }
+
+        [Route("PreFilingSimilarityResearch/New", Name = "PreFilingSimilarityResearchNew")]
+        public ActionResult PreFilingSimilarityResearchNew()
+        {
+            VMModel<PreFilingSimilarityResearch> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<PreFilingSimilarityResearch>();
+            }
+            else
+            {
+                model = new VMModel<PreFilingSimilarityResearch>
+                {
+                    Record = new PreFilingSimilarityResearch(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("PreFilingSimilarityResearch", model);
+        }
+
+        [Route("PreFilingSimilarityResearch/Edit/{ID:int}", Name = "PreFilingSimilarityResearchEdit")]
+        public ActionResult PreFilingSimilarityResearchEdit(int ID)
+        {
+            VMModel<PreFilingSimilarityResearch> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<PreFilingSimilarityResearch>();
+            }
+            else
+            {
+                var preFilingSimilarityResearch = this._managementPreFilingSimilarityResearchService.Get(ID);
+               
+                model = new VMModel<PreFilingSimilarityResearch>
+                {
+                    Record = preFilingSimilarityResearch,
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("PreFilingSimilarityResearch", model);
+        }
+
+        [HttpPost]
+        [Route("PreFilingSimilarityResearch", Name = "PreFilingSimilarityResearchPost")]
+        public ActionResult PreFilingSimilarityResearch(VMModel<PreFilingSimilarityResearch> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (PreFilingSimilarityResearchValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementPreFilingSimilarityResearchService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementPreFilingSimilarityResearchService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<PreFilingSimilarityResearch>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("PreFilingSimilarityResearch/Delete/{ID:int}", Name = "PreFilingSimilarityResearchDelete")]
+        public ActionResult PreFilingSimilarityResearchDelete(int ID)
+        {
+            try
+            {
+                this._managementPreFilingSimilarityResearchService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("PreFilingSimilarityResearchs");
+        }
+
+        #endregion
+
         #region "Register"
 
         [Route("Registers/{rowCount?}/{page?}", Name = "Registers")]
