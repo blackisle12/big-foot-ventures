@@ -202,6 +202,7 @@
     <Content Include="Content\images\loader.gif" />
     <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\nav-css.css" />
+    <Content Include="Content\Views\Home\login.css" />
     <Content Include="Content\Views\Home\Office.css" />
     <Content Include="Content\Views\Home\Brand.css" />
     <Content Include="Content\Views\Home\Agreements.css" />
@@ -328,6 +329,7 @@
     <Content Include="Views\Home\Cancellations.cshtml" />
     <Content Include="Views\Home\Cancellation.cshtml" />
     <Content Include="Views\Home\PreFilingSimilarityResearchs.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

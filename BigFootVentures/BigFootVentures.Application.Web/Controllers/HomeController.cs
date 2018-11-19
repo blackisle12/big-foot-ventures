@@ -2030,6 +2030,16 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Login"
+
+        [Route("login")]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        #endregion
+
         #region "Office"
 
         [Route("Offices/{rowCount?}/{page?}", Name = "Offices")]
