@@ -38,6 +38,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<TMRepresentative> _managementTMRepresentativeService = null;
         private readonly IManagementService<Trademark> _managementTrademarkService = null;
         private readonly IManagementService<TrademarkOwner> _managementTrademarkOwnerService = null;
+        private readonly IManagementService<UserAccount> _managementUserAccountService = null;
 
         #endregion
 
@@ -61,7 +62,8 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<SimilarTrademark> managementSimilarTrademarkService,
             IManagementService<TMRepresentative> managementTMRepresentativeService,
             IManagementService<Trademark> managementTrademarkService,
-            IManagementService<TrademarkOwner> managementTrademarkOwnerService)
+            IManagementService<TrademarkOwner> managementTrademarkOwnerService,
+            IManagementService<UserAccount> managementUserAccountService)
         {
             this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
@@ -82,13 +84,13 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementTMRepresentativeService = managementTMRepresentativeService;
             this._managementTrademarkService = managementTrademarkService;
             this._managementTrademarkOwnerService = managementTrademarkOwnerService;
+            this._managementUserAccountService = managementUserAccountService;
         }
 
         #endregion
 
         #region "Default"
-
-        [Route("~/")]
+        
         [Route("")]
         [Route("Index")]
         public ActionResult Index()
@@ -2030,16 +2032,6 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Login"
-
-        [Route("login")]
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        #endregion
-
         #region "Office"
 
         [Route("Offices/{rowCount?}/{page?}", Name = "Offices")]
@@ -3346,6 +3338,129 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return RedirectToAction("TrademarkOwners");
+        }
+
+        #endregion
+
+        #region "User Account"
+
+        [Route("UserAccounts/{rowCount?}/{page?}", Name = "UserAccounts")]
+        public ActionResult UserAccounts(int rowCount = 10, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var userAccounts = this._managementUserAccountService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<UserAccount>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = userAccounts
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("UserAccount/{ID:int}", Name = "UserAccountView")]
+        public ActionResult UserAccount(int ID)
+        {
+            var userAccount = this._managementUserAccountService.Get(ID);
+            var model = new VMModel<UserAccount>
+            {
+                Record = userAccount,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("UserAccount", model);
+        }
+
+        [Route("UserAccount/New", Name = "UserAccountNew")]
+        public ActionResult UserAccountNew()
+        {
+            VMModel<UserAccount> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<UserAccount>();
+            }
+            else
+            {
+                model = new VMModel<UserAccount>
+                {
+                    Record = new UserAccount(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("UserAccount", model);
+        }
+
+        [Route("UserAccount/Edit/{ID:int}", Name = "UserAccountEdit")]
+        public ActionResult UserAccountEdit(int ID)
+        {
+            VMModel<UserAccount> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<UserAccount>();
+            }
+            else
+            {
+                model = new VMModel<UserAccount>
+                {
+                    Record = this._managementUserAccountService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("UserAccount", model);
+        }
+
+        [HttpPost]
+        [Route("UserAccount", Name = "UserAccountPost")]
+        public ActionResult UserAccount(VMModel<UserAccount> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (UserAccountValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementUserAccountService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementUserAccountService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<UserAccount>(model, postModel);
         }
 
         #endregion
