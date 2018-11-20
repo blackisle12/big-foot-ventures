@@ -13,9 +13,11 @@ namespace BigFootVentures.Business.DataAccess
     {
         #region "Factory Methods"
 
-        ICollection<TEntity> Get(int startIndex, int rowCount, out int total);
+        ICollection<TEntity> Get(int startIndex, int rowCount, out int total);       
 
         TEntity Get(int ID);
+
+        ICollection<TEntity> GetForEmailNotification(int week);
 
         ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
 
@@ -38,6 +40,7 @@ namespace BigFootVentures.Business.DataAccess
 
         private readonly MySqlConnection _connection = null;
         private readonly IMapper _mapper = null;
+        private readonly IEmailNotificationMapper _mapperEmailNotification = null;
         private readonly string _entityName = null;
 
         #endregion
@@ -47,7 +50,14 @@ namespace BigFootVentures.Business.DataAccess
         public Repository(string connectionString, IMapper mapper)
         {
             this._connection = new MySqlConnection(connectionString);
-            this._mapper = mapper;
+            this._mapper = mapper;            
+            this._entityName = typeof(TEntity).Name;
+        }
+
+        public Repository(string connectionString, IEmailNotificationMapper mapperEmailNotification)
+        {
+            this._connection = new MySqlConnection(connectionString);
+            this._mapperEmailNotification = mapperEmailNotification;
             this._entityName = typeof(TEntity).Name;
         }
 
@@ -117,6 +127,41 @@ namespace BigFootVentures.Business.DataAccess
                 }
 
                 return entity;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public ICollection<TEntity> GetForEmailNotification(int week)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                var entities = new List<TEntity>();
+
+                using (var command = new MySqlCommand($"{this._entityName}_GetForEmailNotification", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("week", MySqlDbType.Int32) { Value = week, Direction = ParameterDirection.Input });
+
+                    var dataReader = command.ExecuteReader();
+
+                    foreach (var entity in this._mapperEmailNotification.ParseData(dataReader))
+                    {
+                        entities.Add((TEntity)entity);
+                    }
+
+                    dataReader.Close();
+                }
+
+                return entities;
             }
             catch
             {
