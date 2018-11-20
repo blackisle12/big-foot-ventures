@@ -1,6 +1,4 @@
-﻿/*
-    DEMO STYLE
-*/
+﻿
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
@@ -216,7 +214,7 @@ a.article, a.article:hover {
 /*Main Navbar styles*/
 
 .navbar {
-    z-index:2;
+    z-index:999;
 }
 
 .navbar-default {
