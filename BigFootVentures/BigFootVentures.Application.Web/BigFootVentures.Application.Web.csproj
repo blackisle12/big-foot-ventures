@@ -331,6 +331,8 @@
     <Content Include="Views\Home\Cancellation.cshtml" />
     <Content Include="Views\Home\PreFilingSimilarityResearchs.cshtml" />
     <Content Include="Views\Public\Index.cshtml" />
+    <Content Include="Views\Home\UserAccount.cshtml" />
+    <Content Include="Views\Home\UserAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
