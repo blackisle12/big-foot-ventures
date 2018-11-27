@@ -252,3 +252,17 @@ a.article, a.article:hover {
     color: #ffffff;
     border-bottom: 5px solid #329FDA;
 }
+
+.logout {
+    float: right;
+    color: #ffffff;
+    margin: 15px 15px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-right: 20px
+}
+
+.logout:hover {
+    color: #ffffff;
+    text-decoration: none;
+}

@@ -36,9 +36,12 @@
                 <button name="nav-toggle" type="button" class="btn main-nav-toggle"><i class="fa fa-bars"></i></button>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
-                </ul>
+                <div class="nav navbar-nav">
+                    <ul class="nav navbar-nav">
+                        <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    </ul>
+                </div>
+                <p><a class="logout">Logout <i class="fa fa-sign-out"></i></a></p>
             </div>
         </div>
     </nav>
@@ -72,6 +75,7 @@
                 <li class="@(Request.RawUrl.IndexOf("/Home/Trademark", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")"><a href="@Url.Action("Trademarks", "Home")">Trademarks</a></li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TrademarkOwners", "Home")">Trademark Owners</a></li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/UserAccounts", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("UserAccounts", "Home")">User Accounts</a></li>
+                <li><a>Logout <i class="fa fa-sign-out"></i></a></li>
             </ul>
         </nav>
         <div class="body-content">
