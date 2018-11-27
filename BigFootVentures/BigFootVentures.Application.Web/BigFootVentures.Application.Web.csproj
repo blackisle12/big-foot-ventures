@@ -181,6 +181,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Extensions\EnumExtensions.cs" />
+    <Compile Include="Models\Security\PasswordEncryption.cs" />
+    <Compile Include="Models\Security\Providers\CustomMembershipProvider.cs" />
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
     <Compile Include="Models\Utilities\RouteUtils.cs" />
@@ -249,6 +251,7 @@
     <Content Include="Scripts\nav-scripts.js" />
     <Content Include="Scripts\Views\Home\EmailResponse.js" />
     <Content Include="Scripts\Views\Home\LegalCases.js" />
+    <Content Include="Scripts\Views\Home\UserAccount.js" />
     <Content Include="Scripts\Views\Home\Trademark.js" />
     <Content Include="Scripts\Views\Home\Office.js" />
     <Content Include="Scripts\Views\Home\Brands.js" />
@@ -264,6 +267,7 @@
     <Content Include="Scripts\Views\Home\PreFilingSimilarityResearchs.js" />
     <Content Include="Scripts\Views\Home\TrademarkOwners.js" />
     <Content Include="Scripts\Views\Home\Cancellations.js" />
+    <Content Include="Scripts\Views\Home\UserAccounts.js" />
     <Content Include="Scripts\Views\Home\Trademarks.js" />
     <Content Include="Scripts\Views\Home\Registers.js" />
     <Content Include="Scripts\Views\Home\Companies.js" />

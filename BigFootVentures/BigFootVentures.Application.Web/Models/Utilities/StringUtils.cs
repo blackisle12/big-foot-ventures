@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 
@@ -20,6 +22,28 @@ namespace BigFootVentures.Application.Web.Models.Utilities
             countries.AddRange(query.OrderBy(i => i).ToList());
 
             return countries;
+        }
+
+        public static string GenerateRandomString()
+        {
+            try
+            {
+                var length = Convert.ToInt32(ConfigurationManager.AppSettings["PasswordDefaultLength"]);
+                var result = new char[length];
+                var random = new Random();
+                var allowedCharacters = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789!@$?_";
+
+                for (int i = 0; i < length; i++)
+                {
+                    result[i] = allowedCharacters[random.Next(0, allowedCharacters.Length)];
+                }
+
+                return new string(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion

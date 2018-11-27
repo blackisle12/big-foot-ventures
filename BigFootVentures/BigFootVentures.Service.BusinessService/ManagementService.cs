@@ -17,6 +17,10 @@ namespace BigFootVentures.Service.BusinessService
 
         ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
 
+        ICollection<TModel> GetByEmailAddress(string emailAddress);
+
+        ICollection<TModel> GetByUsername(string username);
+
         #endregion
 
         #region "Persistence"
@@ -72,6 +76,22 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.GetAutocomplete(keyword);
+            }
+        }
+
+        public ICollection<TModel> GetByEmailAddress(string emailAddress)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.GetByEmailAddress(emailAddress);
+            }
+        }
+
+        public ICollection<TModel> GetByUsername(string username)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.GetByUsername(username);
             }
         }
 

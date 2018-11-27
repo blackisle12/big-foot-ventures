@@ -21,6 +21,10 @@ namespace BigFootVentures.Business.DataAccess
 
         ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
 
+        ICollection<TEntity> GetByEmailAddress(string emailAddress);
+
+        ICollection<TEntity> GetByUsername(string username);
+
         #endregion
 
         #region "Persistence"
@@ -195,6 +199,76 @@ namespace BigFootVentures.Business.DataAccess
                             Text = dataReader["TEXT"] as string,
                             Value = Convert.ToInt32(dataReader["VALUE"])
                         });
+                    }
+
+                    dataReader.Close();
+                }
+
+                return entities;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public ICollection<TEntity> GetByEmailAddress(string emailAddress)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                var entities = new List<TEntity>();
+
+                using (var command = new MySqlCommand($"{this._entityName}_GetByEmailAddress", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("pEmailAddress", MySqlDbType.VarChar, 100) { Value = emailAddress, Direction = ParameterDirection.Input });
+
+                    var dataReader = command.ExecuteReader();
+
+                    foreach (var entity in this._mapper.ParseData(dataReader))
+                    {
+                        entities.Add((TEntity)entity);
+                    }
+
+                    dataReader.Close();
+                }
+
+                return entities;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public ICollection<TEntity> GetByUsername(string username)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                var entities = new List<TEntity>();
+
+                using (var command = new MySqlCommand($"{this._entityName}_GetByUsername", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("pUsername", MySqlDbType.VarChar, 100) { Value = username, Direction = ParameterDirection.Input });
+
+                    var dataReader = command.ExecuteReader();
+
+                    foreach (var entity in this._mapper.ParseData(dataReader))
+                    {
+                        entities.Add((TEntity)entity);
                     }
 
                     dataReader.Close();

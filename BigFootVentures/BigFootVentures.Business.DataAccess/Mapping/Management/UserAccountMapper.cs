@@ -38,7 +38,9 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     MailingState = dataReader["MailingState"] as string,
                     MailingZipCode = dataReader["MailingZipCode"] as string,
 
-                    CreatedDate = Convert.ToDateTime(dataReader["CreatedDate"])
+                    CreatedDate = Convert.ToDateTime(dataReader["CreatedDate"]),
+
+                    Roles = dataReader["Roles"] as string
                 };
 
                 if (int.TryParse((dataReader["CreatedBy"] as int?)?.ToString(), out int createdBy))
@@ -88,6 +90,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pUsername", MySqlDbType.VarChar, 45) { Value = entity.Username, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPassword", MySqlDbType.VarChar, 100) { Value = entity.Password, Direction = ParameterDirection.Input },
                 new MySqlParameter("pIsActive", entity.IsActive ? 1 : 0) { Direction = ParameterDirection.Input },
+                new MySqlParameter("pTitle", MySqlDbType.VarChar, 45) { Value = entity.Title, Direction = ParameterDirection.Input },
                 new MySqlParameter("pCompany", MySqlDbType.VarChar, 100) { Value = entity.Company, Direction = ParameterDirection.Input },
                 new MySqlParameter("pDepartment", MySqlDbType.VarChar, 100) { Value = entity.Department, Direction = ParameterDirection.Input },
                 new MySqlParameter("pDivision", MySqlDbType.VarChar, 100) { Value = entity.Division, Direction = ParameterDirection.Input },
@@ -100,7 +103,9 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pMailingZipCode", MySqlDbType.VarChar, 100) { Value = entity.MailingZipCode, Direction = ParameterDirection.Input },
 
                 new MySqlParameter("pCreatedBy", MySqlDbType.Int32) { Value = entity.CreatedBy, Direction = ParameterDirection.Input },
-                new MySqlParameter("pCreatedDate", MySqlDbType.DateTime) { Value = entity.CreatedDate, Direction = ParameterDirection.Input }
+                new MySqlParameter("pCreatedDate", MySqlDbType.DateTime) { Value = entity.CreatedDate, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pRoles", MySqlDbType.VarChar, 255) { Value = entity.Roles, Direction = ParameterDirection.Input }
             });
 
             return parameters.ToArray();

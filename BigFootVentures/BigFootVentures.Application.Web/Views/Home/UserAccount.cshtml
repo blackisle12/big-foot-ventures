@@ -8,7 +8,7 @@
 @using BigFootVentures.Business.Objects.Utilities
 
 @{
-    ViewBag.Title = "User Account - " + (Model.Record.DisplayName ?? "New Record");
+    ViewBag.Title = "User Account - " + (Model.Record.ID > 0 ? $"{Model.Record.FirstName} {Model.Record.LastName}" : "New Record");
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -42,58 +42,54 @@
                     <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">First Name</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.FirstName, new { @class = "form-control required" })
                                 @Html.ValidationMessageFor(m => m.Record.FirstName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Title</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Title, new { @class = "form-control input-neutral" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Last Name</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.FirstName, new { @class = "form-control required" })
-                                @Html.ValidationMessageFor(m => m.Record.FirstName, "", new { @class = "text-danger" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.LastName, new { @class = "form-control required" })
+                                @Html.ValidationMessageFor(m => m.Record.LastName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Company</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Company, new { @class = "form-control input-neutral" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Email Address</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.EmailAddress, new { @class = "form-control required" })
                                 @Html.ValidationMessageFor(m => m.Record.EmailAddress, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Department</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Department, new { @class = "form-control input-neutral" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Active</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 @Html.CheckBoxFor(m => m.Record.IsActive)
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Title</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.Title, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Company</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.Company, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Department</label>
-                            <div class="col-sm-10">
-                                @Html.TextBoxFor(m => m.Record.Department, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
+
                             <label class="col-sm-2 control-label">Division</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.Division, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Employee Number</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-sm-offset-6 control-label">Employee Number</label>
+                            <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.EmployeeNumber, new { @class = "form-control" })
                             </div>
                         </div>
@@ -145,13 +141,39 @@
                 </div>
             </div>
             <!-- END:  Mailing Address -->
+            <!--START: Roles -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Roles
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group display-flex">
+                            <label class="col-sm-2 control-label text-neutral">Available</label>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.RolesAvailable, InputUtils.GetMultiSelectList(EnumUtils.GetDescriptions<MembershipEnums.Role>(Model.Record.Roless)), new { @class = "form-control pick-list-box input-neutral" })
+                            </div>
+                            <div class="col-sm-1 vertical-align">
+                                <button type="button" name="Button.Add.Roles" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-right"></i></button>
+                                <button type="button" name="Button.Remove.Roles" class="btn btn-default pick-list-box-btn"><i class="fa fa-chevron-left"></i></button>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.ListBoxFor(m => m.Record.RolesSelected, InputUtils.GetMultiSelectList(Model.Record.Roless), new { @class = "form-control required pick-list-box" })
+                                @Html.ValidationMessageFor(m => m.Record.Roles, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END:  Roles -->
         </div>
         <div class="panel-footer">
             @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
         </div>
     </div>
-
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Office), ChildIDContainer = "Office.ID", ChildNameContainer = "Office.OfficeName" })
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
     <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>

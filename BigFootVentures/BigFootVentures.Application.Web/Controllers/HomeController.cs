@@ -1,4 +1,5 @@
 ﻿using BigFootVentures.Application.Web.Models.Extensions;
+using BigFootVentures.Application.Web.Models.Security;
 using BigFootVentures.Application.Web.Models.Utilities;
 using BigFootVentures.Application.Web.Models.ViewModels;
 using BigFootVentures.Business.Objects;
@@ -14,6 +15,7 @@ using static BigFootVentures.Application.Web.Models.VMEnums;
 
 namespace BigFootVentures.Application.Web.Controllers
 {
+    [Authorize]
     [RoutePrefix("Home")]
     public class HomeController : Controller
     {
@@ -3434,12 +3436,18 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             Func<int> postModel = () =>
             {
+                if (model.Record.RolesSelected != null)
+                    model.Record.Roles = string.Join(";", model.Record.RolesSelected);
+
                 var validationResult = new Dictionary<string, string>();
 
-                if (UserAccountValidator.IsValid(model.Record, out validationResult))
+                if (UserAccountValidator.IsValid(model.Record, this._managementUserAccountService, out validationResult))
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.Username = model.Record.EmailAddress;
+                        model.Record.Password = PasswordEncryption.Encrypt(StringUtils.GenerateRandomString());
+
                         this._managementUserAccountService.Insert(model.Record);
                     }
                     else

@@ -4,6 +4,12 @@ namespace BigFootVentures.Business.Objects.Management
 {
     public sealed class UserAccount : BusinessBase
     {
+        #region "Private Members"
+
+        private string _roles;
+
+        #endregion
+
         #region "Properties"
 
         public string FirstName { get; set; }
@@ -26,6 +32,16 @@ namespace BigFootVentures.Business.Objects.Management
 
         public int CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public string Roles { get { return this._roles; } set { this._roles = value; if (!string.IsNullOrWhiteSpace(value)) { this.Roless = value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries); } } }
+
+        #endregion
+
+        #region "Calculated Properties"
+
+        public string[] Roless { get; set; }
+        public string[] RolesAvailable { get; set; }
+        public string[] RolesSelected { get; set; }
 
         #endregion
     }
