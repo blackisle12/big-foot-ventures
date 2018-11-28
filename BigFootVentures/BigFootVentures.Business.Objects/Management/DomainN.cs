@@ -18,6 +18,7 @@
         public string Version { get; set; }
         public string Category { get; set; }
         public string AccountID { get; set; }
+        public bool BigFootOwned { get; set; }
         public bool WebsiteCurrent { get; set; }
         public bool Locked { get; set; } = true;
         public string WebsiteUse { get; set; }
