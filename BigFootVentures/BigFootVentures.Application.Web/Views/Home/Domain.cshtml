@@ -205,7 +205,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-offset-6 col-sm-2 control-label">Big Foot Parking Page</label>
+                            <label class="col-sm-2 control-label text-neutral">BigFoot Owned</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.BigFootOwned, new { @class = "input-neutral" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Big Foot Parking Page</label>
                             <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.BigFootParkingPage, new { @class = "form-control" })
                             </div>

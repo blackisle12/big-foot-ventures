@@ -267,3 +267,26 @@ a.article, a.article:hover {
     height: 50px;
     width: 100px;
 }
+
+.search-nav {
+    margin: 15px 15px;
+}
+
+
+@media (min-width: 1359px) {
+    .search-nav {
+        margin-left: 784px;
+    }
+}
+
+@media (min-width: 1544px) {
+    .search-nav {
+        margin-left: 784px;
+    }
+}
+
+@media (min-width: 1900px) {
+    .search-nav {
+        margin-left: 1264px;
+    }
+}
