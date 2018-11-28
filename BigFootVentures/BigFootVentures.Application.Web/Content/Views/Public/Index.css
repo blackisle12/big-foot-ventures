@@ -6,8 +6,8 @@ body {
 }
 
 .login-div {
-    background-color: #24292e;
-    color: white;
+    background-color: white;
+    color: #24292e;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
@@ -35,5 +35,6 @@ body {
 .error-message {
     text-align: center;
     font-weight: 500;
-    margin-bottom: 15px
+    margin-bottom: 15px;
+    color:red;
 }

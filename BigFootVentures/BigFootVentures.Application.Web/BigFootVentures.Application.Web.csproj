@@ -201,6 +201,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\images\bf_logo_black.png" />
+    <Content Include="Content\images\bf_logo_white.png" />
     <Content Include="Content\images\jquery-te.png" />
     <Content Include="Content\images\loader.gif" />
     <Content Include="Content\jquery-te-1.4.0.css" />
@@ -337,6 +339,7 @@
     <Content Include="Views\Public\Index.cshtml" />
     <Content Include="Views\Home\UserAccount.cshtml" />
     <Content Include="Views\Home\UserAccounts.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

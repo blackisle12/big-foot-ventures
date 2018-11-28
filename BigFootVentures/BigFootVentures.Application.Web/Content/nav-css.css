@@ -67,10 +67,6 @@ body {
     background: #24292e;
 }
 
-.side-nav ul.components {
-    border-bottom: 1px solid #47748b;
-}
-
 .side-nav ul p {
     color: #fff;
     padding: 10px;
@@ -265,6 +261,11 @@ a.article, a.article:hover {
 .logout:hover {
     color: #ffffff;
     text-decoration: none;
+}
+
+.nav-image {
+    height: 50px;
+    width: 100px;
 }
 
 .search-nav {
