@@ -19,9 +19,21 @@ body {
     margin-top: 10px;
     text-align: center;
     font-size: 25px;
-    font-weight: 500;
+    font-weight: 900;
 }
 
 .mar-bottom-10 {
     margin-bottom: 10px;
+}
+
+.form-group {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom:25px;
+}
+
+.error-message {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 15px
 }
