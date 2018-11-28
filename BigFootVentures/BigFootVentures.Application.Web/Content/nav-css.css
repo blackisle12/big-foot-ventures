@@ -262,3 +262,8 @@ a.article, a.article:hover {
     color: #ffffff;
     text-decoration: none;
 }
+
+.nav-image {
+    height: 50px;
+    width: 100px;
+}

@@ -169,3 +169,7 @@ input[type=checkbox], input[type=radio] {
         width: 1370px;
     }
 }
+
+.navbar-header {
+    display:inline-flex;
+}
