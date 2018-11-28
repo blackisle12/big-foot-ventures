@@ -72,6 +72,15 @@ namespace BigFootVentures.Application.Web.Controllers
             }
         }
 
+        [Authorize]
+        [Route("Logout")]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("Index");
+        }
+
         #endregion
     }
 }
