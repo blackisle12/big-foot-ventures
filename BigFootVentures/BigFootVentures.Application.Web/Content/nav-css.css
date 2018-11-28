@@ -67,10 +67,6 @@ body {
     background: #24292e;
 }
 
-.side-nav ul.components {
-    border-bottom: 1px solid #47748b;
-}
-
 .side-nav ul p {
     color: #fff;
     padding: 10px;

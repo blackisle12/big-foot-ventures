@@ -2510,6 +2510,15 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Password Reset"
+
+        [Route("PasswordReset", Name = "PasswordReset")]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        } 
+        #endregion
+
         #region "Register"
 
         [Route("Registers/{rowCount?}/{page?}", Name = "Registers")]
