@@ -33,6 +33,11 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("Index")]
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 

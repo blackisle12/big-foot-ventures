@@ -1,98 +1,121 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Big Foot Ventures</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - Big Foot Ventures</title>
 
-    <link href="~/Content/font-awesome.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/Views/Shared/_Layout.css" rel="stylesheet" />
-    <link href="~/Content/jquery-te-1.4.0.css" rel="stylesheet" />
-    <link href="~/Content/nav-css.css" rel="stylesheet" />
+        <link href="~/Content/font-awesome.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/Views/Shared/_Layout.css" rel="stylesheet" />
+        <link href="~/Content/jquery-te-1.4.0.css" rel="stylesheet" />
+        <link href="~/Content/nav-css.css" rel="stylesheet" />
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery-te-1.4.0.min.js"></script>
-    @*<script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/Utilites/StringUtils.js"></script>
-    <script src="~/Scripts/Utilites/CommonUtils.js"></script>
-    <script src="~/Scripts/nav-scripts.js"></script>
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Scripts/jquery-te-1.4.0.min.js"></script>
+        @*<script src="~/Scripts/jquery.validate.min.js"></script>
+            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/Utilites/StringUtils.js"></script>
+        <script src="~/Scripts/Utilites/CommonUtils.js"></script>
+        <script src="~/Scripts/nav-scripts.js"></script>
 
-</head>
-<body>
-    <!-- START: Navigation Bar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <div class="nav-image">
-                    <img class="img-responsive" src="~/Content/images/bf_logo_white.png" />
-                </div>
-                <div>
-                    <button name="nav-toggle" type="button" class="btn main-nav-toggle"><i class="fa fa-bars"></i></button>
-                </div>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <div class="nav navbar-nav">
-                    <ul class="nav navbar-nav">
-                        <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
-                    </ul>
-                    <div class="input-group search-nav">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
+    </head>
+    <body>
+        <!-- START: Navigation Bar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="nav-image">
+                        <img class="img-responsive" src="~/Content/images/bf_logo_white.png" />
+                    </div>
+                    <div>
+                        <button name="nav-toggle" type="button" class="btn main-nav-toggle"><i class="fa fa-bars"></i></button>
                     </div>
                 </div>
-                <p><a href="@Url.Action("Logout", "Public")" class="logout">Logout <i class="fa fa-sign-out"></i></a></p>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="nav navbar-nav">
+                        <ul class="nav navbar-nav">
+                            <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        </ul>
+                        <div class="input-group search-nav">
+                            <input name="txtSearch" type="text" class="form-control" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button name="btnSearch" type="button" class="btn btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <p><a href="@Url.Action("Logout", "Public")" class="logout">Logout <i class="fa fa-sign-out"></i></a></p>
+                </div>
             </div>
-        </div>
-    </nav>
-    <!-- END: Navigation Bar -->
-    <div class="container container-top-padding">
-        <div name="overlay" class="overlay"></div>
-        <nav class="side-nav active" id="sidebar" name="sidebar">
-            <div class="sidebar-header">
-                <p class="side-nav-heading">
-                    <a class="close-nav pull-right" name="nav-toggle"><i class="fa fa-bars"></i></a>
-                    <img class="img-responsive" src="~/Content/images/bf_logo_white.png" />
-                </p>
-            </div>
-            <hr>
-            <ul class="list-unstyled components">
-                <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Agreement", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Agreements", "Home")">Agreements</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Brand", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Brands", "Home")">Brands</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Cancellation", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Cancellations", "Home")">Cancellations</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Compan", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Companies", "Home")">Companies</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Contact", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Contacts", "Home")">Contacts</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Domain", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Domains", "Home")">Domains</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/EmailResponse", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("EmailResponses", "Home")">Email Responses</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Enquir", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Enquiries", "Home")">Enquiries</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Lead", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Leads", "Home")">Leads</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/LegalCase", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("LegalCases", "Home")">Legal Cases</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/LoginInformation", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("LoginInformations", "Home")">Login Information</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Office", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/OfficeStatus", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")"><a href="@Url.Action("Offices", "Home")">Offices</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/OfficeStatus", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("OfficeStatuses", "Home")">Office Status</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/PreFilingSimilarityResearch", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("PreFilingSimilarityResearchs", "Home")">Pre-Filing Similarity Research</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Register", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Registers", "Home")">Registers</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/SimilarTrademark", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("SimilarTrademarks", "Home")">Similar Trademarks</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/TMRepresentative", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TMRepresentatives", "Home")">TM Representatives</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Trademark", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")"><a href="@Url.Action("Trademarks", "Home")">Trademarks</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TrademarkOwners", "Home")">Trademark Owners</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/UserAccounts", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("UserAccounts", "Home")">User Accounts</a></li>
-                <li><hr /></li>
-                <li><a>Account Information</a></li>
-                <li><a href="@Url.Action("ChangePassword", "Home")">Change Password</a></li>
-                <li><a href="@Url.Action("Logout", "Public")">Logout <i class="fa fa-sign-out"></i></a></li>
-            </ul>
         </nav>
-        <div class="body-content">
-            @RenderBody()
+        <!-- END: Navigation Bar -->
+        <div class="container container-top-padding">
+            <div name="overlay" class="overlay"></div>
+            <nav class="side-nav active" id="sidebar" name="sidebar">
+                <div class="sidebar-header">
+                    <p class="side-nav-heading">
+                        <a class="close-nav pull-right" name="nav-toggle"><i class="fa fa-bars"></i></a>
+                        <img class="img-responsive" src="~/Content/images/bf_logo_white.png" />
+                    </p>
+                </div>
+                <hr>
+                <ul class="list-unstyled components">
+                    <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Agreement", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Agreements", "Home")">Agreements</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Brand", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Brands", "Home")">Brands</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Cancellation", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Cancellations", "Home")">Cancellations</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Compan", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Companies", "Home")">Companies</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Contact", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Contacts", "Home")">Contacts</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Domain", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Domains", "Home")">Domains</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/EmailResponse", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("EmailResponses", "Home")">Email Responses</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Enquir", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Enquiries", "Home")">Enquiries</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Lead", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Leads", "Home")">Leads</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/LegalCase", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("LegalCases", "Home")">Legal Cases</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/LoginInformation", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("LoginInformations", "Home")">Login Information</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Office", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/OfficeStatus", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")"><a href="@Url.Action("Offices", "Home")">Offices</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/OfficeStatus", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("OfficeStatuses", "Home")">Office Status</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/PreFilingSimilarityResearch", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("PreFilingSimilarityResearchs", "Home")">Pre-Filing Similarity Research</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Register", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Registers", "Home")">Registers</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/SimilarTrademark", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("SimilarTrademarks", "Home")">Similar Trademarks</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/TMRepresentative", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TMRepresentatives", "Home")">TM Representatives</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Trademark", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")"><a href="@Url.Action("Trademarks", "Home")">Trademarks</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TrademarkOwners", "Home")">Trademark Owners</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/UserAccounts", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("UserAccounts", "Home")">User Accounts</a></li>
+                    <li><hr /></li>
+                    <li><a>Account Information</a></li>
+                    <li><a href="@Url.Action("ChangePassword", "Home")">Change Password</a></li>
+                    <li><a href="@Url.Action("Logout", "Public")">Logout <i class="fa fa-sign-out"></i></a></li>
+                </ul>
+            </nav>
+            <div class="body-content">
+                @RenderBody()
+            </div>
         </div>
-    </div>
-</body>
+        <script type="text/javascript">
+            $(function () {
+                $('[name="btnSearch"]').on('click', function () {
+                    SearchObject();
+                });
+
+                $('[name="txtSearch"]').on('keyup', function (e) {
+                    if (e.keyCode == 13) {
+                        SearchObject();
+                    }
+                })
+            });
+
+            function SearchObject() {
+                var keyword = $('[name="txtSearch"]').val().trim();
+
+                if (keyword.length == 0) {
+                    return;
+                }
+
+                window.open(location.origin + '/Search/Index/' + keyword, '_self');
+            }
+        </script>
+    </body>
 </html>

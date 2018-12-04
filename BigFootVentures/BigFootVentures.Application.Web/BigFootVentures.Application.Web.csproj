@@ -177,6 +177,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +192,7 @@
     <Compile Include="Models\ViewModels\VMJsonResult.cs" />
     <Compile Include="Models\ViewModels\VMModel.cs" />
     <Compile Include="Models\ViewModels\VMPageResult.cs" />
+    <Compile Include="Models\ViewModels\VMSearchResult.cs" />
     <Compile Include="Models\ViewModels\VMSelectListItem.cs" />
     <Compile Include="Models\VMEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,6 +223,7 @@
     <Content Include="Content\Views\Home\Registers.css" />
     <Content Include="Content\Views\Home\Companies.css" />
     <Content Include="Content\Views\Home\Brands.css" />
+    <Content Include="Content\Views\Search\Index.css" />
     <Content Include="Content\Views\Shared\_Layout.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -340,6 +343,7 @@
     <Content Include="Views\Home\UserAccount.cshtml" />
     <Content Include="Views\Home\UserAccounts.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

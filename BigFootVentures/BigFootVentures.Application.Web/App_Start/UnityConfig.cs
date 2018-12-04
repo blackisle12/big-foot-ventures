@@ -36,6 +36,8 @@ namespace BigFootVentures.Application.Web
             container.RegisterType<IManagementService<TrademarkOwner>>(new InjectionFactory(c => new ManagementService<TrademarkOwner>(connectionString)));
             container.RegisterType<IManagementService<UserAccount>>(new InjectionFactory(c => new ManagementService<UserAccount>(connectionString)));
 
+            container.RegisterType<ISearchService>(new InjectionFactory(c => new SearchService(connectionString)));
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
