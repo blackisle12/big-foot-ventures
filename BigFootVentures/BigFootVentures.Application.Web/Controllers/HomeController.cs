@@ -105,7 +105,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Agreement"
 
         [Route("Agreements/{rowCount?}/{page?}", Name = "Agreements")]
-        public ActionResult Agreements(int rowCount = 10, int page = 1)
+        public ActionResult Agreements(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var agreements = this._managementAgreementService.Get(startIndex, rowCount, out int total);
@@ -295,7 +295,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Brand"
 
         [Route("Brands/{rowCount?}/{page?}", Name = "Brands")]
-        public ActionResult Brands(int rowCount = 10, int page = 1)
+        public ActionResult Brands(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var brands = this._managementBrandService.Get(startIndex, rowCount, out int total);
@@ -465,7 +465,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Cancellation"
 
         [Route("Cancellations/{rowCount?}/{page?}", Name = "Cancellations")]
-        public ActionResult Cancellations(int rowCount = 10, int page = 1)
+        public ActionResult Cancellations(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var cancellations = this._managementCancellationService.Get(startIndex, rowCount, out int total);
@@ -606,7 +606,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Company"
 
         [Route("Companies/{rowCount?}/{page?}", Name = "Companies")]
-        public ActionResult Companies(int rowCount = 10, int page = 1)
+        public ActionResult Companies(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var companies = this._managementCompanyService.Get(startIndex, rowCount, out int total);
@@ -804,7 +804,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Contact"
 
         [Route("Contacts/{rowCount?}/{page?}", Name = "Contacts")]
-        public ActionResult Contacts(int rowCount = 10, int page = 1)
+        public ActionResult Contacts(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var contacts = this._managementContactService.Get(startIndex, rowCount, out int total);
@@ -994,7 +994,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Domain"
 
         [Route("Domains/{rowCount?}/{page?}", Name = "Domains")]
-        public ActionResult Domains(int rowCount = 10, int page = 1)
+        public ActionResult Domains(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var domains = this._managementDomainService.Get(startIndex, rowCount, out int total);
@@ -1224,7 +1224,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Email Response"
 
         [Route("EmailResponses/{rowCount?}/{page?}", Name = "EmailResponses")]
-        public ActionResult EmailResponses(int rowCount = 10, int page = 1)
+        public ActionResult EmailResponses(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var emailResponse = this._managementEmailResponseService.Get(startIndex, rowCount, out int total);
@@ -1378,7 +1378,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Enquiry"
 
         [Route("Enquiries/{rowCount?}/{page?}", Name = "Enquiries")]
-        public ActionResult Enquiries(int rowCount = 10, int page = 1)
+        public ActionResult Enquiries(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var enquiries = this._managementEnquiryService.Get(startIndex, rowCount, out int total);
@@ -1585,7 +1585,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Lead"
 
         [Route("Leads/{rowCount?}/{page?}", Name = "Leads")]
-        public ActionResult Leads(int rowCount = 10, int page = 1)
+        public ActionResult Leads(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var leads = this._managementLeadService.Get(startIndex, rowCount, out int total);
@@ -1755,7 +1755,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Legal Case"
 
         [Route("LegalCases/{rowCount?}/{page?}", Name = "LegalCases")]
-        public ActionResult LegalCases(int rowCount = 10, int page = 1)
+        public ActionResult LegalCases(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var legalCases = this._managementLegalCaseService.Get(startIndex, rowCount, out int total);
@@ -1896,7 +1896,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Login Information"
 
         [Route("LoginInformations/{rowCount?}/{page?}", Name = "LoginInformations")]
-        public ActionResult LoginInformations(int rowCount = 10, int page = 1)
+        public ActionResult LoginInformations(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var loginInformations = this._managementLoginInformationService.Get(startIndex, rowCount, out int total);
@@ -2037,7 +2037,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Office"
 
         [Route("Offices/{rowCount?}/{page?}", Name = "Offices")]
-        public ActionResult Offices(int rowCount = 10, int page = 1)
+        public ActionResult Offices(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var offices = this._managementOfficeService.Get(startIndex, rowCount, out int total);
@@ -2215,7 +2215,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Office Status"
 
         [Route("OfficeStatuses/{rowCount?}/{page?}", Name = "OfficeStatuses")]
-        public ActionResult OfficeStatuses(int rowCount = 10, int page = 1)
+        public ActionResult OfficeStatuses(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var officeStatuses = this._managementOfficeStatusService.Get(startIndex, rowCount, out int total);
@@ -2369,7 +2369,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Pre-Filing Similarity Research"
 
         [Route("PreFilingSimilarityResearchs/{rowCount?}/{page?}", Name = "PreFilingSimilarityResearchs")]
-        public ActionResult PreFilingSimilarityResearchs(int rowCount = 10, int page = 1)
+        public ActionResult PreFilingSimilarityResearchs(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var preFilingSimilarityResearchs = this._managementPreFilingSimilarityResearchService.Get(startIndex, rowCount, out int total);
@@ -2522,7 +2522,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Register"
 
         [Route("Registers/{rowCount?}/{page?}", Name = "Registers")]
-        public ActionResult Registers(int rowCount = 10, int page = 1)
+        public ActionResult Registers(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var registers = this._managementRegisterService.Get(startIndex, rowCount, out int total);
@@ -2689,7 +2689,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Similar Trademark"
 
         [Route("SimilarTrademarks/{rowCount?}/{page?}", Name = "SimilarTrademarks")]
-        public ActionResult SimilarTrademarks(int rowCount = 10, int page = 1)
+        public ActionResult SimilarTrademarks(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var similarTrademarks = this._managementSimilarTrademarkService.Get(startIndex, rowCount, out int total);
@@ -2839,7 +2839,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "TM Representative"
 
         [Route("TMRepresentatives/{rowCount?}/{page?}", Name = "TMRepresentatives")]
-        public ActionResult TMRepresentatives(int rowCount = 10, int page = 1)
+        public ActionResult TMRepresentatives(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var TMRepresentatives = this._managementTMRepresentativeService.Get(startIndex, rowCount, out int total);
@@ -2980,7 +2980,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Trademark"
 
         [Route("Trademarks/{rowCount?}/{page?}", Name = "Trademarks")]
-        public ActionResult Trademarks(int rowCount = 10, int page = 1)
+        public ActionResult Trademarks(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var trademarks = this._managementTrademarkService.Get(startIndex, rowCount, out int total);
@@ -3215,7 +3215,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Trademark Owner"
 
         [Route("TrademarkOwners/{rowCount?}/{page?}", Name = "TrademarkOwners")]
-        public ActionResult TrademarkOwners(int rowCount = 10, int page = 1)
+        public ActionResult TrademarkOwners(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var trademarkOwners = this._managementTrademarkOwnerService.Get(startIndex, rowCount, out int total);
@@ -3356,7 +3356,7 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "User Account"
 
         [Route("UserAccounts/{rowCount?}/{page?}", Name = "UserAccounts")]
-        public ActionResult UserAccounts(int rowCount = 10, int page = 1)
+        public ActionResult UserAccounts(int rowCount = 25, int page = 1)
         {
             var startIndex = (page - 1) * rowCount;
             var userAccounts = this._managementUserAccountService.Get(startIndex, rowCount, out int total);

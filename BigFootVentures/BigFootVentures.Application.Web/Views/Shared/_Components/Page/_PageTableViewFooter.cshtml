@@ -1,11 +1,41 @@
 ﻿<div class="row">
     <div class="col-sm-12">
-        <span>
+        <input type="hidden" name="page" value="@Model.Page" />
+        <input type="hidden" name="rowCount" value="@Model.RowCount" />
+        <nav aria-label="...">
+            <ul class="pager">
+                @{
+                    if (Model.Page != 1)
+                    {
+                        <li><a id="pagePrevious" href="#">Previous</a></li>
+                    }
+                    if (Model.Pages > Model.Page)
+                    {
+                        <li><a id="pageNext" href="#">Next</a></li>
+                    }
+                }
+            </ul>
+        </nav>
+        @*<span>
             Page <input class="pagination-input" type="text" name="page" value="@Model.Page" /> of @Model.Pages.ToString("N0")
-        </span>
-        <span class="pull-right">
+        </span>*@
+        @*<span class="pull-right">
             Showing <input class="pagination-input" type="text" name="rowCount" value="@Model.RowCount" /> rows per page
             <button type="submit"><i class="fa fa-refresh"></i></button>
-        </span>
+        </span>*@
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#pagePrevious').on('click', function () {
+            $('[name="page"]').val('@(Model.Page - 1)');
+            $('form').submit();
+        });
+
+        $('#pageNext').on('click', function () {
+            $('[name="page"]').val('@(Model.Page + 1)');
+            $('form').submit();
+        });
+    });
+</script>

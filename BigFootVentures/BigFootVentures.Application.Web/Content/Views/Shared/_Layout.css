@@ -173,3 +173,7 @@ input[type=checkbox], input[type=radio] {
 .navbar-header {
     display:inline-flex;
 }
+
+.pager {
+    margin: 10px 0 !important;
+}
