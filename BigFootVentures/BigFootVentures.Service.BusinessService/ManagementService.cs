@@ -13,6 +13,8 @@ namespace BigFootVentures.Service.BusinessService
 
         ICollection<TModel> Get(int startIndex, int rowCount, out int total);
 
+        ICollection<TModel> GetByKeyword(string keyword, int startIndex, int rowCount, out int total);
+
         TModel Get(int ID);
 
         ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
@@ -60,7 +62,15 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.Get(startIndex, rowCount, out total);
-            }                
+            }
+        }
+
+        public ICollection<TModel> GetByKeyword(string keyword, int startIndex, int rowCount, out int total)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.GetByKeyword(keyword, startIndex, rowCount, out total);
+            }
         }
 
         public TModel Get(int ID)

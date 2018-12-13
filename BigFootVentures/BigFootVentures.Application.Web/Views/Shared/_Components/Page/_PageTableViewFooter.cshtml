@@ -1,7 +1,8 @@
 ﻿<div class="row">
     <div class="col-sm-12">
-        <input type="hidden" name="page" value="@Model.Page" />
         <input type="hidden" name="rowCount" value="@Model.RowCount" />
+        <input type="hidden" name="page" value="@Model.Page" />
+        <input type="hidden" name="keyword" value="@ViewBag.Keyword" />
         <nav aria-label="...">
             <ul class="pager">
                 @{

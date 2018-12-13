@@ -62,6 +62,18 @@
                                             }
                                         </tr>
                                     }
+
+                                    if (table.Rows.Count == 25)
+                                    {
+                                        <tr>
+                                            @{ 
+                                                string link = $"{Url.Action(table.Caption, "Home")}s/25/1/{ViewBag.Keyword}/";
+                                            }
+                                            <td colspan="2">
+                                                <strong><a href="@link">Show more..</a></strong>
+                                            </td>
+                                        </tr>
+                                    }
                                 }
                             </table>
                         }

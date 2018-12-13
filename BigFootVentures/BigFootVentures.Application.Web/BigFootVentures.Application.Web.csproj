@@ -256,6 +256,7 @@
     <Content Include="Scripts\nav-scripts.js" />
     <Content Include="Scripts\Views\Home\EmailResponse.js" />
     <Content Include="Scripts\Views\Home\LegalCases.js" />
+    <Content Include="Scripts\Views\Home\Offices.js" />
     <Content Include="Scripts\Views\Home\UserAccount.js" />
     <Content Include="Scripts\Views\Home\Trademark.js" />
     <Content Include="Scripts\Views\Home\Office.js" />

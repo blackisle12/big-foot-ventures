@@ -104,11 +104,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Agreement"
 
-        [Route("Agreements/{rowCount?}/{page?}", Name = "Agreements")]
-        public ActionResult Agreements(int rowCount = 25, int page = 1)
+        [Route("Agreements/{rowCount?}/{page?}/{keyword?}", Name = "Agreements")]
+        public ActionResult Agreements(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var agreements = this._managementAgreementService.Get(startIndex, rowCount, out int total);
+            var agreements = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementAgreementService.Get(startIndex, rowCount, out int total) :
+                this._managementAgreementService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<AgreementT>
             {
                 StartIndex = startIndex,
@@ -123,6 +125,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -294,11 +298,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Brand"
 
-        [Route("Brands/{rowCount?}/{page?}", Name = "Brands")]
-        public ActionResult Brands(int rowCount = 25, int page = 1)
+        [Route("Brands/{rowCount?}/{page?}/{keyword?}", Name = "Brands")]
+        public ActionResult Brands(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var brands = this._managementBrandService.Get(startIndex, rowCount, out int total);
+            var brands = string.IsNullOrWhiteSpace(keyword) ? 
+                this._managementBrandService.Get(startIndex, rowCount, out int total) :
+                this._managementBrandService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Brand>
             {
                 StartIndex = startIndex,
@@ -313,6 +319,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -464,11 +472,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Cancellation"
 
-        [Route("Cancellations/{rowCount?}/{page?}", Name = "Cancellations")]
-        public ActionResult Cancellations(int rowCount = 25, int page = 1)
+        [Route("Cancellations/{rowCount?}/{page?}/{keyword?}", Name = "Cancellations")]
+        public ActionResult Cancellations(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var cancellations = this._managementCancellationService.Get(startIndex, rowCount, out int total);
+            var cancellations = string.IsNullOrWhiteSpace(keyword) ? 
+                this._managementCancellationService.Get(startIndex, rowCount, out int total) :
+                this._managementCancellationService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Cancellation>
             {
                 StartIndex = startIndex,
@@ -483,6 +493,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -605,11 +617,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Company"
 
-        [Route("Companies/{rowCount?}/{page?}", Name = "Companies")]
-        public ActionResult Companies(int rowCount = 25, int page = 1)
+        [Route("Companies/{rowCount?}/{page?}/{keyword?}", Name = "Companies")]
+        public ActionResult Companies(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var companies = this._managementCompanyService.Get(startIndex, rowCount, out int total);
+            var companies = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementCompanyService.Get(startIndex, rowCount, out int total) :
+                this._managementCompanyService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Company>
             {
                 StartIndex = startIndex,
@@ -624,6 +638,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -803,11 +819,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Contact"
 
-        [Route("Contacts/{rowCount?}/{page?}", Name = "Contacts")]
-        public ActionResult Contacts(int rowCount = 25, int page = 1)
+        [Route("Contacts/{rowCount?}/{page?}/{keyword?}", Name = "Contacts")]
+        public ActionResult Contacts(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var contacts = this._managementContactService.Get(startIndex, rowCount, out int total);
+            var contacts = string.IsNullOrWhiteSpace(keyword) ? 
+                this._managementContactService.Get(startIndex, rowCount, out int total) :
+                this._managementContactService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Contact>
             {
                 StartIndex = startIndex,
@@ -822,6 +840,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -993,11 +1013,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Domain"
 
-        [Route("Domains/{rowCount?}/{page?}", Name = "Domains")]
-        public ActionResult Domains(int rowCount = 25, int page = 1)
+        [Route("Domains/{rowCount?}/{page?}/{keyword?}", Name = "Domains")]
+        public ActionResult Domains(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var domains = this._managementDomainService.Get(startIndex, rowCount, out int total);
+            var domains = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementDomainService.Get(startIndex, rowCount, out int total) :
+                this._managementDomainService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<DomainN>
             {
                 StartIndex = startIndex,
@@ -1012,6 +1034,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -1377,11 +1401,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Enquiry"
 
-        [Route("Enquiries/{rowCount?}/{page?}", Name = "Enquiries")]
-        public ActionResult Enquiries(int rowCount = 25, int page = 1)
+        [Route("Enquiries/{rowCount?}/{page?}/{keyword?}", Name = "Enquiries")]
+        public ActionResult Enquiries(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var enquiries = this._managementEnquiryService.Get(startIndex, rowCount, out int total);
+            var enquiries = string.IsNullOrWhiteSpace(keyword) ? 
+                this._managementEnquiryService.Get(startIndex, rowCount, out int total) :
+                this._managementEnquiryService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Enquiry>
             {
                 StartIndex = startIndex,
@@ -1396,6 +1422,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -1584,11 +1612,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Lead"
 
-        [Route("Leads/{rowCount?}/{page?}", Name = "Leads")]
-        public ActionResult Leads(int rowCount = 25, int page = 1)
+        [Route("Leads/{rowCount?}/{page?}/{keyword?}", Name = "Leads")]
+        public ActionResult Leads(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var leads = this._managementLeadService.Get(startIndex, rowCount, out int total);
+            var leads = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementLeadService.Get(startIndex, rowCount, out int total) :
+                this._managementLeadService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Lead>
             {
                 StartIndex = startIndex,
@@ -1603,6 +1633,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -1754,11 +1786,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Legal Case"
 
-        [Route("LegalCases/{rowCount?}/{page?}", Name = "LegalCases")]
-        public ActionResult LegalCases(int rowCount = 25, int page = 1)
+        [Route("LegalCases/{rowCount?}/{page?}/{keyword?}", Name = "LegalCases")]
+        public ActionResult LegalCases(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var legalCases = this._managementLegalCaseService.Get(startIndex, rowCount, out int total);
+            var legalCases = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementLegalCaseService.Get(startIndex, rowCount, out int total) :
+                this._managementLegalCaseService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<LegalCase>
             {
                 StartIndex = startIndex,
@@ -1773,6 +1807,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -2036,11 +2072,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Office"
 
-        [Route("Offices/{rowCount?}/{page?}", Name = "Offices")]
-        public ActionResult Offices(int rowCount = 25, int page = 1)
+        [Route("Offices/{rowCount?}/{page?}/{keyword?}", Name = "Offices")]
+        public ActionResult Offices(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var offices = this._managementOfficeService.Get(startIndex, rowCount, out int total);
+            var offices = string.IsNullOrWhiteSpace(keyword) ? 
+                this._managementOfficeService.Get(startIndex, rowCount, out int total) :
+                this._managementOfficeService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Office>
             {
                 StartIndex = startIndex,
@@ -2055,6 +2093,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -2521,11 +2561,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Register"
 
-        [Route("Registers/{rowCount?}/{page?}", Name = "Registers")]
-        public ActionResult Registers(int rowCount = 25, int page = 1)
+        [Route("Registers/{rowCount?}/{page?}/{keyword?}", Name = "Registers")]
+        public ActionResult Registers(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var registers = this._managementRegisterService.Get(startIndex, rowCount, out int total);
+            var registers = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementRegisterService.Get(startIndex, rowCount, out int total) :
+                this._managementRegisterService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Register>
             {
                 StartIndex = startIndex,
@@ -2540,6 +2582,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
@@ -2979,11 +3023,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Trademark"
 
-        [Route("Trademarks/{rowCount?}/{page?}", Name = "Trademarks")]
-        public ActionResult Trademarks(int rowCount = 25, int page = 1)
+        [Route("Trademarks/{rowCount?}/{page?}/{keyword?}", Name = "Trademarks")]
+        public ActionResult Trademarks(int rowCount = 25, int page = 1, string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
-            var trademarks = this._managementTrademarkService.Get(startIndex, rowCount, out int total);
+            var trademarks = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementTrademarkService.Get(startIndex, rowCount, out int total) :
+                this._managementTrademarkService.GetByKeyword(keyword, startIndex, rowCount, out total);
             var pageResult = new VMPageResult<Trademark>
             {
                 StartIndex = startIndex,
@@ -2998,6 +3044,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 pageResult.IsRedirectFromDelete = true;
                 TempData.Remove("IsRedirectFromDelete");
             }
+
+            ViewBag.Keyword = keyword;
 
             return View(pageResult);
         }
