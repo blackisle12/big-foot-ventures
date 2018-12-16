@@ -2,6 +2,7 @@
 using BigFootVentures.Application.Web.Models.Security;
 using BigFootVentures.Application.Web.Models.Utilities;
 using BigFootVentures.Application.Web.Models.ViewModels;
+using BigFootVentures.Business.EmailTemplates.Management;
 using BigFootVentures.Business.Objects;
 using BigFootVentures.Business.Objects.Enumerators;
 using BigFootVentures.Business.Objects.Management;
@@ -9,6 +10,7 @@ using BigFootVentures.Service.BusinessService;
 using BigFootVentures.Service.BusinessService.Validators;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
@@ -41,6 +43,8 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Trademark> _managementTrademarkService = null;
         private readonly IManagementService<TrademarkOwner> _managementTrademarkOwnerService = null;
         private readonly IManagementService<UserAccount> _managementUserAccountService = null;
+
+        private readonly EmailAutomationService _emailAutomationService = null;
 
         #endregion
 
@@ -87,6 +91,13 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementTrademarkService = managementTrademarkService;
             this._managementTrademarkOwnerService = managementTrademarkOwnerService;
             this._managementUserAccountService = managementUserAccountService;
+
+            this._emailAutomationService = new EmailAutomationService(
+                ConfigurationManager.AppSettings["SMTP_Host"],
+                Convert.ToInt32(ConfigurationManager.AppSettings["SMTP_Port"]),
+                ConfigurationManager.AppSettings["SMTP_FromEmail"],
+                ConfigurationManager.AppSettings["SMTP_Username"],
+                ConfigurationManager.AppSettings["SMTP_Password"]);
         }
 
         #endregion
@@ -3506,6 +3517,18 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.Password = PasswordEncryption.Encrypt(StringUtils.GenerateRandomString());
 
                         this._managementUserAccountService.Insert(model.Record);
+
+                        this._emailAutomationService.SendEmail(
+                            to: model.Record.Username,
+                            subject: "Account Verification",
+                            body: UserAccountTemplate.GetEmailVerificationTemplate(
+                                model.Record.ID,
+                                ConfigurationManager.AppSettings["Host"],
+                                model.Record.FirstName),
+                            fromName: "Big Foot Ventures",
+                            isHtml: true);
+
+                        TempData.Add("UserAccountInserted", true);
                     }
                     else
                     {

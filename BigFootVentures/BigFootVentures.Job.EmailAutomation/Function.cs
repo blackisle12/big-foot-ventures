@@ -1,4 +1,5 @@
 using Amazon.Lambda.Core;
+using BigFootVentures.Business.EmailTemplates.Management;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using System;
@@ -65,16 +66,16 @@ namespace BigFootVentures.Job.EmailAutomation
                     Console.WriteLine($"Legal Case (Trademark Number): {legalCase.TrademarkNumber}");
                     Console.WriteLine($"Legal Case (Trademark Name): {legalCase.Trademark?.Name}");
 
-                    //this._client.SendEmail(
-                    //    to: "blackisle_12@yahoo.com",
-                    //    subject: "Legal Case",
-                    //    body: LegalCaseTemplate.GetTaskDeadlineTemplate(
-                    //        legalCaseNumber: legalCase.ID.ToString(),
-                    //        trademarkName: legalCase.Trademark?.Name,
-                    //        trademarkNumber: legalCase.TrademarkNumber,
-                    //        dueDate: legalCase.DateAssigned),
-                    //    fromName: "Big Foot Ventures",
-                    //    isHtml: true);
+                    this._client.SendEmail(
+                        to: "blackisle_12@yahoo.com",
+                        subject: "Legal Case",
+                        body: LegalCaseTemplate.GetTaskDeadlineTemplate(
+                            legalCaseNumber: legalCase.ID.ToString(),
+                            trademarkName: legalCase.Trademark?.Name,
+                            trademarkNumber: legalCase.TrademarkNumber,
+                            dueDate: legalCase.DateAssigned),
+                        fromName: "Big Foot Ventures",
+                        isHtml: true);
                 }
             }
         }

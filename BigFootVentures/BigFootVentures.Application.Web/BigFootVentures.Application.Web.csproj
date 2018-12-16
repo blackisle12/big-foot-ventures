@@ -363,6 +363,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BigFootVentures.Business.EmailTemplates\BigFootVentures.Business.EmailTemplates.csproj">
+      <Project>{7DFB8830-0F13-4365-B8EF-740D3F7DB0D3}</Project>
+      <Name>BigFootVentures.Business.EmailTemplates</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BigFootVentures.Business.Objects\BigFootVentures.Business.Objects.csproj">
       <Project>{E28702F1-348A-4DB8-B364-CBB7FC40023D}</Project>
       <Name>BigFootVentures.Business.Objects</Name>

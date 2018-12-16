@@ -20,6 +20,15 @@
 
     @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
 
+    if (TempData.ContainsKey("UserAccountInserted"))
+    {
+        TempData.Remove("UserAccountInserted");
+
+        <div class="alert alert-info">
+            <p>An e-mail has been sent to <strong>@Model.Record.Username</strong> for account verification</p>
+        </div>
+    }
+
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
@@ -79,7 +88,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Active</label>
                             <div class="col-sm-4">
-                                @Html.CheckBoxFor(m => m.Record.IsActive)
+                                @Html.CheckBoxFor(m => m.Record.IsActive, new { @disabled = "true" })
                             </div>
 
                             <label class="col-sm-2 control-label">Division</label>
