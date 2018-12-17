@@ -15,6 +15,15 @@
     <body>
         @using (Html.BeginForm("Login", "Public", FormMethod.Post, new { @class = "form-horizontal" }))
         {
+            if (TempData.ContainsKey("UserActivatedInfo"))
+            {
+                TempData.Remove("UserActivatedInfo");
+
+                <div class="alert alert-info">
+                    <p>You have successfully activated your account..</p>
+                </div>
+            }
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-4 col-md-offset-4 login-div">

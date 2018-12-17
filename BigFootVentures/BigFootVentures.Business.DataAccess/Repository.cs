@@ -1,5 +1,6 @@
 ﻿using BigFootVentures.Business.DataAccess.Mapping;
 using BigFootVentures.Business.Objects;
+using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Business.Objects.Wrapper;
 using MySql.Data.MySqlClient;
 using System;
@@ -34,6 +35,8 @@ namespace BigFootVentures.Business.DataAccess
         void Insert(TEntity entity);
 
         void Update(TEntity entity);
+
+        void UpdateUserAccount(UserAccount entity);
 
         void Delete(int ID);
 
@@ -367,6 +370,32 @@ namespace BigFootVentures.Business.DataAccess
                 {
                     command.Parameters.Add(new MySqlParameter("pID", MySqlDbType.Int32) { Value = entity.ID, Direction = ParameterDirection.Input });
                     command.Parameters.AddRange(this._mapper.CreateParameters(entity));
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public void UpdateUserAccount(UserAccount entity)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                using (var command = new MySqlCommand("UserAccount_UpdateStatusAndPassword", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("pID", MySqlDbType.Int32) { Value = entity.ID, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("pPassword", MySqlDbType.VarChar, 100) { Value = entity.Password, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("pIsActive", entity.IsActive ? 1 : 0) { Direction = ParameterDirection.Input });
 
                     command.ExecuteNonQuery();
                 }

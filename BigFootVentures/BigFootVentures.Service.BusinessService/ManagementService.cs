@@ -1,6 +1,7 @@
 ﻿using BigFootVentures.Business.DataAccess;
 using BigFootVentures.Business.DataAccess.Mapping;
 using BigFootVentures.Business.Objects;
+using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Business.Objects.Wrapper;
 using BigFootVentures.Service.BusinessService.DataAccessMapping;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace BigFootVentures.Service.BusinessService
         void Insert(TModel model);
 
         void Update(TModel model);
+
+        void UpdateUserAccount(UserAccount model);
 
         void Delete(int ID);
 
@@ -122,6 +125,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 repository.Update(model);
+            }
+        }
+
+        public void UpdateUserAccount(UserAccount model)
+        {
+            using (var repository = new Repository<UserAccount>(this._connectionString, this._mapper))
+            {
+                repository.UpdateUserAccount(model);
             }
         }
 

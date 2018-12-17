@@ -1,4 +1,6 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Application.Web.Models.Security;
+using BigFootVentures.Application.Web.Models.ViewModels;
+using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using BigFootVentures.Service.BusinessService.Validators;
 using System;
@@ -84,6 +86,61 @@ namespace BigFootVentures.Application.Web.Controllers
             FormsAuthentication.SignOut();
 
             return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region "Action Results"
+
+        [Route("UserAccountVerification/{id}", Name = "UserAccountVerificationView")]
+        public ActionResult UserAccountVerification(int id)
+        {
+            var userAccount = this._managementUserAccountService.Get(id);
+
+            if (userAccount == null || userAccount.IsActive)
+            {
+                return HttpNotFound();
+            }
+
+            userAccount.Password = string.Empty;
+
+            var model = new VMModel<UserAccount>();
+            model.Record = userAccount;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("UserAccountVerification", Name = "UserAccountVerificationPost")]
+        public ActionResult UserAccountVerification(VMModel<UserAccount> model)
+        {
+            var userAccount = this._managementUserAccountService.Get(model.Record.ID);
+
+            if (userAccount == null || userAccount.IsActive)
+            {
+                return HttpNotFound();
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Record.Password) || string.IsNullOrWhiteSpace(model.Record.ConfirmPassword))
+            {
+                TempData.Add("NoPasswordError", true);
+                return View(model);
+            }
+
+            if (!string.Equals(model.Record.Password, model.Record.ConfirmPassword))
+            {
+                TempData.Add("NotEqualPasswordError", true);
+                return View(model);
+            }
+
+            var newPassword = model.Record.Password;
+            model.Record = userAccount;
+            model.Record.IsActive = true;
+            model.Record.Password = PasswordEncryption.Encrypt(newPassword);
+            this._managementUserAccountService.UpdateUserAccount(model.Record);
+
+            TempData.Add("UserActivatedInfo", true);
+            return RedirectToAction("Index", "Public");
         }
 
         #endregion

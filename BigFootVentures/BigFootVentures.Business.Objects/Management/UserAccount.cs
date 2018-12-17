@@ -35,6 +35,8 @@ namespace BigFootVentures.Business.Objects.Management
 
         public string Roles { get { return this._roles; } set { this._roles = value; if (!string.IsNullOrWhiteSpace(value)) { this.Roless = value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries); } } }
 
+        public string ConfirmPassword { get; set; }
+
         #endregion
 
         #region "Calculated Properties"

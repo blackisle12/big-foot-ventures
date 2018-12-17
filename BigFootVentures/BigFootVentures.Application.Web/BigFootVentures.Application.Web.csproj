@@ -345,6 +345,7 @@
     <Content Include="Views\Home\UserAccounts.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Public\UserAccountVerification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
