@@ -67,7 +67,14 @@
                                     {
                                         <tr>
                                             @{ 
-                                                string link = $"{Url.Action(table.Caption, "Home")}s/25/1/{ViewBag.Keyword}/";
+                                                string caption = Url.Action(table.Caption, "Home") + "s";
+
+                                                if (table.Caption == "Company")
+                                                {
+                                                    caption = caption.Replace("Companys", "Companies");
+                                                }
+
+                                                string link = $"{caption}/25/1/{ViewBag.Keyword}/";
                                             }
                                             <td colspan="2">
                                                 <strong><a href="@link">Show more..</a></strong>
