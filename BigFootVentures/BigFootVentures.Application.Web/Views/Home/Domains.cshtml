@@ -1,4 +1,6 @@
-﻿@using BigFootVentures.Business.Objects.Management
+﻿<link href="~/Content/Views/Home/Domains.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
 @using BigFootVentures.Application.Web.Models.ViewModels
 
 @{
@@ -20,7 +22,10 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>                        
+                        <th class="th-name">Name</th>
+                        <th class="th-website-use">Website Use</th>
+                        <th class="th-website-current">Website Current</th>
+                        <th class="th-created-by">Created by</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,7 +33,10 @@
                         foreach (var domain in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("DomainNView", new { ID = domain.ID })" target="_blank">@domain.Name</a></td>                                
+                                <td><a href="@Url.RouteUrl("DomainNView", new { ID = domain.ID })" target="_blank">@domain.Name</a></td>
+                                <td>@domain.WebsiteUse</td>
+                                <td><input type="checkbox" @(domain.WebsiteCurrent ? "checked" : string.Empty) disabled /></td>
+                                <td>@domain.OwnerName</td>
                             </tr>
                         }
                     }

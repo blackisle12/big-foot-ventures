@@ -23,7 +23,13 @@
                 <thead>
                     <tr class="th-bg">
                         <th class="th-name">Name</th>
-                        <th class="th-type">Type</th>                        
+                        <th class="th-bf-company">BF Company</th>
+                        <th class="th-counterpart">Name of the counterpart</th>
+                        <th class="th-applicability">Applicability</th>
+                        <th class="th-object-of-agreement">Object of Agreement</th>
+                        <th class="th-type">Type</th>
+                        <th class="th-date-of-signature">Date of Signature</th>
+                        <th class="th-created-by">Created by</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +38,13 @@
                         {
                             <tr>
                                 <td><a href="@Url.RouteUrl("AgreementTView", new { ID = agreement.ID })" target="_blank">@agreement.Name</a></td>
-                                <td>@agreement.Type</td>                                
+                                <td>@agreement.BFCompany.CompanyName</td>
+                                <td>@agreement.Counterpart.CompanyName</td>
+                                <td>@agreement.Applicability</td>
+                                <td>@agreement.ObjectOfAgreement</td>
+                                <td>@agreement.Type</td>
+                                <td>@agreement.DateOfSignature</td>
+                                <td>@agreement.OwnerName</td>
                             </tr>
                         }
                     }

@@ -1,7 +1,19 @@
 ﻿.th-name {
-    width: 60%;
+    width: 30%;
 }
 
-.th-department {
-    width: 40%;
+.th-company-name {
+    width: 20%;
+}
+
+.th-title {
+    width: 10%;
+}
+
+.th-phone {
+    width: 15%;
+}
+
+.th-email {
+    width: 25%;
 }

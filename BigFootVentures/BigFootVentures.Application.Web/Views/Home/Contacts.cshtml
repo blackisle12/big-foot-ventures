@@ -23,7 +23,10 @@
                 <thead>
                     <tr class="th-bg">
                         <th class="th-name">Name</th>
-                        <th class="th-department">Department</th>                        
+                        <th class="th-company-name">Company</th>
+                        <th class="th-title">Title</th>
+                        <th class="th-phone">Phone</th>
+                        <th class="th-email">Email</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +35,10 @@
                         {
                             <tr>
                                 <td><a href="@Url.RouteUrl("ContactView", new { ID = contact.ID })" target="_blank">@($"{contact.FirstName} {contact.LastName}")</a></td>
-                                <td>@contact.Department</td>
+                                <td>@contact.Company.CompanyName</td>
+                                <td>@contact.Title</td>
+                                <td>@contact.Phone</td>
+                                <td>@contact.Email</td>
                             </tr>
                         }
                     }

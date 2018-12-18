@@ -23,6 +23,10 @@
                 <thead>
                     <tr class="th-bg">
                         <th class="th-name">Name</th>
+                        <th class="th-trademark-number">Trademark Number</th>
+                        <th class="th-international-registration-number">International Registration No.</th>
+                        <th class="th-filing-date-value">Filing Date Value</th>
+                        <th class="th-publication-date">Publication Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +35,10 @@
                         {
                             <tr>
                                 <td><a href="@Url.RouteUrl("TrademarkView", new { ID = trademark.ID })" target="_blank">@trademark.Name</a></td>
+                                <td>@trademark.TrademarkNumber</td>
+                                <td>@trademark.InternationalRegistrationNumber</td>
+                                <td>@trademark.FilingDateValue</td>
+                                <td>@trademark.PublicationDate</td>
                             </tr>
                         }
                     }

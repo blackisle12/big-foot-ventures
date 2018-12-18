@@ -1,7 +1,31 @@
 ﻿.th-name {
-    width: 65%;
+    width: 12.5%;
+}
+
+.th-bf-company {
+    width: 25%;
+}
+
+.th-counterpart {
+    width: 25%;
+}
+
+.th-applicability {
+    width: 5%;
+}
+
+.th-object-of-agreement {
+    width: 7.5%;
 }
 
 .th-type {
-    width: 35%;
+    width: 7.5%;
+}
+
+.th-date-of-signature {
+    width: 7.5%;
+}
+
+.th-created-by {
+    width: 10%;
 }

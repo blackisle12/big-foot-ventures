@@ -59,7 +59,20 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     ID = (int)dataReader["ID"],
 
                     Name = dataReader["Name"] as string,
-                    Type = dataReader["Type"] as string
+                    BFCompany = new Company
+                    {
+                        CompanyName = dataReader["BFCompanyName"] as string
+                    },
+                    Counterpart = new Company
+                    {
+                        CompanyName = dataReader["CounterpartCompanyName"] as string
+                    },
+                    Applicability = dataReader["Applicability"] as string,
+                    ObjectOfAgreement = dataReader["ObjectOfAgreement"] as string,
+                    Type = dataReader["Type"] as string,
+                    DateOfSignature = dataReader["DateOfSignature"] as string,
+
+                    OwnerName = dataReader["OwnerName"] as string
                 };
 
                 entities.Add(entity);

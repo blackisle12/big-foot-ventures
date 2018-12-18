@@ -123,6 +123,10 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     ID = (int)dataReader["ID"],
 
                     Name = dataReader["Name"] as string,
+                    WebsiteUse = dataReader["WebsiteUse"] as string,
+                    WebsiteCurrent = (dataReader["WebsiteCurrent"] as sbyte? ?? 0) == 1,
+
+                    OwnerName = dataReader["OwnerName"] as string
                 };
 
                 entities.Add(entity);

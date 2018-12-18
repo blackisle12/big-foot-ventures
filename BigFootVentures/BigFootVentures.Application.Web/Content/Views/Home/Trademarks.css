@@ -1,3 +1,19 @@
 ﻿.th-name {
-    width: 100%;
+    width: 30%;
+}
+
+.th-trademark-number {
+    width: 20%;
+}
+
+.th-international-registration-number {
+    width: 20%;
+}
+
+.th-filing-date-value {
+    width: 15%;
+}
+
+.th-publication-date {
+    width: 15%;
 }

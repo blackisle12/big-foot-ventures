@@ -244,6 +244,10 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     ID = (int)dataReader["ID"],
 
                     Name = dataReader["Name"] as string,
+                    TrademarkNumber = dataReader["TrademarkNumber"] as string,
+                    InternationalRegistrationNumber = dataReader["InternationalRegistrationNumber"] as string,
+                    FilingDateValue = dataReader["FilingDateValue"] as string,
+                    PublicationDate = dataReader["PublicationDate"] as string
                 };
 
                 entities.Add(entity);

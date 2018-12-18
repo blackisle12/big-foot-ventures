@@ -70,7 +70,13 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                     FirstName = dataReader["FirstName"] as string,
                     LastName = dataReader["LastName"] as string,
-                    Department = dataReader["Department"] as string,
+                    Company = new Company
+                    {
+                        CompanyName = dataReader["CompanyName"] as string
+                    },
+                    Title = dataReader["Title"] as string,
+                    Phone = dataReader["Phone"] as string,
+                    Email = dataReader["Email"] as string
                 };
 
                 entities.Add(entity);
