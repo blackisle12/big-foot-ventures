@@ -9,85 +9,123 @@
 
 @model VMSearchResult
 
-<div class="panel panel-default panel-parent">
-    <div class="panel-heading">
-        <span class="panel-title">
-            Search result for keyword "<strong>@ViewBag.Keyword</strong>"
-        </span>
-        <span class="panel-title pull-right">
-            <i class="fa fa-search"></i>
-        </span>
-    </div>
-    <div class="panel-body">
-        <!-- START: Search Result -->
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="table-responsive">
+<h4>
+    Search result for keyword "<strong>@ViewBag.Keyword</strong>"
+</h4>
+
+<hr />
+
+<div class="col-md-2">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-info"><strong>Records</strong></li>
+        @{ 
+            foreach (var table in Model.Table)
+            {
+                <li class="list-group-item">
                     @{
-                        foreach (var table in Model.Table)
+                        string caption = Url.Action(table.Caption, "Home") + "s";
+
+                        if (table.Caption == "Company")
                         {
-                            if (!table.Rows.Any())
-                            {
-                                continue;
-                            }
+                            caption = caption.Replace("Companys", "Companies");
+                        }
 
-                            <table class="table table-striped table-hover table-bordered">
-                                <caption>@table.Caption</caption>
-                                <tr>
-                                    @{
-                                        foreach (var header in table.Header)
-                                        {
-                                            <th>@header</th>
-                                        }
-                                    }
-                                </tr>
-                                @{
-                                    foreach (var row in table.Rows)
-                                    {
-                                        <tr>
-                                            @{
-                                                string link = $"{Url.Action(table.Caption, "Home")}/{row[0]}";
+                        string link = $"{caption}/25/1/{ViewBag.Keyword}/";
 
-                                                for (var i = 1; i < row.Count; i++)
-                                                {
-                                                    if (i == 1)
-                                                    {
-                                                        <td><a href="@link">@Html.Raw(row[i])</a></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>@Html.Raw(row[i])</td>
-                                                    }
-                                                }
-                                            }
-                                        </tr>
-                                    }
-
-                                    if (table.Rows.Count == 25)
-                                    {
-                                        <tr>
-                                            @{ 
-                                                string caption = Url.Action(table.Caption, "Home") + "s";
-
-                                                if (table.Caption == "Company")
-                                                {
-                                                    caption = caption.Replace("Companys", "Companies");
-                                                }
-
-                                                string link = $"{caption}/25/1/{ViewBag.Keyword}/";
-                                            }
-                                            <td colspan="2">
-                                                <strong><a href="@link">Show more..</a></strong>
-                                            </td>
-                                        </tr>
-                                    }
-                                }
-                            </table>
+                        if (table.Rows.Count == 0)
+                        {
+                            <span>@table.Caption</span>
+                        }
+                        else
+                        {
+                            <a href="@link">@string.Format("{0} ({1})", table.Caption, table.Rows.Count < 25 ? table.Rows.Count.ToString() : "25+")</a>
                         }
                     }
+                </li>
+            }
+        }
+    </ul>
+</div>
+<div class="col-md-10">
+    <div class="panel panel-default panel-parent">
+        <div class="panel-body">
+            <!-- START: Search Result -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        @{
+                            foreach (var table in Model.Table)
+                            {
+                                if (!table.Rows.Any())
+                                {
+                                    continue;
+                                }
+
+                                <table class="table table-striped table-hover table-bordered">
+                                    <caption>@string.Format("{0} ({1})", table.Caption, table.Rows.Count < 25 ? table.Rows.Count.ToString() : "25+")</caption>
+                                    <thead>
+                                        <tr>
+                                            @{
+                                                foreach (var header in table.Header)
+                                                {
+                                                    <th>@header</th>
+                                                }
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var row in table.Rows)
+                                            {
+                                                <tr>
+                                                    @{
+                                                        string link = $"{Url.Action(table.Caption, "Home")}/{row[0]}";
+
+                                                        for (var i = 1; i < row.Count; i++)
+                                                        {
+                                                            if (i == 1)
+                                                            {
+                                                                <td><a href="@link">@Html.Raw(row[i])</a></td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>@Html.Raw(row[i])</td>
+                                                            }
+                                                        }
+                                                    }
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        @{
+                                            if (table.Rows.Count == 25)
+                                            {
+                                                <tr>
+                                                    @{
+                                                        string caption = Url.Action(table.Caption, "Home") + "s";
+
+                                                        if (table.Caption == "Company")
+                                                        {
+                                                            caption = caption.Replace("Companys", "Companies");
+                                                        }
+
+                                                        string link = $"{caption}/25/1/{ViewBag.Keyword}/";
+                                                    }
+                                                    <td colspan="2">
+                                                        <strong><a href="@link">Show more..</a></strong>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tfoot>
+                                </table>
+                            }
+                        }
+                    </div>
                 </div>
             </div>
+            <!-- END: Search Result -->
         </div>
-        <!-- END: Search Result -->
-    </div>    
+    </div>
 </div>
