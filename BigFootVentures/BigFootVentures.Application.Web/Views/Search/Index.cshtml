@@ -23,22 +23,16 @@
             {
                 <li class="list-group-item">
                     @{
-                        string caption = Url.Action(table.Caption, "Home") + "s";
-
-                        if (table.Caption == "Company")
+                        if (table.Rows.Any())
                         {
-                            caption = caption.Replace("Companys", "Companies");
-                        }
-
-                        string link = $"{caption}/25/1/{ViewBag.Keyword}/";
-
-                        if (table.Rows.Count == 0)
-                        {
-                            <span>@table.Caption</span>
+                            @Html.ActionLink(
+                        string.Format("{0} ({1})", table.Caption, table.Rows.Count < 25 ? table.Rows.Count.ToString() : "25+"),
+                        table.Caption,
+                        new { rowCount = 25, page = 1, keyword = ViewBag.Keyword })
                         }
                         else
                         {
-                            <a href="@link">@string.Format("{0} ({1})", table.Caption, table.Rows.Count < 25 ? table.Rows.Count.ToString() : "25+")</a>
+                            @Html.Raw(table.Caption)
                         }
                     }
                 </li>

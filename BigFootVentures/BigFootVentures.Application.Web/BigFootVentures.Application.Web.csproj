@@ -192,6 +192,7 @@
     <Compile Include="Models\ViewModels\VMJsonResult.cs" />
     <Compile Include="Models\ViewModels\VMModel.cs" />
     <Compile Include="Models\ViewModels\VMPageResult.cs" />
+    <Compile Include="Models\ViewModels\VMSearchResultObject.cs" />
     <Compile Include="Models\ViewModels\VMSearchResult.cs" />
     <Compile Include="Models\ViewModels\VMSelectListItem.cs" />
     <Compile Include="Models\VMEnums.cs" />
