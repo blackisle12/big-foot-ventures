@@ -1,4 +1,21 @@
 ﻿caption {
     font-size: 120%;
     font-weight: bold;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.alert {
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+.active {
+    background-color: #a9a9a9 !important;
+    border-color: #a9a9a9 !important;
+}
+
+.active a {
+    color: #fff !important;
 }

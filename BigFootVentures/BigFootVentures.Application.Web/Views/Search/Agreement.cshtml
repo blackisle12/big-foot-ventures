@@ -1,0 +1,132 @@
+﻿<link href="~/Content/Views/Search/Index.css" rel="stylesheet" />
+<link href="~/Content/Views/Search/Agreement.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Search Result (Agreement) - " + ViewBag.Keyword;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMSearchResultObject<AgreementT>
+
+@using (Html.BeginForm("Agreement", "Search", FormMethod.Get))
+{
+    <h4>
+        Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>Agreement</strong> (@Model.ObjectResult.Total found)
+    </h4>
+
+    <hr />
+
+    <div class="col-md-2">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info"><strong>Records</strong></li>
+            @{
+                foreach (var table in Model.SearchResult.Table)
+                {
+                    <li class="list-group-item @(table.Caption == "Agreement" ? "active" : string.Empty)">
+                        @{
+                            if (table.Rows.Any())
+                            {
+                                @Html.ActionLink(
+                                     string.Format("{0} ({1})", table.Caption, table.Rows.Count < 25 ? table.Rows.Count.ToString() : "25+"),
+                                     table.Caption,
+                                     new { rowCount = 25, page = 1, keyword = ViewBag.Keyword })
+                            }
+                            else
+                            {
+                                @Html.Raw(table.Caption)
+                            }
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="col-md-10">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="th-bg">
+                        <th></th>
+                        <th class="th-name">Name</th>
+                        <th class="th-bf-company">BF Company</th>
+                        <th class="th-counterpart">Name of the counterpart</th>
+                        <th class="th-applicability">Applicability</th>
+                        <th class="th-object-of-agreement">Object of Agreement</th>
+                        <th class="th-type">Type</th>
+                        <th class="th-date-of-signature">Date of Signature</th>
+                        <th class="th-created-by">Created by</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var agreement in Model.ObjectResult.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("AgreementTView", new { ID = agreement.ID })" target="_blank">Edit</a></td>
+                                <td>@agreement.Name</td>
+                                <td>@agreement.BFCompany.CompanyName</td>
+                                <td>@agreement.Counterpart.CompanyName</td>
+                                <td>@agreement.Applicability</td>
+                                <td>@agreement.ObjectOfAgreement</td>
+                                <td>@agreement.Type</td>
+                                <td>@agreement.DateOfSignature</td>
+                                <td>@agreement.OwnerName</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="hidden" name="rowCount" value="@Model.ObjectResult.RowCount" />
+                <input type="hidden" name="page" value="@Model.ObjectResult.Page" />
+                <input type="hidden" name="keyword" value="@ViewBag.Keyword" />
+                <nav aria-label="...">
+                    <ul class="pager">
+                        @{
+                            if (Model.ObjectResult.Page != 1)
+                            {
+                                <li><a id="pagePrevious" href="#">Previous</a></li>
+                            }
+                            if (Model.ObjectResult.Pages > Model.ObjectResult.Page)
+                            {
+                                <li><a id="pageNext" href="#">Next</a></li>
+                            }
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#pagePrevious').on('click', function () {
+                $('[name="page"]').val('@(Model.ObjectResult.Page - 1)');
+                $('form').submit();
+            });
+
+            $('#pageNext').on('click', function () {
+                $('[name="page"]').val('@(Model.ObjectResult.Page + 1)');
+                $('form').submit();
+            });
+
+            $('form').submit(function (e) {
+                e.preventDefault();
+
+                var keyword = $('[name="keyword"]').val();
+
+                if (keyword.length > 0) {
+                    window.open(location.origin + '/Search/Agreement/' + $('[name="rowCount"]').val() + '/' + $('[name="page"]').val() + '/' + keyword + '/', '_self');
+                }
+                else {
+                    window.open(location.origin + '/Search/Agreement/' + $('[name="rowCount"]').val() + '/' + $('[name="page"]').val(), '_self');
+                }
+            });
+        });
+    </script>
+}

@@ -225,6 +225,7 @@
     <Content Include="Content\Views\Home\Registers.css" />
     <Content Include="Content\Views\Home\Companies.css" />
     <Content Include="Content\Views\Home\Brands.css" />
+    <Content Include="Content\Views\Search\Agreement.css" />
     <Content Include="Content\Views\Search\Index.css" />
     <Content Include="Content\Views\Shared\_Layout.css" />
     <Content Include="favicon.ico" />
@@ -348,6 +349,7 @@
     <Content Include="Views\Home\ChangePassword.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Public\UserAccountVerification.cshtml" />
+    <Content Include="Views\Search\Agreement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
