@@ -1,0 +1,24 @@
+﻿.table thead tr th:first-child {
+    width: 3%;
+}
+
+.th-case-number {
+    width: 15%;
+}
+
+.th-description {
+    width: 30%;
+}
+
+.th-reference-number {
+    width: 25%;
+}
+
+.th-domain-name {
+    width: 20%;
+}
+
+.th-do-not-contact {
+    width: 10%;
+}
+

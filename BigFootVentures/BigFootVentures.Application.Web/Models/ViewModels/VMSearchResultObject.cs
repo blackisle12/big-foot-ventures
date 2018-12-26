@@ -6,6 +6,8 @@ namespace BigFootVentures.Application.Web.Models.ViewModels
     {
         #region "Properties"
 
+        public string Caption { get; set; }
+
         public VMSearchResult SearchResult { get; set; }
 
         public VMPageResult<TModel> ObjectResult { get; set; }

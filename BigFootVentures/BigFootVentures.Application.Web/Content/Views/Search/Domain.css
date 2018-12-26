@@ -1,0 +1,19 @@
+﻿.table thead tr th:first-child {
+    width: 3%;
+}
+
+.th-name {
+    width: 35%;
+}
+
+.th-website-use {
+    width: 25%;
+}
+
+.th-website-current {
+    width: 10%;
+}
+
+.th-created-by {
+    width: 30%;
+}

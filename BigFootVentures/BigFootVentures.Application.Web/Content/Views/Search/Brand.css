@@ -1,0 +1,27 @@
+﻿.table thead tr th:first-child {
+    width: 3%;
+}
+
+.th-name {
+    width: 25%;
+}
+
+.th-purpose {
+    width: 10%;
+}
+
+.th-value {
+    width: 15%;
+}
+
+.th-categories {
+    width: 20%;
+}
+
+.th-hvt {
+    width: 20%;
+}
+
+.th-emv {
+    width: 10%;
+}

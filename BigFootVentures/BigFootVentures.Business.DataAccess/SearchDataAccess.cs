@@ -105,9 +105,9 @@ namespace BigFootVentures.Business.DataAccess
             searchResultList.Add(new SearchResultWrapper { Caption = "Domain", Header = new List<string> { "Domain Name", "BigFoot Owned" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Enquiry", Header = new List<string> { "Old Case Number", "Reference Number" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Lead", Header = new List<string> { "Name", "Company" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "LegalCase", Header = new List<string> { "Type of Case", "Trademark Number" }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Legal Case", Header = new List<string> { "Type of Case", "Trademark Number" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Office", Header = new List<string> { "Office Name", string.Empty }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Register", Header = new List<string> { "Register Name", "Country" }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Registrar", Header = new List<string> { "Register Name", "Country" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Trademark", Header = new List<string> { "Trademark Name", string.Empty }, Rows = new List<List<string>>() });
 
             return searchResultList;

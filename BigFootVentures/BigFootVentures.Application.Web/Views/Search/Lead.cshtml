@@ -1,0 +1,54 @@
+﻿<link href="~/Content/Views/Search/Index.css" rel="stylesheet" />
+<link href="~/Content/Views/Search/Lead.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Search Result (Lead) - " + ViewBag.Keyword;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMSearchResultObject<Lead>
+
+@using (Html.BeginForm("Lead", "Search", FormMethod.Get))
+{
+    <h4>
+        Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>@Model.Caption</strong> (@Model.ObjectResult.Total found)
+    </h4>
+
+    <hr />
+
+    <div class="col-md-2">
+        @Html.Partial("../Shared/_Components/Search/_PageObjectsFilter")
+    </div>
+    <div class="col-md-10">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="th-bg">
+                        <th></th>
+                        <th class="th-name">Name</th>
+                        <th class="th-company">Company</th>
+                        <th class="th-status">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var lead in Model.ObjectResult.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("LeadView", new { ID = lead.ID })" target="_blank">View</a></td>
+                                <td>@($"{lead.FirstName} {lead.LastName}")</td>
+                                <td>@lead.Company</td>
+                                <td>@lead.Status</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @Html.Partial("../Shared/_Components/Search/_PageFooter")
+    </div>
+}

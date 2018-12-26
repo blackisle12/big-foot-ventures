@@ -1,0 +1,56 @@
+﻿<link href="~/Content/Views/Search/Index.css" rel="stylesheet" />
+<link href="~/Content/Views/Search/Domain.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Search Result (Domain) - " + ViewBag.Keyword;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMSearchResultObject<DomainN>
+
+@using (Html.BeginForm("Domain", "Search", FormMethod.Get))
+{
+    <h4>
+        Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>@Model.Caption</strong> (@Model.ObjectResult.Total found)
+    </h4>
+
+    <hr />
+
+    <div class="col-md-2">
+        @Html.Partial("../Shared/_Components/Search/_PageObjectsFilter")
+    </div>
+    <div class="col-md-10">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="th-bg">
+                        <th></th>
+                        <th class="th-name">Name</th>
+                        <th class="th-website-use">Website Use</th>
+                        <th class="th-website-current">Website Current</th>
+                        <th class="th-created-by">Created by</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var domain in Model.ObjectResult.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("DomainNView", new { ID = domain.ID })" target="_blank">View</a></td>
+                                <td>@domain.Name</td>
+                                <td>@domain.WebsiteUse</td>
+                                <td><input type="checkbox" @(domain.WebsiteCurrent ? "checked" : string.Empty) disabled /></td>
+                                <td>@domain.OwnerName</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @Html.Partial("../Shared/_Components/Search/_PageFooter")
+    </div>
+}

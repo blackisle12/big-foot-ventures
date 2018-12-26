@@ -18,17 +18,22 @@
 <div class="col-md-2">
     <ul class="list-group">
         <li class="list-group-item list-group-item-info"><strong>Records</strong></li>
-        @{ 
+        @{
             foreach (var table in Model.Table)
             {
                 <li class="list-group-item">
                     @{
-                        if (table.Rows.Any())
+                        if (table.Rows.Count > 0)
                         {
-                            @Html.ActionLink(
-                                string.Format("{0} ({1})", table.Caption, table.Rows.Count < 25 ? table.Rows.Count.ToString() : "25+"),
-                                table.Caption,
-                                new { rowCount = 25, page = 1, keyword = ViewBag.Keyword })
+                            var caption = string.Format("{0} ({1})", table.Caption, table.Rows.Count < 25 ? table.Rows.Count.ToString() : "25+");
+                            var action = table.Caption;
+
+                            if (table.Caption == "Legal Case")
+                            {
+                                action = "LegalCase";
+                            }
+
+                            <a href="@Url.Action(action, "Search", new { rowCount = 25, page = 1, keyword = ViewBag.Keyword })">@caption</a>
                         }
                         else
                         {
@@ -79,7 +84,7 @@
                                         {
                                             if (i == 1)
                                             {
-                                                <td><a href="@link">Edit</a></td>
+                                                <td><a href="@link">View</a></td>
                                                 <td>@Html.Raw(row[i])</td>
                                             }
                                             else

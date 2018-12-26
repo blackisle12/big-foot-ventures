@@ -1,0 +1,23 @@
+﻿.table thead tr th:first-child {
+    width: 3%;
+}
+
+.th-name {
+    width: 30%;
+}
+
+.th-company-name {
+    width: 20%;
+}
+
+.th-title {
+    width: 10%;
+}
+
+.th-phone {
+    width: 15%;
+}
+
+.th-email {
+    width: 25%;
+}

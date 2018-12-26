@@ -1,0 +1,44 @@
+﻿<ul class="list-group">
+    <li class="list-group-item list-group-item-info"><strong>Records</strong></li>
+    @{
+        foreach (var table in Model.SearchResult.Table)
+        {
+            <li class="list-group-item @(table.Caption == Model.Caption ? "active" : string.Empty)">
+                @{
+                    if (table.Rows.Count > 0)
+                    {
+                        var caption = string.Format("{0} ({1})", table.Caption, table.Rows.Count < 25 ? table.Rows.Count.ToString() : "25+");
+                        var action = table.Caption;
+
+                        if (table.Caption == "Legal Case")
+                        {
+                            action = "LegalCase";
+                        }
+                        else if (table.Caption == "Registrar")
+                        {
+                            action = "Register";
+                        }
+
+                        <a href="#" class="go-to-object" data-object="@action">@caption</a>
+                    }
+                    else
+                    {
+                        @Html.Raw(table.Caption)
+                    }
+                }
+            </li>
+        }
+    }
+</ul>
+
+<script type="text/javascript">
+        $(function () {
+            $('.go-to-object').click(function (e) {
+                e.preventDefault();
+
+                var object = $(this).data('object');
+
+                window.open(location.origin + '/Search/' + object + '/25/1/@ViewBag.Keyword/', '_self');
+            });
+        });
+</script>

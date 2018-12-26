@@ -1,0 +1,58 @@
+﻿<link href="~/Content/Views/Search/Index.css" rel="stylesheet" />
+<link href="~/Content/Views/Search/Enquiry.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Search Result (Enquiry) - " + ViewBag.Keyword;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMSearchResultObject<Enquiry>
+
+@using (Html.BeginForm("Enquiry", "Search", FormMethod.Get))
+{
+    <h4>
+        Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>@Model.Caption</strong> (@Model.ObjectResult.Total found)
+    </h4>
+
+    <hr />
+
+    <div class="col-md-2">
+        @Html.Partial("../Shared/_Components/Search/_PageObjectsFilter")
+    </div>
+    <div class="col-md-10">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="th-bg">
+                        <th></th>
+                        <th class="th-case-number">Case Number</th>
+                        <th class="th-description">Description</th>
+                        <th class="th-reference-number">Reference Number</th>
+                        <th class="th-domain-name">Domain Name</th>
+                        <th class="th-do-not-contact">Do Not Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var enquiry in Model.ObjectResult.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("EnquiryView", new { ID = enquiry.ID })" target="_blank">View</a></td>
+                                <td>@enquiry.OldCaseNumber</td>
+                                <td>@enquiry.Description</td>
+                                <td>@enquiry.ReferenceNumber</td>
+                                <td>@enquiry.DomainName</td>
+                                <td><input type="checkbox" @(enquiry.DoNotContact ? "checked" : string.Empty) disabled /></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @Html.Partial("../Shared/_Components/Search/_PageFooter")
+    </div>
+}

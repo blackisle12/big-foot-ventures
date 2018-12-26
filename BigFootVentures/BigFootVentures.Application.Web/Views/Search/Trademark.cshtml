@@ -1,0 +1,58 @@
+﻿<link href="~/Content/Views/Search/Index.css" rel="stylesheet" />
+<link href="~/Content/Views/Search/Trademark.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Search Result (Trademark) - " + ViewBag.Keyword;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMSearchResultObject<Trademark>
+
+@using (Html.BeginForm("Trademark", "Search", FormMethod.Get))
+{
+    <h4>
+        Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>@Model.Caption</strong> (@Model.ObjectResult.Total found)
+    </h4>
+
+    <hr />
+
+    <div class="col-md-2">
+        @Html.Partial("../Shared/_Components/Search/_PageObjectsFilter")
+    </div>
+    <div class="col-md-10">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="th-bg">
+                        <th></th>
+                        <th class="th-name">Name</th>
+                        <th class="th-trademark-number">Trademark Number</th>
+                        <th class="th-international-registration-number">International Registration No.</th>
+                        <th class="th-filing-date-value">Filing Date Value</th>
+                        <th class="th-publication-date">Publication Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var trademark in Model.ObjectResult.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("TrademarkView", new { ID = trademark.ID })" target="_blank">View</a></td>
+                                <td>@trademark.Name</td>
+                                <td>@trademark.TrademarkNumber</td>
+                                <td>@trademark.InternationalRegistrationNumber</td>
+                                <td>@trademark.FilingDateValue</td>
+                                <td>@trademark.PublicationDate</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @Html.Partial("../Shared/_Components/Search/_PageFooter")
+    </div>
+}

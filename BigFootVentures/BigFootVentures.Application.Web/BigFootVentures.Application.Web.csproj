@@ -225,6 +225,17 @@
     <Content Include="Content\Views\Home\Registers.css" />
     <Content Include="Content\Views\Home\Companies.css" />
     <Content Include="Content\Views\Home\Brands.css" />
+    <Content Include="Content\Views\Search\Trademark.css" />
+    <Content Include="Content\Views\Search\Register.css" />
+    <Content Include="Content\Views\Search\Contact.css" />
+    <Content Include="Content\Views\Search\Office.css" />
+    <Content Include="Content\Views\Search\LegalCase.css" />
+    <Content Include="Content\Views\Search\Lead.css" />
+    <Content Include="Content\Views\Search\Enquiry.css" />
+    <Content Include="Content\Views\Search\Domain.css" />
+    <Content Include="Content\Views\Search\Cancellation.css" />
+    <Content Include="Content\Views\Search\Company.css" />
+    <Content Include="Content\Views\Search\Brand.css" />
     <Content Include="Content\Views\Search\Agreement.css" />
     <Content Include="Content\Views\Search\Index.css" />
     <Content Include="Content\Views\Shared\_Layout.css" />
@@ -350,6 +361,19 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Public\UserAccountVerification.cshtml" />
     <Content Include="Views\Search\Agreement.cshtml" />
+    <Content Include="Views\Search\Brand.cshtml" />
+    <Content Include="Views\Search\Company.cshtml" />
+    <Content Include="Views\Search\Cancellation.cshtml" />
+    <Content Include="Views\Search\Domain.cshtml" />
+    <Content Include="Views\Search\Enquiry.cshtml" />
+    <Content Include="Views\Search\Lead.cshtml" />
+    <Content Include="Views\Search\LegalCase.cshtml" />
+    <Content Include="Views\Shared\_Components\Search\_PageObjectsFilter.cshtml" />
+    <Content Include="Views\Shared\_Components\Search\_PageFooter.cshtml" />
+    <Content Include="Views\Search\Office.cshtml" />
+    <Content Include="Views\Search\Contact.cshtml" />
+    <Content Include="Views\Search\Register.cshtml" />
+    <Content Include="Views\Search\Trademark.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

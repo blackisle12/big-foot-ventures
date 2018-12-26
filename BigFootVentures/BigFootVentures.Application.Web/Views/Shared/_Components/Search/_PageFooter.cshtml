@@ -1,0 +1,61 @@
+﻿@{
+    var action = Model.Caption;
+
+    if (action == "Legal Case")
+    {
+        action = "LegalCase";
+    }
+    else if (action == "Registrar")
+    {
+        action = "Register";
+    }
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <input type="hidden" name="rowCount" value="@Model.ObjectResult.RowCount" />
+        <input type="hidden" name="page" value="@Model.ObjectResult.Page" />
+        <input type="hidden" name="keyword" value="@ViewBag.Keyword" />
+        <nav aria-label="...">
+            <ul class="pager">
+                @{
+                    if (Model.ObjectResult.Page != 1)
+                    {
+                        <li><a id="pagePrevious" href="#">Previous</a></li>
+                    }
+                    if (Model.ObjectResult.Pages > Model.ObjectResult.Page)
+                    {
+                        <li><a id="pageNext" href="#">Next</a></li>
+                    }
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(function () {
+            $('#pagePrevious').on('click', function () {
+                $('[name="page"]').val('@(Model.ObjectResult.Page - 1)');
+                $('form').submit();
+            });
+
+            $('#pageNext').on('click', function () {
+                $('[name="page"]').val('@(Model.ObjectResult.Page + 1)');
+                $('form').submit();
+            });
+
+            $('form').submit(function (e) {
+                e.preventDefault();
+
+                var keyword = $('[name="keyword"]').val();
+
+                if (keyword.length > 0) {
+                    window.open(location.origin + '/Search/@action/' + $('[name="rowCount"]').val() + '/' + $('[name="page"]').val() + '/' + keyword + '/', '_self');
+                }
+                else {
+                    window.open(location.origin + '/Search/@action/' + $('[name="rowCount"]').val() + '/' + $('[name="page"]').val(), '_self');
+                }
+            });
+        });
+</script>

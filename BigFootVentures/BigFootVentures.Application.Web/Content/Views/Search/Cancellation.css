@@ -1,0 +1,8 @@
+﻿.table thead tr th:first-child {
+    width: 3%;
+}
+
+.th-name {
+    width: 97%;
+}
+

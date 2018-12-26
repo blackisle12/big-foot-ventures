@@ -1,0 +1,16 @@
+﻿.table thead tr th:first-child {
+    width: 3%;
+}
+
+.th-name {
+    width: 50%;
+}
+
+.th-company {
+    width: 35%;
+}
+
+.th-status {
+    width: 15%;
+}
+

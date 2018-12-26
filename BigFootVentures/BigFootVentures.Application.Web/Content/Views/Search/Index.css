@@ -19,3 +19,7 @@
 .active a {
     color: #fff !important;
 }
+
+.list-group-item {
+    border-radius: 0 !important;
+}
