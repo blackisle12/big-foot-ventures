@@ -26,9 +26,9 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <div class="nav-image">
+                    @*<div class="nav-image">
                         <img class="img-responsive" src="~/Content/images/bf_logo_white.png" />
-                    </div>
+                    </div>*@
                     <div>
                         <button name="nav-toggle" type="button" class="btn main-nav-toggle"><i class="fa fa-bars"></i></button>
                     </div>
@@ -57,8 +57,8 @@
             <nav class="side-nav active" id="sidebar" name="sidebar">
                 <div class="sidebar-header">
                     <p class="side-nav-heading">
-                        <a class="close-nav pull-right" name="nav-toggle"><i class="fa fa-bars"></i></a>
-                        <img class="img-responsive" src="~/Content/images/bf_logo_white.png" />
+                        <a class="close-nav" name="nav-toggle"><i class="fa fa-bars"></i></a>
+                        @*<img class="img-responsive" src="~/Content/images/bf_logo_white.png" />*@
                     </p>
                 </div>
                 <hr>
@@ -80,6 +80,7 @@
                     <li class="@(Request.RawUrl.IndexOf("/Home/PreFilingSimilarityResearch", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("PreFilingSimilarityResearchs", "Home")">Pre-Filing Similarity Research</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Register", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Registers", "Home")">Registrar</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/SimilarTrademark", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("SimilarTrademarks", "Home")">Similar Trademarks</a></li>
+                    <li class="@(Request.RawUrl.IndexOf("/Home/Task", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Tasks", "Home")">Tasks</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/TMRepresentative", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TMRepresentatives", "Home")">TM Representatives</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/Trademark", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")"><a href="@Url.Action("Trademarks", "Home")">Trademarks</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TrademarkOwners", "Home")">Trademark Owners</a></li>

@@ -271,6 +271,7 @@
     <Content Include="Scripts\Views\Home\EmailResponse.js" />
     <Content Include="Scripts\Views\Home\LegalCases.js" />
     <Content Include="Scripts\Views\Home\Offices.js" />
+    <Content Include="Scripts\Views\Home\Tasks.js" />
     <Content Include="Scripts\Views\Home\UserAccount.js" />
     <Content Include="Scripts\Views\Home\Trademark.js" />
     <Content Include="Scripts\Views\Home\Office.js" />
@@ -374,6 +375,7 @@
     <Content Include="Views\Search\Contact.cshtml" />
     <Content Include="Views\Search\Register.cshtml" />
     <Content Include="Views\Search\Trademark.cshtml" />
+    <Content Include="Views\Home\Tasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

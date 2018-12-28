@@ -31,6 +31,7 @@ namespace BigFootVentures.Application.Web
             container.RegisterType<IManagementService<PreFilingSimilarityResearch>>(new InjectionFactory(c => new ManagementService<PreFilingSimilarityResearch>(connectionString)));
             container.RegisterType<IManagementService<Register>>(new InjectionFactory(c => new ManagementService<Register>(connectionString)));
             container.RegisterType<IManagementService<SimilarTrademark>>(new InjectionFactory(c => new ManagementService<SimilarTrademark>(connectionString)));
+            container.RegisterType<IManagementService<Task>>(new InjectionFactory(c => new ManagementService<Task>(connectionString)));
             container.RegisterType<IManagementService<TMRepresentative>>(new InjectionFactory(c => new ManagementService<TMRepresentative>(connectionString)));
             container.RegisterType<IManagementService<Trademark>>(new InjectionFactory(c => new ManagementService<Trademark>(connectionString)));
             container.RegisterType<IManagementService<TrademarkOwner>>(new InjectionFactory(c => new ManagementService<TrademarkOwner>(connectionString)));

@@ -39,6 +39,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<PreFilingSimilarityResearch> _managementPreFilingSimilarityResearchService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
         private readonly IManagementService<SimilarTrademark> _managementSimilarTrademarkService = null;
+        private readonly IManagementService<Task> _managementTaskService = null;
         private readonly IManagementService<TMRepresentative> _managementTMRepresentativeService = null;
         private readonly IManagementService<Trademark> _managementTrademarkService = null;
         private readonly IManagementService<TrademarkOwner> _managementTrademarkOwnerService = null;
@@ -66,6 +67,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<PreFilingSimilarityResearch> managementPreFilingSimilarityResearchService,
             IManagementService<Register> managementRegisterService,
             IManagementService<SimilarTrademark> managementSimilarTrademarkService,
+            IManagementService<Task> managementTaskService,
             IManagementService<TMRepresentative> managementTMRepresentativeService,
             IManagementService<Trademark> managementTrademarkService,
             IManagementService<TrademarkOwner> managementTrademarkOwnerService,
@@ -87,6 +89,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementPreFilingSimilarityResearchService = managementPreFilingSimilarityResearchService;
             this._managementRegisterService = managementRegisterService;            
             this._managementSimilarTrademarkService = managementSimilarTrademarkService;
+            this._managementTaskService = managementTaskService;
             this._managementTMRepresentativeService = managementTMRepresentativeService;
             this._managementTrademarkService = managementTrademarkService;
             this._managementTrademarkOwnerService = managementTrademarkOwnerService;
@@ -2887,6 +2890,149 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return RedirectToAction("SimilarTrademarks");
+        }
+
+        #endregion
+
+        #region "Task"
+
+        [Route("Tasks/{rowCount?}/{page?}", Name = "Tasks")]
+        public ActionResult Tasks(int rowCount = 25, int page = 1)
+        {
+            var startIndex = (page - 1) * rowCount;
+            var tasks = this._managementTaskService.Get(startIndex, rowCount, out int total);
+            var pageResult = new VMPageResult<Task>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = tasks
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            return View(pageResult);
+        }
+
+        [Route("Task/{ID:int}", Name = "TaskView")]
+        public ActionResult Task(int ID)
+        {
+            var task = this._managementTaskService.Get(ID);
+            var model = new VMModel<Task>
+            {
+                Record = task,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("Task", model);
+        }
+
+        [Route("Task/New", Name = "TaskNew")]
+        public ActionResult TaskNew()
+        {
+            VMModel<Task> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Task>();
+            }
+            else
+            {
+                model = new VMModel<Task>
+                {
+                    Record = new Task(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("SimilarTrademark", model);
+        }
+
+        [Route("Task/Edit/{ID:int}", Name = "TaskEdit")]
+        public ActionResult TaskEdit(int ID)
+        {
+            VMModel<Task> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Task>();
+            }
+            else
+            {
+                var task = this._managementTaskService.Get(ID);
+
+                model = new VMModel<Task>
+                {
+                    Record = task,
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Task", model);
+        }
+
+        [HttpPost]
+        [Route("Task", Name = "TaskPost")]
+        public ActionResult Task(VMModel<Task> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (TaskValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementTaskService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementTaskService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Task>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Task/Delete/{ID:int}", Name = "TaskDelete")]
+        public ActionResult TaskDelete(int ID)
+        {
+            try
+            {
+                this._managementTaskService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Tasks");
         }
 
         #endregion

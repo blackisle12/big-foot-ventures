@@ -1,0 +1,52 @@
+﻿<link href="~/Content/Views/Home/Tasks.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Tasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<Task>
+
+@using (Html.BeginForm("Tasks", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-issue-date">Date</th>
+                        <th class="th-status">Status</th>
+                        <th class="th-subject">Subject</th>
+                        <th class="th-related-to">Related To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var task in Model.Records)
+                        {
+                            <tr>
+                                <td>@task.IssueDate</td>
+                                <td>@task.Status</td>
+                                <td><a href="@Url.RouteUrl("TaskView", new { ID = task.ID })" target="_blank">@task.Subject</a></td>
+                                <td><a href="@Url.RouteUrl($"{task.RelatedToObjectName}View", new { ID = task.RelatedToObjectID })" target="_blank">@task.RelatedToObjectValue</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/Tasks.js"></script>
+}
