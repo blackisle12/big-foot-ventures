@@ -38,7 +38,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                    RelatedToObjectValue = dataReader["RelatedToObjectValue"] as string,
                    CloseTask = ((dataReader["CloseTask"] as sbyte? ?? 0) == 1),
 
-                   MessageDate = (DateTime)dataReader["MessageDate"],
+                   MessageDate = dataReader["MessageDate"] as DateTime?,
 
                    CreateRecurringSeriesOfTasks = ((dataReader["CreateRecurringSeriesOfTasks"] as sbyte? ?? 0) == 1),
 
@@ -91,7 +91,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pComments", MySqlDbType.VarChar, 255) { Value = entity.Comments, Direction = ParameterDirection.Input },
                 new MySqlParameter("pIssueDate", MySqlDbType.Date) { Value = entity.IssueDate, Direction = ParameterDirection.Input },
                 new MySqlParameter("pDueDate", MySqlDbType.Date) { Value = entity.DueDate, Direction = ParameterDirection.Input },
-                new MySqlParameter("pPriority", MySqlDbType.VarChar, 25) { Value = entity.OwnerName, Direction = ParameterDirection.Input },
+                new MySqlParameter("pPriority", MySqlDbType.VarChar, 25) { Value = entity.Priority, Direction = ParameterDirection.Input },
                 new MySqlParameter("pCompletionDate", MySqlDbType.DateTime) { Value = entity.CompletionDate, Direction = ParameterDirection.Input },
                 new MySqlParameter("pCreationDate", MySqlDbType.DateTime) { Value = entity.CreationDate, Direction = ParameterDirection.Input },
                 new MySqlParameter("pReasonForClose", MySqlDbType.VarChar, 255) { Value = entity.ReasonForClose, Direction = ParameterDirection.Input },

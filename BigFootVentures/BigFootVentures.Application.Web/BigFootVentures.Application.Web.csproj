@@ -376,6 +376,7 @@
     <Content Include="Views\Search\Register.cshtml" />
     <Content Include="Views\Search\Trademark.cshtml" />
     <Content Include="Views\Home\Tasks.cshtml" />
+    <Content Include="Views\Home\Task.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

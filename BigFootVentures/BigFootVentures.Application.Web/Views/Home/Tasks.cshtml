@@ -33,10 +33,10 @@
                         foreach (var task in Model.Records)
                         {
                             <tr>
-                                <td>@task.IssueDate</td>
+                                <td>@(task.IssueDate?.ToString("dd-MM-yyyy"))</td>
                                 <td>@task.Status</td>
                                 <td><a href="@Url.RouteUrl("TaskView", new { ID = task.ID })" target="_blank">@task.Subject</a></td>
-                                <td><a href="@Url.RouteUrl($"{task.RelatedToObjectName}View", new { ID = task.RelatedToObjectID })" target="_blank">@task.RelatedToObjectValue</a></td>
+                                <td>@task.RelatedToObjectValue</td>
                             </tr>
                         }
                     }

@@ -1436,6 +1436,27 @@ namespace BigFootVentures.Business.Objects.Enumerators
             }
         }
 
+        public static class Task
+        {
+            public enum Priority
+            {
+                [Description("Normal")]
+                Normal,
+
+                [Description("High")]
+                High
+            }
+
+            public enum Status
+            {
+                [Description("Open")]
+                Open,
+
+                [Description("Completed")]
+                Completed
+            }
+        }
+
         public static class Trademark
         {
             public enum OfficeStatus

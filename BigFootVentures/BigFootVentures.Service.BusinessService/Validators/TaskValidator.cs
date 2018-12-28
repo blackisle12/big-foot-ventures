@@ -19,7 +19,7 @@ namespace BigFootVentures.Service.BusinessService.Validators
 
             if (task.AssignedTo == null || task.AssignedTo.ID == 0)
             {
-                validationResult.Add("Record.AssignedToName", ValidationMessages.REQUIRED);
+                validationResult.Add("Record.AssignedTo.DisplayName", ValidationMessages.REQUIRED);
             }
 
             return !validationResult.Any();

@@ -2923,6 +2923,10 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult Task(int ID)
         {
             var task = this._managementTaskService.Get(ID);
+
+            task.AssignedTo = this._managementUserAccountService.Get(task.AssignedTo.ID);
+            task.AssignedTo.DisplayName = $"{task.AssignedTo.FirstName} {task.AssignedTo.LastName}";
+            
             var model = new VMModel<Task>
             {
                 Record = task,
@@ -2956,7 +2960,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 };
             }
 
-            return View("SimilarTrademark", model);
+            return View("Task", model);
         }
 
         [Route("Task/Edit/{ID:int}", Name = "TaskEdit")]
@@ -3695,6 +3699,32 @@ namespace BigFootVentures.Application.Web.Controllers
             };
 
             return RedirectPost<UserAccount>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("UserAccount/Autocomplete/{keyword}", Name = "UserAccountAutocomplete")]
+        public ActionResult UserAccountAutocomplete(string keyword)
+        {
+            VMJsonResult result = null;
+
+            try
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = true,
+                    Result = this._managementUserAccountService.GetAutocomplete(keyword)
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new VMJsonResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = ex.Message
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

@@ -1,0 +1,189 @@
+﻿<link href="~/Content/Views/Home/Task.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Task - " + (Model.Record.ID > 0 ? Model.Record.Subject : "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Task>
+
+@using (Html.BeginForm("Task", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+    @Html.HiddenFor(m => m.Record.AssignedTo.ID)
+    @Html.HiddenFor(m => m.Record.RelatedToObjectID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Task
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Task Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Task Information
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subject</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Subject, new { @class = "form-control required" })
+                                @Html.ValidationMessageFor(m => m.Record.Subject, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Assigned To</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.AssignedTo.DisplayName, new { @class = "form-control required", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.AssignedTo.DisplayName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Record.AssignedTo.DisplayName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Comments</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.Comments, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Task.Status>()), new { @class = "form-control required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Issue Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.IssueDate, new { @class = "form-control", @type = "date", @Value = Model.Record.IssueDate?.ToString("yyyy-MM-dd") })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Due Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.DueDate, new { @class = "form-control", @type = "date", @Value = Model.Record.DueDate?.ToString("yyyy-MM-dd") })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Close Task</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.CloseTask)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Priority</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(m => m.Record.Priority, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Task.Priority>()), new { @class = "form-control required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Completion Date</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.CompletionDate, new { @class = "form-control", @type = "datetime-local", @Value = Model.Record.CompletionDate?.ToString("yyyy-MM-ddTHH:mm") })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Creation Date</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.CreationDate, new { @class = "form-control", @type = "datetime-local", @Value = Model.Record.CreationDate?.ToString("yyyy-MM-ddTHH:mm") })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Task Information -->
+            <!-- START: Related To -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Related to
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Message Date</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.MessageDate, new { @class = "form-control", @type = "datetime-local" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Related To -->
+            <!-- START: Reccurence -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Reccurence
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Create Recurring Series of Tasks</label>
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Record.CreateRecurringSeriesOfTasks)
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Reccurence -->
+            <!-- START: Reminder -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Reminder
+                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Reminder</label>
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Record.Reminder)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                @Html.TextBoxFor(m => m.Record.ReminderDate, new { @class = "form-control", @type = "datetime-local" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Reminder -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(UserAccount), ChildIDContainer = "AssignedTo.ID", ChildNameContainer = "AssignedTo.DisplayName" })    
+
+    <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
+    <script src="~/Scripts/Views/Home/Task.js"></script>
+}
