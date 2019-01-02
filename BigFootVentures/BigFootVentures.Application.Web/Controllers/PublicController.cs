@@ -4,6 +4,7 @@ using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using BigFootVentures.Service.BusinessService.Validators;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -51,7 +52,9 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 if (Membership.ValidateUser(username, password))
                 {
-                    FormsAuthentication.SetAuthCookie(username, false);
+                    var userAccount = this._managementUserAccountService.GetByUsername(username).FirstOrDefault();
+
+                    FormsAuthentication.SetAuthCookie($"{userAccount.ID} {username} {userAccount.FirstName} {userAccount.LastName}", false);
 
                     return RedirectToAction("Index", "Home");
                 }

@@ -187,8 +187,10 @@
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
     <Compile Include="Models\Utilities\RouteUtils.cs" />
+    <Compile Include="Models\Utilities\SessionUtils.cs" />
     <Compile Include="Models\Utilities\StringUtils.cs" />
     <Compile Include="Models\ViewModels\VMAssociation.cs" />
+    <Compile Include="Models\ViewModels\VMDashboard.cs" />
     <Compile Include="Models\ViewModels\VMJsonResult.cs" />
     <Compile Include="Models\ViewModels\VMModel.cs" />
     <Compile Include="Models\ViewModels\VMPageResult.cs" />

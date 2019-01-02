@@ -24,6 +24,8 @@ namespace BigFootVentures.Service.BusinessService
 
         ICollection<TModel> GetByUsername(string username);
 
+        ICollection<TModel> GetAssigned(int assignedToID, int startIndex, int rowCount, out int total);
+
         #endregion
 
         #region "Persistence"
@@ -105,6 +107,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.GetByUsername(username);
+            }
+        }
+
+        public ICollection<TModel> GetAssigned(int assignedToID, int startIndex, int rowCount, out int total)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.GetAssigned(assignedToID, startIndex, rowCount, out total);
             }
         }
 

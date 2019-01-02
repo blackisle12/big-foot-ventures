@@ -37,6 +37,7 @@
                     <div class="nav navbar-nav">
                         <ul class="nav navbar-nav">
                             <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li><a href="#"><strong>@BigFootVentures.Application.Web.Models.Utilities.SessionUtils.GetUserAccount().DisplayName</strong></a></li>
                         </ul>
                         <div class="input-group search-nav">
                             <input name="txtSearch" type="text" class="form-control" placeholder="Search">

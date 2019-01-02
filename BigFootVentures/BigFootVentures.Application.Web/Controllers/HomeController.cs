@@ -108,10 +108,24 @@ namespace BigFootVentures.Application.Web.Controllers
         #region "Default"
         
         [Route("")]
-        [Route("Index")]
-        public ActionResult Index()
+        [Route("Index/{rowCount?}/{page?}", Name = "Dashboard")]
+        public ActionResult Index(int rowCount = 25, int page = 1)
         {
-            return View();
+            var startIndex = (page - 1) * rowCount;
+            var tasks = this._managementTaskService.GetAssigned(SessionUtils.GetUserAccount().ID, startIndex, rowCount, out int total);
+            var model = new VMDashboard
+            {
+                Tasks = new VMPageResult<Task>
+                {
+                    StartIndex = startIndex,
+                    RowCount = rowCount,
+                    Page = page,
+                    Total = total,
+                    Records = tasks
+                }
+            };
+
+            return View(model);
         }
 
         #endregion
@@ -241,6 +255,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementAgreementService.Insert(model.Record);
                     }
                     else
@@ -586,6 +602,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementCancellationService.Insert(model.Record);
                     }
                     else
@@ -956,6 +974,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementContactService.Insert(model.Record);
                     }
                     else
@@ -1190,6 +1210,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementDomainService.Insert(model.Record);
                     }
                     else
@@ -1370,6 +1392,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementEmailResponseService.Insert(model.Record);
                     }
                     else
@@ -1555,6 +1579,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementEnquiryService.Insert(model.Record);
                     }
                     else
@@ -1729,6 +1755,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementLeadService.Insert(model.Record);
                     }
                     else
@@ -2198,6 +2226,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementOfficeService.Insert(model.Record);
                     }
                     else
@@ -2377,6 +2407,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementOfficeStatusService.Insert(model.Record);
                     }
                     else
@@ -2521,6 +2553,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementPreFilingSimilarityResearchService.Insert(model.Record);
                     }
                     else
@@ -2675,6 +2709,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementRegisterService.Insert(model.Record);
                     }
                     else
@@ -2840,7 +2876,7 @@ namespace BigFootVentures.Application.Web.Controllers
         }
 
         [HttpPost]
-        [Route("SimilarTrademark", Name = "SimlarTrademarkPost")]
+        [Route("SimilarTrademark", Name = "SimilarTrademarkPost")]
         public ActionResult SimilarTrademark(VMModel<SimilarTrademark> model)
         {
             Func<int> postModel = () =>
@@ -2851,6 +2887,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementSimilarTrademarkService.Insert(model.Record);
                     }
                     else
@@ -2998,6 +3036,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementTaskService.Insert(model.Record);
                     }
                     else
@@ -3352,6 +3392,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
+
                         this._managementTrademarkService.Insert(model.Record);
                     }
                     else
@@ -3665,6 +3707,8 @@ namespace BigFootVentures.Application.Web.Controllers
                     {
                         model.Record.Username = model.Record.EmailAddress;
                         model.Record.Password = PasswordEncryption.Encrypt(StringUtils.GenerateRandomString());
+                        model.Record.CreatedBy = SessionUtils.GetUserAccount().ID;
+                        model.Record.CreatedDate = SessionUtils.GetCurrentDateTime();
 
                         this._managementUserAccountService.Insert(model.Record);
 

@@ -179,3 +179,9 @@ input[type=checkbox], input[type=radio] {
 .pager {
     margin: 10px 0 !important;
 }
+
+p.table-empty {
+    text-align: center;
+    padding: 15px 0;
+    margin: 0 !important;
+}
