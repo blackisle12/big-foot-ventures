@@ -123,11 +123,19 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     ID = (int)dataReader["ID"],
 
                     Name = dataReader["Name"] as string,
-                    WebsiteUse = dataReader["WebsiteUse"] as string,
-                    WebsiteCurrent = (dataReader["WebsiteCurrent"] as sbyte? ?? 0) == 1,
-
-                    OwnerName = dataReader["OwnerName"] as string
+                    BigFootOwned = (dataReader["BigFootOwned"] as sbyte? ?? 0) == 1,
+                    ExpirationDate = dataReader["ExpirationDate"] as string,
                 };
+
+                if (int.TryParse((dataReader["RegistrarID"] as int?)?.ToString(), out int registrarID))
+                {
+                    entity.Registrar = new Register { ID = registrarID, Name = dataReader["RegistrarName"] as string };
+                }
+
+                if (int.TryParse((dataReader["RegistrantID"] as int?)?.ToString(), out int registrantID))
+                {
+                    entity.Registrant = new Company { ID = registrantID, DisplayName = dataReader["RegistrantName"] as string };
+                }
 
                 entities.Add(entity);
             }

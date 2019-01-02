@@ -63,7 +63,7 @@
                     </caption>
                     <thead>
                         <tr>
-                            <th style="width: 5%;"></th>
+                            <th style="width: 5%;">Action</th>
                             @{
                                 foreach (var header in table.Header)
                                 {
@@ -89,7 +89,14 @@
                                             }
                                             else
                                             {
-                                                <td>@Html.Raw(row[i])</td>
+                                                if (table.Caption == "Domain")
+                                                {
+                                                    <td><input type="checkbox" @(row[i] == "True" ? "checked" : string.Empty) disabled /></td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@Html.Raw(row[i])</td>
+                                                }
                                             }
                                         }
                                     }
