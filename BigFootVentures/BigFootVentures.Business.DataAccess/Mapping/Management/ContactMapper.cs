@@ -1,7 +1,10 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 
 namespace BigFootVentures.Business.DataAccess.Mapping.Management
 {
@@ -83,6 +86,25 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             }
 
             return entities;
+        }
+
+        public StringBuilder ExportData(MySqlDataReader dataReader)
+        {
+            var file = new StringBuilder();
+
+            file.AppendLine("Name,Company,Title,Phone,Email");
+
+            while (dataReader.Read())
+            {
+                file.Append(DataUtils.EscapeCSV($"{dataReader["FirstName"] as string} {dataReader["LastName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CompanyName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Title"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Phone"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Email"] as string}") + ", ");
+                file.Append(Environment.NewLine);
+            }
+
+            return file;
         }
 
         public MySqlParameter[] CreateParameters(object model)

@@ -1,8 +1,10 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 
 namespace BigFootVentures.Business.DataAccess.Mapping.Management
 {
@@ -141,6 +143,25 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             }
 
             return entities;
+        }
+
+        public StringBuilder ExportData(MySqlDataReader dataReader)
+        {
+            var file = new StringBuilder();
+
+            file.AppendLine("Name,Bigfoot Owned,Registrant,Expiration Date,Registrar");
+
+            while (dataReader.Read())
+            {
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Name"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrantName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ExpirationDate"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrarName"] as string}") + ", ");
+                file.Append(Environment.NewLine);
+            }
+
+            return file;
         }
 
         public MySqlParameter[] CreateParameters(object model)

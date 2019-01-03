@@ -5,6 +5,7 @@ using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Business.Objects.Wrapper;
 using BigFootVentures.Service.BusinessService.DataAccessMapping;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BigFootVentures.Service.BusinessService
 {
@@ -15,6 +16,8 @@ namespace BigFootVentures.Service.BusinessService
         ICollection<TModel> Get(int startIndex, int rowCount, out int total);
 
         ICollection<TModel> GetByKeyword(string keyword, int startIndex, int rowCount, out int total);
+
+        StringBuilder ExportByKeyword(string keyword);
 
         TModel Get(int ID);
 
@@ -75,6 +78,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.GetByKeyword(keyword, startIndex, rowCount, out total);
+            }
+        }
+
+        public StringBuilder ExportByKeyword(string keyword)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.ExportByKeyword(keyword);
             }
         }
 

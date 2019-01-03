@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
 
@@ -1043,6 +1044,15 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [Route("Contact/Export/{keyword}")]
+        public FileContentResult ContactExport(string keyword)
+        {
+            var file = this._managementContactService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Contact-{SessionUtils.GetCurrentDateTime().ToString("yyyyMMdd-HHmmss")}.csv");
+        }
+
         #endregion
 
         #region "Domain"
@@ -1277,6 +1287,15 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Route("DomainN/Export/{keyword}")]
+        public FileContentResult DomainNExport(string keyword)
+        {
+            var file = this._managementDomainService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Domain-{SessionUtils.GetCurrentDateTime().ToString("yyyyMMdd-HHmmss")}.csv");
         }
 
         #endregion

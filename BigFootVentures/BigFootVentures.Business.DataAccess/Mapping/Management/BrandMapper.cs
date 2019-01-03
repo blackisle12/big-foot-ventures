@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 
 namespace BigFootVentures.Business.DataAccess.Mapping.Management
 {
@@ -64,6 +65,22 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             }
 
             return entities;
+        }
+
+        public StringBuilder ExportData(MySqlDataReader dataReader)
+        {
+            var file = new StringBuilder();
+
+            while (dataReader.Read())
+            {
+                //file.AppendLine($@"{dataReader["Name"] as string} 
+                //    {(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1} 
+                //    {dataReader["RegistrantName"] as string} 
+                //    {dataReader["ExpirationDate"] as string} 
+                //    {dataReader["RegistrarName"] as string}");
+            }
+
+            return file;
         }
 
         public MySqlParameter[] CreateParameters(object model)

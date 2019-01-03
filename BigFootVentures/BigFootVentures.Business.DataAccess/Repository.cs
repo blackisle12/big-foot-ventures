@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 
 namespace BigFootVentures.Business.DataAccess
 {
@@ -17,6 +18,8 @@ namespace BigFootVentures.Business.DataAccess
         ICollection<TEntity> Get(int startIndex, int rowCount, out int total);
 
         ICollection<TEntity> GetByKeyword(string keyword, int startIndex, int rowCount, out int total);
+
+        StringBuilder ExportByKeyword(string keyword);
 
         TEntity Get(int ID);
 
@@ -144,6 +147,32 @@ namespace BigFootVentures.Business.DataAccess
                 }
 
                 return entities;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public StringBuilder ExportByKeyword(string keyword)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                using (var command = new MySqlCommand($"{this._entityName}_ExportByKeyword", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("keyword", MySqlDbType.VarChar, 50) { Value = keyword, Direction = ParameterDirection.Input });
+
+                    var dataReader = command.ExecuteReader();
+
+                    return this._mapper.ExportData(dataReader);
+                }
             }
             catch
             {

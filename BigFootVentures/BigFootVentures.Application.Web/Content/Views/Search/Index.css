@@ -23,3 +23,7 @@
 .list-group-item {
     border-radius: 0 !important;
 }
+
+.panel-title {
+    font-size: 12px;
+}
