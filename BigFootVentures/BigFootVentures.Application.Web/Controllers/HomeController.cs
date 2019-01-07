@@ -325,6 +325,15 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [Route("Agreement/Export/{keyword}")]
+        public FileContentResult AgreementExport(string keyword)
+        {
+            var file = this._managementAgreementService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Agreement-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
         #endregion
 
         #region "Brand"
@@ -499,6 +508,15 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        [Route("Brand/Export/{keyword}")]
+        public FileContentResult BrandExport(string keyword)
+        {
+            var file = this._managementBrandService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Brand-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
         #endregion
 
         #region "Cancellation"
@@ -645,6 +663,16 @@ namespace BigFootVentures.Application.Web.Controllers
 
             return RedirectToAction("Cancellations");
         }
+
+        [HttpGet]
+        [Route("Cancellation/Export/{keyword}")]
+        public FileContentResult CancellationExport(string keyword)
+        {
+            var file = this._managementCancellationService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Cancellation-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
 
         #endregion
 
@@ -846,6 +874,15 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Route("Company/Export/{keyword}")]
+        public FileContentResult CompanyExport(string keyword)
+        {
+            var file = this._managementCompanyService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Company-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         #endregion
@@ -1050,7 +1087,7 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var file = this._managementContactService.ExportByKeyword(keyword);
 
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Contact-{SessionUtils.GetCurrentDateTime().ToString("yyyyMMdd-HHmmss")}.csv");
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Contact-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         #endregion
@@ -1295,7 +1332,7 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var file = this._managementDomainService.ExportByKeyword(keyword);
 
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Domain-{SessionUtils.GetCurrentDateTime().ToString("yyyyMMdd-HHmmss")}.csv");
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Domain-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         #endregion
@@ -1665,6 +1702,15 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Route("Enquiry/Export/{keyword}")]
+        public FileContentResult EnquiryExport(string keyword)
+        {
+            var file = this._managementEnquiryService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Enquiry-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         #endregion
@@ -2313,6 +2359,16 @@ namespace BigFootVentures.Application.Web.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        [Route("Office/Export/{keyword}")]
+        public FileContentResult OfficeExport(string keyword)
+        {
+            var file = this._managementOfficeService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Office-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
         #endregion
 
         #region "Office Status"
@@ -2795,6 +2851,15 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Route("Register/Export/{keyword}")]
+        public FileContentResult RegisterExport(string keyword)
+        {
+            var file = this._managementRegisterService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Register-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         #endregion
@@ -3478,6 +3543,15 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [Route("Trademark/Export/{keyword}")]
+        public FileContentResult TrademarkExport(string keyword)
+        {
+            var file = this._managementTrademarkService.ExportByKeyword(keyword);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Trademark-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         #endregion

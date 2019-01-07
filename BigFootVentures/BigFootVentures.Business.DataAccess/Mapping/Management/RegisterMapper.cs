@@ -1,5 +1,7 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -61,13 +63,18 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
+            file.Append("Name,Owner Name,RAA Year,Country,Accredited TLDs");
+            file.Append(Environment.NewLine);
+
             while (dataReader.Read())
             {
-                //file.AppendLine($@"{dataReader["Name"] as string} 
-                //    {(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1} 
-                //    {dataReader["RegistrantName"] as string} 
-                //    {dataReader["ExpirationDate"] as string} 
-                //    {dataReader["RegistrarName"] as string}");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Name"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Owner Name"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RAA Year"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Country"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Accredited TLDs"] as string}") + ",");
+
+                file.Append(Environment.NewLine);
             }
 
             return file;

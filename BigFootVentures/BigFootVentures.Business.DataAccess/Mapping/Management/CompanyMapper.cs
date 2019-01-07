@@ -1,5 +1,7 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -122,13 +124,76 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
+            file.Append("Name,Account Record Type,Account Owner,Former Name,Last Name,First Name,Middle Name,Suffix,Person Title,Salutation,Type,Description,Phone,Person Mobile Phone,");
+            file.Append("Fax,Email,Industry,No. of Employees,Name ID,Office ID OHIM,Office ID,OHIM Num Trademarks,OHIM Num Oppositions,OHIM Owner ID,Address Type,Company Size,Escrow Agent,Broker,");
+            file.Append("Deletion Request,Deletion Request Reason,Company Registration Number,Country of Incorporation,Date of Incorporation,Tax Number,Officers,TM Filing Cost,TM Cancellation Cost,");
+            file.Append("TM Opposition Cost,TM Priority Cost,TM Registration Certificate Cost,TM Research Cost,Other Costs,Bigfoot Accredited,Bigfoot Group,Shipping Country,Shipping Street,");
+            file.Append("Shipping City,Shipping State,Shipping Postal Code");
+            file.Append(Environment.NewLine);
+
             while (dataReader.Read())
             {
-                //file.AppendLine($@"{dataReader["Name"] as string} 
-                //    {(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1} 
-                //    {dataReader["RegistrantName"] as string} 
-                //    {dataReader["ExpirationDate"] as string} 
-                //    {dataReader["RegistrarName"] as string}");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["NAME"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["AccountRecordType"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["AccountOwner"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["FORMER NAME"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["LASTNAME"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["FIRSTNAME"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["MIDDLENAME"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SUFFIX"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PERSONTITLE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SALUTATION"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TYPE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DESCRIPTION"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PHONE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PERSONMOBILEPHONE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["FAX"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["EMAIL"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["INDUSTRY"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["NUMBEROFEMPLOYEES"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["NAME ID"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OFFICE ID OHIM"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OFFICE ID"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OHIM NUM TRADEMARKS"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OHIM NUM OPPOSITIONS"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OHIM OWNER ID"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ADDRESS TYPE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["COMPANY SIZE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["ESCROW AGENT"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["BROKER"] as sbyte? ?? 0) == 1}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DELETION REQUEST"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DELETION REQUEST REASOND"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["COMPANY REGISTRATION NUMBER"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["COUNTRY OF INCORPORATION"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DATE OF INCORPORATION"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TAX NUMBER"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OFFICERS"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TM FILING COST"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TM CANCELLATION COST"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TM OPPOSITION COST"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TM PRIORITY COST"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TM REGISTRATION CERTIFICATE COST"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TM RESEARCH COST"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OTHER COSTS"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["BIGFOOT ACCREDITED"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["BIGFOOT GROUP"] as sbyte? ?? 0) == 1}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SHIPPINGCOUNTRY"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SHIPPINGSTREET"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SHIPPINGCITY"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SHIPPINGSTATE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SHIPPINGPOSTALCODE"] as string}") + ",");
+
+                file.Append(Environment.NewLine);
             }
 
             return file;

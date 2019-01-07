@@ -92,15 +92,33 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
-            file.AppendLine("Name,Company,Title,Phone,Email");
+            file.Append("First Name,Middle Name,Last Name,Company Name,Salutation,Suffix,Title,Email,Phone,Mobile,Fax,Department,OHIM Owner ID,OHIM Num Trademarks,Mailing Country,");
+            file.Append("Mailing Street,Mailing City,Mailing State,Mailing Postal Code");
+            file.Append(Environment.NewLine);
 
             while (dataReader.Read())
             {
-                file.Append(DataUtils.EscapeCSV($"{dataReader["FirstName"] as string} {dataReader["LastName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["FirstName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["MiddleName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["LastName"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["CompanyName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Salutation"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Suffix"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["Title"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Email"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["Phone"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["Email"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Mobile"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Fax"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Department"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OHIMOwnerID"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OHIMNumTrademarks"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["MailingCountry"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["MailingStreet"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["MailingCity"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["MailingState"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["MailingPostalCode"] as string}") + ",");
+
                 file.Append(Environment.NewLine);
             }
 

@@ -1,5 +1,7 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -40,7 +42,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     CaseOrigin = dataReader["CaseOrigin"] as string,
                     ReferenceNumber = dataReader["ReferenceNumber"] as string,
 
-                    DomainName = dataReader["DomainName"] as string,                    
+                    DomainName = dataReader["DomainName"] as string,
                     RegistrantEmail = dataReader["RegistrantEmail"] as string,
                     Street = dataReader["Street"] as string,
                     City = dataReader["City"] as string,
@@ -106,13 +108,55 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
+            file.Append("Old Case Number,Record Type,Owner Name,Negotiation BF Amount,Negotiation 3rd Party Amount,Priority,Status,Send Email,Unread Email,Do Not Contact,Subject,Percent of Completion,");
+            file.Append("Case Assign,Private Registration Email,Registrant,Case Origin,Reference Number,Domain Name,Registrant Email,Street,City,State,Country,Postal Code,Phone,Fax,Description,");
+            file.Append("Field Names, Internal Comments,Object Names,Technical Assessment,Test Plan,Steps to Test,Test Outcome");
+            file.Append(Environment.NewLine);
+
             while (dataReader.Read())
             {
-                //file.AppendLine($@"{dataReader["Name"] as string} 
-                //    {(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1} 
-                //    {dataReader["RegistrantName"] as string} 
-                //    {dataReader["ExpirationDate"] as string} 
-                //    {dataReader["RegistrarName"] as string}");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OldCaseNumber"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RecordType"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerName"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["NegotiationBFAmount"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Negotiation3rdPartyAmount"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Priority"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Status"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["SendEmail"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["UnreadEmail"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["DoNotContact"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Subject"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PercentOfCompletion"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CaseAssign"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PrivateRegistrationEmail"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Registrant"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CaseOrigin"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ReferenceNumber"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DomainName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrantEmail"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Street"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["City"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["State"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Country"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PostalCode"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Phone"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Fax"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Description"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["FieldNames"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["InternalComments"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ObjectNames"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TechnicalAssessment"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TestPlan"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["StepsToTest"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TestOutcome"] as string}") + ",");
+
+                file.Append(Environment.NewLine);
             }
 
             return file;

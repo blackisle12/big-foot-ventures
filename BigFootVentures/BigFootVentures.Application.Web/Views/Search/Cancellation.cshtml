@@ -13,9 +13,7 @@
 
 @using (Html.BeginForm("Cancellation", "Search", FormMethod.Get))
 {
-    <h4>
-        Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>@Model.Caption</strong> (@Model.ObjectResult.Total found)
-    </h4>
+    <h4>Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>@Model.Caption</strong> (@Model.ObjectResult.Total found)</h4>
 
     <hr />
 
@@ -23,28 +21,44 @@
         @Html.Partial("../Shared/_Components/Search/_PageObjectsFilter")
     </div>
     <div class="col-md-10">
-        <div class="table-responsive">
-            <table class="table table-striped table-hover table-bordered">
-                <thead>
-                    <tr class="th-bg">
-                        <th>Action</th>
-                        <th class="th-name">Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        foreach (var cancellation in Model.ObjectResult.Records)
-                        {
-                            <tr>
-                                <td><a href="@Url.RouteUrl("CancellationView", new { ID = cancellation.ID })" target="_blank">View</a></td>
-                                <td>@cancellation.ReferenceInternal</td>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <p class="panel-title pull-right">
+                    <button type="button" id="btnExport"><i class="fa fa-file-excel-o"></i> Export</button>
+                </p>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr class="th-bg">
+                                <th>Action</th>
+                                <th class="th-name">Name</th>
                             </tr>
-                        }
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var cancellation in Model.ObjectResult.Records)
+                                {
+                                    <tr>
+                                        <td><a href="@Url.RouteUrl("CancellationView", new { ID = cancellation.ID })" target="_blank">View</a></td>
+                                        <td>@cancellation.ReferenceInternal</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-footer">
+                @Html.Partial("../Shared/_Components/Search/_PageFooter")
+            </div>
         </div>
-
-        @Html.Partial("../Shared/_Components/Search/_PageFooter")
     </div>
+    <script type="text/javascript">
+        $('#btnExport').on('click', function () {
+            location.href = '@Url.Action("CancellationExport", "Home")';
+        });
+    </script>
 }

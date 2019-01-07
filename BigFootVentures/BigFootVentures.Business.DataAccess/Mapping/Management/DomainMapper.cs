@@ -149,7 +149,12 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
-            file.AppendLine("Name,Bigfoot Owned,Registrant,Expiration Date,Registrar");
+            file.Append("Name,Bigfoot Owned,Registrant,Expiration Date,Registrar,BF Strategy,Buyside Funnel,Remarks,FMV Order of Magnitude,Status,Version,Category,Locked,Website Use,");
+            file.Append("Website Description,Website Redirect,Company Website,AutoRenew,WHOIS,Registration Price (USD),Registration Date,BigFoot Parking Page,Privacy Protected,");
+            file.Append("Registrant Email,Private Registration Email,Previous Registrant Changed On,Purchase Price (USD),Purchase Date,Sales Price (USD), Sale Date,");
+            file.Append("CD Date Sent,CD Sent From,CD Sent Method,CD Courier,CD Tracking Number,Trademark Used in the UDRP ID,UDRP Filing Date,UDRP Cost in USD, UDRP Cost Other than USD,");
+            file.Append("UDRP Case Number,Arbitrator Name,UDRP Jurisdiction,Language of Proceedings,Legal Action Related Proceedings,UDRP Outcome,UDRP Comment,Deletion Request,Deletion Request Reason");
+            file.Append(Environment.NewLine);
 
             while (dataReader.Read())
             {
@@ -158,6 +163,54 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrantName"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["ExpirationDate"] as string}") + ", ");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrarName"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["BFStrategy"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["BuysideFunnel"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Remarks"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["FMVOrderOfMagnitude"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Status"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Version"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Category"] as string}") + ", ");                
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["Locked"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["WebsiteUse"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["WebsiteDescription"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["WebsiteRedirect"] as string}") + ", ");                
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["CompanyWebsite"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["AutoRenew"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["WHOIS"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrationPriceUSD"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrationDate"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["BigFootParkingPage"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["PrivacyProtected"] as sbyte? ?? 0) == 1}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrantEmail"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PrivateRegistrationEmail"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PreviousRegistrantChangedOn"] as string}") + ", ");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PurchasePriceUSD"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PurchaseDate"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SalesPriceUSD"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SaleDate"] as string}") + ", ");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CDDateSent"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CDSentFrom"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CDSentMethod"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CDCourier"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CDTrackingNumber"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TrademarkUsedInTheUDRPID"] as int?}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPFilingDate"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPCostInUSD"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPCostOtherThanUSD"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPCaseNumber"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ArbitratorName"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPJurisdiction"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["LanguageOfProceedings"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["LegalActionRelatedProceedings"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPOutcome"] as string}") + ", ");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPComment"] as string}") + ", ");
+
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["DeletionRequest"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DeletionRequestReason"] as string}") + ", ");
+
                 file.Append(Environment.NewLine);
             }
 

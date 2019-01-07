@@ -1,5 +1,7 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -71,13 +73,27 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
+            file.Append("Name,Owner Name,Purpose,Value,HVT,EMV,Category,Deletion Request,Deletion Request Reason,Premium,Character Count,BNF");
+            file.Append(Environment.NewLine);
+
             while (dataReader.Read())
             {
-                //file.AppendLine($@"{dataReader["Name"] as string} 
-                //    {(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1} 
-                //    {dataReader["RegistrantName"] as string} 
-                //    {dataReader["ExpirationDate"] as string} 
-                //    {dataReader["RegistrarName"] as string}");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["NAME"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Owner_Name"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PURPOSE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["VALUE"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["HVT"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["EMV"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CATEGORY"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DELETION_REQUEST"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DELETION_REQUEST_REASON"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PREMIUM__C"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CHARACTER_COUNT__C"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["BNF__C"] as string}") + ",");
+
+                file.Append(Environment.NewLine);
             }
 
             return file;

@@ -1,5 +1,7 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -108,13 +110,56 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
+            file.Append("Reference Internal,Reference External,Sent Origin,Receipt Date,Payment Date,Filing Cost,Status,Internal Case Number,Submission Method,Payment Reference,Research Performance,Comments,");
+            file.Append("Admissible Date, Owner Response Deadline,Observation Deadline,Owner Response Deadline Ext,Observation Deadline Ext,Acquisition Letter Sent Origin,Acquisition Letter Sent Method,");
+            file.Append("Acquisition Letter Date Sent,Owner Response Acquisition Letter,Domain Enquiry,Domain Enquiry Notes,Outcome,Outcome Date,Withdrawal Reason,Trademark Assignment Date,Trademark Acquisition Cost,");
+            file.Append("UDRP Strategy,UDRP Strategy Comments,Negotiation Comments,Withdrawal Date,Expense Claim Received Date,Cost Refund,Trademark Name, Applicant Name,Owner Name");
+            file.Append(Environment.NewLine);
+
             while (dataReader.Read())
             {
-                //file.AppendLine($@"{dataReader["Name"] as string} 
-                //    {(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1} 
-                //    {dataReader["RegistrantName"] as string} 
-                //    {dataReader["ExpirationDate"] as string} 
-                //    {dataReader["RegistrarName"] as string}");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ReferenceInternal"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ReferenceExternal"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SentOrigin"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ReceiptDate"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PaymentDate"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["FilingCost"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Status"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["InternalCaseNumber"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SubmissionMethod"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PaymentReference"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ResearchPerformance"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Comments"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["AdmissibleDate"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerResponseDeadline"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ObservationDeadline"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerResponseDeadlineExt"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ObservationDeadlineExt"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["AcquisitionLetterSentOrigin"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["AcquisitionLetterSentMethod"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["AcquisitionLetterDateSent"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerResponseAcquisitionLetter"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["DomainEnquiry"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DomainEnquiryNotes"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Outcome"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OutcomeDate"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["WithdrawalReason"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TrademarkAssignmentDate"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TrademarkAcquisitionCost"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPStrategy"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["UDRPStrategyComment"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["NegotiationComments"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["WithdrawalDate"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ExpenseClaimReceivedDate"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CostRefund"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["TrademarkName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ApplicantName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerName"] as string}") + ",");
+
+                file.Append(Environment.NewLine);
             }
 
             return file;

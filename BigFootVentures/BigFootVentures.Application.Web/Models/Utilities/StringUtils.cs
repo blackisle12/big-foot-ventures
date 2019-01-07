@@ -46,6 +46,11 @@ namespace BigFootVentures.Application.Web.Models.Utilities
             }
         }
 
+        public static string GetCurrentDateTimeAsString()
+        {
+            return SessionUtils.GetCurrentDateTime().ToString("yyyyMMdd-HHmmss");
+        }
+
         #endregion
     }
 }

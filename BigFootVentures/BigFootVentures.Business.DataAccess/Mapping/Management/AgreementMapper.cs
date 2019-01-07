@@ -1,5 +1,7 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -86,13 +88,23 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
+            file.Append("Name,BF Company Name,Counterpart Company Name,Object of Agreement,Other Related Trademarks,Type,Applicability,Date of Signature,Comments,Owner Name");
+            file.Append(Environment.NewLine);
+
             while (dataReader.Read())
             {
-                //file.AppendLine($@"{dataReader["Name"] as string} 
-                //    {(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1} 
-                //    {dataReader["RegistrantName"] as string} 
-                //    {dataReader["ExpirationDate"] as string} 
-                //    {dataReader["RegistrarName"] as string}");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Name"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["BFCompanyName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["CounterpartCompanyName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ObjectOfAgreement"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OtherRelatedTrademarks"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Type"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Applicability"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["DateOfSignature"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Comments"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerName"] as string}") + ",");
+
+                file.Append(Environment.NewLine);
             }
 
             return file;

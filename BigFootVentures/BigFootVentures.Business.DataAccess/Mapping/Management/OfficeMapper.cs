@@ -1,5 +1,7 @@
-﻿using BigFootVentures.Business.Objects.Management;
+﻿using BigFootVentures.Business.DataAccess.Utilities;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -79,13 +81,43 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
+            file.Append("Office Name,Owner Name,External ID,Geography Type,State,State Abbreviation,Office Property,Office URL,Office Value Category,Online,Online Comments,Publication Date Comments,");
+            file.Append("Registration Date Comments,Opposition Period Monts, Search URL, Office Statuses Source, Office Name Archive,National Number Assigned,Points,PCT,Paris,WTO,");
+            file.Append("Registration Payment Notification,Registration Payment Method,Opposition Payment Notification,Opposition Payment Method");
+            file.Append(Environment.NewLine);
+
             while (dataReader.Read())
             {
-                //file.AppendLine($@"{dataReader["Name"] as string} 
-                //    {(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1} 
-                //    {dataReader["RegistrantName"] as string} 
-                //    {dataReader["ExpirationDate"] as string} 
-                //    {dataReader["RegistrarName"] as string}");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OfficeName"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerName"] as string}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["ExternalID"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["GeographyType"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["State"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["StateAbbreviation"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OfficeProperty"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OfficeUrl"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OfficeValueCategory"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["Online"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OnlineComments"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["PublicationDateComments"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrationDateComments"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OppositionPeriodMonths"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["SearchUrl"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OfficeStatusesSource"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OfficeNameArchive"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["NationalNumberAssigned"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["Points"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["PCT"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["Paris"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["WTO"] as sbyte? ?? 0) == 1}") + ",");
+
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrationPaymentNotification"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrationPaymentMethod"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OppositionPaymentNotification"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{dataReader["OppositionPaymentMethod"] as string}") + ",");
+
+                file.Append(Environment.NewLine);
             }
 
             return file;
