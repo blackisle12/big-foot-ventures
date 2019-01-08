@@ -51,6 +51,11 @@ namespace BigFootVentures.Application.Web.Models.Utilities
             return SessionUtils.GetCurrentDateTime().ToString("yyyyMMdd-HHmmss");
         }
 
+        public static bool HasNumber(string word)
+        {
+            return word.Any(char.IsDigit);
+        }
+
         #endregion
     }
 }

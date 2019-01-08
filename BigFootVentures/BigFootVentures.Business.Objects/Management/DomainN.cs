@@ -1,4 +1,6 @@
-﻿namespace BigFootVentures.Business.Objects.Management
+﻿using BigFootVentures.Business.Objects.Utilities;
+
+namespace BigFootVentures.Business.Objects.Management
 {
     public sealed class DomainN : BusinessBase
     {
@@ -66,6 +68,14 @@
 
         public bool DeletionRequest { get; set; }
         public string DeletionRequestReason { get; set; }
+
+        #endregion
+
+        #region "Calculated Properties"
+
+        public int DomainLength { get { return !this.Name.Contains(".") ? this.Name.Length : this.Name.Split(new char[] { '.' })[0].Length; } }
+        public int NameLength { get { return this.Name.Length; } }
+        public string NumberInTheName { get { return StringUtils.HasNumber(this.Name) ? "Yes" : "No"; } }
 
         #endregion
     }

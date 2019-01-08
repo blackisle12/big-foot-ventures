@@ -228,27 +228,63 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Expiry Date</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.ExpiryDate, new { @class = "form-control" })
                             </div>
+                            @{
+                                if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
+                                {
+                                    <label class="col-sm-2 control-label">Purpose</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.Brand.Purpose, new { @class = "form-control" })
+                                    </div>
+                                }
+                            }
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">6 Months Anniversary</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.SixMonthsAnniversary, new { @class = "form-control" })
                             </div>
+                            @{
+                                if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
+                                {
+                                    <label class="col-sm-2 control-label">Value</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.Brand.Value, new { @class = "form-control" })
+                                    </div>
+                                }
+                            }
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Priority Date</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.PriorityDate, new { @class = "form-control" })
                             </div>
+                            @{
+                                if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
+                                {
+                                    <label class="col-sm-2 control-label">HVT (High Value Target)</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.Brand.HVTChk)
+                                    </div>
+                                }
+                            }
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Priority Country & Priority TM Number</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 @Html.TextAreaFor(m => m.Record.PriorityCountryAndPriorityTMNumber, new { @class = "form-control" })
                             </div>
+                            @{
+                                if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
+                                {
+                                    <label class="col-sm-2 control-label">Category</label>
+                                    <div class="col-sm-4">
+                                        @Html.ListBoxFor(m => m.Record.Brand.CategoriesSelected, InputUtils.GetMultiSelectList(Model.Record.Brand?.Categories), new { @class = "form-control pick-list-box" })
+                                    </div>
+                                }
+                            }
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Seniority Used</label>
@@ -280,6 +316,17 @@
                                 @Html.CheckBoxFor(m => m.Record.RevocationTarget)
                             </div>
                         </div>
+                        @{
+                            if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">TM Name and Brand Match</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.TMNameAndBrandMatched, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                        }
                     </fieldset>
                 </div>
             </div>
@@ -920,76 +967,208 @@
                 </div>
                 <div class="panel-body">
                     <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Researcher Name</label>
-                            <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.ResearcherName, new { @class = "form-control" })
-                            </div>
+                        @{
+                            if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Researcher Name</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.ResearcherName, new { @class = "form-control" })
+                                    </div>
 
-                            <label class="col-sm-2 control-label">Mark Use</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.MarkUse, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.MarkUse>()), new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">TM Website</label>
-                            <div class="col-sm-4">
-                                <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.TMWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
-                                    <div class="input-group-btn">
-                                        <button type="button" name="Button.TMWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    <label class="col-sm-2 control-label">Mark Use</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.MarkUse, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.MarkUse>()), new { @class = "form-control" })
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">TM Website</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.Record.TMWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
+                                            <div class="input-group-btn">
+                                                <button type="button" name="Button.TMWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <label class="col-sm-2 control-label">Competing Marks</label>
-                            <div class="col-sm-4">
-                                @Html.CheckBoxFor(m => m.Record.CompetingMarks)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Owner Website</label>
-                            <div class="col-sm-4">
-                                <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.OwnerWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
-                                    <div class="input-group-btn">
-                                        <button type="button" name="Button.OwnerWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    <label class="col-sm-2 control-label">Competing Marks</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.CompetingMarks)
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">TM Website Use</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.TMWebsite.WebsiteUse, new { @class = "form-control" })
+                                    </div>
 
-                            <label class="col-sm-2 control-label">Competing Mark</label>
-                            <div class="col-sm-4">
-                                @Html.TextAreaFor(m => m.Record.CompetingMark, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Com Website</label>
-                            <div class="col-sm-4">
-                                <div class="input-group">
-                                    @Html.TextBoxFor(m => m.Record.ComWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
-                                    <div class="input-group-btn">
-                                        <button type="button" name="Button.ComWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    <label class="col-sm-2 control-label">Competing Mark</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextAreaFor(m => m.Record.CompetingMark, new { @class = "form-control" })
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">TM Website Current</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.TMWebsite.WebsiteCurrent)
+                                    </div>
 
-                            <label class="col-sm-2 control-label">Cancel Researcher Comments</label>
-                            <div class="col-sm-4">
-                                @Html.TextAreaFor(m => m.Record.CancelResearcherComments, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Cancellation Strategy</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.CancellationStrategy, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.CancellationStrategy>()), new { @class = "form-control" })
-                            </div>
+                                    <label class="col-sm-2 control-label">Cancel Researcher Comments</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextAreaFor(m => m.Record.CancelResearcherComments, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">TM Website Description</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.TMWebsite.WebsiteDescription, new { @class = "form-control" })
+                                    </div>
 
-                            <label class="col-sm-2 control-label">Owner Defense</label>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.OwnerDefense, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.OwnerDefense>()), new { @class = "form-control" })
-                            </div>
-                        </div>
+                                    <label class="col-sm-2 control-label">Owner Defense</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.OwnerDefense, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.OwnerDefense>()), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Owner Website</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.Record.OwnerWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
+                                            <div class="input-group-btn">
+                                                <button type="button" name="Button.OwnerWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Owner Website Use</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.OwnerWebsite.WebsiteUse, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Owner Website Current</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.OwnerWebsite.WebsiteCurrent)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Owner Website Description</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.OwnerWebsite.WebsiteDescription, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Com Website</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.Record.ComWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
+                                            <div class="input-group-btn">
+                                                <button type="button" name="Button.ComWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Com Website Use</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.ComWebsite.WebsiteUse, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Com Website Current</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.ComWebsite.WebsiteCurrent)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Com Website Description</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.ComWebsite.WebsiteDescription, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Cancellation Strategy</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.CancellationStrategy, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.CancellationStrategy>()), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Researcher Name</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.ResearcherName, new { @class = "form-control" })
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">Mark Use</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.MarkUse, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.MarkUse>()), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">TM Website</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.Record.TMWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
+                                            <div class="input-group-btn">
+                                                <button type="button" name="Button.TMWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">Competing Marks</label>
+                                    <div class="col-sm-4">
+                                        @Html.CheckBoxFor(m => m.Record.CompetingMarks)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Owner Website</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.Record.OwnerWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
+                                            <div class="input-group-btn">
+                                                <button type="button" name="Button.OwnerWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">Competing Mark</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextAreaFor(m => m.Record.CompetingMark, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Com Website</label>
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(m => m.Record.ComWebsite.Name, new { @class = "form-control", @readonly = "readonly" })
+                                            <div class="input-group-btn">
+                                                <button type="button" name="Button.ComWebsite.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">Cancel Researcher Comments</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextAreaFor(m => m.Record.CancelResearcherComments, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Cancellation Strategy</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.CancellationStrategy, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.CancellationStrategy>()), new { @class = "form-control" })
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">Owner Defense</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.Record.OwnerDefense, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.OwnerDefense>()), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                        }
                     </fieldset>
                 </div>
             </div>
@@ -1040,12 +1219,40 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Cancellation Store
+                        Cancellation Score
                         <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
                     </h4>
                 </div>
                 <div class="panel-body">
                     <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                        @{
+                            if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
+                            {
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Non Use Score</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.NonUseScore, new { @class = "form-control" })
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">Name Score</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.NameScore, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Defenseless Score</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.DefenselessScore, new { @class = "form-control" })
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">Cancellation Score</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Record.CancellationScore, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                        }
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Revocation Reference External</label>
                             <div class="col-sm-10">

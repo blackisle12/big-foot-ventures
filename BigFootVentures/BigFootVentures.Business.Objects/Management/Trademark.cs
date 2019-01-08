@@ -211,6 +211,53 @@ namespace BigFootVentures.Business.Objects.Management
         public string[] ARIPODesignatedStatesSelected { get; set; }
         public string[] ARIPODesignatedStatesAvailable { get; set; }
 
+        public string TMNameAndBrandMatched { get { return this.Name == this.Brand?.Name ? "True" : "False"; } }
+        public int NonUseScore
+        {
+            get
+            {
+                if (this.MarkUse == "Inactive")
+                    return 100;
+                else if (this.MarkUse == "Active")
+                    return 0;
+                else if (this.MarkUse == "Slightly Active")
+                    return 10;
+                else
+                    return 5;
+            }
+        }
+        public int NameScore
+        {
+            get
+            {
+                if (this.NameValue == "<$1K")
+                    return 0;
+                else if (this.NameValue == ">$1K - < $10K")
+                    return 1;
+                else if (this.NameValue == ">$10K - <$100K")
+                    return 10;
+                else if (this.NameValue == ">$100K")
+                    return 100;
+                else
+                    return 0;
+            }
+        }
+        public int DefenselessScore
+        {
+            get
+            {
+                if (this.OwnerDefense == "Strong - MNC")
+                    return 0;
+                else if (this.OwnerDefense == "Medium")
+                    return 1;
+                else if (this.OwnerDefense == "Weak")
+                    return 10;
+                else
+                    return 2;
+            }
+        }
+        public int CancellationScore { get { return this.NameScore * this.DefenselessScore * this.NonUseScore; } }
+
         #endregion
     }
 }
