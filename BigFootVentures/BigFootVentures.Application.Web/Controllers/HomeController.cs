@@ -1255,6 +1255,28 @@ namespace BigFootVentures.Application.Web.Controllers
 
                 if (DomainValidator.IsValid(model.Record, out validationResult))
                 {
+                    model.Record.RegistrantEmail = "Email not found!";
+
+                    if (model.Record.RegistrantCompany != null && model.Record.RegistrantCompany.ID > 0)
+                    {
+                        if (model.Record.RegistrantCompany.ID.ToString() == ConfigurationManager.AppSettings["BigFoot_Company_ID"])
+                        {
+                            model.Record.BigFootOwned = true;
+                        }
+
+                        model.Record.RegistrantCompany = this._managementCompanyService.Get(model.Record.RegistrantCompany.ID);
+
+                        if (!model.Record.BigFootOwned && model.Record.RegistrantCompany.BigFootGroup)
+                        {
+                            model.Record.BigFootOwned = true;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(model.Record.RegistrantCompany.Email))
+                        {
+                            model.Record.RegistrantEmail = model.Record.RegistrantCompany.Email;
+                        }
+                    }
+
                     if (model.Record.ID == 0)
                     {
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
@@ -3862,6 +3884,24 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region "Other Views"
+
+        [Route("AccountInformation/{ID:int}", Name = "AccountInformationView")]
+        public ActionResult AccountInformation(int ID)
+        {
+            var userAccount = this._managementUserAccountService.Get(SessionUtils.GetUserAccount().ID);
+            
+            var model = new VMModel<UserAccount>
+            {
+                Record = userAccount,
+                PageMode = PageMode.View
+            };
+
+            return View("AccountInformation", model);
         }
 
         #endregion

@@ -92,7 +92,7 @@
                     <li class="@(Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TrademarkOwners", "Home")">Trademark Owners</a></li>
                     <li class="@(Request.RawUrl.IndexOf("/Home/UserAccounts", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("UserAccounts", "Home")">User Accounts</a></li>
                     <li><hr /></li>
-                    <li><a>Account Information</a></li>
+                    <li><a href="@Url.Action("AccountInformation", "Home")">Account Information</a></li>
                     <li><a href="@Url.Action("ChangePassword", "Home")">Change Password</a></li>
                     <li><a href="@Url.Action("Logout", "Public")">Logout <i class="fa fa-sign-out"></i></a></li>
                 </ul>

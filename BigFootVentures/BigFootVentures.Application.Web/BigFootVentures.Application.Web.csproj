@@ -379,6 +379,7 @@
     <Content Include="Views\Search\Trademark.cshtml" />
     <Content Include="Views\Home\Tasks.cshtml" />
     <Content Include="Views\Home\Task.cshtml" />
+    <Content Include="Views\Home\AccountInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

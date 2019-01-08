@@ -207,7 +207,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label text-neutral">BigFoot Owned</label>
                             <div class="col-sm-4">
-                                @Html.CheckBoxFor(m => m.Record.BigFootOwned, new { @class = "input-neutral" })
+                                @Html.CheckBoxFor(m => m.Record.BigFootOwned, new { @class = "input-neutral", @disabled = "disabled" })
                             </div>
 
                             <label class="col-sm-2 control-label">Big Foot Parking Page</label>
@@ -284,7 +284,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Registrant Email</label>
                             <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.RegistrantEmail, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Record.RegistrantEmail, new { @class = "form-control", @disabled = "disabled" })
                             </div>
 
                             <label class="col-sm-2 control-label">Previous Registrant changed on</label>

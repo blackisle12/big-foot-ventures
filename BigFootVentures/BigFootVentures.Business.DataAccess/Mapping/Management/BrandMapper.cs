@@ -114,7 +114,9 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pCategory", MySqlDbType.VarChar, 255) { Value = entity.Category, Direction = ParameterDirection.Input },
 
                 new MySqlParameter("pDeletionRequest", MySqlDbType.VarChar, 100) { Value = entity.DeletionRequestChk, Direction = ParameterDirection.Input },
-                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = entity.DeletionRequestReason, Direction = ParameterDirection.Input }
+                new MySqlParameter("pDeletionRequestReason", MySqlDbType.VarChar, 255) { Value = entity.DeletionRequestReason, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pCharacterCount", MySqlDbType.VarChar, 15) { Value = entity.CharacterCount, Direction = ParameterDirection.Input }
             });
 
             return parameters.ToArray();
