@@ -187,7 +187,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Agreement", model);
+            return View("AgreementView", model);
         }
 
         [Route("Agreement/New", Name = "AgreementTNew")]
@@ -381,7 +381,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Brand", model);
+            return View("BrandView", model);
         }
 
         [Route("Brand/New", Name = "BrandNew")]
@@ -564,7 +564,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Cancellation", model);
+            return View("CancellationView", model);
         }
 
         [Route("Cancellation/New", Name = "CancellationNew")]

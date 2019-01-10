@@ -185,3 +185,8 @@ p.table-empty {
     padding: 15px 0;
     margin: 0 !important;
 }
+
+.list-group-item {
+    border: none;
+    height: 33px;
+}

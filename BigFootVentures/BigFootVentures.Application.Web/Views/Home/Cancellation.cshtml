@@ -1,7 +1,6 @@
 ﻿<link href="~/Content/Views/Home/Cancellation.css" rel="stylesheet" />
 
 @using BigFootVentures.Application.Web.Models
-@using BigFootVentures.Application.Web.Models.Utilities
 @using BigFootVentures.Application.Web.Models.ViewModels
 @using BigFootVentures.Business.Objects.Enumerators
 @using BigFootVentures.Business.Objects.Management
@@ -25,23 +24,20 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Cancellation <strong>@Model.Record.ReferenceInternal</strong>
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new") Cancellation <strong>@Model.Record.ReferenceInternal</strong>
             </span>
             <span class="panel-title pull-right">
-                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+                <i class="fa fa-edit"></i>
             </span>
         </div>
         <div class="panel-body">
             <!-- START: Information -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Information</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Cancellation Reference Internal</label>
                             <div class="col-sm-4">
@@ -143,13 +139,10 @@
             <!-- START: Relevant Dates -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Relevant Dates
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Relevant Dates</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Cancellation Admissible Date</label>
                             <div class="col-sm-4">
@@ -185,13 +178,10 @@
             <!-- START: Acquisition -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Acquisition
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Acquisition</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Acquisition Letter Sent Origin</label>
                             <div class="col-sm-4">

@@ -382,6 +382,9 @@
     <Content Include="Views\Home\Task.cshtml" />
     <Content Include="Views\Home\AccountInformation.cshtml" />
     <Content Include="Views\Home\TMRepresentative.cshtml" />
+    <Content Include="Views\Home\BrandView.cshtml" />
+    <Content Include="Views\Home\AgreementView.cshtml" />
+    <Content Include="Views\Home\CancellationView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
