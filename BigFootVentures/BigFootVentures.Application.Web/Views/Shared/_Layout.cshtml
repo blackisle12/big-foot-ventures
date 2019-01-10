@@ -35,7 +35,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <div class="nav navbar-nav">
-                        <ul class="nav navbar-nav">                            
+                        <ul class="nav navbar-nav">
                             <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")">
                                 <a href="@Url.Action("Index", "Home")">
                                     <i class="fa fa-user-circle-o"></i>
@@ -45,10 +45,15 @@
                             </li>
                         </ul>
                         <div class="input-group search-nav">
-                            <input name="txtSearch" type="text" class="form-control" placeholder="Search">
+                            <input name="txtSearch" type="text" class="form-control" placeholder="Search...">
                             <div class="input-group-btn">
                                 <button name="btnSearch" type="button" class="btn btn-default">
                                     <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <div class="input-group-btn">
+                                <button name="btnFilter" type="button" class="btn btn-default" title="Advance Search">
+                                    <i class="fa fa-filter"></i>
                                 </button>
                             </div>
                         </div>
@@ -101,6 +106,9 @@
                 @RenderBody()
             </div>
         </div>
+
+        @Html.Partial("../Shared/_Components/Modals/_AdvanceSearch")
+
         <script type="text/javascript">
             $(function () {
                 $('[name="btnSearch"]').on('click', function () {

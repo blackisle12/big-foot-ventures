@@ -1,6 +1,8 @@
-﻿using BigFootVentures.Application.Web.Models.ViewModels;
+﻿using BigFootVentures.Application.Web.Models.Utilities;
+using BigFootVentures.Application.Web.Models.ViewModels;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
+using System.Text;
 using System.Web.Mvc;
 
 namespace BigFootVentures.Application.Web.Controllers
@@ -229,13 +231,16 @@ namespace BigFootVentures.Application.Web.Controllers
         }
 
         [Route("Domain/{rowCount?}/{page?}/{keyword?}", Name = "SearchDomain")]
-        public ActionResult Domain(int rowCount = 25, int page = 1, string keyword = "")
+        public ActionResult Domain(int rowCount = 25, int page = 1, string keyword = "", string bigFootOwned = null)
         {
             var searchResultObject = new VMSearchResultObject<DomainN> { Caption = "Domain" };
             var startIndex = (page - 1) * rowCount;
+
+            var query = QueryUtils.BuildSearchAdvanceQuery("Domain", startIndex, rowCount, keyword, bigFootOwned);
+
             var domains = string.IsNullOrWhiteSpace(keyword) ?
                 this._managementDomainService.Get(startIndex, rowCount, out int total) :
-                this._managementDomainService.GetByKeyword(keyword, startIndex, rowCount, out total);
+                this._managementDomainService.GetByQuery(query.Item1, query.Item2, out total);
 
             searchResultObject.ObjectResult = new VMPageResult<DomainN>
             {

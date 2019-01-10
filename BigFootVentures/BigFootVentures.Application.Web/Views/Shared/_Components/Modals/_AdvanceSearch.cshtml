@@ -1,0 +1,106 @@
+﻿<div class="modal fade" role="dialog" name="Modal.AdvanceSearch">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-filter"></i> &nbsp;Advance Search</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Select an object</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="Select.Object">
+                                    <option value="NotSet">- Select Object -</option>
+                                    <option value="Domain">Domain</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="div-main-filter" style="display: none;">
+                            <hr />
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">SELECT FILTERS</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Keyword</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="Input.Keyword" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group div-filter" name="Div.DomainFilter" style="display: none;">
+                                <label class="col-sm-4 control-label">BigFoot Owned</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="Select.Filter.Domain.BigFootOwned">
+                                        <option value="NotSet">- None -</option>
+                                        <option value="1">Checked</option>
+                                        <option value="0">Unchecked</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" name="Modal.Button.Search" style="display: none;"><i class="fa fa-search"></i> Search</button>
+                <button type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('[name="btnFilter"]').on('click', function () {
+            InitModal();
+
+            $('[name="Modal.AdvanceSearch"]').modal('show');
+        });
+
+        $('[name="Select.Object"]').on('change', function () {
+            var value = $(this).val();
+
+            if (value == 'NotSet') {
+                InitModal();
+            }
+            else {
+                $('[name="Modal.Button.Search"], .div-main-filter').show();
+            }
+
+            $('.div-filter').hide();
+
+            if (value == 'Domain') {
+                $('[name="Div.DomainFilter"]').show();
+            }
+        });
+
+        $('[name="Modal.Button.Search"]').on('click', function () {
+            var query = '?t=1';
+            var object = $('[name="Select.Object"]').val();
+            var keyword = $('[name="Input.Keyword"]').val();
+
+            if (keyword.length == 0) {
+                alert('Please provide a keyword.');
+                return;
+            }
+            
+            if (object == 'Domain') {
+                var bigFootOwned = $('[name="Select.Filter.Domain.BigFootOwned"]').val();
+
+                if (bigFootOwned != 'NotSet') {
+                    query += '&bigFootOwned=' + bigFootOwned;
+                }
+            }
+
+            window.open(location.origin + '/Search/' + object + '/25/1/' + keyword + query, '_self');
+        });
+    });
+
+    function InitModal() {
+        $('[name="Select.Object"]').val('NotSet');
+        $('[name="Input.Keyword"]').val('');
+
+        $('[name="Modal.Button.Search"], .div-main-filter, .div-filter').hide();
+    }
+</script>

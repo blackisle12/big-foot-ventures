@@ -186,6 +186,7 @@
     <Compile Include="Models\Security\Providers\CustomMembershipProvider.cs" />
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
+    <Compile Include="Models\Utilities\QueryUtils.cs" />
     <Compile Include="Models\Utilities\RouteUtils.cs" />
     <Compile Include="Models\Utilities\SessionUtils.cs" />
     <Compile Include="Models\Utilities\StringUtils.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Models\ViewModels\VMJsonResult.cs" />
     <Compile Include="Models\ViewModels\VMModel.cs" />
     <Compile Include="Models\ViewModels\VMPageResult.cs" />
+    <Compile Include="Models\ViewModels\VMSearchAdvance.cs" />
     <Compile Include="Models\ViewModels\VMSearchResultObject.cs" />
     <Compile Include="Models\ViewModels\VMSearchResult.cs" />
     <Compile Include="Models\ViewModels\VMSelectListItem.cs" />
@@ -385,6 +387,7 @@
     <Content Include="Views\Home\BrandView.cshtml" />
     <Content Include="Views\Home\AgreementView.cshtml" />
     <Content Include="Views\Home\CancellationView.cshtml" />
+    <Content Include="Views\Shared\_Components\Modals\_AdvanceSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

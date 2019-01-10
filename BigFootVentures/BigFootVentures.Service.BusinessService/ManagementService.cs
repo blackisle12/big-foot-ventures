@@ -17,6 +17,8 @@ namespace BigFootVentures.Service.BusinessService
 
         ICollection<TModel> GetByKeyword(string keyword, int startIndex, int rowCount, out int total);
 
+        ICollection<TModel> GetByQuery(string query, string queryTotal, out int total);
+
         StringBuilder ExportByKeyword(string keyword);
 
         TModel Get(int ID);
@@ -78,6 +80,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.GetByKeyword(keyword, startIndex, rowCount, out total);
+            }
+        }
+
+        public ICollection<TModel> GetByQuery(string query, string queryTotal, out int total)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.GetByQuery(query, queryTotal, out total);
             }
         }
 
