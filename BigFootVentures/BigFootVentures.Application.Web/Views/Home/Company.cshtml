@@ -307,7 +307,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Country of incorporation</label>
                                     <div class="col-sm-10">
-                                        @Html.DropDownListFor(m => m.Record.CountryOfIncorporation, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Record.CountryOfIncorporation, new SelectList(BigFootVentures.Application.Web.Models.Utilities.StringUtils.GetCountries()), new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -375,7 +375,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Country of incorporation</label>
                                     <div class="col-sm-4">
-                                        @Html.DropDownListFor(m => m.Record.CountryOfIncorporation, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.Record.CountryOfIncorporation, new SelectList(BigFootVentures.Application.Web.Models.Utilities.StringUtils.GetCountries()), new { @class = "form-control" })
                                     </div>
 
                                     <label class="col-sm-2 control-label">Officers</label>
@@ -469,7 +469,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Shipping Country</label>
                             <div class="col-sm-10">
-                                @Html.DropDownListFor(m => m.Record.ShippingCountry, new SelectList(StringUtils.GetCountries()), new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.Record.ShippingCountry, new SelectList(BigFootVentures.Application.Web.Models.Utilities.StringUtils.GetCountries()), new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
