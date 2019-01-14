@@ -4,7 +4,7 @@
 @using BigFootVentures.Business.Objects.Management
 
 @{
-    ViewBag.Title = "Comapany - " + Model.Record.Salutation + " " + Model.Record.FirstName + " " + Model.Record.MiddleName + " " + Model.Record.LastName;
+    ViewBag.Title = "Company - " + Model.Record.Salutation + " " + Model.Record.FirstName + " " + Model.Record.MiddleName + " " + Model.Record.LastName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -63,8 +63,8 @@
                             <li class="list-group-item">@Model.Record.FormerName</li>
                             <li class="list-group-item">@Model.Record.OfficeIDGB</li>
                             <li class="list-group-item">@Model.Record.OHIMNUMOppositions</li>
-                            <li class="list-group-item">@Model.Record.EscrowAgent</li>
-                            <li class="list-group-item">@Model.Record.Broker</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.EscrowAgent ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Broker ? "checked" : string.Empty) /></li>
                             <li class="list-group-item">@Model.Record.CountryOfIncorporation</li>
                             <li class="list-group-item">@Model.Record.TaxNumber</li>
                         </ul>
