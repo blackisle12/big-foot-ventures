@@ -231,16 +231,17 @@ namespace BigFootVentures.Application.Web.Controllers
         }
 
         [Route("Domain/{rowCount?}/{page?}/{keyword?}", Name = "SearchDomain")]
-        public ActionResult Domain(int rowCount = 25, int page = 1, string keyword = "", string bigFootOwned = null)
+        public ActionResult Domain(int rowCount = 25, int page = 1, string keyword = null,
+            string name = null, string bigFootOwned = null, string websiteCurrent = null, string locked = null, string websiteUse = null, string BFStrategy = null,
+            string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
+            string version = null, string WHOIS = null, string category = null)
         {
             var searchResultObject = new VMSearchResultObject<DomainN> { Caption = "Domain" };
             var startIndex = (page - 1) * rowCount;
 
-            var query = QueryUtils.BuildSearchAdvanceQuery("Domain", startIndex, rowCount, keyword, bigFootOwned);
-
-            var domains = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementDomainService.Get(startIndex, rowCount, out int total) :
-                this._managementDomainService.GetByQuery(query.Item1, query.Item2, out total);
+            var query = QueryUtils.BuildSearchAdvanceDomainQuery(startIndex, rowCount, keyword ?? name, bigFootOwned, websiteCurrent, locked, websiteUse, BFStrategy,
+                buySideFunnel, FMVOrderOfMagnitude, companyWebsite, status, autoRenew, version, WHOIS, category);
+            var domains = this._managementDomainService.GetByQuery(query.Item1, query.Item2, out int total);
 
             searchResultObject.ObjectResult = new VMPageResult<DomainN>
             {
@@ -251,14 +252,18 @@ namespace BigFootVentures.Application.Web.Controllers
                 Records = domains
             };
 
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
+            if (!string.IsNullOrWhiteSpace(keyword))
             {
-                Table = searchResultWrapperList
-            };
+                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
 
-            ViewBag.Keyword = keyword;
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? name;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
 
             return View(searchResultObject);
         }
