@@ -169,7 +169,7 @@ namespace BigFootVentures.Business.DataAccess
 
                 var entities = new List<TEntity>();
 
-                using (var command = new MySqlCommand($"{this._entityName}_GetByQuery", this._connection) { CommandType = CommandType.StoredProcedure })
+                using (var command = new MySqlCommand($"Object_GetByQuery", this._connection) { CommandType = CommandType.StoredProcedure })
                 {
                     command.Parameters.Add(new MySqlParameter("query1", MySqlDbType.Text) { Value = query, Direction = ParameterDirection.Input });
                     command.Parameters.Add(new MySqlParameter("query2", MySqlDbType.Text) { Value = queryTotal, Direction = ParameterDirection.Input });

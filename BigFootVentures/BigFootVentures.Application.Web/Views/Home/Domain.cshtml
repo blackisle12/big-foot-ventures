@@ -249,7 +249,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Domain Category</label>
                                     <div class="col-sm-4">
-                                        @Html.ListBoxFor(m => m.Record.Brand.CategoriesSelected, InputUtils.GetMultiSelectList(Model.Record.Brand.Categories), new { @class = "form-control pick-list-box" })
+                                        @Html.ListBoxFor(m => m.Record.Brand.CategoriesSelected, InputUtils.GetMultiSelectList(Model.Record.Brand?.Categories), new { @class = "form-control pick-list-box" })
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -300,6 +300,7 @@
     <Content Include="Scripts\Views\Home\Company.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
     <Content Include="Scripts\Utilites\CommonUtils.js" />
+    <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Domain.js" />
     <Content Include="Scripts\Views\Shared\_Components\Page\_PageEditViewFooter.js" />
     <Content Include="Scripts\Views\Shared\_PanelHelper.js" />
     <Content Include="Scripts\Views\Shared\_Validator.js" />
@@ -388,6 +389,7 @@
     <Content Include="Views\Home\AgreementView.cshtml" />
     <Content Include="Views\Home\CancellationView.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\_AdvanceSearch.cshtml" />
+    <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Domain.cshtml" />
     <Content Include="Views\Home\CompanyBusinessExternalView.cshtml" />
     <Content Include="Views\Home\CompanyPersonView.cshtml" />
     <Content Include="Views\Home\ContactView.cshtml" />
