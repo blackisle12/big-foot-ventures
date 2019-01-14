@@ -1,0 +1,187 @@
+﻿<link href="~/Content/Views/Home/company.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Comapany - " + Model.Record.Salutation + " " + Model.Record.FirstName + " " + Model.Record.MiddleName + " " + Model.Record.LastName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Company>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing Company <strong>@Model.Record.Salutation @Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Person Account Detail</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Company Name</strong></li>
+                            <li class="list-group-item"><strong>Title</strong></li>
+                            <li class="list-group-item"><strong>Type</strong></li>
+                            <li class="list-group-item"><strong>Description</strong></li>
+                            <li class="list-group-item"><strong>Office ID OHIM</strong></li>
+                            <li class="list-group-item"><strong>OHIM_Num_Trademarks</strong></li>
+                            <li class="list-group-item"><strong>Address_Type</strong></li>
+                            <li class="list-group-item"><strong>Company Size</strong></li>
+                            <li class="list-group-item"><strong>Name ID</strong></li>
+                            <li class="list-group-item"><strong>Former Name</strong></li>
+                            <li class="list-group-item"><strong>Office ID GB</strong></li>
+                            <li class="list-group-item"><strong>OHIM_Num_oppositions</strong></li>
+                            <li class="list-group-item"><strong>Escrow Agent</strong></li>
+                            <li class="list-group-item"><strong>Broker</strong></li>
+                            <li class="list-group-item"><strong>Country of Incorporation</strong></li>
+                            <li class="list-group-item"><strong>Tax Number</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.Salutation @Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</li>
+                            <li class="list-group-item">@Model.Record.Title</li>
+                            <li class="list-group-item">@Model.Record.Type</li>
+                            <li class="list-group-item">@Model.Record.Description</li>
+                            <li class="list-group-item">@Model.Record.OfficeIDOHIM</li>
+                            <li class="list-group-item">@Model.Record.OHIMNumTrademarks</li>
+                            <li class="list-group-item">@Model.Record.AddressType</li>
+                            <li class="list-group-item">@Model.Record.CompanySize</li>
+                            <li class="list-group-item">@Model.Record.NameID</li>
+                            <li class="list-group-item">@Model.Record.FormerName</li>
+                            <li class="list-group-item">@Model.Record.OfficeIDGB</li>
+                            <li class="list-group-item">@Model.Record.OHIMNUMOppositions</li>
+                            <li class="list-group-item">@Model.Record.EscrowAgent</li>
+                            <li class="list-group-item">@Model.Record.Broker</li>
+                            <li class="list-group-item">@Model.Record.CountryOfIncorporation</li>
+                            <li class="list-group-item">@Model.Record.TaxNumber</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Account Owner</strong></li>
+                            <li class="list-group-item"><strong>Phone</strong></li>
+                            <li class="list-group-item"><strong>Mobile</strong></li>
+                            <li class="list-group-item"><strong>Fax</strong></li>
+                            <li class="list-group-item"><strong>Email</strong></li>
+                            <li class="list-group-item"><strong>Industry</strong></li>
+                            <li class="list-group-item"><strong>OHIM_Num_Trademarks</strong></li>
+                            <li class="list-group-item"><strong>OHIM_Owner_ID</strong></li>
+                            <li class="list-group-item"><strong>Bigfoot Group</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.AccountOwner</li>
+                            <li class="list-group-item">@Model.Record.Phone</li>
+                            <li class="list-group-item">@Model.Record.Mobile</li>
+                            <li class="list-group-item">@Model.Record.Fax</li>
+                            <li class="list-group-item">@Model.Record.Email</li>
+                            <li class="list-group-item">@Model.Record.Industry</li>
+                            <li class="list-group-item">@Model.Record.OHIMNumTrademarks</li>
+                            <li class="list-group-item">@Model.Record.OHIMOwnerID</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.BigFootGroup ? "checked" : string.Empty) /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: External Reporesenatative Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">External Reporesenatative Information</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>TM Filing Cost</strong></li>
+                            <li class="list-group-item"><strong>TM Cancellation Cost</strong></li>
+                            <li class="list-group-item"><strong>TM Opposition Cost</strong></li>
+                            <li class="list-group-item"><strong>TM Priority Cost</strong></li>
+                            <li class="list-group-item"><strong>TM Registration Certificate Cost</strong></li>
+                            <li class="list-group-item"><strong>TM Research Cost</strong></li>
+                            <li class="list-group-item"><strong>Other Cost</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.TMFilingCost</li>
+                            <li class="list-group-item">@Model.Record.TMCancellationCost</li>
+                            <li class="list-group-item">@Model.Record.TMOppositionCost</li>
+                            <li class="list-group-item">@Model.Record.TMPriorityCost</li>
+                            <li class="list-group-item">@Model.Record.TMRegistrationCertificateCost</li>
+                            <li class="list-group-item">@Model.Record.TMResearchCost</li>
+                            <li class="list-group-item">@Model.Record.OtherCosts</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Bigfoot Accredited</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.BigFootAccredited ? "checked" : string.Empty) /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: External Reporesenatative Information -->
+            <!-- START: Deletion Request -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Deletion Request</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Deletion Request</strong></li>
+                            <li class="list-group-item"><strong>Deletion Request Reason</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequestChk ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item">@Model.Record.DeletionRequestReason</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Deletion Request -->
+            <!-- START: Address Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Address Information</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Shipping Address</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.ShippingStreet, @Model.Record.ShippingCity, @Model.Record.ShippingState, @Model.Record.ShippingPostalCode @Model.Record.ShippingCountry</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: External Reporesenatative Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>

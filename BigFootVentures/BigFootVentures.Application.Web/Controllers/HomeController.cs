@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
+using static BigFootVentures.Business.Objects.Enumerators.ManagementEnums.Company;
 
 namespace BigFootVentures.Application.Web.Controllers
 {
@@ -727,7 +728,14 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Company", model);
+            if (company.AccountRecordType == AccountRecordType.PersonAccount.ToString())
+            {
+                return View("CompanyPersonView", model);
+            }
+            else
+            {
+                return View("CompanyBusinessExternalView", model);
+            }
         }
 
         [Route("Company/New/{recordType}", Name = "CompanyNew")]
@@ -943,7 +951,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Contact", model);
+            return View("ContactView", model);
         }
 
         [Route("Contact/New", Name = "ContactNew")]

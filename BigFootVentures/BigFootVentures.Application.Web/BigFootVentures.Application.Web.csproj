@@ -388,6 +388,9 @@
     <Content Include="Views\Home\AgreementView.cshtml" />
     <Content Include="Views\Home\CancellationView.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\_AdvanceSearch.cshtml" />
+    <Content Include="Views\Home\CompanyBusinessExternalView.cshtml" />
+    <Content Include="Views\Home\CompanyPersonView.cshtml" />
+    <Content Include="Views\Home\ContactView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
