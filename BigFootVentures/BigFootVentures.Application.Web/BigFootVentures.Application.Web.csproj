@@ -393,6 +393,8 @@
     <Content Include="Views\Home\CompanyBusinessExternalView.cshtml" />
     <Content Include="Views\Home\CompanyPersonView.cshtml" />
     <Content Include="Views\Home\ContactView.cshtml" />
+    <Content Include="Views\Home\EmailResponseView.cshtml" />
+    <Content Include="Views\Home\EnquiryDomainView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
