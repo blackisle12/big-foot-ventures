@@ -1,0 +1,72 @@
+﻿<link href="~/Content/Views/Home/EmailResponse.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "EmailResponse - " + Model.Record.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<EmailResponse>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing EmailResponse <strong>@Model.Record.Name</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">EmailResponse Detail</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Name</strong></li>
+                            <li class="list-group-item"><strong>Enquiries</strong></li>
+                            <li class="list-group-item"><strong>Description</strong></li>
+                            <li class="list-group-item"><strong>Email</strong></li>
+                            <li class="list-group-item"><strong>Status</strong></li>
+                            <li class="list-group-item"><strong>Subject</strong></li>
+                            <li class="list-group-item"><strong>Message Date</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.Name</li>
+                            <li class="list-group-item">@(Model.Record.Enquiry?.OldCaseNumber)</li>
+                            <li class="list-group-item">@Model.Record.Description</li>
+                            <li class="list-group-item">@Model.Record.Email</li>
+                            <li class="list-group-item">@Model.Record.Status</li>
+                            <li class="list-group-item">@Model.Record.Subject</li>
+                            <li class="list-group-item">@Model.Record.MessageDate</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Ownner</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.OwnerName</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>
