@@ -1,0 +1,95 @@
+﻿<link href="~/Content/Views/Home/Lead.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Lead - " + Model.Record.FirstName + " " + Model.Record.LastName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Lead>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing Lead <strong>@Model.Record.FirstName @Model.Record.LastName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Lead Detail</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Lead Status</strong></li>
+                            <li class="list-group-item"><strong>Name</strong></li>
+                            <li class="list-group-item"><strong>Title</strong></li>
+                            <li class="list-group-item"><strong>Email</strong></li>
+                            <li class="list-group-item"><strong>Phone</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.Status</li>
+                            <li class="list-group-item">@Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</li>
+                            <li class="list-group-item">@Model.Record.Title</li>
+                            <li class="list-group-item">@Model.Record.Email</li>
+                            <li class="list-group-item">@Model.Record.Phone</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Lead Owner</strong></li>
+                            <li class="list-group-item"><strong>Company</strong></li>
+                            <li class="list-group-item"><strong>Industry</strong></li>
+                            <li class="list-group-item"><strong>No. of Employees</strong></li>
+                            <li class="list-group-item"><strong>Lead Source</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.OwnerName</li>
+                            <li class="list-group-item">@Model.Record.Company</li>
+                            <li class="list-group-item">@Model.Record.Industry</li>
+                            <li class="list-group-item">@Model.Record.NoOfEmployees</li>
+                            <li class="list-group-item">@Model.Record.Source</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: Address Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Address Information</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Address</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.Street, @Model.Record.City, @Model.Record.State, @Model.Record.PostalCode @Model.Record.Country</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Address Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>

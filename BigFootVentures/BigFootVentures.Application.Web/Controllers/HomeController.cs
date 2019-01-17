@@ -1579,7 +1579,14 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Enquiry", model);
+            if (enquiry.RecordType == ManagementEnums.Enquiry.RecordType.DomainEnquiry.ToString())
+            {
+                return View("EnquiryDomainView", model);
+            }
+            else
+            {
+                return View("EnquiryITSupportView", model);
+            }
         }
 
         [Route("Enquiry/New/{recordType}", Name = "EnquiryNew")]
@@ -1791,7 +1798,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Lead", model);
+            return View("LeadView", model);
         }
 
         [Route("Lead/New", Name = "LeadNew")]
@@ -1966,7 +1973,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("LegalCase", model);
+            return View("LegalCaseView", model);
         }
 
         [Route("LegalCase/New", Name = "LegalCaseNew")]
@@ -2252,7 +2259,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Office", model);
+            return View("OfficeView", model);
         }
 
         [Route("Office/New", Name = "OfficeNew")]
