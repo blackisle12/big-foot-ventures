@@ -1,0 +1,37 @@
+﻿@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Utilities
+
+<div name="Div.BrandFilter" class="div-filter" style="display: none;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Select.Filter.Brand.Name" />
+        </div>
+
+        <label class="col-sm-2 control-label">Purpose</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Brand.Purpose", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Brand.Purpose>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Value</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Brand.Value", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Brand.Value>()), new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">Category</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Brand.Category", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Brand.CategoryFilter>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">HVT</label>
+        <div class="col-sm-4">
+            <select class="form-control" name="Select.Filter.Brand.HVT">
+                <option value="NotSet"></option>
+                <option value="1">Checked</option>
+                <option value="0">Unchecked</option>
+            </select>
+        </div>
+    </div>
+</div>

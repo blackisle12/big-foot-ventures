@@ -13,6 +13,8 @@
                             <div class="col-sm-8">
                                 <select class="form-control" name="Select.Object">
                                     <option value="NotSet">- Select Object -</option>
+                                    <option value="Agreement">Agreement</option>
+                                    <option value="Brand">Brand</option>
                                     <option value="Domain">Domain</option>
                                 </select>
                             </div>
@@ -21,6 +23,8 @@
                             <div class="div-main-filter" style="display: none;">
                                 <hr />
 
+                                @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Agreement")
+                                @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Brand")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Domain")
                             </div>
                         </div>
@@ -35,6 +39,8 @@
     </div>
 </div>
 
+<script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Agreement.js"></script>
+<script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Brand.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Domain.js"></script>
 
 <script type="text/javascript">
@@ -57,7 +63,13 @@
 
             $('.div-filter').hide();
 
-            if (value == 'Domain') {
+            if (value == 'Agreement') {
+                $('[name="Div.AgreementFilter"]').show();
+            }
+            else if (value == 'Brand') {
+                $('[name="Div.BrandFilter"]').show();
+            }
+            else if (value == 'Domain') {
                 $('[name="Div.DomainFilter"]').show();
             }
         });
@@ -71,7 +83,13 @@
                 return;
             }
 
-            if (object == 'Domain') {
+            if (object == 'Agreement') {
+                query = BuildAgreementQuery(query);
+            }
+            else if (object == 'Brand') {
+                query = BuildBrandQuery(query);
+            }
+            else if (object == 'Domain') {
                 query = BuildDomainQuery(query);
             }
 

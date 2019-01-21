@@ -106,6 +106,8 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 query.Append($"AND d.Category LIKE '%{category}%' ");
             }
 
+            query.Append("ORDER BY d.Name");
+
             return query.ToString();
         }
 

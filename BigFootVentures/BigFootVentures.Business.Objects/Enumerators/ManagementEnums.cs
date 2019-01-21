@@ -39,6 +39,9 @@ namespace BigFootVentures.Business.Objects.Enumerators
         {
             public enum ObjectOfAgreement
             {
+                [Description("")]
+                NotSet,
+
                 [Description("Trademarks")]
                 Trademarks,
 
@@ -99,6 +102,57 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum Category
             {
+                [Description("Actor Names")]
+                ActorNames,
+
+                [Description("Airlines")]
+                Airlines,
+
+                [Description("Animals")]
+                Animals,
+
+                [Description("Brandbucket")]
+                Brandbucket,
+
+                [Description("First Names")]
+                FirstNames,
+
+                [Description("Last Names")]
+                LastNames,
+
+                [Description("Locations")]
+                Locations,
+
+                [Description("MG's Request")]
+                MGRequest,
+
+                [Description("Misc")]
+                Misc,
+
+                [Description("Model Names")]
+                ModelNames,
+
+                [Description("Movie Titles")]
+                MovieTitles,
+
+                [Description("Names")]
+                Names,
+
+                [Description("Numbers")]
+                Numbers,
+
+                [Description("Sitematrix")]
+                Sitematrix,
+
+                [Description("Typo")]
+                Typo
+            }
+
+            public enum CategoryFilter
+            {
+                [Description("")]
+                NotSet,
+
                 [Description("Actor Names")]
                 ActorNames,
 
