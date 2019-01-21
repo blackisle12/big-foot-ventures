@@ -1,0 +1,138 @@
+﻿@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Utilities
+
+<div name="Div.CompanyFilter" class="div-filter" style="display: none;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.Name" />
+        </div>
+
+        <label class="col-sm-2 control-label">Account Record Type</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Company.AccountRecordType", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.AccountRecordTypeFilter>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Former Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.FormerName" />
+        </div>
+
+        <label class="col-sm-2 control-label">Type</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Company.Type", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Type>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Parent Account</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.ParentAccount" />
+        </div>
+
+        <label class="col-sm-2 control-label">Phone</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.Phone" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Fax</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.Fax" />
+        </div>
+
+        <label class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.Email" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Company Size</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Company.CompanySize", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.CompanySize>()), new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">Industry</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Company.Industry", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Company.Industry>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name ID</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.NameID" />
+        </div>
+
+        <label class="col-sm-2 control-label">Employees</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.Employees" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Office ID GB</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.OfficeIDGB" />
+        </div>
+
+        <label class="col-sm-2 control-label">OHIM Num Oppositions</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.OHIMNumOppositions" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Escrow Agent</label>
+        <div class="col-sm-4">
+            <select class="form-control" name="Select.Filter.Company.EscrowAgent">
+                <option value="NotSet"></option>
+                <option value="1">Checked</option>
+                <option value="0">Unchecked</option>
+            </select>
+        </div>
+
+        <label class="col-sm-2 control-label">Broker</label>
+        <div class="col-sm-4">
+            <select class="form-control" name="Select.Filter.Company.Broker">
+                <option value="NotSet"></option>
+                <option value="1">Checked</option>
+                <option value="0">Unchecked</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Company Registration Number</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.RegistrationNumber" />
+        </div>
+
+        <label class="col-sm-2 control-label">Country of Incorporation</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Company.CountryOfIncorporation", new SelectList(BigFootVentures.Application.Web.Models.Utilities.StringUtils.GetCountries()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Officers</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.Officers" />
+        </div>
+
+        <label class="col-sm-2 control-label">Tax Number</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Company.TaxNumber" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">BigFoot Accredited</label>
+        <div class="col-sm-4">
+            <select class="form-control" name="Select.Filter.Company.BigFootAccredited">
+                <option value="NotSet"></option>
+                <option value="1">Checked</option>
+                <option value="0">Unchecked</option>
+            </select>
+        </div>
+
+        <label class="col-sm-2 control-label">Shipping Country</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Company.ShippingCountry", new SelectList(BigFootVentures.Application.Web.Models.Utilities.StringUtils.GetCountries()), new { @class = "form-control" })
+        </div>
+    </div>
+</div>

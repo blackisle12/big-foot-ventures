@@ -355,6 +355,21 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 PersonAccount
             }
 
+            public enum AccountRecordTypeFilter
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Business Account")]
+                BusinessAccount,
+
+                [Description("External Client")]
+                ExternalClient,
+
+                [Description("Person Account")]
+                PersonAccount
+            }
+
             public enum Type
             {
                 [Description("")]

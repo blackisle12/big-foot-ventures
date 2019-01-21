@@ -856,15 +856,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        [Route("Company/Export/{keyword}")]
-        public FileContentResult CompanyExport(string keyword)
-        {
-            var file = this._managementCompanyService.ExportByKeyword(keyword);
-
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Company-{StringUtils.GetCurrentDateTimeAsString()}.csv");
-        }
-
         #endregion
 
         #region "Contact"

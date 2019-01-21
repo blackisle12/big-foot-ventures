@@ -211,7 +211,8 @@ namespace BigFootVentures.Application.Web.Controllers
         [HttpGet]
         [Route("Cancellation/Export/{keyword}", Name = "CancellationExportWithKeyword")]
         [Route("Cancellation/Export", Name = "CancellationExport")]
-        public FileContentResult CancellationExport(string keyword = null, string referenceInternal = null, string referenceExternal = null, string sentOrigin = null, string internalCaseNumber = null, 
+        public FileContentResult CancellationExport(string keyword = null, 
+            string referenceInternal = null, string referenceExternal = null, string sentOrigin = null, string internalCaseNumber = null, 
             string submissionMethod = null, string applicant = null, string trademark = null, string researchPerformance = null, string status = null, string acquisitionLetterSentOrigin = null, 
             string acquisitionLetterSentMethod = null, string UDRPStrategy = null, string ownerResponseAcquisitionLetter = null, string domainEnquiry = null, string outcome = null)
         {
@@ -225,30 +226,25 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Action Methods"
-
-        [Route("Index/{keyword}", Name = "Search")]
-        public ActionResult Index(string keyword)
-        {
-            var searchResultWrapperList = this._searchService.Search(keyword);
-            var searchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResult);
-        }
+        #region "Company"
 
         [Route("Company/{rowCount?}/{page?}/{keyword?}", Name = "SearchCompany")]
-        public ActionResult Company(int rowCount = 25, int page = 1, string keyword = "")
+        public ActionResult Company(int rowCount = 25, int page = 1, string keyword = null,
+            string name = null, string accountRecordType = null, string formerName = null, string type = null, string parentAccount = null, string phone = null,
+            string fax = null, string email = null, string companySize = null, string industry = null, string nameID = null, string employees = null, string officeIDGB = null, string OHIMNumOppositions = null,
+            string escrowAgent = null, string broker = null, string companyRegistrationNumber = null, string countryOfIncorporation = null, string officers = null, string taxNumber = null,
+            string bigFootAccredited = null, string shippingCountry = null)
         {
             var searchResultObject = new VMSearchResultObject<Company> { Caption = "Company" };
             var startIndex = (page - 1) * rowCount;
-            var companies = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementCompanyService.Get(startIndex, rowCount, out int total) :
-                this._managementCompanyService.GetByKeyword(keyword, startIndex, rowCount, out total);
+
+            var query = CompanyUtils.BuildQuery(startIndex, rowCount,
+                keyword ?? name, accountRecordType, formerName, type, parentAccount, phone,
+                fax, email, companySize, industry, nameID, employees, officeIDGB, OHIMNumOppositions,
+                escrowAgent, broker, companyRegistrationNumber, countryOfIncorporation, officers, taxNumber,
+                bigFootAccredited, shippingCountry);
+
+            var companies = this._managementCompanyService.GetByQuery(query.Item1, query.Item2, out int total);
 
             searchResultObject.ObjectResult = new VMPageResult<Company>
             {
@@ -259,47 +255,46 @@ namespace BigFootVentures.Application.Web.Controllers
                 Records = companies
             };
 
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
+            if (!string.IsNullOrWhiteSpace(keyword))
             {
-                Table = searchResultWrapperList
-            };
+                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
 
-            ViewBag.Keyword = keyword;
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? name;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
 
             return View(searchResultObject);
         }
 
-        [Route("Contact/{rowCount?}/{page?}/{keyword?}", Name = "SearchContact")]
-        public ActionResult Contact(int rowCount = 25, int page = 1, string keyword = "")
+        [HttpGet]
+        [Route("Company/Export/{keyword}", Name = "CompanyExportWithKeyword")]
+        [Route("Company/Export", Name = "CompanyExport")]
+        public FileContentResult CompanyExport(string keyword = null, 
+            string name = null, string accountRecordType = null, string formerName = null, string type = null, string parentAccount = null, string phone = null,
+            string fax = null, string email = null, string companySize = null, string industry = null, string nameID = null, string employees = null, string officeIDGB = null, string OHIMNumOppositions = null,
+            string escrowAgent = null, string broker = null, string companyRegistrationNumber = null, string countryOfIncorporation = null, string officers = null, string taxNumber = null,
+            string bigFootAccredited = null, string shippingCountry = null)
         {
-            var searchResultObject = new VMSearchResultObject<Contact> { Caption = "Contact" };
-            var startIndex = (page - 1) * rowCount;
-            var contacts = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementContactService.Get(startIndex, rowCount, out int total) :
-                this._managementContactService.GetByKeyword(keyword, startIndex, rowCount, out total);
+            var query = CompanyUtils.BuildExportQuery(keyword ?? name, accountRecordType, formerName, type, parentAccount, phone,
+                fax, email, companySize, industry, nameID, employees, officeIDGB, OHIMNumOppositions,
+                escrowAgent, broker, companyRegistrationNumber, countryOfIncorporation, officers, taxNumber,
+                bigFootAccredited, shippingCountry);
+            var file = this._managementCompanyService.ExportByQuery(query);
 
-            searchResultObject.ObjectResult = new VMPageResult<Contact>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = contacts
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Company-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
+
+        #endregion
+
+        #region "Contact"
+        #endregion
+
+        #region "Domain"
 
         [Route("Domain/{rowCount?}/{page?}/{keyword?}", Name = "SearchDomain")]
         public ActionResult Domain(int rowCount = 25, int page = 1, string keyword = null,
@@ -342,7 +337,8 @@ namespace BigFootVentures.Application.Web.Controllers
         [HttpGet]
         [Route("Domain/Export/{keyword}", Name = "DomainExportWithKeyword")]
         [Route("Domain/Export", Name = "DomainExport")]
-        public FileContentResult DomainExport(string keyword = null, string name = null, string bigFootOwned = null, string websiteCurrent = null, string locked = null, string websiteUse = null, string BFStrategy = null,
+        public FileContentResult DomainExport(string keyword = null,
+            string name = null, string bigFootOwned = null, string websiteCurrent = null, string locked = null, string websiteUse = null, string BFStrategy = null,
             string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
             string version = null, string WHOIS = null, string category = null)
         {
@@ -351,6 +347,54 @@ namespace BigFootVentures.Application.Web.Controllers
             var file = this._managementDomainService.ExportByQuery(query);
 
             return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Domain-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
+        #region "Action Methods"
+
+        [Route("Index/{keyword}", Name = "Search")]
+        public ActionResult Index(string keyword)
+        {
+            var searchResultWrapperList = this._searchService.Search(keyword);
+            var searchResult = new VMSearchResult
+            {
+                Table = searchResultWrapperList
+            };
+
+            ViewBag.Keyword = keyword;
+
+            return View(searchResult);
+        }
+
+        [Route("Contact/{rowCount?}/{page?}/{keyword?}", Name = "SearchContact")]
+        public ActionResult Contact(int rowCount = 25, int page = 1, string keyword = "")
+        {
+            var searchResultObject = new VMSearchResultObject<Contact> { Caption = "Contact" };
+            var startIndex = (page - 1) * rowCount;
+            var contacts = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementContactService.Get(startIndex, rowCount, out int total) :
+                this._managementContactService.GetByKeyword(keyword, startIndex, rowCount, out total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Contact>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = contacts
+            };
+
+            var searchResultWrapperList = this._searchService.Search(keyword);
+
+            searchResultObject.SearchResult = new VMSearchResult
+            {
+                Table = searchResultWrapperList
+            };
+
+            ViewBag.Keyword = keyword;
+
+            return View(searchResultObject);
         }
 
         [Route("Enquiry/{rowCount?}/{page?}/{keyword?}", Name = "SearchEnquiry")]
