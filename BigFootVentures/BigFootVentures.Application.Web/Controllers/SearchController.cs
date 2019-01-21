@@ -1,4 +1,5 @@
 ﻿using BigFootVentures.Application.Web.Models.Utilities;
+using BigFootVentures.Application.Web.Models.Utilities.Query;
 using BigFootVentures.Application.Web.Models.ViewModels;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
@@ -64,6 +65,292 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Agreement"
+
+        [Route("Agreement/{rowCount?}/{page?}/{keyword?}", Name = "SearchAgreement")]
+        public ActionResult Agreement(int rowCount = 25, int page = 1, string keyword = null,
+            string name = null, string BFCompany = null, string counterpart = null, string objectOfAgreement = null, string type = null)
+        {
+            var searchResultObject = new VMSearchResultObject<AgreementT> { Caption = "Agreement" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = AgreementUtils.BuildQuery(startIndex, rowCount, keyword ?? name, BFCompany, counterpart, objectOfAgreement, type);
+            var agreements = this._managementAgreementService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<AgreementT>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = agreements
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? name;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Agreement/Export/{keyword}", Name = "AgreementExportWithKeyword")]
+        [Route("Agreement/Export", Name = "AgreementExport")]
+        public FileContentResult AgreementExport(string keyword = null, string name = null, string BFCompany = null, string counterpart = null, string objectOfAgreement = null, string type = null)
+        {
+            var query = AgreementUtils.BuildExportQuery(keyword ?? name, BFCompany, counterpart, objectOfAgreement, type);
+            var file = this._managementAgreementService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Agreement-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
+        #region "Brand"
+
+        [Route("Brand/{rowCount?}/{page?}/{keyword?}", Name = "SearchBrand")]
+        public ActionResult Brand(int rowCount = 25, int page = 1, string keyword = null,
+            string name = null, string purpose = null, string value = null, string category = null, string HVT = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Brand> { Caption = "Brand" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = BrandUtils.BuildQuery(startIndex, rowCount, keyword ?? name, purpose, value, category, HVT);
+            var brands = this._managementBrandService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Brand>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = brands
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? name;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Brand/Export/{keyword}", Name = "BrandExportWithKeyword")]
+        [Route("Brand/Export", Name = "BrandExport")]
+        public FileContentResult BrandExport(string keyword = null, string name = null, string purpose = null, string value = null, string category = null, string HVT = null)
+        {
+            var query = BrandUtils.BuildExportQuery(keyword ?? name, purpose, value, category, HVT);
+            var file = this._managementBrandService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Brand-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
+        #region "Cancellation"
+
+        [Route("Cancellation/{rowCount?}/{page?}/{keyword?}", Name = "SearchCancellation")]
+        public ActionResult Cancellation(int rowCount = 25, int page = 1, string keyword = null,
+            string referenceInternal = null, string referenceExternal = null, string sentOrigin = null, string internalCaseNumber = null,
+            string submissionMethod = null, string applicant = null, string trademark = null, string researchPerformance = null, string status = null, string acquisitionLetterSentOrigin = null,
+            string acquisitionLetterSentMethod = null, string UDRPStrategy = null, string ownerResponseAcquisitionLetter = null, string domainEnquiry = null, string outcome = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Cancellation> { Caption = "Cancellation" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = CancellationUtils.BuildQuery(startIndex, rowCount,
+                keyword ?? referenceInternal, referenceExternal, sentOrigin, internalCaseNumber,
+                submissionMethod, applicant, trademark, researchPerformance, status, acquisitionLetterSentOrigin,
+                acquisitionLetterSentMethod, UDRPStrategy, ownerResponseAcquisitionLetter, domainEnquiry, outcome);
+
+            var cancellations = this._managementCancellationService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Cancellation>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = cancellations
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(referenceInternal ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? referenceInternal;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Cancellation/Export/{keyword}", Name = "CancellationExportWithKeyword")]
+        [Route("Cancellation/Export", Name = "CancellationExport")]
+        public FileContentResult CancellationExport(string keyword = null, 
+            string referenceInternal = null, string referenceExternal = null, string sentOrigin = null, string internalCaseNumber = null, 
+            string submissionMethod = null, string applicant = null, string trademark = null, string researchPerformance = null, string status = null, string acquisitionLetterSentOrigin = null, 
+            string acquisitionLetterSentMethod = null, string UDRPStrategy = null, string ownerResponseAcquisitionLetter = null, string domainEnquiry = null, string outcome = null)
+        {
+            var query = CancellationUtils.BuildExportQuery(keyword ?? referenceInternal, referenceExternal, sentOrigin, internalCaseNumber,
+                submissionMethod, applicant, trademark, researchPerformance, status, acquisitionLetterSentOrigin,
+                acquisitionLetterSentMethod, UDRPStrategy, ownerResponseAcquisitionLetter, domainEnquiry, outcome);
+            var file = this._managementCancellationService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Cancellation-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
+        #region "Company"
+
+        [Route("Company/{rowCount?}/{page?}/{keyword?}", Name = "SearchCompany")]
+        public ActionResult Company(int rowCount = 25, int page = 1, string keyword = null,
+            string name = null, string accountRecordType = null, string formerName = null, string type = null, string parentAccount = null, string phone = null,
+            string fax = null, string email = null, string companySize = null, string industry = null, string nameID = null, string employees = null, string officeIDGB = null, string OHIMNumOppositions = null,
+            string escrowAgent = null, string broker = null, string companyRegistrationNumber = null, string countryOfIncorporation = null, string officers = null, string taxNumber = null,
+            string bigFootAccredited = null, string shippingCountry = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Company> { Caption = "Company" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = CompanyUtils.BuildQuery(startIndex, rowCount,
+                keyword ?? name, accountRecordType, formerName, type, parentAccount, phone,
+                fax, email, companySize, industry, nameID, employees, officeIDGB, OHIMNumOppositions,
+                escrowAgent, broker, companyRegistrationNumber, countryOfIncorporation, officers, taxNumber,
+                bigFootAccredited, shippingCountry);
+
+            var companies = this._managementCompanyService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Company>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = companies
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? name;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Company/Export/{keyword}", Name = "CompanyExportWithKeyword")]
+        [Route("Company/Export", Name = "CompanyExport")]
+        public FileContentResult CompanyExport(string keyword = null, 
+            string name = null, string accountRecordType = null, string formerName = null, string type = null, string parentAccount = null, string phone = null,
+            string fax = null, string email = null, string companySize = null, string industry = null, string nameID = null, string employees = null, string officeIDGB = null, string OHIMNumOppositions = null,
+            string escrowAgent = null, string broker = null, string companyRegistrationNumber = null, string countryOfIncorporation = null, string officers = null, string taxNumber = null,
+            string bigFootAccredited = null, string shippingCountry = null)
+        {
+            var query = CompanyUtils.BuildExportQuery(keyword ?? name, accountRecordType, formerName, type, parentAccount, phone,
+                fax, email, companySize, industry, nameID, employees, officeIDGB, OHIMNumOppositions,
+                escrowAgent, broker, companyRegistrationNumber, countryOfIncorporation, officers, taxNumber,
+                bigFootAccredited, shippingCountry);
+            var file = this._managementCompanyService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Company-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
+        #region "Contact"
+        #endregion
+
+        #region "Domain"
+
+        [Route("Domain/{rowCount?}/{page?}/{keyword?}", Name = "SearchDomain")]
+        public ActionResult Domain(int rowCount = 25, int page = 1, string keyword = null,
+            string name = null, string bigFootOwned = null, string websiteCurrent = null, string locked = null, string websiteUse = null, string BFStrategy = null,
+            string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
+            string version = null, string WHOIS = null, string category = null)
+        {
+            var searchResultObject = new VMSearchResultObject<DomainN> { Caption = "Domain" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = DomainUtils.BuildQuery(startIndex, rowCount, keyword ?? name, bigFootOwned, websiteCurrent, locked, websiteUse, BFStrategy,
+                buySideFunnel, FMVOrderOfMagnitude, companyWebsite, status, autoRenew, version, WHOIS, category);
+            var domains = this._managementDomainService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<DomainN>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = domains
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? name;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Domain/Export/{keyword}", Name = "DomainExportWithKeyword")]
+        [Route("Domain/Export", Name = "DomainExport")]
+        public FileContentResult DomainExport(string keyword = null,
+            string name = null, string bigFootOwned = null, string websiteCurrent = null, string locked = null, string websiteUse = null, string BFStrategy = null,
+            string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
+            string version = null, string WHOIS = null, string category = null)
+        {
+            var query = DomainUtils.BuildExportQuery(keyword ?? name, bigFootOwned, websiteCurrent, locked, websiteUse, BFStrategy,
+                buySideFunnel, FMVOrderOfMagnitude, companyWebsite, status, autoRenew, version, WHOIS, category);
+            var file = this._managementDomainService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Domain-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
         #region "Action Methods"
 
         [Route("Index/{keyword}", Name = "Search")]
@@ -78,126 +365,6 @@ namespace BigFootVentures.Application.Web.Controllers
             ViewBag.Keyword = keyword;
 
             return View(searchResult);
-        }
-
-        [Route("Agreement/{rowCount?}/{page?}/{keyword?}", Name = "SearchAgreement")]
-        public ActionResult Agreement(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<AgreementT> { Caption = "Agreement" };
-            var startIndex = (page - 1) * rowCount;
-            var agreements = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementAgreementService.Get(startIndex, rowCount, out int total) :
-                this._managementAgreementService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<AgreementT>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = agreements
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
-        }
-
-        [Route("Brand/{rowCount?}/{page?}/{keyword?}", Name = "SearchBrand")]
-        public ActionResult Brand(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Brand> { Caption = "Brand" };
-            var startIndex = (page - 1) * rowCount;
-            var brands = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementBrandService.Get(startIndex, rowCount, out int total) :
-                this._managementBrandService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Brand>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = brands
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
-        }
-
-        [Route("Cancellation/{rowCount?}/{page?}/{keyword?}", Name = "SearchCancellation")]
-        public ActionResult Cancellation(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Cancellation> { Caption = "Cancellation" };
-            var startIndex = (page - 1) * rowCount;
-            var cancellations = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementCancellationService.Get(startIndex, rowCount, out int total) :
-                this._managementCancellationService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Cancellation>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = cancellations
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
-        }
-
-        [Route("Company/{rowCount?}/{page?}/{keyword?}", Name = "SearchCompany")]
-        public ActionResult Company(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Company> { Caption = "Company" };
-            var startIndex = (page - 1) * rowCount;
-            var companies = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementCompanyService.Get(startIndex, rowCount, out int total) :
-                this._managementCompanyService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Company>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = companies
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
         }
 
         [Route("Contact/{rowCount?}/{page?}/{keyword?}", Name = "SearchContact")]
@@ -226,44 +393,6 @@ namespace BigFootVentures.Application.Web.Controllers
             };
 
             ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
-        }
-
-        [Route("Domain/{rowCount?}/{page?}/{keyword?}", Name = "SearchDomain")]
-        public ActionResult Domain(int rowCount = 25, int page = 1, string keyword = null,
-            string name = null, string bigFootOwned = null, string websiteCurrent = null, string locked = null, string websiteUse = null, string BFStrategy = null,
-            string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
-            string version = null, string WHOIS = null, string category = null)
-        {
-            var searchResultObject = new VMSearchResultObject<DomainN> { Caption = "Domain" };
-            var startIndex = (page - 1) * rowCount;
-
-            var query = QueryUtils.BuildSearchAdvanceDomainQuery(startIndex, rowCount, keyword ?? name, bigFootOwned, websiteCurrent, locked, websiteUse, BFStrategy,
-                buySideFunnel, FMVOrderOfMagnitude, companyWebsite, status, autoRenew, version, WHOIS, category);
-            var domains = this._managementDomainService.GetByQuery(query.Item1, query.Item2, out int total);
-
-            searchResultObject.ObjectResult = new VMPageResult<DomainN>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = domains
-            };
-
-            if (!string.IsNullOrWhiteSpace(keyword))
-            {
-                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
-
-                searchResultObject.SearchResult = new VMSearchResult
-                {
-                    Table = searchResultWrapperList
-                };
-            }
-
-            ViewBag.Keyword = keyword ?? name;
-            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
 
             return View(searchResultObject);
         }

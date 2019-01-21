@@ -8,6 +8,16 @@ namespace BigFootVentures.Business.DataAccess.Utilities
 
         public static string EscapeCSV(string data)
         {
+            if (data.Contains("\r"))
+            {
+                data = data.Replace("\r", string.Empty);
+            }
+
+            if (data.Contains("\n"))
+            {
+                data = data.Replace("\n", string.Empty);
+            }
+
             if (data.Contains("\""))
             {
                 data = data.Replace("\"", "\"\"");
@@ -18,7 +28,7 @@ namespace BigFootVentures.Business.DataAccess.Utilities
                 data = String.Format("\"{0}\"", data);
             }
 
-            if (data.Contains(System.Environment.NewLine))
+            if (data.Contains(Environment.NewLine))
             {
                 data = String.Format("\"{0}\"", data);
             }

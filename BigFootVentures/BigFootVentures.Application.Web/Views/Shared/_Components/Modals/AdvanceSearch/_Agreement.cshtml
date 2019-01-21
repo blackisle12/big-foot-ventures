@@ -1,0 +1,33 @@
+﻿@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Utilities
+
+<div name="Div.AgreementFilter" class="div-filter" style="display: none;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Agreement.Name" />
+        </div>
+
+        <label class="col-sm-2 control-label">Name of the BF Company</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Agreement.BFCompany" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name of the Counterpart</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Agreement.Counterpart" />
+        </div>
+
+        <label class="col-sm-2 control-label">Object of Agreement</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Agreement.ObjectOfAgreement", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Agreement.ObjectOfAgreement>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Type of Agreement</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Agreement.Type", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Agreement.Type>()), new { @class = "form-control" })
+        </div>
+    </div>
+</div>

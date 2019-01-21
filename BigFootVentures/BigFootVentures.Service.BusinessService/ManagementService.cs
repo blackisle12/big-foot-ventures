@@ -21,6 +21,8 @@ namespace BigFootVentures.Service.BusinessService
 
         StringBuilder ExportByKeyword(string keyword);
 
+        StringBuilder ExportByQuery(string query);
+
         TModel Get(int ID);
 
         ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
@@ -96,6 +98,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.ExportByKeyword(keyword);
+            }
+        }
+
+        public StringBuilder ExportByQuery(string query)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.ExportByQuery(query);
             }
         }
 

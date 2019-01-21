@@ -50,11 +50,11 @@
 
                 var keyword = $('[name="keyword"]').val();
 
-                if (keyword.length > 0) {
-                    window.open(location.origin + '/Search/@action/' + $('[name="rowCount"]').val() + '/' + $('[name="page"]').val() + '/' + keyword + '/', '_self');
+                if (location.search.length > 0) {
+                    window.open(location.origin + '/Search/@action/' + $('[name="rowCount"]').val() + '/' + $('[name="page"]').val() + location.search, '_self');
                 }
                 else {
-                    window.open(location.origin + '/Search/@action/' + $('[name="rowCount"]').val() + '/' + $('[name="page"]').val(), '_self');
+                    window.open(location.origin + '/Search/@action/' + $('[name="rowCount"]').val() + '/' + $('[name="page"]').val() + '/' + keyword + '/', '_self');
                 }
             });
         });

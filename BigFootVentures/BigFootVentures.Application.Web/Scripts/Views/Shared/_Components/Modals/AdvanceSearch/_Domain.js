@@ -1,5 +1,5 @@
 ﻿function BuildDomainQuery(query) {
-    var name = $('[name="Select.Filter.Domain.Name"]').val();
+    var name = $('[name="Input.Filter.Domain.Name"]').val();
     var bigFootOwned = $('[name="Select.Filter.Domain.BigFootOwned"]').val();
     var websiteCurrent = $('[name="Select.Filter.Domain.WebsiteCurrent"]').val();
     var locked = $('[name="Select.Filter.Domain.Locked"]').val();
@@ -10,9 +10,9 @@
     var companyWebsite = $('[name="Select.Filter.Domain.CompanyWebsite"]').val();
     var status = $('[name="Select.Filter.Domain.Status"]').val();
     var autoRenew = $('[name="Select.Filter.Domain.AutoRenew"]').val();
-    var version = $('[name="Select.Filter.Domain.Version"]').val();
-    var WHOIS = $('[name="Select.Filter.Domain.WHOIS"]').val();
-    var category = $('[name="Select.Filter.Domain.Category"]').val();
+    var version = $('[name="Input.Filter.Domain.Version"]').val();
+    var WHOIS = $('[name="Input.Filter.Domain.WHOIS"]').val();
+    var category = $('[name="Input.Filter.Domain.Category"]').val();
 
     if (name != null && name != undefined && name.length > 0) {
         query += '&name=' + name;
