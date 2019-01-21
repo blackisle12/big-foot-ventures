@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
+using static BigFootVentures.Business.Objects.Enumerators.ManagementEnums.Company;
 
 namespace BigFootVentures.Application.Web.Controllers
 {
@@ -727,7 +728,14 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Company", model);
+            if (company.AccountRecordType == AccountRecordType.PersonAccount.ToString())
+            {
+                return View("CompanyPersonView", model);
+            }
+            else
+            {
+                return View("CompanyBusinessExternalView", model);
+            }
         }
 
         [Route("Company/New/{recordType}", Name = "CompanyNew")]
@@ -943,7 +951,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Contact", model);
+            return View("ContactView", model);
         }
 
         [Route("Contact/New", Name = "ContactNew")]
@@ -1562,7 +1570,14 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Enquiry", model);
+            if (enquiry.RecordType == ManagementEnums.Enquiry.RecordType.DomainEnquiry.ToString())
+            {
+                return View("EnquiryDomainView", model);
+            }
+            else
+            {
+                return View("EnquiryITSupportView", model);
+            }
         }
 
         [Route("Enquiry/New/{recordType}", Name = "EnquiryNew")]
@@ -1774,7 +1789,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Lead", model);
+            return View("LeadView", model);
         }
 
         [Route("Lead/New", Name = "LeadNew")]
@@ -1949,7 +1964,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("LegalCase", model);
+            return View("LegalCaseView", model);
         }
 
         [Route("LegalCase/New", Name = "LegalCaseNew")]
@@ -2235,7 +2250,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Office", model);
+            return View("OfficeView", model);
         }
 
         [Route("Office/New", Name = "OfficeNew")]

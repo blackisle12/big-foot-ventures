@@ -1,0 +1,84 @@
+﻿<link href="~/Content/Views/Home/LegalCase.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "LegalCase - " + Model.Record.TypeOfCase;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<LegalCase>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing Legal Case <strong>@Model.Record.TypeOfCase</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Legal Case Detail</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Type Of Case</strong></li>
+                            <li class="list-group-item"><strong>Type of Case External Clients</strong></li>
+                            <li class="list-group-item"><strong>Trademark</strong></li>
+                            <li class="list-group-item"><strong>Trademark Number</strong></li>
+                            <li class="list-group-item"><strong>Keywords</strong></li>
+                            <li class="list-group-item"><strong>Date Assigned</strong></li>
+                            <li class="list-group-item"><strong>Court Url</strong></li>
+                            <li class="list-group-item"><strong>Plantiff</strong></li>
+                            <li class="list-group-item"><strong>Defendant</strong></li>
+                            <li class="list-group-item"><strong>Plantiff Representative</strong></li>
+                            <li class="list-group-item"><strong>Defendant Representative</strong></li>
+                            <li class="list-group-item"><strong>Deletion Request</strong></li>
+                            <li class="list-group-item"><strong>Deletion Request Reason</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.TypeOfCase</li>
+                            <li class="list-group-item">@Model.Record.TypeOfCaseExternalClients</li>
+                            <li class="list-group-item">@(Model.Record.Trademark?.Name)</li>
+                            <li class="list-group-item">@Model.Record.TrademarkNumber</li>
+                            <li class="list-group-item">@Model.Record.Keywords</li>
+                            <li class="list-group-item">@Model.Record.DateAssigned</li>
+                            <li class="list-group-item">@Model.Record.CourtURL</li>
+                            <li class="list-group-item">@Model.Record.Plaintiff.CompanyName</li>
+                            <li class="list-group-item">@Model.Record.Defendant.CompanyName</li>
+                            <li class="list-group-item">@(Model.Record.PlaintiffRepresentative?.CompanyName)</li>
+                            <li class="list-group-item">@(Model.Record.DefendantRepresentative?.CompanyName)</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequest ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item">@Model.Record.DeletionRequestReason</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Owner</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.DisplayName</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>

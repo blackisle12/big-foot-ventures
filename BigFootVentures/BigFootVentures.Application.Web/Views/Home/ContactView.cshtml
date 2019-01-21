@@ -1,0 +1,99 @@
+﻿<link href="~/Content/Views/Home/Contact.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Contact - " + Model.Record.Salutation + " " + Model.Record.FirstName + " " + Model.Record.MiddleName + " " + Model.Record.LastName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Contact>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing Contact <strong>@Model.Record.Salutation @Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Contact Detail</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Name</strong></li>
+                            <li class="list-group-item"><strong>Company Name</strong></li>
+                            <li class="list-group-item"><strong>Title</strong></li>
+                            <li class="list-group-item"><strong>Email</strong></li>
+                            <li class="list-group-item"><strong>Phone</strong></li>
+                            <li class="list-group-item"><strong>Mobile</strong></li>
+                            <li class="list-group-item"><strong>OHIM_Owner_ID</strong></li>
+                            <li class="list-group-item"><strong>OHIM_Num_Trademarks</strong></li>
+                            <li class="list-group-item"><strong>Website - Individual</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.Salutation @Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</li>
+                            <li class="list-group-item">@(Model.Record.Company?.CompanyName)</li>
+                            <li class="list-group-item">@Model.Record.Title</li>
+                            <li class="list-group-item">@Model.Record.Email</li>
+                            <li class="list-group-item">@Model.Record.Phone</li>
+                            <li class="list-group-item">@Model.Record.Mobile</li>
+                            <li class="list-group-item">@Model.Record.OHIMOwnerID</li>
+                            <li class="list-group-item">@Model.Record.OHIMNumTrademarks</li>
+                            <li class="list-group-item">@Model.Record.WebsiteIndividual</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Contact Owner</strong></li>
+                            <li class="list-group-item"><strong>Department</strong></li>
+                            <li class="list-group-item"><strong>Fax</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.OwnerName</li>
+                            <li class="list-group-item">@Model.Record.Department</li>
+                            <li class="list-group-item">@Model.Record.Fax</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: Address Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Address Information</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Mailing Address</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.MailingStreet, @Model.Record.MailingCity, @Model.Record.MailingState, @Model.Record.MailingPostalCode @Model.Record.MailingCountry</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Address Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>
