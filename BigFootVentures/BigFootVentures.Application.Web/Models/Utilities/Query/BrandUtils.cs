@@ -49,7 +49,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(HVT))
             {
-                query.Append($"AND HVT = %{HVT}% ");
+                query.Append($"AND HVT = {HVT} ");
             }
 
             query.Append("ORDER BY NAME");
@@ -90,7 +90,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(HVT))
             {
-                query.Append($"AND HVT = %{HVT}% ");
+                query.Append($"AND HVT = {HVT} ");
             }
 
             query.Append($"ORDER BY NAME LIMIT {startIndex},{rowCount}");
@@ -127,7 +127,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(HVT))
             {
-                query.Append($"AND HVT = %{HVT}% ");
+                query.Append($"AND HVT = {HVT} ");
             }
 
             return query;

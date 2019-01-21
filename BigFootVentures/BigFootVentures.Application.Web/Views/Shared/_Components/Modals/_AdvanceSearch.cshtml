@@ -15,6 +15,7 @@
                                     <option value="NotSet">- Select Object -</option>
                                     <option value="Agreement">Agreement</option>
                                     <option value="Brand">Brand</option>
+                                    <option value="Cancellation">Cancellation</option>
                                     <option value="Domain">Domain</option>
                                 </select>
                             </div>
@@ -25,6 +26,7 @@
 
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Agreement")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Brand")
+                                @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Cancellation")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Domain")
                             </div>
                         </div>
@@ -41,6 +43,7 @@
 
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Agreement.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Brand.js"></script>
+<script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Cancellation.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Domain.js"></script>
 
 <script type="text/javascript">
@@ -69,6 +72,9 @@
             else if (value == 'Brand') {
                 $('[name="Div.BrandFilter"]').show();
             }
+            else if (value == 'Cancellation') {
+                $('[name="Div.CancellationFilter"]').show();
+            }    
             else if (value == 'Domain') {
                 $('[name="Div.DomainFilter"]').show();
             }
@@ -88,6 +94,9 @@
             }
             else if (object == 'Brand') {
                 query = BuildBrandQuery(query);
+            }
+            else if (object == 'Cancellation') {
+                query = BuildCancellationQuery(query);
             }
             else if (object == 'Domain') {
                 query = BuildDomainQuery(query);

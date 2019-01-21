@@ -647,16 +647,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return RedirectToAction("Cancellations");
         }
 
-        [HttpGet]
-        [Route("Cancellation/Export/{keyword}")]
-        public FileContentResult CancellationExport(string keyword)
-        {
-            var file = this._managementCancellationService.ExportByKeyword(keyword);
-
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Cancellation-{StringUtils.GetCurrentDateTimeAsString()}.csv");
-        }
-
-
         #endregion
 
         #region "Company"

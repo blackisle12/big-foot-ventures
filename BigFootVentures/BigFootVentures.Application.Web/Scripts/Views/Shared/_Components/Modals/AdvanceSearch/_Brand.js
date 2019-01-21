@@ -1,5 +1,5 @@
 ﻿function BuildBrandQuery(query) {
-    var name = $('[name="Select.Filter.Brand.Name"]').val();
+    var name = $('[name="Input.Filter.Brand.Name"]').val();
     var purpose = $('[name="Select.Filter.Brand.Purpose"]').val();
     var value = $('[name="Select.Filter.Brand.Value"]').val();
     var category = $('[name="Select.Filter.Brand.Category"]').val();

@@ -1,7 +1,7 @@
 ﻿function BuildAgreementQuery(query) {
-    var name = $('[name="Select.Filter.Agreement.Name"]').val();
-    var BFCompany = $('[name="Select.Filter.Agreement.BFCompany"]').val();
-    var counterpart = $('[name="Select.Filter.Agreement.Counterpart"]').val();
+    var name = $('[name="Input.Filter.Agreement.Name"]').val();
+    var BFCompany = $('[name="Input.Filter.Agreement.BFCompany"]').val();
+    var counterpart = $('[name="Input.Filter.Agreement.Counterpart"]').val();
     var objectOfAgreement = $('[name="Select.Filter.Agreement.ObjectOfAgreement"]').val();
     var type = $('[name="Select.Filter.Agreement.Type"]').val();
 

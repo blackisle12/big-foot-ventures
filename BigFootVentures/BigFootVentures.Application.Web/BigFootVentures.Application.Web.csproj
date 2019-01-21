@@ -186,6 +186,7 @@
     <Compile Include="Models\Security\Providers\CustomMembershipProvider.cs" />
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
+    <Compile Include="Models\Utilities\Query\CancellationUtils.cs" />
     <Compile Include="Models\Utilities\Query\BrandUtils.cs" />
     <Compile Include="Models\Utilities\Query\AgreementUtils.cs" />
     <Compile Include="Models\Utilities\Query\DomainUtils.cs" />
@@ -302,6 +303,7 @@
     <Content Include="Scripts\Views\Home\Company.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
     <Content Include="Scripts\Utilites\CommonUtils.js" />
+    <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Cancellation.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Brand.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Agreement.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Domain.js" />
@@ -405,6 +407,7 @@
     <Content Include="Views\Home\OfficeView.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Agreement.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Brand.cshtml" />
+    <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Cancellation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

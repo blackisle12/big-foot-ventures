@@ -1,0 +1,92 @@
+﻿@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Utilities
+
+<div name="Div.CancellationFilter" class="div-filter" style="display: none;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Cancellation Reference Internal</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Cancellation.ReferenceInternal" />
+        </div>
+
+        <label class="col-sm-2 control-label">Cancellation Reference External</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Cancellation.ReferenceExternal" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Cancellation Sent Origin</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Cancellation.SentOrigin" />
+        </div>
+
+        <label class="col-sm-2 control-label">Internal Case Number</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Cancellation.InternalCaseNumber" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Cancellation Submission Method</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Cancellation.SubmissionMethod", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.SubmissionMethod>()), new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">Cancellation Applicant</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Cancellation.Applicant" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Trademark</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Cancellation.Trademark" />
+        </div>
+
+        <label class="col-sm-2 control-label">Cancellation Research Performance</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Cancellation.ResearchPerformance", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.ResearchPerformance>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Cancellation Status</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Cancellation.Status", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.Status>()), new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">Acquisition Letter Sent Origin</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Cancellation.AcquisitionLetterSentOrigin", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.AcquisitionLetterSentOrigin>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Acquisition Letter Sent Method</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Cancellation.AcquisitionLetterSentMethod", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.AcquisitionLetterSentMethod>()), new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">UDRP Strategy</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Cancellation.UDRPStrategy", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.UDRPStrategy>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Owner Response Acquisition Letter</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Cancellation.OwnerResponseAcquisitionLetter", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.OwnerResponseAcquisitionLetter>()), new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">Cancellation Domain Enquiry</label>
+        <div class="col-sm-4">
+            <select class="form-control" name="Select.Filter.Cancellation.DomainEnquiry">
+                <option value="NotSet"></option>
+                <option value="1">Checked</option>
+                <option value="0">Unchecked</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Cancellation Outcome</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Cancellation.Outcome", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Cancellation.Outcome>()), new { @class = "form-control" })
+        </div>
+    </div>
+</div>  

@@ -166,6 +166,63 @@ namespace BigFootVentures.Application.Web.Controllers
         #endregion
 
         #region "Cancellation"
+
+        [Route("Cancellation/{rowCount?}/{page?}/{keyword?}", Name = "SearchCancellation")]
+        public ActionResult Cancellation(int rowCount = 25, int page = 1, string keyword = null,
+            string referenceInternal = null, string referenceExternal = null, string sentOrigin = null, string internalCaseNumber = null,
+            string submissionMethod = null, string applicant = null, string trademark = null, string researchPerformance = null, string status = null, string acquisitionLetterSentOrigin = null,
+            string acquisitionLetterSentMethod = null, string UDRPStrategy = null, string ownerResponseAcquisitionLetter = null, string domainEnquiry = null, string outcome = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Cancellation> { Caption = "Cancellation" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = CancellationUtils.BuildQuery(startIndex, rowCount,
+                keyword ?? referenceInternal, referenceExternal, sentOrigin, internalCaseNumber,
+                submissionMethod, applicant, trademark, researchPerformance, status, acquisitionLetterSentOrigin,
+                acquisitionLetterSentMethod, UDRPStrategy, ownerResponseAcquisitionLetter, domainEnquiry, outcome);
+
+            var cancellations = this._managementCancellationService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Cancellation>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = cancellations
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(referenceInternal ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? referenceInternal;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Cancellation/Export/{keyword}", Name = "CancellationExportWithKeyword")]
+        [Route("Cancellation/Export", Name = "CancellationExport")]
+        public FileContentResult CancellationExport(string keyword = null, string referenceInternal = null, string referenceExternal = null, string sentOrigin = null, string internalCaseNumber = null, 
+            string submissionMethod = null, string applicant = null, string trademark = null, string researchPerformance = null, string status = null, string acquisitionLetterSentOrigin = null, 
+            string acquisitionLetterSentMethod = null, string UDRPStrategy = null, string ownerResponseAcquisitionLetter = null, string domainEnquiry = null, string outcome = null)
+        {
+            var query = CancellationUtils.BuildExportQuery(keyword ?? referenceInternal, referenceExternal, sentOrigin, internalCaseNumber,
+                submissionMethod, applicant, trademark, researchPerformance, status, acquisitionLetterSentOrigin,
+                acquisitionLetterSentMethod, UDRPStrategy, ownerResponseAcquisitionLetter, domainEnquiry, outcome);
+            var file = this._managementCancellationService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Cancellation-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
         #endregion
 
         #region "Action Methods"
@@ -182,36 +239,6 @@ namespace BigFootVentures.Application.Web.Controllers
             ViewBag.Keyword = keyword;
 
             return View(searchResult);
-        }
-
-        [Route("Cancellation/{rowCount?}/{page?}/{keyword?}", Name = "SearchCancellation")]
-        public ActionResult Cancellation(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Cancellation> { Caption = "Cancellation" };
-            var startIndex = (page - 1) * rowCount;
-            var cancellations = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementCancellationService.Get(startIndex, rowCount, out int total) :
-                this._managementCancellationService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Cancellation>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = cancellations
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
         }
 
         [Route("Company/{rowCount?}/{page?}/{keyword?}", Name = "SearchCompany")]

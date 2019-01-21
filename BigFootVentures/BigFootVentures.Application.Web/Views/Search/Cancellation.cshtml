@@ -58,7 +58,7 @@
     </div>
     <script type="text/javascript">
         $('#btnExport').on('click', function () {
-            location.href = '@Url.Action("CancellationExport", "Home")';
+            location.href = '@Url.Action("CancellationExport", "Search")' + (location.search.length > 0 ? location.search : '/@ViewBag.Keyword');
         });
     </script>
 }
