@@ -23,6 +23,8 @@ namespace BigFootVentures.Business.DataAccess
 
         StringBuilder ExportByKeyword(string keyword);
 
+        StringBuilder ExportByQuery(string query);
+
         TEntity Get(int ID);
 
         ICollection<TEntity> GetForEmailNotification(int week);
@@ -169,7 +171,7 @@ namespace BigFootVentures.Business.DataAccess
 
                 var entities = new List<TEntity>();
 
-                using (var command = new MySqlCommand($"Object_GetByQuery", this._connection) { CommandType = CommandType.StoredProcedure })
+                using (var command = new MySqlCommand("Object_GetByQuery", this._connection) { CommandType = CommandType.StoredProcedure })
                 {
                     command.Parameters.Add(new MySqlParameter("query1", MySqlDbType.Text) { Value = query, Direction = ParameterDirection.Input });
                     command.Parameters.Add(new MySqlParameter("query2", MySqlDbType.Text) { Value = queryTotal, Direction = ParameterDirection.Input });
@@ -209,6 +211,32 @@ namespace BigFootVentures.Business.DataAccess
                 using (var command = new MySqlCommand($"{this._entityName}_ExportByKeyword", this._connection) { CommandType = CommandType.StoredProcedure })
                 {
                     command.Parameters.Add(new MySqlParameter("keyword", MySqlDbType.VarChar, 50) { Value = keyword, Direction = ParameterDirection.Input });
+
+                    var dataReader = command.ExecuteReader();
+
+                    return this._mapper.ExportData(dataReader);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public StringBuilder ExportByQuery(string query)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                using (var command = new MySqlCommand("Object_ExportByQuery", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("query1", MySqlDbType.Text) { Value = query, Direction = ParameterDirection.Input });
 
                     var dataReader = command.ExecuteReader();
 

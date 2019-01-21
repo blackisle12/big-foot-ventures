@@ -1,4 +1,5 @@
 ﻿using BigFootVentures.Application.Web.Models.Utilities;
+using BigFootVentures.Application.Web.Models.Utilities.Query;
 using BigFootVentures.Application.Web.Models.ViewModels;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
@@ -239,7 +240,7 @@ namespace BigFootVentures.Application.Web.Controllers
             var searchResultObject = new VMSearchResultObject<DomainN> { Caption = "Domain" };
             var startIndex = (page - 1) * rowCount;
 
-            var query = QueryUtils.BuildSearchAdvanceDomainQuery(startIndex, rowCount, keyword ?? name, bigFootOwned, websiteCurrent, locked, websiteUse, BFStrategy,
+            var query = DomainUtils.BuildQuery(startIndex, rowCount, keyword ?? name, bigFootOwned, websiteCurrent, locked, websiteUse, BFStrategy,
                 buySideFunnel, FMVOrderOfMagnitude, companyWebsite, status, autoRenew, version, WHOIS, category);
             var domains = this._managementDomainService.GetByQuery(query.Item1, query.Item2, out int total);
 
@@ -266,6 +267,19 @@ namespace BigFootVentures.Application.Web.Controllers
             ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
 
             return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Domain/Export", Name = "ExportDomain")]
+        public FileContentResult DomainExport(string name = null, string bigFootOwned = null, string websiteCurrent = null, string locked = null, string websiteUse = null, string BFStrategy = null,
+            string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
+            string version = null, string WHOIS = null, string category = null)
+        {
+            var query = DomainUtils.BuildExportQuery(name, bigFootOwned, websiteCurrent, locked, websiteUse, BFStrategy,
+                buySideFunnel, FMVOrderOfMagnitude, companyWebsite, status, autoRenew, version, WHOIS, category);
+            var file = this._managementDomainService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Domain-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         [Route("Enquiry/{rowCount?}/{page?}/{keyword?}", Name = "SearchEnquiry")]

@@ -186,7 +186,7 @@
     <Compile Include="Models\Security\Providers\CustomMembershipProvider.cs" />
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
-    <Compile Include="Models\Utilities\QueryUtils.cs" />
+    <Compile Include="Models\Utilities\Query\DomainUtils.cs" />
     <Compile Include="Models\Utilities\RouteUtils.cs" />
     <Compile Include="Models\Utilities\SessionUtils.cs" />
     <Compile Include="Models\Utilities\StringUtils.cs" />
