@@ -511,6 +511,64 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Legal Case"
+        #endregion
+
+        #region "Office"
+
+        [Route("Office/{rowCount?}/{page?}/{keyword?}", Name = "SearchOffice")]
+        public ActionResult Office(int rowCount = 25, int page = 1, string keyword = null,
+            string officeName = null, string state = null, string officeURL = null, string online = null, string officeNameArchive = null, string PCT = null, string WTO = null,
+            string geographyType = null, string office = null, string officeValueCategory = null, string searchURL = null, string nationalNumberAssigned = null, string paris = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Office> { Caption = "Office" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = OfficeUtils.BuildQuery(startIndex, rowCount, keyword ??
+                officeName, state, officeURL, online, officeNameArchive, PCT, WTO, geographyType, office, officeValueCategory, searchURL, nationalNumberAssigned, paris);
+            var offices = this._managementOfficeService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Office>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = offices
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(officeName ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? officeName;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Office/Export/{keyword}", Name = "OfficeExportWithKeyword")]
+        [Route("Office/Export", Name = "OfficeExport")]
+        public FileContentResult OfficeExport(string keyword = null,
+            string officeName = null, string state = null, string officeURL = null, string online = null, string officeNameArchive = null, string PCT = null, string WTO = null,
+            string geographyType = null, string office = null, string officeValueCategory = null, string searchURL = null, string nationalNumberAssigned = null, string paris = null)
+        {
+            var query = OfficeUtils.BuildExportQuery(keyword ??
+                officeName, state, officeURL, online, officeNameArchive, PCT, WTO, geographyType, office, officeValueCategory, searchURL, nationalNumberAssigned, paris);
+            var file = this._managementOfficeService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Office-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
         #region "Action Methods"
 
         [Route("Index/{keyword}", Name = "Search")]
@@ -543,36 +601,6 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = legalCases
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
-        }
-
-        [Route("Office/{rowCount?}/{page?}/{keyword?}", Name = "SearchOffice")]
-        public ActionResult Office(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Office> { Caption = "Office" };
-            var startIndex = (page - 1) * rowCount;
-            var offices = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementOfficeService.Get(startIndex, rowCount, out int total) :
-                this._managementOfficeService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Office>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = offices
             };
 
             var searchResultWrapperList = this._searchService.Search(keyword);
