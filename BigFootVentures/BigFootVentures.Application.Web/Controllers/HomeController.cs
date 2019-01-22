@@ -2817,15 +2817,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        [Route("Register/Export/{keyword}")]
-        public FileContentResult RegisterExport(string keyword)
-        {
-            var file = this._managementRegisterService.ExportByKeyword(keyword);
-
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Register-{StringUtils.GetCurrentDateTimeAsString()}.csv");
-        }
-
         #endregion
 
         #region "Similar Trademark"

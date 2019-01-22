@@ -1,0 +1,27 @@
+﻿@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Utilities
+
+<div name="Div.RegisterFilter" class="div-filter" style="display: none;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Register.Name" />
+        </div>
+
+        <label class="col-sm-2 control-label">RAA Year</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Register.RAAYear" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Country</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Register.Country", new SelectList(BigFootVentures.Application.Web.Models.Utilities.StringUtils.GetCountries()), new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">Accredited TLDs</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Register.AccreditedTLDs" />
+        </div>
+    </div>
+</div>

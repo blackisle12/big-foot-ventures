@@ -569,6 +569,58 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Register"
+
+        [Route("Register/{rowCount?}/{page?}/{keyword?}", Name = "SearchRegister")]
+        public ActionResult Register(int rowCount = 25, int page = 1, string keyword = null,
+            string name = null, string RAAYear = null, string country = null, string accreditedTLDs = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Register> { Caption = "Registrar" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = RegisterUtils.BuildQuery(startIndex, rowCount, keyword ??
+                name, RAAYear, country, accreditedTLDs);
+            var registers = this._managementRegisterService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Register>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = registers
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? name;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Register/Export/{keyword}", Name = "RegisterExportWithKeyword")]
+        [Route("Register/Export", Name = "RegisterExport")]
+        public FileContentResult RegisterExport(string keyword = null, 
+            string name = null, string RAAYear = null, string country = null, string accreditedTLDs = null)
+        {
+            var query = RegisterUtils.BuildExportQuery(keyword ?? name, RAAYear, country, accreditedTLDs);
+            var file = this._managementRegisterService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Registrar-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
         #region "Action Methods"
 
         [Route("Index/{keyword}", Name = "Search")]
@@ -601,36 +653,6 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = legalCases
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
-        }
-
-        [Route("Register/{rowCount?}/{page?}/{keyword?}", Name = "SearchRegister")]
-        public ActionResult Register(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Register> { Caption = "Registrar" };
-            var startIndex = (page - 1) * rowCount;
-            var registers = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementRegisterService.Get(startIndex, rowCount, out int total) :
-                this._managementRegisterService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Register>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = registers
             };
 
             var searchResultWrapperList = this._searchService.Search(keyword);

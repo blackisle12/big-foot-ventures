@@ -186,6 +186,7 @@
     <Compile Include="Models\Security\Providers\CustomMembershipProvider.cs" />
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
+    <Compile Include="Models\Utilities\Query\RegisterUtils.cs" />
     <Compile Include="Models\Utilities\Query\OfficeUtils.cs" />
     <Compile Include="Models\Utilities\Query\LeadUtils.cs" />
     <Compile Include="Models\Utilities\Query\EnquiryUtils.cs" />
@@ -308,6 +309,7 @@
     <Content Include="Scripts\Views\Home\Company.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
     <Content Include="Scripts\Utilites\CommonUtils.js" />
+    <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Register.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Office.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Lead.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Enquiry.js" />
@@ -427,6 +429,7 @@
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Enquiry.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Lead.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Office.cshtml" />
+    <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
