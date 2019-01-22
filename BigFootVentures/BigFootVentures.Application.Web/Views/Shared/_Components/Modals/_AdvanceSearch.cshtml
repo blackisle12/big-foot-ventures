@@ -19,6 +19,7 @@
                                     <option value="Company">Company</option>
                                     <option value="Contact">Contact</option>
                                     <option value="Domain">Domain</option>
+                                    <option value="Enquiry">Enquiry</option>
                                 </select>
                             </div>
                         </div>
@@ -32,6 +33,7 @@
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Company")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Contact")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Domain")
+                                @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Enquiry")
                             </div>
                         </div>
                     </fieldset>
@@ -51,6 +53,7 @@
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Company.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Contact.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Domain.js"></script>
+<script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Enquiry.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -101,6 +104,9 @@
             }
             else if (object == 'Domain') {
                 query = BuildDomainQuery(query);
+            }
+            else if (object == 'Enquiry') {
+                query = BuildEnquiryQuery(query);
             }
 
             if (query.length == 4) {

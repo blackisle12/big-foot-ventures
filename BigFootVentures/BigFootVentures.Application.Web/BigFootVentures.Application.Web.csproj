@@ -186,6 +186,7 @@
     <Compile Include="Models\Security\Providers\CustomMembershipProvider.cs" />
     <Compile Include="Models\Utilities\InputUtils.cs" />
     <Compile Include="Models\Utilities\PageUtils.cs" />
+    <Compile Include="Models\Utilities\Query\EnquiryUtils.cs" />
     <Compile Include="Models\Utilities\Query\ContactUtils.cs" />
     <Compile Include="Models\Utilities\Query\CompanyUtils.cs" />
     <Compile Include="Models\Utilities\Query\CancellationUtils.cs" />
@@ -305,6 +306,7 @@
     <Content Include="Scripts\Views\Home\Company.js" />
     <Content Include="Scripts\Views\Home\Brand.js" />
     <Content Include="Scripts\Utilites\CommonUtils.js" />
+    <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Enquiry.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Contact.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Company.js" />
     <Content Include="Scripts\Views\Shared\_Components\Modals\AdvanceSearch\_Cancellation.js" />
@@ -418,6 +420,7 @@
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Cancellation.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Company.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Contact.cshtml" />
+    <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Enquiry.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

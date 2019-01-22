@@ -982,6 +982,78 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 Closed
             }
 
+            public enum StatusAll
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("New")]
+                New,
+
+                [Description("On Hold")]
+                OnHold,
+
+                [Description("Escalated")]
+                Escalated,
+
+                [Description("Under Evaluation")]
+                UnderEvaluation,
+
+                [Description("Design/Development")]
+                DesignDevelopment,
+
+                [Description("Build Complete")]
+                BuildComplete,
+
+                [Description("Testing in Progress")]
+                TestingInProgress,
+
+                [Description("Closed")]
+                Closed,
+
+                [Description("To be contacted")]
+                ToBeContacted,
+
+                [Description("Not Interested")]
+                NotInterested,
+
+                [Description("In Negotiations")]
+                InNegotiations,
+
+                [Description("Couldn't agree on terms")]
+                CouldntAgreeOnTerms,
+
+                [Description("Agreed keep in touch")]
+                AgreedKeepInTouch,
+
+                [Description("Follow up")]
+                FollowUp,
+
+                [Description("Acquired")]
+                Acquired,
+
+                [Description("Leased (BigFoot: Lessor)")]
+                LeasedBigFootLessor,
+
+                [Description("Leased (BigFoot: Lessee)")]
+                LeasedBigFootLessee,
+
+                [Description("Don't contact us again")]
+                DontContactUsAgain,
+
+                [Description("Sent Enquiry 1")]
+                SentEnquiry1,
+
+                [Description("Sent Enquiry 2")]
+                SentEnquiry2,
+
+                [Description("Sent Enquiry 3")]
+                SentEnquiry3,
+
+                [Description("Sent Enquiry 4")]
+                SentEnquiry4
+            }
+
             public enum CaseAssign
             {
                 [Description("")]

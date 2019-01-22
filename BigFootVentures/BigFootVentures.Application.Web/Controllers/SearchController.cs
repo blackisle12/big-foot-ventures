@@ -403,6 +403,59 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Enquiry"
+
+        [Route("Enquiry/{rowCount?}/{page?}/{keyword?}", Name = "SearchEnquiry")]
+        public ActionResult Enquiry(int rowCount = 25, int page = 1, string keyword = null,
+            string oldCaseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Enquiry> { Caption = "Enquiry" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = EnquiryUtils.BuildQuery(startIndex, rowCount, keyword ??
+                oldCaseNumber, status, caseAssign, priority, subject);
+            var enquiries = this._managementEnquiryService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Enquiry>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = enquiries
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(oldCaseNumber ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? oldCaseNumber;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Enquiry/Export/{keyword}", Name = "EnquiryExportWithKeyword")]
+        [Route("Enquiry/Export", Name = "EnquiryExport")]
+        public FileContentResult EnquiryExport(string keyword = null,
+            string oldCaseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
+        {
+            var query = EnquiryUtils.BuildExportQuery(keyword ??
+                oldCaseNumber, status, caseAssign, priority, subject);
+            var file = this._managementEnquiryService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Enquiry-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
         #region "Action Methods"
 
         [Route("Index/{keyword}", Name = "Search")]
@@ -417,36 +470,6 @@ namespace BigFootVentures.Application.Web.Controllers
             ViewBag.Keyword = keyword;
 
             return View(searchResult);
-        }
-
-        [Route("Enquiry/{rowCount?}/{page?}/{keyword?}", Name = "SearchEnquiry")]
-        public ActionResult Enquiry(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Enquiry> { Caption = "Enquiry" };
-            var startIndex = (page - 1) * rowCount;
-            var enquiries = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementEnquiryService.Get(startIndex, rowCount, out int total) :
-                this._managementEnquiryService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Enquiry>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = enquiries
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
         }
 
         [Route("Lead/{rowCount?}/{page?}/{keyword?}", Name = "SearchLead")]

@@ -1,0 +1,33 @@
+﻿@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Utilities
+
+<div name="Div.EnquiryFilter" class="div-filter" style="display: none;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Old Case Number</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Enquiry.OldCaseNumber" />
+        </div>
+
+        <label class="col-sm-2 control-label">Status</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Enquiry.Status", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Enquiry.StatusAll>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Case Assign</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Enquiry.CaseAssign", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Enquiry.CaseAssign>()), new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">Priority</label>
+        <div class="col-sm-4">
+            @Html.DropDownList("Select.Filter.Enquiry.Priority", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Enquiry.Priority>()), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Subject</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="Input.Filter.Enquiry.Subject" />
+        </div>
+    </div>
+</div>
