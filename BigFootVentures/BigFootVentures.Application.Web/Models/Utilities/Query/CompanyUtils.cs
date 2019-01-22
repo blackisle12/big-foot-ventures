@@ -53,7 +53,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(formerName))
             {
-                query.Append($"AND `C.FORMER NAME` LIKE '%{formerName}%' ");
+                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))
@@ -184,7 +184,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(formerName))
             {
-                query.Append($"AND `C.FORMER NAME` LIKE '%{formerName}%' ");
+                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))
@@ -310,7 +310,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(formerName))
             {
-                query.Append($"AND `C.FORMER NAME` LIKE '%{formerName}%' ");
+                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))

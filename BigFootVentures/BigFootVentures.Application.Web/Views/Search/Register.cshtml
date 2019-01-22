@@ -13,16 +13,14 @@
 
 @using (Html.BeginForm("Register", "Search", FormMethod.Get))
 {
-    <h4>
-        Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>@Model.Caption</strong> (@Model.ObjectResult.Total found)
-    </h4>
+    <h4>Search result for keyword "<strong>@ViewBag.Keyword</strong>" on <strong>@Model.Caption</strong> (@Model.ObjectResult.Total found)</h4>
 
     <hr />
 
     <div class="col-md-2">
         @Html.Partial("../Shared/_Components/Search/_PageObjectsFilter")
     </div>
-    <div class="col-md-10">
+    <div class="col-md-@((ViewBag.IsAdvanceSearch == null || !ViewBag.IsAdvanceSearch ? "10" : "12"))">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <p class="panel-title pull-right">
@@ -66,7 +64,7 @@
     </div>
     <script type="text/javascript">
         $('#btnExport').on('click', function () {
-            location.href = '@Url.Action("RegisterExport", "Home")';
+            location.href = '@Url.Action("RegisterExport", "Search")' + (location.search.length > 0 ? location.search : '/@ViewBag.Keyword');
         });
     </script>
 }
