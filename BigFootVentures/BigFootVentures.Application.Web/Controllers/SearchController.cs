@@ -456,6 +456,61 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Lead"
+
+        [Route("Lead/{rowCount?}/{page?}/{keyword?}", Name = "SearchLead")]
+        public ActionResult Lead(int rowCount = 25, int page = 1, string keyword = null,
+            string status = null, string firstName = null, string middleName = null, string lastName = null, string email = null, string phone = null,
+            string company = null, string industry = null, string source = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Lead> { Caption = "Lead" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = LeadUtils.BuildQuery(startIndex, rowCount, keyword ??
+                status, firstName, middleName, lastName, email, phone, company, industry, source);
+            var leads = this._managementLeadService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Lead>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = leads
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(firstName ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? firstName;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Lead/Export/{keyword}", Name = "LeadExportWithKeyword")]
+        [Route("Lead/Export", Name = "LeadExport")]
+        public FileContentResult AgreementExport(string keyword = null,
+            string status = null, string firstName = null, string middleName = null, string lastName = null, string email = null, string phone = null,
+            string company = null, string industry = null, string source = null)
+        {
+            var query = LeadUtils.BuildExportQuery(keyword ??
+                status, firstName, middleName, lastName, email, phone, company, industry, source);
+            var file = this._managementLeadService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Lead-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
         #region "Action Methods"
 
         [Route("Index/{keyword}", Name = "Search")]
@@ -470,36 +525,6 @@ namespace BigFootVentures.Application.Web.Controllers
             ViewBag.Keyword = keyword;
 
             return View(searchResult);
-        }
-
-        [Route("Lead/{rowCount?}/{page?}/{keyword?}", Name = "SearchLead")]
-        public ActionResult Lead(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Lead> { Caption = "Lead" };
-            var startIndex = (page - 1) * rowCount;
-            var leads = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementLeadService.Get(startIndex, rowCount, out int total) :
-                this._managementLeadService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Lead>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = leads
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
         }
 
         [Route("LegalCase/{rowCount?}/{page?}/{keyword?}", Name = "SearchLegalCase")]

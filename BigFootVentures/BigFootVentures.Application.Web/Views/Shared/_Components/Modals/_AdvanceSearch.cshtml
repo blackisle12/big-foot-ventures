@@ -20,6 +20,7 @@
                                     <option value="Contact">Contact</option>
                                     <option value="Domain">Domain</option>
                                     <option value="Enquiry">Enquiry</option>
+                                    <option value="Lead">Lead</option>
                                 </select>
                             </div>
                         </div>
@@ -34,6 +35,7 @@
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Contact")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Domain")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Enquiry")
+                                @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Lead")
                             </div>
                         </div>
                     </fieldset>
@@ -54,6 +56,7 @@
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Contact.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Domain.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Enquiry.js"></script>
+<script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Lead.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -107,6 +110,9 @@
             }
             else if (object == 'Enquiry') {
                 query = BuildEnquiryQuery(query);
+            }
+            else if (object == 'Lead') {
+                query = BuildLeadQuery(query);
             }
 
             if (query.length == 4) {

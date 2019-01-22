@@ -1108,6 +1108,24 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 Unqualified
             }
 
+            public enum StatusFilter
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Contacted")]
+                Contacted,
+
+                [Description("Open")]
+                Open,
+
+                [Description("Qualified")]
+                Qualified,
+
+                [Description("Unqualified")]
+                Unqualified
+            }
+
             public enum Salutation
             {
                 [Description("")]
