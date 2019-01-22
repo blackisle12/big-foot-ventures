@@ -32,6 +32,10 @@
                             {
                                 action = "LegalCase";
                             }
+                            else if (table.Caption == "Registrar")
+                            {
+                                action = "Register";
+                            }
 
                             <a href="@Url.Action(action, "Search", new { rowCount = 25, page = 1, keyword = ViewBag.Keyword })">@caption</a>
                         }
@@ -78,7 +82,18 @@
                             {
                                 <tr>
                                     @{
-                                        string link = $"{Url.Action(table.Caption, "Home")}/{row[0]}";
+                                        var action = table.Caption;
+
+                                        if (table.Caption == "Legal Case")
+                                        {
+                                            action = "LegalCase";
+                                        }
+                                        else if (table.Caption == "Registrar")
+                                        {
+                                            action = "Register";
+                                        }
+
+                                        string link = $"{Url.Action(action, "Home")}/{row[0]}";
 
                                         for (var i = 1; i < row.Count; i++)
                                         {
