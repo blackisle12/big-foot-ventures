@@ -1052,15 +1052,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        [Route("Contact/Export/{keyword}")]
-        public FileContentResult ContactExport(string keyword)
-        {
-            var file = this._managementContactService.ExportByKeyword(keyword);
-
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Contact-{StringUtils.GetCurrentDateTimeAsString()}.csv");
-        }
-
         #endregion
 
         #region "Domain"
@@ -1693,15 +1684,6 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        [Route("Enquiry/Export/{keyword}")]
-        public FileContentResult EnquiryExport(string keyword)
-        {
-            var file = this._managementEnquiryService.ExportByKeyword(keyword);
-
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Enquiry-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         #endregion
@@ -2349,15 +2331,6 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        [Route("Office/Export/{keyword}")]
-        public FileContentResult OfficeExport(string keyword)
-        {
-            var file = this._managementOfficeService.ExportByKeyword(keyword);
-
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Office-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
 
         #endregion
