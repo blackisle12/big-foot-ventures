@@ -1,0 +1,606 @@
+﻿<link href="~/Content/Views/Home/Trademark.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Trademark - " + Model.Record.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Trademark>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing trademark <strong>@Model.Record.Name</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Trademark Office -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Trademark Office</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Name</strong></li>
+                            <li class="list-group-item"><strong>Office</strong></li>
+                            <li class="list-group-item"><strong>Office Status</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.Name</li>
+                            <li class="list-group-item">@(Model.Record.Office?.OfficeName)</li>
+                            <li class="list-group-item">@Model.Record.OfficeStatus</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Trademark Office -->
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Trademark Information</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Trademark Number</strong></li>
+                            <li class="list-group-item"><strong>International Registration Number</strong></li>
+                            <li class="list-group-item"><strong>Filing Number</strong></li>
+                            <li class="list-group-item"><strong>Registration Number</strong></li>
+                            <li class="list-group-item"><strong>TM URL</strong></li>
+                            <li class="list-group-item"><strong>Brand</strong></li>
+                            <li class="list-group-item"><strong>Owner</strong></li>
+                            <li class="list-group-item"><strong>Original Office</strong></li>
+                            <li class="list-group-item"><strong>Receipt Date</strong></li>
+                            <li class="list-group-item"><strong>Filing date Value</strong></li>
+                            <li class="list-group-item"><strong>Publication Date</strong></li>
+                            <li class="list-group-item"><strong>Registration Date</strong></li>
+                            <li class="list-group-item"><strong>Expiry Date</strong></li>
+                            <li class="list-group-item"><strong>6 Months Anniversary</strong></li>
+                            <li class="list-group-item"><strong>Priority Date</strong></li>
+                            <li class="list-group-item"><strong>Priority Country & Priority TM Number</strong></li>
+                            <li class="list-group-item"><strong>Seniority Used</strong></li>
+                            <li class="list-group-item"><strong>Seniority Details</strong></li>
+                            <li class="list-group-item"><strong>Deletion Request</strong></li>
+                            <li class="list-group-item"><strong>Deletion Request Reason</strong></li>
+                            <li class="list-group-item"><strong>Revocation Target</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.TrademarkNumber</li>
+                            <li class="list-group-item">@Model.Record.InternationalRegistrationNumber</li>
+                            <li class="list-group-item">@Model.Record.FilingNumber</li>
+                            <li class="list-group-item">@Model.Record.RegistrationNumber</li>
+                            <li class="list-group-item">@Model.Record.TMURL</li>
+                            <li class="list-group-item">@(Model.Record.Brand?.Name)</li>
+                            <li class="list-group-item">@Model.Record.OwnerName</li>
+                            <li class="list-group-item">@Model.Record.OriginalOffice</li>
+                            <li class="list-group-item">@Model.Record.ReceiptDate</li>
+                            <li class="list-group-item">@Model.Record.FilingDateValue</li>
+                            <li class="list-group-item">@Model.Record.PublicationDate</li>
+                            <li class="list-group-item">@Model.Record.RegistrationDate</li>
+                            <li class="list-group-item">@Model.Record.ExpiryDate</li>
+                            <li class="list-group-item">@Model.Record.SixMonthsAnniversary</li>
+                            <li class="list-group-item">@Model.Record.PriorityDate</li>
+                            <li class="list-group-item">@Model.Record.PriorityCountryAndPriorityTMNumber</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.SeniorityUsed ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item">@Model.Record.SeniorityDetails</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequest ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item">@Model.Record.DeletionRequestReason</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.RevocationTarget ? "checked" : string.Empty) /></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Mismatch Classes Checkbox</strong></li>
+                            <li class="list-group-item"><strong>Status Grouping</strong></li>
+                            <li class="list-group-item"><strong>Office Status Description</strong></li>
+                            <li class="list-group-item"><strong>User Status Description</strong></li>
+                            <li class="list-group-item"><strong>Figurative</strong></li>
+                            <li class="list-group-item"><strong>Trademark Type</strong></li>
+                            <li class="list-group-item"><strong>Figurative URL</strong></li>
+                            <li class="list-group-item"><strong>Language Filing</strong></li>
+                            <li class="list-group-item"><strong>Language Second</strong></li>
+                            <li class="list-group-item"><strong>Geography</strong></li>
+                            <li class="list-group-item"><strong>Involved in revocation</strong></li>
+                            <li class="list-group-item"><strong>Bigfoot Group Owned</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item">@Model.Record.UserStatusDescription</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Figurative ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item">@Model.Record.TrademarkType</li>
+                            <li class="list-group-item">@Model.Record.FigurativeURL</li>
+                            <li class="list-group-item">@Model.Record.LanguageFiling</li>
+                            <li class="list-group-item">@Model.Record.LanguageSecond</li>
+                            <li class="list-group-item">@Model.Record.Geography</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.InvolvedInRevocation ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item">@Model.Record.BigfootGroupOwned</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Trademark Information -->
+            <!-- START: Similirarity Research -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Similirarity Research</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Open Similarity Research Task</strong></li>
+                            <li class="list-group-item"><strong>Initial Submitter</strong></li>
+                            <li class="list-group-item"><strong>Last Similarity Research Completed By</strong></li>
+                            <li class="list-group-item"><strong>Last Similarity Research Completed On</strong></li>
+                            <li class="list-group-item"><strong>Opposition Research</strong></li>
+                            <li class="list-group-item"><strong>Similar Trademark Spellings</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.OpenSimilarityResearchTask</li>
+                            <li class="list-group-item">@Model.Record.InitialSubmitter</li>
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item">@Model.Record.LastSimilarityResearchCompletedOn</li>
+                            <li class="list-group-item">@Model.Record.OppositionResearch</li>
+                            <li class="list-group-item">@Model.Record.SimilarTrademarkSpellings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Similirarity Research -->
+            <!-- START: Trademark Detail Office Specific Fields -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Trademark Detail Office Specific Fields</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>WIPO Designated Protection</strong></li>
+                            <li class="list-group-item"><strong>WIPO Basic Application-ISO</strong></li>
+                            <li class="list-group-item"><strong>ARIPO Designated States</strong></li>
+                            <li class="list-group-item"><strong>Trademark Name English Translation</strong></li>
+                            <li class="list-group-item"><strong>WIPO Basic Application-Filing Date</strong></li>
+                            <li class="list-group-item"><strong>WIPO Basic Application-Number</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.WIPODesignatedProtection</li>
+                            <li class="list-group-item">@Model.Record.WIPOBasicApplicationISO</li>
+                            <li class="list-group-item">@Model.Record.ARIPODesignatedStates</li>
+                            <li class="list-group-item">@Model.Record.TrademarkNameEnglishTranslation</li>
+                            <li class="list-group-item">@Model.Record.WIPOBasicApplicationFilingDate</li>
+                            <li class="list-group-item">@Model.Record.WIPOBasicApplicationNumber</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Trademark Detail Office Specific Fields -->
+            <!-- START: Country Specific-Latvia -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Country Specific-Latvia</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Payment Status Registered LV</strong></li>
+                            <li class="list-group-item"><strong>Acceptance Due Date</strong></li>
+                            <li class="list-group-item"><strong>Comments LV</strong></li>
+                            <li class="list-group-item"><strong>LV Appeal Deadline</strong></li>
+                            <li class="list-group-item"><strong>Reasons For the Refusal LV</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.PaymentStatusRegisteredLV</li>
+                            <li class="list-group-item">@Model.Record.AcceptanceDueDate</li>
+                            <li class="list-group-item">@Model.Record.CommentsLV</li>
+                            <li class="list-group-item">@Model.Record.LVAppealDeadline</li>
+                            <li class="list-group-item">@Model.Record.ReasonForTheRefusalLV</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Country Specific-Latvia -->
+            <!-- START: Country Specific-Latvia -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Country Specific-Latvia</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Class 1</strong></li>
+                            <li class="list-group-item"><strong>Class 2</strong></li>
+                            <li class="list-group-item"><strong>Class 3</strong></li>
+                            <li class="list-group-item"><strong>Class 4</strong></li>
+                            <li class="list-group-item"><strong>Class 5</strong></li>
+                            <li class="list-group-item"><strong>Class 6</strong></li>
+                            <li class="list-group-item"><strong>Class 7</strong></li>
+                            <li class="list-group-item"><strong>Class 8</strong></li>
+                            <li class="list-group-item"><strong>Class 9</strong></li>
+                            <li class="list-group-item"><strong>Class 10</strong></li>
+                            <li class="list-group-item"><strong>Class 11</strong></li>
+                            <li class="list-group-item"><strong>Class 12</strong></li>
+                            <li class="list-group-item"><strong>Class 13</strong></li>
+                            <li class="list-group-item"><strong>Class 14</strong></li>
+                            <li class="list-group-item"><strong>Class 15</strong></li>
+                            <li class="list-group-item"><strong>Class 16</strong></li>
+                            <li class="list-group-item"><strong>Class 17</strong></li>
+                            <li class="list-group-item"><strong>Class 18</strong></li>
+                            <li class="list-group-item"><strong>Class 19</strong></li>
+                            <li class="list-group-item"><strong>Class 20</strong></li>
+                            <li class="list-group-item"><strong>Class 21</strong></li>
+                            <li class="list-group-item"><strong>Class 22</strong></li>
+                            <li class="list-group-item"><strong>Class 23</strong></li>
+                            <li class="list-group-item"><strong>Class 24</strong></li>
+                            <li class="list-group-item"><strong>Class 25</strong></li>
+                            <li class="list-group-item"><strong>Class 26</strong></li>
+                            <li class="list-group-item"><strong>Class 27</strong></li>
+                            <li class="list-group-item"><strong>Class 28</strong></li>
+                            <li class="list-group-item"><strong>Class 29</strong></li>
+                            <li class="list-group-item"><strong>Class 30</strong></li>
+                            <li class="list-group-item"><strong>Class 31</strong></li>
+                            <li class="list-group-item"><strong>Class 32</strong></li>
+                            <li class="list-group-item"><strong>Class 33</strong></li>
+                            <li class="list-group-item"><strong>Class 34</strong></li>
+                            <li class="list-group-item"><strong>Class 35</strong></li>
+                            <li class="list-group-item"><strong>Class 36</strong></li>
+                            <li class="list-group-item"><strong>Class 37</strong></li>
+                            <li class="list-group-item"><strong>Class 38</strong></li>
+                            <li class="list-group-item"><strong>Class 39</strong></li>
+                            <li class="list-group-item"><strong>Class 40</strong></li>
+                            <li class="list-group-item"><strong>Class 41</strong></li>
+                            <li class="list-group-item"><strong>Class 42</strong></li>
+                            <li class="list-group-item"><strong>Class 43</strong></li>
+                            <li class="list-group-item"><strong>Class 44</strong></li>
+                            <li class="list-group-item"><strong>Class 45</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class1 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class2 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class3 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class4 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class5 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class6 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class7 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class8 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class9 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class10 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class12 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class13 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class14 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class15 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class16 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class17 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class18 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class19 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class20 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class21 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class22 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class23 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class24 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class25 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class26 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class27 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class28 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class29 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class30 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class31 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class32 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class33 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class34 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class35 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class36 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class37 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class38 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class39 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class40 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class41 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class42 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class43 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class44 ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Class45 ? "checked" : string.Empty) /></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Class 1 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 2 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 3 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 4 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 5 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 6 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 7 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 8 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 9 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 10 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 11 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 12 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 13 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 14 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 15 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 16 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 17 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 18 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 19 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 20 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 21 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 22 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 23 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 24 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 25 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 26 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 27 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 28 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 29 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 30 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 31 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 32 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 33 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 34 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 35 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 36 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 37 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 38 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 39 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 40 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 41 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 42 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 43 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 44 Description</strong></li>
+                            <li class="list-group-item"><strong>Class 45 Description</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.Class1Description</li>
+                            <li class="list-group-item">@Model.Record.Class2Description</li>
+                            <li class="list-group-item">@Model.Record.Class3Description</li>
+                            <li class="list-group-item">@Model.Record.Class4Description</li>
+                            <li class="list-group-item">@Model.Record.Class5Description</li>
+                            <li class="list-group-item">@Model.Record.Class6Description</li>
+                            <li class="list-group-item">@Model.Record.Class7Description</li>
+                            <li class="list-group-item">@Model.Record.Class8Description</li>
+                            <li class="list-group-item">@Model.Record.Class9Description</li>
+                            <li class="list-group-item">@Model.Record.Class10Description</li>
+                            <li class="list-group-item">@Model.Record.Class11Description</li>
+                            <li class="list-group-item">@Model.Record.Class12Description</li>
+                            <li class="list-group-item">@Model.Record.Class13Description</li>
+                            <li class="list-group-item">@Model.Record.Class14Description</li>
+                            <li class="list-group-item">@Model.Record.Class15Description</li>
+                            <li class="list-group-item">@Model.Record.Class16Description</li>
+                            <li class="list-group-item">@Model.Record.Class17Description</li>
+                            <li class="list-group-item">@Model.Record.Class18Description</li>
+                            <li class="list-group-item">@Model.Record.Class19Description</li>
+                            <li class="list-group-item">@Model.Record.Class20Description</li>
+                            <li class="list-group-item">@Model.Record.Class21Description</li>
+                            <li class="list-group-item">@Model.Record.Class22Description</li>
+                            <li class="list-group-item">@Model.Record.Class23Description</li>
+                            <li class="list-group-item">@Model.Record.Class24Description</li>
+                            <li class="list-group-item">@Model.Record.Class25Description</li>
+                            <li class="list-group-item">@Model.Record.Class26Description</li>
+                            <li class="list-group-item">@Model.Record.Class27Description</li>
+                            <li class="list-group-item">@Model.Record.Class28Description</li>
+                            <li class="list-group-item">@Model.Record.Class29Description</li>
+                            <li class="list-group-item">@Model.Record.Class30Description</li>
+                            <li class="list-group-item">@Model.Record.Class31Description</li>
+                            <li class="list-group-item">@Model.Record.Class32Description</li>
+                            <li class="list-group-item">@Model.Record.Class33Description</li>
+                            <li class="list-group-item">@Model.Record.Class34Description</li>
+                            <li class="list-group-item">@Model.Record.Class35Description</li>
+                            <li class="list-group-item">@Model.Record.Class36Description</li>
+                            <li class="list-group-item">@Model.Record.Class37Description</li>
+                            <li class="list-group-item">@Model.Record.Class38Description</li>
+                            <li class="list-group-item">@Model.Record.Class39Description</li>
+                            <li class="list-group-item">@Model.Record.Class40Description</li>
+                            <li class="list-group-item">@Model.Record.Class41Description</li>
+                            <li class="list-group-item">@Model.Record.Class42Description</li>
+                            <li class="list-group-item">@Model.Record.Class43Description</li>
+                            <li class="list-group-item">@Model.Record.Class44Description</li>
+                            <li class="list-group-item">@Model.Record.Class45Description</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END:  Country Specific-Latvia -->
+            <!-- START: Cancellation Researcher -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Cancellation Researcher</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Researcher Name</strong></li>
+                            <li class="list-group-item"><strong>TM Website</strong></li>
+                            <li class="list-group-item"><strong>Owner Website</strong></li>
+                            <li class="list-group-item"><strong>Com Website</strong></li>
+                            <li class="list-group-item"><strong>Cancellation Strategy</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.ResearcherName</li>
+                            <li class="list-group-item">@(Model.Record.TMWebsite?.Name)</li>
+                            <li class="list-group-item">@(Model.Record.OwnerWebsite?.Name)</li>
+                            <li class="list-group-item">@(Model.Record.ComWebsite?.Name)</li>
+                            <li class="list-group-item">@Model.Record.CancellationStrategy</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Mark Use</strong></li>
+                            <li class="list-group-item"><strong>Competing Marks</strong></li>
+                            <li class="list-group-item"><strong>Competing Mark</strong></li>
+                            <li class="list-group-item"><strong>Cancel Researcher Comments</strong></li>
+                            <li class="list-group-item"><strong>Owner Defense</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.MarkUse</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.CompetingMarks ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item">@Model.Record.CompetingMark</li>
+                            <li class="list-group-item">@Model.Record.CancelResearcherComments</li>
+                            <li class="list-group-item">@Model.Record.OwnerDefense</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Cancellation Researcher -->
+            <!-- START: Bigfoot Strategy -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Bigfoot Strategy</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Source Name</strong></li>
+                            <li class="list-group-item"><strong>BF Strategy</strong></li>
+                            <li class="list-group-item"><strong>Strategy Notes</strong></li>
+                            <li class="list-group-item"><strong>Name Value</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item">@Model.Record.BFStrategy</li>
+                            <li class="list-group-item">@Model.Record.StrategyNotes</li>
+                            <li class="list-group-item">@Model.Record.NameValue</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Cancel Buy Budget</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item">@Model.Record.CancelBuyBudget</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Bigfoot Strategy -->
+            <!-- START: Cancellation Score -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Cancellation Score</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Revocation Reference External</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.RevocationReferenceExternal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Cancellation Score -->
+            <!-- START: Invalidity -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Invalidity</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Invalidity Number</strong></li>
+                            <li class="list-group-item"><strong>Invalidity Applicant</strong></li>
+                            <li class="list-group-item"><strong>Invalidity Invoked Ground</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.InvalidityNumber</li>
+                            <li class="list-group-item">@(Model.Record.InvalidityApplicant?.FirstName) @(Model.Record.InvalidityApplicant?.MiddleName) @(Model.Record.InvalidityApplicant?.LastName)</li>
+                            <li class="list-group-item">@Model.Record.InvalidityInvokedGround</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Invalidity Date</strong></li>
+                            <li class="list-group-item"><strong>Invalidity Action Outcome</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.InvalidityDate</li>
+                            <li class="list-group-item">@Model.Record.InvalidityActionOutcome</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Invalidity -->
+            <!-- START: Legal Section -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Legal Section</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Letter Reference</strong></li>
+                            <li class="list-group-item"><strong>Letter Origin</strong></li>
+                            <li class="list-group-item"><strong>Letter Sending Method</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.LetterReference</li>
+                            <li class="list-group-item">@Model.Record.LetterOrigin</li>
+                            <li class="list-group-item">@Model.Record.LetterSendingMethod</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Letter Sent On</strong></li>
+                            <li class="list-group-item"><strong>Owner Response Deadline</strong></li>
+                            <li class="list-group-item"><strong>Letter Outcome</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.LetterSentOn</li>
+                            <li class="list-group-item">@Model.Record.OwnerResponseDeadline</li>
+                            <li class="list-group-item">@Model.Record.LetterOutcome</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Legal Section -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>

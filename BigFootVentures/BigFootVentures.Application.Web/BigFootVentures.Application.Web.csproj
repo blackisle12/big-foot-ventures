@@ -415,6 +415,7 @@
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Brand.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Cancellation.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Company.cshtml" />
+    <Content Include="Views\Home\TrademarkView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

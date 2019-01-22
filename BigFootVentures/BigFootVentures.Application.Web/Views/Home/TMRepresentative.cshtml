@@ -25,10 +25,10 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) TM Representative
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new")) TM Representative
             </span>
             <span class="panel-title pull-right">
-                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+                <i class="fa fa-edit"></i>
             </span>
         </div>
         <div class="panel-body">
@@ -41,7 +41,7 @@
                     </h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Trademark</label>
                             <div class="col-sm-4 autocomplete">
