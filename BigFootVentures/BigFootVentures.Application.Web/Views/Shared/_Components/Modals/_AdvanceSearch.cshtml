@@ -17,6 +17,7 @@
                                     <option value="Brand">Brand</option>
                                     <option value="Cancellation">Cancellation</option>
                                     <option value="Company">Company</option>
+                                    <option value="Contact">Contact</option>
                                     <option value="Domain">Domain</option>
                                 </select>
                             </div>
@@ -29,6 +30,7 @@
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Brand")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Cancellation")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Company")
+                                @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Contact")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Domain")
                             </div>
                         </div>
@@ -47,6 +49,7 @@
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Brand.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Cancellation.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Company.js"></script>
+<script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Contact.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Domain.js"></script>
 
 <script type="text/javascript">
@@ -69,21 +72,7 @@
 
             $('.div-filter').hide();
 
-            if (value == 'Agreement') {
-                $('[name="Div.AgreementFilter"]').show();
-            }
-            else if (value == 'Brand') {
-                $('[name="Div.BrandFilter"]').show();
-            }
-            else if (value == 'Cancellation') {
-                $('[name="Div.CancellationFilter"]').show();
-            }
-            else if (value == 'Company') {
-                $('[name="Div.CompanyFilter"]').show();
-            }
-            else if (value == 'Domain') {
-                $('[name="Div.DomainFilter"]').show();
-            }
+            $('[name="Div.' + value + 'Filter"]').show();
         });
 
         $('[name="Modal.Button.Search"]').on('click', function () {
@@ -106,6 +95,9 @@
             }
             else if (object == 'Company') {
                 query = BuildCompanyQuery(query);
+            }
+            else if (object == 'Contact') {
+                query = BuildContactQuery(query);
             }
             else if (object == 'Domain') {
                 query = BuildDomainQuery(query);

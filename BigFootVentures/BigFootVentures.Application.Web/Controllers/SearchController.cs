@@ -292,6 +292,58 @@ namespace BigFootVentures.Application.Web.Controllers
         #endregion
 
         #region "Contact"
+
+        [Route("Contact/{rowCount?}/{page?}/{keyword?}", Name = "SearchContact")]
+        public ActionResult Contact(int rowCount = 25, int page = 1, string keyword = null,
+            string firstName = null, string middleName = null, string lastName = null, string department = null, string fax = null,
+            string email = null, string phone = null, string mobile = null, string OHIMOwnerID = null, string OHIMNumTrademarks = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Contact> { Caption = "Contact" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = ContactUtils.BuildQuery(startIndex, rowCount, keyword ??
+                firstName, middleName, lastName, department, fax, email, phone, mobile, OHIMOwnerID, OHIMNumTrademarks);
+            var contacts = this._managementContactService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Contact>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = contacts
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(firstName ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? firstName;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Contact/Export/{keyword}", Name = "ContactExportWithKeyword")]
+        [Route("Contact/Export", Name = "ContactExport")]
+        public FileContentResult ContactExport(string keyword = null,
+            string firstName = null, string middleName = null, string lastName = null, string department = null, string fax = null,
+            string email = null, string phone = null, string mobile = null, string OHIMOwnerID = null, string OHIMNumTrademarks = null)
+        {
+            var query = ContactUtils.BuildExportQuery(keyword ??
+                firstName, middleName, lastName, department, fax, email, phone, mobile, OHIMOwnerID, OHIMNumTrademarks);
+            var file = this._managementContactService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Contact-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
         #endregion
 
         #region "Domain"
@@ -365,36 +417,6 @@ namespace BigFootVentures.Application.Web.Controllers
             ViewBag.Keyword = keyword;
 
             return View(searchResult);
-        }
-
-        [Route("Contact/{rowCount?}/{page?}/{keyword?}", Name = "SearchContact")]
-        public ActionResult Contact(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Contact> { Caption = "Contact" };
-            var startIndex = (page - 1) * rowCount;
-            var contacts = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementContactService.Get(startIndex, rowCount, out int total) :
-                this._managementContactService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Contact>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = contacts
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
         }
 
         [Route("Enquiry/{rowCount?}/{page?}/{keyword?}", Name = "SearchEnquiry")]

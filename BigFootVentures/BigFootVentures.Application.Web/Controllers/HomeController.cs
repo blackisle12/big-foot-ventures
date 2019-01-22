@@ -1052,15 +1052,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        [Route("Contact/Export/{keyword}")]
-        public FileContentResult ContactExport(string keyword)
-        {
-            var file = this._managementContactService.ExportByKeyword(keyword);
-
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Contact-{StringUtils.GetCurrentDateTimeAsString()}.csv");
-        }
-
         #endregion
 
         #region "Domain"
