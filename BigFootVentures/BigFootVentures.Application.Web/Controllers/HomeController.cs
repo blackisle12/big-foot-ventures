@@ -3335,7 +3335,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Trademark", model);
+            return View("TrademarkView", model);
         }
 
         [Route("Trademark/New", Name = "TrademarkNew")]

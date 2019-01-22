@@ -421,6 +421,7 @@
     <Content Include="Views\Home\SimilarTrademarkView.cshtml" />
     <Content Include="Views\Home\TMRepresentativeView.cshtml" />
     <Content Include="Views\Home\TrademarkOwnerView.cshtml" />
+    <Content Include="Views\Home\TrademarkView.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Agreement.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Brand.cshtml" />
     <Content Include="Views\Shared\_Components\Modals\AdvanceSearch\_Cancellation.cshtml" />
