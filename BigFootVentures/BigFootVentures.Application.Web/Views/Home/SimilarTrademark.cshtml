@@ -25,23 +25,20 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Similar Trademark
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new") Similar Trademark
             </span>
             <span class="panel-title pull-right">
-                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+                <i class="fa fa-edit"></i>
             </span>
         </div>
         <div class="panel-body">
             <!-- START: Information -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Information</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Trademark Name</label>
                             <div class="col-sm-4">
@@ -95,13 +92,10 @@
             <!-- START: System Information -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        System Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">System Information</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Class Summary TM</label>
                             <div class="col-sm-4">
@@ -120,13 +114,10 @@
             <!-- START: Potential Opposition -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Potential Opposition
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Potential Opposition</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Remarks</label>
                             <div class="col-sm-4">
