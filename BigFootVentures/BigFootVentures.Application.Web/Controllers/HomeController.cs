@@ -2709,7 +2709,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Register", model);
+            return View("RegisterView", model);
         }
 
         [Route("Register/New", Name = "RegisterNew")]
@@ -2891,7 +2891,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("SimilarTrademark", model);
+            return View("SimilarTrademarkView", model);
         }
 
         [Route("SimilarTrademark/New", Name = "SimilarTrademarkNew")]
@@ -3188,7 +3188,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("TMRepresentative", model);
+            return View("TMRepresentativeView", model);
         }
 
         [Route("TMRepresentative/New", Name = "TMRepresentativeNew")]
@@ -3579,7 +3579,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("TrademarkOwner", model);
+            return View("TrademarkOwnerView", model);
         }
 
         [Route("TrademarkOwner/New", Name = "TrademarkOwnerNew")]

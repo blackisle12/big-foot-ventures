@@ -1,0 +1,130 @@
+﻿<link href="~/Content/Views/Home/SimilarTrademark.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Similar Trademark - " + Model.Record.Trademark?.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<SimilarTrademark>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing similar trademark <strong>@(Model.Record.Trademark?.Name)</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Similar Trademark Detail</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Trademark Name</strong></li>
+                            <li class="list-group-item"><strong>Comment</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@(Model.Record.Trademark?.Name)</li>
+                            <li class="list-group-item">@Model.Record.Comment</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Owner</strong></li>
+                            <li class="list-group-item"><strong>Trademark Similar Name</strong></li>
+                            <li class="list-group-item"><strong>Conflict</strong></li>
+                            <li class="list-group-item"><strong>Create Opposition Check</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.OwnerName</li>
+                            <li class="list-group-item">@(Model.Record.TrademarkSimilar?.Name)</li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Conflict ? "checked" : string.Empty) /></li>
+                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.CreateOppositionCheck ? "checked" : string.Empty) /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: System Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">System Information</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Class Summary TM</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.ClassSummaryTM</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Class Summary Similar TM</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.ClassSummarySimilarTM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: System Information -->
+            <!-- START: Potential Opposition -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Potential Opposition</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Remarks</strong></li>
+                            <li class="list-group-item"><strong>Refilling Evaluation</strong></li>
+                            <li class="list-group-item"><strong>Refilling Comment</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.Remarks</li>
+                            <li class="list-group-item">@Model.Record.RefilingEvaluation</li>
+                            <li class="list-group-item">@Model.Record.RefilingComment</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Opposition Evaluation</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">@Model.Record.OppositionEvaluation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Potential Opposition -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>
