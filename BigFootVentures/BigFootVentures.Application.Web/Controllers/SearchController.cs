@@ -621,6 +621,77 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
+        #region "Trademark"
+
+        [Route("Trademark/{rowCount?}/{page?}/{keyword?}", Name = "SearchTrademark")]
+        public ActionResult Trademark(int rowCount = 25, int page = 1, string keyword = null,
+            string name = null, string office = null, string officeStatus = null, string trademarkNumber = null, string figurative = null, string brand = null,
+            string figurativeURL = null, string originalOffice = null, string languageFiling = null, string languageSecond = null, string geography = null,
+            string involvedInRevocation = null, string bigFootGroupOwned = null, string seniorityUsed = null, string revocationTarget = null, string openSimilarityResearchTask = null,
+            string oppositionResearch = null, string researcherName = null, string markUse = null, string TMWebsite = null, string competingMarks = null,
+            string ownerWebsite = null, string cancellationStrategy = null, string comWebsite = null, string ownerDefense = null, string BFStrategy = null,
+            string nameValue = null, string invalidityNumber = null, string invalidityApplicant = null, string invalidityActionOutcome = null, string letterReference = null,
+            string letterOrigin = null, string letterSendingMethod = null, string letterOutcome = null)
+        {
+            var searchResultObject = new VMSearchResultObject<Trademark> { Caption = "Trademark" };
+            var startIndex = (page - 1) * rowCount;
+
+            var query = TrademarkUtils.BuildQuery(startIndex, rowCount, keyword ??
+                name, office, officeStatus, trademarkNumber, figurative, brand, figurativeURL, originalOffice, languageFiling, languageSecond, geography,
+                involvedInRevocation, bigFootGroupOwned, seniorityUsed, revocationTarget, openSimilarityResearchTask, oppositionResearch, researcherName,
+                markUse, TMWebsite, competingMarks, ownerWebsite, cancellationStrategy, comWebsite, ownerDefense, BFStrategy, nameValue, invalidityNumber,
+                invalidityApplicant, invalidityActionOutcome, letterReference, letterOrigin, letterSendingMethod, letterOutcome);
+            var trademarks = this._managementTrademarkService.GetByQuery(query.Item1, query.Item2, out int total);
+
+            searchResultObject.ObjectResult = new VMPageResult<Trademark>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = trademarks
+            };
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                var searchResultWrapperList = this._searchService.Search(name ?? keyword);
+
+                searchResultObject.SearchResult = new VMSearchResult
+                {
+                    Table = searchResultWrapperList
+                };
+            }
+
+            ViewBag.Keyword = keyword ?? name;
+            ViewBag.IsAdvanceSearch = string.IsNullOrWhiteSpace(keyword);
+
+            return View(searchResultObject);
+        }
+
+        [HttpGet]
+        [Route("Trademark/Export/{keyword}", Name = "TrademarkExportWithKeyword")]
+        [Route("Trademark/Export", Name = "TrademarkExport")]
+        public FileContentResult TrademarkExport(string keyword = null,
+            string name = null, string office = null, string officeStatus = null, string trademarkNumber = null, string figurative = null, string brand = null,
+            string figurativeURL = null, string originalOffice = null, string languageFiling = null, string languageSecond = null, string geography = null,
+            string involvedInRevocation = null, string bigFootGroupOwned = null, string seniorityUsed = null, string revocationTarget = null, string openSimilarityResearchTask = null,
+            string oppositionResearch = null, string researcherName = null, string markUse = null, string TMWebsite = null, string competingMarks = null,
+            string ownerWebsite = null, string cancellationStrategy = null, string comWebsite = null, string ownerDefense = null, string BFStrategy = null,
+            string nameValue = null, string invalidityNumber = null, string invalidityApplicant = null, string invalidityActionOutcome = null, string letterReference = null,
+            string letterOrigin = null, string letterSendingMethod = null, string letterOutcome = null)
+        {
+            var query = TrademarkUtils.BuildExportQuery(keyword ??
+                name, office, officeStatus, trademarkNumber, figurative, brand, figurativeURL, originalOffice, languageFiling, languageSecond, geography,
+                involvedInRevocation, bigFootGroupOwned, seniorityUsed, revocationTarget, openSimilarityResearchTask, oppositionResearch, researcherName,
+                markUse, TMWebsite, competingMarks, ownerWebsite, cancellationStrategy, comWebsite, ownerDefense, BFStrategy, nameValue, invalidityNumber,
+                invalidityApplicant, invalidityActionOutcome, letterReference, letterOrigin, letterSendingMethod, letterOutcome);
+            var file = this._managementTrademarkService.ExportByQuery(query);
+
+            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Trademark-{StringUtils.GetCurrentDateTimeAsString()}.csv");
+        }
+
+        #endregion
+
         #region "Action Methods"
 
         [Route("Index/{keyword}", Name = "Search")]
@@ -653,36 +724,6 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = legalCases
-            };
-
-            var searchResultWrapperList = this._searchService.Search(keyword);
-
-            searchResultObject.SearchResult = new VMSearchResult
-            {
-                Table = searchResultWrapperList
-            };
-
-            ViewBag.Keyword = keyword;
-
-            return View(searchResultObject);
-        }
-
-        [Route("Trademark/{rowCount?}/{page?}/{keyword?}", Name = "SearchTrademark")]
-        public ActionResult Trademark(int rowCount = 25, int page = 1, string keyword = "")
-        {
-            var searchResultObject = new VMSearchResultObject<Trademark> { Caption = "Trademark" };
-            var startIndex = (page - 1) * rowCount;
-            var trademarks = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementTrademarkService.Get(startIndex, rowCount, out int total) :
-                this._managementTrademarkService.GetByKeyword(keyword, startIndex, rowCount, out total);
-
-            searchResultObject.ObjectResult = new VMPageResult<Trademark>
-            {
-                StartIndex = startIndex,
-                RowCount = rowCount,
-                Page = page,
-                Total = total,
-                Records = trademarks
             };
 
             var searchResultWrapperList = this._searchService.Search(keyword);

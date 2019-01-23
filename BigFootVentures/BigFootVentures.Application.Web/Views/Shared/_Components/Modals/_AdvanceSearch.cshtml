@@ -23,6 +23,7 @@
                                     <option value="Lead">Lead</option>
                                     <option value="Office">Office</option>
                                     <option value="Register">Registrar</option>
+                                    <option value="Trademark">Trademark</option>
                                 </select>
                             </div>
                         </div>
@@ -40,6 +41,7 @@
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Lead")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Office")
                                 @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Register")
+                                @Html.Partial("../Shared/_Components/Modals/AdvanceSearch/_Trademark")
                             </div>
                         </div>
                     </fieldset>
@@ -63,6 +65,7 @@
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Lead.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Office.js"></script>
 <script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Register.js"></script>
+<script src="~/Scripts/Views/Shared/_Components/Modals/AdvanceSearch/_Trademark.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -125,6 +128,9 @@
             }
             else if (object == 'Register') {
                 query = BuildRegisterQuery(query);
+            }
+            else if (object == 'Trademark') {
+                query = BuildTrademarkQuery(query);
             }
 
             if (query.length == 4) {

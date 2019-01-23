@@ -1651,6 +1651,42 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 UnderCancellation
             }
 
+            public enum OfficeStatusFilter
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Cancelled")]
+                Cancelled,
+
+                [Description("Expired")]
+                Expired,
+
+                [Description("Filed")]
+                Filed,
+
+                [Description("Opposed")]
+                Opposed,
+
+                [Description("Published")]
+                Published,
+
+                [Description("Refused")]
+                Refused,
+
+                [Description("Registered")]
+                Registered,
+
+                [Description("Surrendered")]
+                Surrendered,
+
+                [Description("Terminated")]
+                Terminated,
+
+                [Description("Under Cancellation")]
+                UnderCancellation
+            }
+
             public enum TrademarkType
             {
                 [Description("")]

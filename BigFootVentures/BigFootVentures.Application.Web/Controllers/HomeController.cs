@@ -3500,15 +3500,6 @@ namespace BigFootVentures.Application.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        [Route("Trademark/Export/{keyword}")]
-        public FileContentResult TrademarkExport(string keyword)
-        {
-            var file = this._managementTrademarkService.ExportByKeyword(keyword);
-
-            return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Trademark-{StringUtils.GetCurrentDateTimeAsString()}.csv");
-        }
-
         #endregion
 
         #region "Trademark Owner"

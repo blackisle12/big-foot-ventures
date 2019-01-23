@@ -1,0 +1,272 @@
+﻿@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Utilities
+
+<div name="Div.TrademarkFilter" class="div-filter" style="display: none;">
+    <div class="panel panel-default">
+        <!-- START: Trademark Office -->
+        <div class="panel-heading">
+            <span class="panel-title">Trademark Office</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.Name" />
+                </div>
+
+                <label class="col-sm-2 control-label">Office</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.Office" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Office Status</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.OfficeStatus", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.OfficeStatusFilter>()), new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!-- END: Trademark Office -->
+        <!-- START: Trademark Information -->
+        <div class="panel-heading">
+            <span class="panel-title">Trademark Information</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Trademark Number</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.TrademarkNumber" />
+                </div>
+
+                <label class="col-sm-2 control-label">TM URL</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.TMURL" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Figurative</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="Select.Filter.Trademark.Figurative">
+                        <option value="NotSet"></option>
+                        <option value="1">Checked</option>
+                        <option value="0">Unchecked</option>
+                    </select>
+                </div>
+
+                <label class="col-sm-2 control-label">Brand</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.Brand" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Figurative URL</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.FigurativeURL" />
+                </div>
+
+                <label class="col-sm-2 control-label">Original Office</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.OriginalOffice" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Language Filing</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.LanguageFiling", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Generic.Language>()), new { @class = "form-control" })
+                </div>
+
+                <label class="col-sm-2 control-label">Language Second</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.LanguageSecond", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Generic.Language>()), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Geography</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.Geography", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.Geography>()), new { @class = "form-control" })
+                </div>
+
+                <label class="col-sm-2 control-label">Involved in Revocation</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="Select.Filter.Trademark.InvolvedInRevocation">
+                        <option value="NotSet"></option>
+                        <option value="1">Checked</option>
+                        <option value="0">Unchecked</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">BigFoot Group Owned</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.BigFootGroupOwned", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.BigfootGroupOwned>()), new { @class = "form-control" })
+                </div>
+
+                <label class="col-sm-2 control-label">Seniority Used</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="Select.Filter.Trademark.SeniorityUsed">
+                        <option value="NotSet"></option>
+                        <option value="1">Checked</option>
+                        <option value="0">Unchecked</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Revocation Target</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="Select.Filter.Trademark.RevocationTarget">
+                        <option value="NotSet"></option>
+                        <option value="1">Checked</option>
+                        <option value="0">Unchecked</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- END: Trademark Information -->
+        <!-- START: Similarity Research -->
+        <div class="panel-heading">
+            <span class="panel-title">Similarity Research</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Open Similarity Research Task</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.OpenSimilarityResearchTask", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.OpenSimilarityResearchTask>()), new { @class = "form-control" })
+                </div>
+
+                <label class="col-sm-2 control-label">Opposition Research</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.OppositionResearch", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.OppositionResearch>()), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+            </div>
+        </div>
+        <!-- END: Similarity Research -->
+        <!-- START: Cancellation Researcher -->
+        <div class="panel-heading">
+            <span class="panel-title">Cancellation Researcher</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Researcher Name</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.ResearcherName" />
+                </div>
+
+                <label class="col-sm-2 control-label">Mark Use</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.MarkUse", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.MarkUse>()), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">TM Website</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.TMWebsite" />
+                </div>
+
+                <label class="col-sm-2 control-label">Competing Marks</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="Select.Filter.Trademark.CompetingMarks">
+                        <option value="NotSet"></option>
+                        <option value="1">Checked</option>
+                        <option value="0">Unchecked</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Owner Website</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.OwnerWebsite" />
+                </div>
+
+                <label class="col-sm-2 control-label">Cancellation Strategy</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.CancellationStrategy", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.CancellationStrategy>()), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Com Website</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.ComWebsite" />
+                </div>
+
+                <label class="col-sm-2 control-label">Owner Defense</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.OwnerDefense", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.OwnerDefense>()), new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!-- END: Cancellation Researcher -->
+        <!-- START: BigFoot Strategy -->
+        <div class="panel-heading">
+            <span class="panel-title">BigFoot Strategy</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">BF Strategy</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.BFStrategy", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.BFStrategy>()), new { @class = "form-control" })
+                </div>
+
+                <label class="col-sm-2 control-label">Name Value</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.NameValue", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.NameValue>()), new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!-- END: BigFoot Strategy -->
+        <!-- START: Invalidity -->
+        <div class="panel-heading">
+            <span class="panel-title">Invalidity</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Invalidity Number</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.InvalidityNumber" />
+                </div>
+
+                <label class="col-sm-2 control-label">Invalidity Applicant</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.InvalidityApplicant" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Invalidity Action Outcome</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.InvalidityActionOutcome", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.InvalidityActionOutcome>()), new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!-- END: Invalidity -->
+        <!-- START: Legal Section -->
+        <div class="panel-heading">
+            <span class="panel-title">Legal Section</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Letter Reference</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="Input.Filter.Trademark.Letter Reference" />
+                </div>
+
+                <label class="col-sm-2 control-label">Letter Origin</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.LetterOrigin", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.LetterOrigin>()), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Letter Sending Method</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.LetterSendingMethod", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.LetterSendingMethod>()), new { @class = "form-control" })
+                </div>
+
+                <label class="col-sm-2 control-label">Letter Outcome</label>
+                <div class="col-sm-4">
+                    @Html.DropDownList("Select.Filter.Trademark.LetterOutcome", new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Trademark.LetterOutcome>()), new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!-- END: Legal Section -->
+    </div>
+</div>
