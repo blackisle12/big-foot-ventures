@@ -29,42 +29,30 @@
                     <h4 class="panel-title">Enquiry Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Case Number</strong></li>
-                            <li class="list-group-item"><strong>Owner</strong></li>
-                            <li class="list-group-item"><strong>Negotiation BF Amount</strong></li>
-                            <li class="list-group-item"><strong>Negotiation 3rd Party Amount</strong></li>
-                            <li class="list-group-item"><strong>Old Casenumber</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OldCaseNumber</li>
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                            <li class="list-group-item">@Model.Record.NegotiationBFAmount</li>
-                            <li class="list-group-item">@Model.Record.Negotiation3rdPartyAmount</li>
-                            <li class="list-group-item">@Model.Record.OldCaseNumber</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Priority</strong></li>
-                            <li class="list-group-item"><strong>Status</strong></li>
-                            <li class="list-group-item"><strong>Send Email</strong></li>
-                            <li class="list-group-item"><strong>Unread Email</strong></li>
-                            <li class="list-group-item"><strong>Do Not Contact</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Priority</li>
-                            <li class="list-group-item">@Model.Record.Status</li>
-                            <li class="list-group-item">@Model.Record.SendEmail</li>
-                            <li class="list-group-item">@Model.Record.UnreadEmail</li>
-                            <li class="list-group-item">@Model.Record.DoNotContact</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Case Number</strong></td>
+                            <td>@Model.Record.OldCaseNumber</td>
+                            <td><strong>Priority</strong></td>
+                            <td>@Model.Record.Priority</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                            <td><strong>Status</strong></td>
+                            <td>@Model.Record.Status</td>
+                            <td><strong>Negotiation BF Amount</strong></td>
+                            <td>@Model.Record.NegotiationBFAmount</td>
+                            <td><strong>Send Email</strong></td>
+                            <td>@Model.Record.SendEmail</td>
+                            <td><strong>Negotiation 3rd Party Amount</strong></td>
+                            <td>@Model.Record.Negotiation3rdPartyAmount</td>
+                            <td><strong>Unread Email</strong></td>
+                            <td>@Model.Record.UnreadEmail</td>
+                            <td><strong>Old Casenumber</strong></td>
+                            <td>@Model.Record.OldCaseNumber</td>
+                            <td><strong>Do Not Contact</strong></td>
+                            <td>@Model.Record.DoNotContact</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
@@ -74,34 +62,32 @@
                     <h4 class="panel-title">Description</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Subject</strong></li>
-                            <li class="list-group-item"><strong>Private Registration Email</strong></li>
-                            <li class="list-group-item"><strong>Registrant</strong></li>
-                            <li class="list-group-item"><strong>Case Origin</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Subject</li>
-                            <li class="list-group-item">@Model.Record.PrivateRegistrationEmail</li>
-                            <li class="list-group-item">@Model.Record.Registrant</li>
-                            <li class="list-group-item">@Model.Record.CaseOrigin</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Record Type</strong></li>
-                            <li class="list-group-item"><strong>Reference Number</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.RecordType</li>
-                            <li class="list-group-item">@Model.Record.ReferenceNumber</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Subject</strong></td>
+                            <td>@Model.Record.Subject</td>
+                            <td><strong>Record Type</strong></td>
+                            <td>@Model.Record.RecordType</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Private Registration Email</strong></td>
+                            <td>@Model.Record.PrivateRegistrationEmail</td>
+                            <td><strong>Reference Number</strong></td>
+                            <td>@Model.Record.ReferenceNumber</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Registrant</strong></td>
+                            <td>@Model.Record.Registrant</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Case Origin</strong></td>
+                            <td>@Model.Record.CaseOrigin</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Description -->
@@ -111,46 +97,44 @@
                     <h4 class="panel-title">Owner</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Domain Name</strong></li>
-                            <li class="list-group-item"><strong>Registrant Company</strong></li>
-                            <li class="list-group-item"><strong>Street</strong></li>
-                            <li class="list-group-item"><strong>State</strong></li>
-                            <li class="list-group-item"><strong>Country</strong></li>
-                            <li class="list-group-item"><strong>Phone</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.DomainName</li>
-                            <li class="list-group-item">@Model.Record.RegistrantCompany</li>
-                            <li class="list-group-item">@Model.Record.Street</li>
-                            <li class="list-group-item">@Model.Record.State</li>
-                            <li class="list-group-item">@Model.Record.Country</li>
-                            <li class="list-group-item">@Model.Record.Phone</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Registrar</strong></li>
-                            <li class="list-group-item"><strong>Registrant Email</strong></li>
-                            <li class="list-group-item"><strong>City</strong></li>
-                            <li class="list-group-item"><strong>Postal Code</strong></li>
-                            <li class="list-group-item"><strong>Description</strong></li>
-                            <li class="list-group-item"><strong>Fax</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Registrar</li>
-                            <li class="list-group-item">@Model.Record.RegistrantEmail</li>
-                            <li class="list-group-item">@Model.Record.City</li>
-                            <li class="list-group-item">@Model.Record.PostalCode</li>
-                            <li class="list-group-item">@Model.Record.Description</li>
-                            <li class="list-group-item">@Model.Record.Fax</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Domain Name</strong></td>
+                            <td>@Model.Record.DomainName</td>
+                            <td><strong>Registrar</strong></td>
+                            <td>@Model.Record.Registrar</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Registrant Company</strong></td>
+                            <td>@Model.Record.RegistrantCompany</td>
+                            <td><strong>Registrant Email</strong></td>
+                            <td>@Model.Record.RegistrantEmail</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Street</strong></td>
+                            <td>@Model.Record.Street</td>
+                            <td><strong>City</strong></td>
+                            <td>@Model.Record.City</td>
+                        </tr>
+                        <tr>
+                            <td><strong>State</strong></td>
+                            <td>@Model.Record.State</td>
+                            <td><strong>Postal Code</strong></td>
+                            <td>@Model.Record.PostalCode</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Country</strong></td>
+                            <td>@Model.Record.Country</td>
+                            <td><strong>Description</strong></td>
+                            <td>@Model.Record.Description</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone</strong></td>
+                            <td>@Model.Record.Phone</td>
+                            <td><strong>Fax</strong></td>
+                            <td>@Model.Record.Fax</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Owner -->
