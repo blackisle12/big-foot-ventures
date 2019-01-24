@@ -22,7 +22,6 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th></th>
                         <th class="th-case-number">Case Number</th>
                         <th class="th-description">Description</th>
                         <th class="th-reference-number">Reference Number</th>
@@ -35,8 +34,7 @@
                         foreach (var enquiry in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("EnquiryView", new { ID = enquiry.ID })" target="_blank">View</a></td>
-                                <td>@enquiry.OldCaseNumber</td>
+                                <td><a href="@Url.RouteUrl("EnquiryView", new { ID = enquiry.ID })" target="_blank">@enquiry.CaseNumber</a></td>
                                 <td>@enquiry.Description</td>
                                 <td>@enquiry.ReferenceNumber</td>
                                 <td>@enquiry.DomainName</td>

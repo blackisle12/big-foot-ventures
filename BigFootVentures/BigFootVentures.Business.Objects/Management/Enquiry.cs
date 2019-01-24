@@ -1,4 +1,6 @@
-﻿namespace BigFootVentures.Business.Objects.Management
+﻿using BigFootVentures.Business.Objects.Utilities;
+
+namespace BigFootVentures.Business.Objects.Management
 {
     public sealed class Enquiry : BusinessBase
     {
@@ -45,6 +47,12 @@
         public string TestPlan { get; set; }
         public string StepsToTest { get; set; }
         public string TestOutcome { get; set; }
+
+        #endregion
+
+        #region "Calculated Properties"
+
+        public string CaseNumber { get { return StringUtils.GenerateAutoNumber(this.ID); } }
 
         #endregion
     }
