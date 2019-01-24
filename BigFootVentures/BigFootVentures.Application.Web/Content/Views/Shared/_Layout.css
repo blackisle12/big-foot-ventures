@@ -190,3 +190,12 @@ p.table-empty {
     border: none;
     height: 33px;
 }
+
+.table tbody tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-view td {
+    width: 25%;
+}

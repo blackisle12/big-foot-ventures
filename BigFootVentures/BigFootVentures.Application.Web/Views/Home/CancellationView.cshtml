@@ -29,54 +29,56 @@
                     <h4 class="panel-title">Information</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Cancellation Reference Internal</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Sent Origin</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Receipt Date</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Payment Date</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Filing Cost</strong></li>
-                            <li class="list-group-item"><strong>Trademark</strong></li>
-                            <li class="list-group-item"><strong>Trademark Office</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Status</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.ReferenceInternal</li>
-                            <li class="list-group-item">@Model.Record.SentOrigin</li>
-                            <li class="list-group-item">@Model.Record.ReceiptDate</li>
-                            <li class="list-group-item">@Model.Record.PaymentDate</li>
-                            <li class="list-group-item">@Model.Record.FilingCost</li>
-                            <li class="list-group-item">@(Model.Record.Trademark?.Name)</li>
-                            <li class="list-group-item">@(Model.Record.Trademark?.Office?.OfficeName)</li>
-                            <li class="list-group-item">@Model.Record.Status</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Cancellation Reference External</strong></li>
-                            <li class="list-group-item"><strong>Internal Case Number</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Submission Method</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Applicant</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Payment Reference</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Research Performance</strong></li>
-                            <li class="list-group-item"><strong>Comments</strong></li>
-                            <li class="list-group-item"><strong>Owner</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.ReferenceExternal</li>
-                            <li class="list-group-item">@Model.Record.InternalCaseNumber</li>
-                            <li class="list-group-item">@Model.Record.SubmissionMethod</li>
-                            <li class="list-group-item">@(Model.Record.Applicant?.DisplayName)</li>
-                            <li class="list-group-item">@Model.Record.PaymentReference</li>
-                            <li class="list-group-item">@Model.Record.ResearchPerformance</li>
-                            <li class="list-group-item">@Model.Record.Comments</li>
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Cancellation Reference Internal</strong></td>
+                            <td>@Model.Record.ReferenceInternal</td>
+                            <td><strong>Cancellation Reference External</strong></td>
+                            <td>@Model.Record.ReferenceExternal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Sent Origin</strong></td>
+                            <td>@Model.Record.SentOrigin</td>
+                            <td><strong>Internal Case Number</strong></td>
+                            <td>@Model.Record.InternalCaseNumber</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Receipt Date</strong></td>
+                            <td>@Model.Record.ReceiptDate</td>
+                            <td><strong>Cancellation Submission Method</strong></td>
+                            <td>@Model.Record.SubmissionMethod</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Payment Date</strong></td>
+                            <td>@Model.Record.PaymentDate</td>
+                            <td><strong>Cancellation Applicant</strong></td>
+                            <td>@Model.Record.Applicant</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Filing Cost</strong></td>
+                            <td>@Model.Record.FilingCost</td>
+                            <td><strong>Cancellation Payment Reference</strong></td>
+                            <td>@Model.Record.PaymentReference</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark</strong></td>
+                            <td>@(Model.Record.Trademark?.Name)</td>
+                            <td><strong>Cancellation Research Performance</strong></td>
+                            <td>@Model.Record.ResearchPerformance</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Office</strong></td>
+                            <td>@(Model.Record.Trademark?.Office?.OfficeName)</td>
+                            <td><strong>Comments</strong></td>
+                            <td>@Model.Record.Comments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Status</strong></td>
+                            <td>@Model.Record.Status</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
@@ -86,32 +88,26 @@
                     <h4 class="panel-title">Relevant Dates</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Cancellation Admissible Date</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Owner Response Deadline</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Observation Deadline</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.AdmissibleDate</li>
-                            <li class="list-group-item">@Model.Record.OwnerResponseDeadline</li>
-                            <li class="list-group-item">@Model.Record.ObservationDeadline</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Cancellation Owner Response Deadline Ext</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Observation Deadline Ext</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerResponseDeadlineExt</li>
-                            <li class="list-group-item">@Model.Record.ObservationDeadlineExt</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Cancellation Admissible Date</strong></td>
+                            <td>@Model.Record.AdmissibleDate</td>
+                            <td><strong>Cancellation Owner Response Deadline Ext</strong></td>
+                            <td>@Model.Record.OwnerResponseDeadlineExt</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Owner Response Deadline</strong></td>
+                            <td>@Model.Record.OwnerResponseDeadline</td>
+                            <td><strong>Cancellation Observation Deadline Ext</strong></td>
+                            <td>@Model.Record.ObservationDeadlineExt</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Observation Deadline</strong></td>
+                            <td>@Model.Record.ObservationDeadline</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Relevant Dates -->
@@ -121,44 +117,44 @@
                     <h4 class="panel-title">Acquisition</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Acquisition Letter Sent Origin</strong></li>
-                            <li class="list-group-item"><strong>Acquisition Letter Sent Method</strong></li>
-                            <li class="list-group-item"><strong>Acquisition Letter Date Sent</strong></li>
-                            <li class="list-group-item"><strong>Owner Response Acquisition Letter</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Domain Enquiry</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Domain Enquiry Notes</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.AcquisitionLetterSentOrigin</li>
-                            <li class="list-group-item">@Model.Record.AcquisitionLetterSentMethod</li>
-                            <li class="list-group-item">@Model.Record.AcquisitionLetterDateSent</li>
-                            <li class="list-group-item">@Model.Record.OwnerResponseAcquisitionLetter</li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.DomainEnquiry ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item">@Model.Record.DomainEnquiryNotes</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Trademark Assignment Date</strong></li>
-                            <li class="list-group-item"><strong>Trademark Acquisition Cost</strong></li>
-                            <li class="list-group-item"><strong>UDRP Strategy</strong></li>
-                            <li class="list-group-item"><strong>UDRP Strategy Comment</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Negotiation Comments</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.TrademarkAssignmentDate</li>
-                            <li class="list-group-item">@Model.Record.TrademarkAcquisitionCost</li>
-                            <li class="list-group-item">@Model.Record.UDRPStrategy</li>
-                            <li class="list-group-item">@Model.Record.UDRPStrategyComment</li>
-                            <li class="list-group-item">@Model.Record.NegotiationComments</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Acquisition Letter Sent Origin</strong></td>
+                            <td>@Model.Record.AcquisitionLetterSentOrigin</td>
+                            <td><strong>Trademark Assignment Date</strong></td>
+                            <td>@Model.Record.TrademarkAssignmentDate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Acquisition Letter Sent Method</strong></td>
+                            <td>@Model.Record.AcquisitionLetterSentMethod</td>
+                            <td><strong>Trademark Acquisition Cost</strong></td>
+                            <td>@Model.Record.TrademarkAcquisitionCost</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Acquisition Letter Date Sent</strong></td>
+                            <td>@Model.Record.AcquisitionLetterDateSent</td>
+                            <td><strong>UDRP Strategy</strong></td>
+                            <td>@Model.Record.UDRPStrategy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Owner Response Acquisition Letter</strong></td>
+                            <td>@Model.Record.OwnerResponseAcquisitionLetter</td>
+                            <td><strong>UDRP Strategy Comment</strong></td>
+                            <td>@Model.Record.UDRPStrategyComment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Domain Enquiry</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.DomainEnquiry ? "checked" : string.Empty) /></td>
+                            <td><strong>Cancellation Negotiation Comments</strong></td>
+                            <td>@Model.Record.NegotiationComments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Domain Enquiry Notes</strong></td>
+                            <td>@Model.Record.DomainEnquiryNotes</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Acquisition -->
@@ -168,34 +164,26 @@
                     <h4 class="panel-title">Outcome</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Cancellation Outcome</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Outcome Date</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Withdrawal Reason</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Outcome</li>
-                            <li class="list-group-item">@Model.Record.OutcomeDate</li>
-                            <li class="list-group-item">@Model.Record.WithdrawalReason</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Cancellation Withdrawal Date</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Expense Claim Received Date</strong></li>
-                            <li class="list-group-item"><strong>Cancellation Cost Refund</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.WithdrawalDate</li>
-                            <li class="list-group-item">@Model.Record.ExpenseClaimReceivedDate</li>
-                            <li class="list-group-item">@Model.Record.CostRefund</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Cancellation Outcome</strong></td>
+                            <td>@Model.Record.Outcome</td>
+                            <td><strong>Cancellation Withdrawal Date</strong></td>
+                            <td>@Model.Record.WithdrawalDate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Outcome Date</strong></td>
+                            <td>@Model.Record.OutcomeDate</td>
+                            <td><strong>Cancellation Expense Claim Received Date</strong></td>
+                            <td>@Model.Record.ExpenseClaimReceivedDate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cancellation Withdrawal Reason</strong></td>
+                            <td>@Model.Record.WithdrawalReason</td>
+                            <td><strong>Cancellation Cost Refund</strong></td>
+                            <td>@Model.Record.CostRefund</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Outcome -->

@@ -29,28 +29,50 @@
                     <h4 class="panel-title">Information</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Name</strong></li>
-                            <li class="list-group-item"><strong>Purpose</strong></li>
-                            <li class="list-group-item"><strong>Value</strong></li>
-                            <li class="list-group-item"><strong>Category</strong></li>
-                            <li class="list-group-item"><strong>HVT (High Value Target)</strong></li>
-                            <li class="list-group-item"><strong>EMV</strong></li>
-                            <li class="list-group-item"><strong>Character Count</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Name</li>
-                            <li class="list-group-item">@Model.Record.Purpose</li>
-                            <li class="list-group-item">@Model.Record.Value</li>
-                            <li class="list-group-item">@Model.Record.Category</li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.HVTChk ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item">@Model.Record.EMV</li>
-                            <li class="list-group-item">@Model.Record.CharacterCount</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td>@Model.Record.Name</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Purpose</strong></td>
+                            <td>@Model.Record.Purpose</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Value</strong></td>
+                            <td>@Model.Record.Value</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Category</strong></td>
+                            <td>@Model.Record.Category</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>HVT (High Value Target)</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.HVTChk ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>EMV</strong></td>
+                            <td>@Model.Record.EMV</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Character Count</strong></td>
+                            <td>@Model.Record.CharacterCount</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
@@ -60,18 +82,20 @@
                     <h4 class="panel-title">Deletion Request</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Deletion Request</strong></li>
-                            <li class="list-group-item"><strong>Deletion Request Reason</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequestChk ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item">@Model.Record.DeletionRequestReason</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Deletion Request</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequestChk ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deletion Request Reason</strong></td>
+                            <td>@Model.Record.DeletionRequestReason</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Deletion Request -->

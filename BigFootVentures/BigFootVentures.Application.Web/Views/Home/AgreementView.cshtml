@@ -29,44 +29,62 @@
                     <h4 class="panel-title">Information</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Agreement Name</strong></li>
-                            <li class="list-group-item"><strong>Name of the BF Company</strong></li>
-                            <li class="list-group-item"><strong>Name of the counterpart</strong></li>
-                            <li class="list-group-item"><strong>Object of Agreement</strong></li>
-                            <li class="list-group-item"><strong>Trademark</strong></li>
-                            <li class="list-group-item"><strong>Other Related Trademarks</strong></li>
-                            <li class="list-group-item"><strong>Type of Agreement</strong></li>
-                            <li class="list-group-item"><strong>Applicability</strong></li>
-                            <li class="list-group-item"><strong>Date of Signature</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Name</li>
-                            <li class="list-group-item">@Model.Record.BFCompany.DisplayName</li>
-                            <li class="list-group-item">@Model.Record.Counterpart.DisplayName</li>
-                            <li class="list-group-item">@Model.Record.ObjectOfAgreement</li>
-                            <li class="list-group-item"></li>
-                            <li class="list-group-item">@Model.Record.OtherRelatedTrademarks</li>
-                            <li class="list-group-item">@Model.Record.Type</li>
-                            <li class="list-group-item">@Model.Record.Applicability</li>
-                            <li class="list-group-item">@Model.Record.DateOfSignature</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Owner</strong></li>
-                            <li class="list-group-item"><strong>Comments</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                            <li class="list-group-item">@Model.Record.Comments</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Agreement Name</strong></td>
+                            <td>@Model.Record.Name</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Name of the BF Company</strong></td>
+                            <td>@Model.Record.BFCompany</td>
+                            <td><strong>Comments</strong></td>
+                            <td>@Model.Record.Comments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Name of the counterpart</strong></td>
+                            <td>@Model.Record.Counterpart</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Object of Agreement</strong></td>
+                            <td>@Model.Record.ObjectOfAgreement</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Other Related Trademarks</strong></td>
+                            <td>@Model.Record.OtherRelatedTrademarks</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Type of Agreement</strong></td>
+                            <td>@Model.Record.Type</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Applicability</strong></td>
+                            <td>@Model.Record.Applicability</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date of Signature</strong></td>
+                            <td>@Model.Record.DateOfSignature</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->

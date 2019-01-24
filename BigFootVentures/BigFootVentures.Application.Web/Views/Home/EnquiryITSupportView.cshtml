@@ -29,36 +29,32 @@
                     <h4 class="panel-title">Enquiry Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Case Number</strong></li>
-                            <li class="list-group-item"><strong>% of Completion</strong></li>
-                            <li class="list-group-item"><strong>Old Casenumber</strong></li>
-                            <li class="list-group-item"><strong>CASEREASSIGN</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OldCaseNumber</li>
-                            <li class="list-group-item">@Model.Record.PercentOfCompletion</li>
-                            <li class="list-group-item">@Model.Record.OldCaseNumber</li>
-                            <li class="list-group-item">@Model.Record.CaseAssign</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Owner</strong></li>
-                            <li class="list-group-item"><strong>Status</strong></li>
-                            <li class="list-group-item"><strong>Priority</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                            <li class="list-group-item">@Model.Record.Status</li>
-                            <li class="list-group-item">@Model.Record.Priority</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Case Number</strong></td>
+                            <td>@Model.Record.OldCaseNumber</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>% of Completion</strong></td>
+                            <td>@Model.Record.PercentOfCompletion</td>
+                            <td><strong>Status</strong></td>
+                            <td>@Model.Record.Status</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Old Casenumber</strong></td>
+                            <td>@Model.Record.OldCaseNumber</td>
+                            <td><strong>Priority</strong></td>
+                            <td>@Model.Record.Priority</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CASEREASSIGN</strong></td>
+                            <td>@Model.Record.CaseAssign</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
@@ -68,26 +64,38 @@
                     <h4 class="panel-title">Description</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Subject</strong></li>
-                            <li class="list-group-item"><strong>Description</strong></li>
-                            <li class="list-group-item"><strong>Field Name(s)</strong></li>
-                            <li class="list-group-item"><strong>Internal Comments</strong></li>
-                            <li class="list-group-item"><strong>Object Name(s)</strong></li>
-                            <li class="list-group-item"><strong>Technical Assesment</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Subject</li>
-                            <li class="list-group-item">@Model.Record.Description</li>
-                            <li class="list-group-item">@Model.Record.FieldNames</li>
-                            <li class="list-group-item">@Model.Record.InternalComments</li>
-                            <li class="list-group-item">@Model.Record.ObjectNames</li>
-                            <li class="list-group-item">@Model.Record.TechnicalAssessment</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Subject</strong></td>
+                            <td>@Model.Record.Subject</td>
+                            <td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Description</strong></td>
+                            <td>@Model.Record.Description</td>
+                            <td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Field Name(s)</strong></td>
+                            <td>@Model.Record.FieldNames</td>
+                            <td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Internal Comments</strong></td>
+                            <td>@Model.Record.InternalComments</td>
+                            <td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Object Name(s)</strong></td>
+                            <td>@Model.Record.ObjectNames</td>
+                            <td></td><td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technical Assesment</strong></td>
+                            <td>@Model.Record.TechnicalAssessment</td>
+                            <td></td><td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Description -->
@@ -97,30 +105,26 @@
                     <h4 class="panel-title">Additional Information</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Test Plan</strong></li>
-                            <li class="list-group-item"><strong>Steps To Test</strong></li>
-                            <li class="list-group-item"><strong>Test Outcome</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.TestPlan</li>
-                            <li class="list-group-item">@Model.Record.StepsToTest</li>
-                            <li class="list-group-item">@Model.Record.TestOutcome</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Record Type</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.RecordType</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Test Plan</strong></td>
+                            <td>@Model.Record.TestPlan</td>
+                            <td><strong>Record Type</strong></td>
+                            <td>@Model.Record.RecordType</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Steps To Test</strong></td>
+                            <td>@Model.Record.StepsToTest</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Test Outcome</strong></td>
+                            <td>@Model.Record.TestOutcome</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Additional Information -->
