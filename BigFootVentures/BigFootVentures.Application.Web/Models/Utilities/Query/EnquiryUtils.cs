@@ -8,20 +8,20 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
         #region "Public Methods"
 
         public static Tuple<string, string> BuildQuery(int startIndex, int rowCount,
-            string oldCaseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
+            string caseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
         {
             StringBuilder query = null;
             StringBuilder queryTotal = null;
 
-            query = BuildQuery(new StringBuilder().Append("SELECT "), startIndex, rowCount, 
-                oldCaseNumber, status, caseAssign, priority, subject);
-            queryTotal = BuildTotalQuery(new StringBuilder().Append("SELECT "), 
-                oldCaseNumber, status, caseAssign, priority, subject);
+            query = BuildQuery(new StringBuilder().Append("SELECT "), startIndex, rowCount,
+                caseNumber, status, caseAssign, priority, subject);
+            queryTotal = BuildTotalQuery(new StringBuilder().Append("SELECT "),
+                caseNumber, status, caseAssign, priority, subject);
 
             return new Tuple<string, string>(query.ToString(), queryTotal.ToString());
         }
 
-        public static string BuildExportQuery(string oldCaseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
+        public static string BuildExportQuery(string caseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
         {
             var query = new StringBuilder().Append("SELECT ");
 
@@ -29,9 +29,9 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             query.Append("FROM Enquiry ");
             query.Append($"WHERE 0 = 0 ");
 
-            if (!string.IsNullOrWhiteSpace(oldCaseNumber))
+            if (!string.IsNullOrWhiteSpace(caseNumber))
             {
-                query.Append($"AND OldCaseNumber LIKE '%{oldCaseNumber}%' ");
+                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
@@ -54,7 +54,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 query.Append($"AND Subject LIKE '%{subject}%' ");
             }
 
-            query.Append("ORDER BY OldCaseNumber");
+            query.Append("ORDER BY ID");
 
             return query.ToString();
         }
@@ -64,15 +64,15 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
         #region "Private Methods"
 
         private static StringBuilder BuildQuery(StringBuilder query, int startIndex, int rowCount,
-            string oldCaseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
+            string caseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
         {
             query.Append("* ");
             query.Append("FROM Enquiry ");
             query.Append($"WHERE 0 = 0 ");
 
-            if (!string.IsNullOrWhiteSpace(oldCaseNumber))
+            if (!string.IsNullOrWhiteSpace(caseNumber))
             {
-                query.Append($"AND OldCaseNumber LIKE '%{oldCaseNumber}%' ");
+                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
@@ -95,21 +95,21 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 query.Append($"AND Subject LIKE '%{subject}%' ");
             }
 
-            query.Append($"ORDER BY OldCaseNumber LIMIT {startIndex},{rowCount}");
+            query.Append($"ORDER BY ID LIMIT {startIndex},{rowCount}");
 
             return query;
         }
 
         private static StringBuilder BuildTotalQuery(StringBuilder query,
-            string oldCaseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
+            string caseNumber = null, string status = null, string caseAssign = null, string priority = null, string subject = null)
         {
             query.Append("COUNT(ID) INTO @total ");
             query.Append("FROM Enquiry ");
             query.Append($"WHERE 0 = 0 ");
 
-            if (!string.IsNullOrWhiteSpace(oldCaseNumber))
+            if (!string.IsNullOrWhiteSpace(caseNumber))
             {
-                query.Append($"AND OldCaseNumber LIKE '%{oldCaseNumber}%' ");
+                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))

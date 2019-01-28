@@ -23,10 +23,11 @@
                 <thead>
                     <tr class="th-bg">
                         <th class="th-case-number">Case Number</th>
+                        <th class="th-owner">Owner</th>
+                        <th class="th-subject">Subject</th>
+                        <th class="th-status">Status</th>
+                        <th class="th-priority">Priority</th>
                         <th class="th-description">Description</th>
-                        <th class="th-reference-number">Reference Number</th>
-                        <th class="th-domain-name">Domain Name</th>
-                        <th class="th-do-not-contact">Do Not Contact</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,10 +36,11 @@
                         {
                             <tr>
                                 <td><a href="@Url.RouteUrl("EnquiryView", new { ID = enquiry.ID })" target="_blank">@enquiry.CaseNumber</a></td>
+                                <td>@enquiry.OwnerName</td>
+                                <td>@enquiry.Subject</td>
+                                <td>@enquiry.Status</td>
+                                <td>@enquiry.Priority</td>
                                 <td>@enquiry.Description</td>
-                                <td>@enquiry.ReferenceNumber</td>
-                                <td>@enquiry.DomainName</td>
-                                <td><input type="checkbox" @(enquiry.DoNotContact ? "checked" : string.Empty) disabled /></td>
                             </tr>
                         }
                     }

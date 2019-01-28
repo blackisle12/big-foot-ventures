@@ -1,4 +1,5 @@
-﻿using BigFootVentures.Business.Objects.Wrapper;
+﻿using BigFootVentures.Business.Objects.Utilities;
+using BigFootVentures.Business.Objects.Wrapper;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,9 @@ namespace BigFootVentures.Business.DataAccess
                             searchResult.Rows.Add(new List<string>
                             {
                                 Convert.ToInt32(dataReader["ID"]).ToString(),
-                                dataReader["COL1"] as string,
+                                dataReader["Caption"] as string == "Enquiry" ? 
+                                    StringUtils.GenerateAutoNumber(Convert.ToInt32(dataReader["COL1"] as string)) :
+                                    dataReader["COL1"] as string,
                                 dataReader["COL2"] as string
                             });
                         }
@@ -103,7 +106,7 @@ namespace BigFootVentures.Business.DataAccess
             searchResultList.Add(new SearchResultWrapper { Caption = "Company", Header = new List<string> { "Name", "Account Record Type" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Contact", Header = new List<string> { "Name", "Department" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Domain", Header = new List<string> { "Domain Name", "BigFoot Owned" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Enquiry", Header = new List<string> { "Old Case Number", "Reference Number" }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Enquiry", Header = new List<string> { "Case Number", "Subject" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Lead", Header = new List<string> { "Name", "Company" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Legal Case", Header = new List<string> { "Type of Case", "Trademark Number" }, Rows = new List<List<string>>() });
             searchResultList.Add(new SearchResultWrapper { Caption = "Office", Header = new List<string> { "Office Name", string.Empty }, Rows = new List<List<string>>() });

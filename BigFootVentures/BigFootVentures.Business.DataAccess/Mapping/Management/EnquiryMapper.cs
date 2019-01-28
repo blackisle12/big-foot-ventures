@@ -1,5 +1,6 @@
 ﻿using BigFootVentures.Business.DataAccess.Utilities;
 using BigFootVentures.Business.Objects.Management;
+using BigFootVentures.Business.Objects.Utilities;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -68,9 +69,9 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     entity.RegistrantCompany = new Company { ID = registrantCompanyID };
                 }
 
-                if (int.TryParse((dataReader["RegistrantID"] as int?)?.ToString(), out int registrantID))
+                if (int.TryParse((dataReader["RegistrarID"] as int?)?.ToString(), out int registrarID))
                 {
-                    entity.Registrar = new Register { ID = registrantID };
+                    entity.Registrar = new Register { ID = registrarID };
                 }
 
                 entities.Add(entity);
@@ -88,14 +89,14 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 var entity = new Enquiry
                 {
                     ID = (int)dataReader["ID"],
-                    
-                    OldCaseNumber = dataReader["OldCaseNumber"] as string,
-                    DoNotContact = (dataReader["DoNotContact"] as sbyte? ?? 0) == 1,
-                    
-                    ReferenceNumber = dataReader["ReferenceNumber"] as string,
 
-                    DomainName = dataReader["DomainName"] as string,
-                    Description = dataReader["Description"] as string,
+                    OwnerName = dataReader["OwnerName"] as string,
+
+                    Subject = dataReader["Subject"] as string,
+                    Status = dataReader["Status"] as string,
+                    Priority = dataReader["Priority"] as string,
+
+                    Description = dataReader["Description"] as string
                 };
 
                 entities.Add(entity);
@@ -108,13 +109,15 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
         {
             var file = new StringBuilder();
 
-            file.Append("Old Case Number,Record Type,Owner Name,Negotiation BF Amount,Negotiation 3rd Party Amount,Priority,Status,Send Email,Unread Email,Do Not Contact,Subject,Percent of Completion,");
+            file.Append("Case Number, Old Case Number,Record Type,Owner Name,Negotiation BF Amount,Negotiation 3rd Party Amount,Priority,Status,Send Email,Unread Email,Do Not Contact,Subject,Percent of Completion,");
             file.Append("Case Assign,Private Registration Email,Registrant,Case Origin,Reference Number,Domain Name,Registrant Email,Street,City,State,Country,Postal Code,Phone,Fax,Description,");
             file.Append("Field Names, Internal Comments,Object Names,Technical Assessment,Test Plan,Steps to Test,Test Outcome");
             file.Append(Environment.NewLine);
 
             while (dataReader.Read())
             {
+                file.Append(DataUtils.EscapeCSV($"{StringUtils.GenerateAutoNumber(Convert.ToInt32(dataReader["ID"] as string))}") + ",");
+
                 file.Append(DataUtils.EscapeCSV($"{dataReader["OldCaseNumber"] as string}") + ",");
 
                 file.Append(DataUtils.EscapeCSV($"{dataReader["RecordType"] as string}") + ",");
@@ -190,7 +193,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                 new MySqlParameter("pDomainName", MySqlDbType.VarChar, 100) { Value = entity.DomainName, Direction = ParameterDirection.Input },
                 new MySqlParameter("pRegistrantCompanyID", MySqlDbType.Int32) { Value = entity.RegistrantCompany?.ID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pRegistrantID", MySqlDbType.Int32) { Value = entity.Registrar?.ID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pRegistrarID", MySqlDbType.Int32) { Value = entity.Registrar?.ID, Direction = ParameterDirection.Input },
                 new MySqlParameter("pRegistrantEmail", MySqlDbType.VarChar, 100) { Value = entity.RegistrantEmail, Direction = ParameterDirection.Input },
                 new MySqlParameter("pStreet", MySqlDbType.VarChar, 100) { Value = entity.Street, Direction = ParameterDirection.Input },
                 new MySqlParameter("pCity", MySqlDbType.VarChar, 100) { Value = entity.City, Direction = ParameterDirection.Input },
