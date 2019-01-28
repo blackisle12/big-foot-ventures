@@ -29,32 +29,32 @@
                     <h4 class="panel-title">Registrar Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Registrar Name</strong></li>
-                            <li class="list-group-item"><strong>RAA Year</strong></li>
-                            <li class="list-group-item"><strong>Country</strong></li>
-                            <li class="list-group-item"><strong>Accredited TLDS</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Name</li>
-                            <li class="list-group-item">@Model.Record.RAAYear</li>
-                            <li class="list-group-item">@Model.Record.Country</li>
-                            <li class="list-group-item">@Model.Record.AccreditedTLDs</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Owner</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Registrar Name</strong></td>
+                            <td>@Model.Record.Name</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RAA Year</strong></td>
+                            <td>@Model.Record.RAAYear</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Country</strong></td>
+                            <td>@Model.Record.Country</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accredited TLDs</strong></td>
+                            <td>@Model.Record.AccreditedTLDs</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
