@@ -1,12 +1,12 @@
 ﻿function BuildEnquiryQuery(query) {
-    var oldCaseNumber = $('[name="Input.Filter.Enquiry.OldCaseNumber"]').val();
+    var caseNumber = $('[name="Input.Filter.Enquiry.CaseNumber"]').val();
     var status = $('[name="Select.Filter.Enquiry.Status"]').val();
     var caseAssign = $('[name="Select.Filter.Enquiry.CaseAssign"]').val();
     var priority = $('[name="Select.Filter.Enquiry.Priority"]').val();
     var subject = $('[name="Input.Filter.Enquiry.Subject"]').val();
 
-    if (oldCaseNumber != null && oldCaseNumber != undefined && oldCaseNumber.length > 0) {
-        query += '&oldCaseNumber=' + oldCaseNumber;
+    if (caseNumber != null && caseNumber != undefined && caseNumber.length > 0) {
+        query += '&caseNumber=' + caseNumber;
     }
 
     if (status != '') {

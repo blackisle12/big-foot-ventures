@@ -116,7 +116,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             while (dataReader.Read())
             {
-                file.Append(DataUtils.EscapeCSV($"{StringUtils.GenerateAutoNumber(Convert.ToInt32(dataReader["ID"] as string))}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{StringUtils.GenerateAutoNumber((int)dataReader["ID"])}") + ",");
 
                 file.Append(DataUtils.EscapeCSV($"{dataReader["OldCaseNumber"] as string}") + ",");
 
