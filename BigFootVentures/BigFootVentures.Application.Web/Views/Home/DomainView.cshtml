@@ -1,0 +1,354 @@
+﻿@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Domain - " + Model.Record.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<DomainN>
+
+@using (Html.BeginForm("Domain", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing Domain <strong>@(Model.Record.Name ?? string.Empty)</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Information</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Registrant Company</strong></td>
+                            <td>@(Model.Record.RegistrantCompany?.DisplayName)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: Domain Detail -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Domain Detail</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Domain Name</strong></td>
+                            <td>@Model.Record.Name</td>
+                            <td><strong>Website Current</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.WebsiteCurrent ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Domain Enquiry</strong></td>
+                            <td>@(Model.Record.DomainEnquiry?.CaseNumber)</td>
+                            <td><strong>Locked</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.Locked ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Brand</strong></td>
+                            <td>@(Model.Record.Brand?.Name)</td>
+                            <td><strong>Website Use</strong></td>
+                            <td>@Model.Record.WebsiteUse</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BF Strategy</strong></td>
+                            <td>@Model.Record.BFStrategy</td>
+                            <td><strong>Website Description</strong></td>
+                            <td>@Model.Record.WebsiteDescription</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Buyside Funnel</strong></td>
+                            <td>@Model.Record.BuysideFunnel</td>
+                            <td><strong>Website Redirect</strong></td>
+                            <td>@Model.Record.WebsiteRedirect</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Remarks</strong></td>
+                            <td>@Model.Record.Remarks</td>
+                            <td><strong>Expiration Date</strong></td>
+                            <td>@Model.Record.ExpirationDate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FMV Order of Magnitude</strong></td>
+                            <td>@Model.Record.FMVOrderOfMagnitude</td>
+                            <td><strong>Company Website</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.CompanyWebsite ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status</strong></td>
+                            <td>@Model.Record.Status</td>
+                            <td><strong>Auto Renew</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.AutoRenew ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Version</strong></td>
+                            <td>@Model.Record.Version</td>
+                            <td><strong>WHOIS</strong></td>
+                            <td>@Model.Record.WHOIS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Category</strong></td>
+                            <td>@Model.Record.Category</td>
+                            <td><strong>Registration Price USD</strong></td>
+                            <td>@Model.Record.RegistrationPriceUSD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Account ID</strong></td>
+                            <td>@Model.Record.AccountID</td>
+                            <td><strong>Registration Date</strong></td>
+                            <td>@Model.Record.RegistrationDate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BigFoot Owned</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.BigFootOwned ? "checked" : string.Empty) /></td>
+                            <td><strong>BigFoot Parking Page</strong></td>
+                            <td>@Model.Record.BigFootParkingPage</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Domain Length</strong></td>
+                            <td>@Model.Record.DomainLength</td>
+                            <td><strong>Privacy Protected</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.PrivacyProtected ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Domain Purpose</strong></td>
+                            <td>@(Model.Record.Brand?.Purpose)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Domain Value</strong></td>
+                            <td>@(Model.Record.Brand?.Value)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Domain Category</strong></td>
+                            <td>@(Model.Record.Brand?.Category)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>HVT (High Value Target)</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.Brand != null ? (Model.Record.Brand.HVTChk ? "checked" : string.Empty) : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Name Length</strong></td>
+                            <td>@Model.Record.NameLength</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Number in the Name</strong></td>
+                            <td>@Model.Record.NumberInTheName</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Domain Detail -->
+            <!-- START: Registrar -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Registrar</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Registrar</strong></td>
+                            <td>@(Model.Record.Registrar?.Name)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Registrar -->
+            <!-- START: Current Registrant -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Current Registrant</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Registrant</strong></td>
+                            <td>@(Model.Record.Registrant?.DisplayName)</td>
+                            <td><strong>Previous Registrant</strong></td>
+                            <td>@(Model.Record.PreviousRegistrant?.DisplayName)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Registrant Email</strong></td>
+                            <td>@Model.Record.RegistrantEmail</td>
+                            <td><strong>Previous Registrant Changed on</strong></td>
+                            <td>@Model.Record.PreviousRegistrantChangedOn</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Private Registration Email</strong></td>
+                            <td>@Model.Record.PrivateRegistrationEmail</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Current Registrant -->
+            <!-- START: Domain Transactions -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Domain Transactions</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Purchase Price USD</strong></td>
+                            <td>@Model.Record.PurchasePriceUSD</td>
+                            <td><strong>Sale Price USD</strong></td>
+                            <td>@Model.Record.SalePriceUSD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Purchase Date</strong></td>
+                            <td>@Model.Record.PurchaseDate</td>
+                            <td><strong>Sale Date</strong></td>
+                            <td>@Model.Record.SaleDate</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Domain Transactions -->
+            <!-- START: Legal Section -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Legal Section</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>C&D Date Sent</strong></td>
+                            <td>@Model.Record.CDDateSent</td>
+                            <td><strong>Trademark used in the UDRP</strong></td>
+                            <td>@Model.Record.TrademarkUsedInTheUDRPName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C&D Sent From</strong></td>
+                            <td>@Model.Record.CDSentFrom</td>
+                            <td><strong>UDRP Filing Date</strong></td>
+                            <td>@Model.Record.UDRPFilingDate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C&D Sent Method</strong></td>
+                            <td>@Model.Record.CDSentMethod</td>
+                            <td><strong>UDRP cost (in USD)</strong></td>
+                            <td>@Model.Record.UDRPCostInUSD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C&D Courier</strong></td>
+                            <td>@Model.Record.CDCourier</td>
+                            <td><strong>UDRP cost (other than USD)</strong></td>
+                            <td>@Model.Record.UDRPCostOtherThanUSD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C&D Tracking Number</strong></td>
+                            <td>@Model.Record.CDTrackingNumber</td>
+                            <td><strong>UDRP Case Number</strong></td>
+                            <td>@Model.Record.UDRPCaseNumber</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Arbitrator Name</strong></td>
+                            <td>@Model.Record.ArbitratorName</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>UDRP Jurisdiction</strong></td>
+                            <td>@Model.Record.UDRPJurisdiction</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Language of Proceedings</strong></td>
+                            <td>@Model.Record.LanguageOfProceedings</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Legal action/Related proceedings</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.LegalActionRelatedProceedings ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>UDRP Outcome</strong></td>
+                            <td>@Model.Record.UDRPOutcome</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>UDRP Comment</strong></td>
+                            <td>@Model.Record.UDRPComment</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Legal Section -->
+            <!-- START: Deletion Request -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Deletion Request</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Deletion Request</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequest ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deletion Request Reason</strong></td>
+                            <td>@Model.Record.DeletionRequestReason</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Deletion Request -->
+            <!-- START: System Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">System Information</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: System Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+}

@@ -30,8 +30,11 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             var query = new StringBuilder().Append("SELECT ");
 
             query.Append("d.*, c.ID AS RegistrantID, c.NAME AS RegistrantName, ");
+            query.Append("rc.ID AS RegistrantCompanyID, rc.NAME AS RegistrantCompanyName, rc.`BIGFOOT GROUP` AS RegistrantCompanyBigFootGroup, p.NAME AS RegistrantCompanyParentAccountName, ");
             query.Append("r.ID AS RegistrarID, r.Name AS RegistrarName ");
             query.Append("FROM DomainN d ");
+            query.Append("LEFT JOIN Company rc ON d.RegistrantCompanyID = rc.ID ");
+            query.Append("LEFT JOIN Company p ON rc.ParentAccountID = p.ID ");
             query.Append("LEFT JOIN Company c ON d.RegistrantID = c.ID ");
             query.Append("LEFT JOIN Register r ON d.RegistrarID = r.ID ");
             query.Append($"WHERE 0 = 0 ");
@@ -43,7 +46,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append($"AND d.BigFootOwned = {bigFootOwned} ");
+                query.Append("AND (rc.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))
@@ -120,9 +123,12 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
             string version = null, string WHOIS = null, string category = null)
         {
-            query.Append("d.ID, d.Name, d.BigFootOwned, d.ExpirationDate, c.ID AS RegistrantID, c.NAME AS RegistrantName, ");
+            query.Append("d.*, c.ID AS RegistrantID, c.NAME AS RegistrantName, ");
+            query.Append("rc.ID AS RegistrantCompanyID, rc.NAME AS RegistrantCompanyName, rc.`BIGFOOT GROUP` AS RegistrantCompanyBigFootGroup, p.NAME AS RegistrantCompanyParentAccountName, ");
             query.Append("r.ID AS RegistrarID, r.Name AS RegistrarName ");
             query.Append("FROM DomainN d ");
+            query.Append("LEFT JOIN Company rc ON d.RegistrantCompanyID = rc.ID ");
+            query.Append("LEFT JOIN Company p ON rc.ParentAccountID = p.ID ");
             query.Append("LEFT JOIN Company c ON d.RegistrantID = c.ID ");
             query.Append("LEFT JOIN Register r ON d.RegistrarID = r.ID ");
             query.Append($"WHERE 0 = 0 ");
@@ -134,7 +140,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append($"AND d.BigFootOwned = {bigFootOwned} ");
+                query.Append("AND (rc.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))
@@ -207,78 +213,80 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
             string version = null, string WHOIS = null, string category = null)
         {
-            query.Append("COUNT(ID) INTO @total ");
-            query.Append("FROM DomainN ");
+            query.Append("COUNT(d.ID) INTO @total ");
+            query.Append("FROM DomainN d ");
+            query.Append("LEFT JOIN Company rc ON d.RegistrantCompanyID = rc.ID ");
+            query.Append("LEFT JOIN Company p ON rc.ParentAccountID = p.ID ");
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND Name LIKE '%{name}%' ");
+                query.Append($"AND d.Name LIKE '%{name}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append($"AND BigFootOwned = {bigFootOwned} ");
+                query.Append("AND (rc.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))
             {
-                query.Append($"AND WebsiteCurrent = {websiteCurrent} ");
+                query.Append($"AND d.WebsiteCurrent = {websiteCurrent} ");
             }
 
             if (!string.IsNullOrWhiteSpace(locked))
             {
-                query.Append($"AND Locked = {locked} ");
+                query.Append($"AND d.Locked = {locked} ");
             }
 
             if (!string.IsNullOrWhiteSpace(websiteUse))
             {
-                query.Append($"AND WebsiteUse LIKE '%{websiteUse}%' ");
+                query.Append($"AND d.WebsiteUse LIKE '%{websiteUse}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(BFStrategy))
             {
-                query.Append($"AND BFStrategy LIKE '%{BFStrategy}%' ");
+                query.Append($"AND d.BFStrategy LIKE '%{BFStrategy}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(buySideFunnel))
             {
-                query.Append($"AND BuySideFunnel LIKE '%{buySideFunnel}%' ");
+                query.Append($"AND d.BuySideFunnel LIKE '%{buySideFunnel}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(FMVOrderOfMagnitude))
             {
-                query.Append($"AND FMVOrderOfMagnitude LIKE '%{FMVOrderOfMagnitude}%' ");
+                query.Append($"AND d.FMVOrderOfMagnitude LIKE '%{FMVOrderOfMagnitude}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(companyWebsite))
             {
-                query.Append($"AND CompanyWebsite = {companyWebsite} ");
+                query.Append($"AND d.CompanyWebsite = {companyWebsite} ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND Status LIKE '%{status}%' ");
+                query.Append($"AND d.Status LIKE '%{status}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(autoRenew))
             {
-                query.Append($"AND AutoRenew = {autoRenew} ");
+                query.Append($"AND d.AutoRenew = {autoRenew} ");
             }
 
             if (!string.IsNullOrWhiteSpace(version))
             {
-                query.Append($"AND Version LIKE '%{version}%' ");
+                query.Append($"AND d.Version LIKE '%{version}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(WHOIS))
             {
-                query.Append($"AND WHOIS LIKE '%{WHOIS}%' ");
+                query.Append($"AND d.WHOIS LIKE '%{WHOIS}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                query.Append($"AND Category LIKE '%{category}%' ");
+                query.Append($"AND d.Category LIKE '%{category}%' ");
             }
 
             return query;

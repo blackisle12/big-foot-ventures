@@ -35,7 +35,6 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     AccountID = dataReader["AccountID"] as string,
                     WebsiteCurrent = (dataReader["WebsiteCurrent"] as sbyte? ?? 0) == 1,
                     Locked = (dataReader["Locked"] as sbyte? ?? 0) == 1,
-                    BigFootOwned = (dataReader["BigFootOwned"] as sbyte? ?? 0) == 1,
                     WebsiteUse = dataReader["WebsiteUse"] as string,
                     WebsiteDescription = dataReader["WebsiteDescription"] as string,
                     WebsiteRedirect = dataReader["WebsiteRedirect"] as string,
@@ -80,7 +79,16 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                 if (int.TryParse((dataReader["RegistrantCompanyID"] as int?)?.ToString(), out int registrantCompanyID))
                 {
-                    entity.RegistrantCompany = new Company { ID = registrantCompanyID };
+                    entity.RegistrantCompany = new Company
+                    {
+                        ID = registrantCompanyID,
+                        DisplayName = dataReader["RegistrantCompanyName"] as string,
+                        BigFootGroup = (dataReader["RegistrantCompanyBigFootGroup"] as sbyte? ?? 0) == 1,
+                        ParentAccount = new Company
+                        {
+                            DisplayName = dataReader["RegistrantCompanyParentAccountName"] as string
+                        }
+                    };
                 }
 
                 if (int.TryParse((dataReader["DomainEnquiryID"] as int?)?.ToString(), out int domainEnquiryID))
@@ -125,9 +133,22 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     ID = (int)dataReader["ID"],
 
                     Name = dataReader["Name"] as string,
-                    BigFootOwned = (dataReader["BigFootOwned"] as sbyte? ?? 0) == 1,
                     ExpirationDate = dataReader["ExpirationDate"] as string,
                 };
+
+                if (int.TryParse((dataReader["RegistrantCompanyID"] as int?)?.ToString(), out int registrantCompanyID))
+                {
+                    entity.RegistrantCompany = new Company
+                    {
+                        ID = registrantCompanyID,
+                        DisplayName = dataReader["RegistrantCompanyName"] as string,
+                        BigFootGroup = (dataReader["RegistrantCompanyBigFootGroup"] as sbyte? ?? 0) == 1,
+                        ParentAccount = new Company
+                        {
+                            DisplayName = dataReader["RegistrantCompanyParentAccountName"] as string
+                        }
+                    };
+                }
 
                 if (int.TryParse((dataReader["RegistrarID"] as int?)?.ToString(), out int registrarID))
                 {
@@ -136,7 +157,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                 if (int.TryParse((dataReader["RegistrantID"] as int?)?.ToString(), out int registrantID))
                 {
-                    entity.Registrant = new Company { ID = registrantID, DisplayName = dataReader["RegistrantName"] as string };
+                    entity.Registrant = new Company
+                    {
+                        ID = registrantID,
+                        DisplayName = dataReader["RegistrantName"] as string
+                    };
                 }
 
                 entities.Add(entity);
@@ -159,7 +184,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             while (dataReader.Read())
             {
                 file.Append(DataUtils.EscapeCSV($"{dataReader["Name"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{(dataReader["BigFootOwned"] as sbyte? ?? 0) == 1}") + ",");
+                file.Append(DataUtils.EscapeCSV($"{(dataReader["RegistrantCompanyBigFootGroup"] as sbyte? ?? 0) == 1 || dataReader["RegistrantCompanyParentAccountName"] as string == "Bigfoot Group"}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrantName"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["ExpirationDate"] as string}") + ", ");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrarName"] as string}") + ", ");
@@ -237,7 +262,6 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pVersion", MySqlDbType.VarChar, 45) { Value = entity.Version, Direction = ParameterDirection.Input },
                 new MySqlParameter("pCategory", MySqlDbType.VarChar, 45) { Value = entity.Category, Direction = ParameterDirection.Input },
                 new MySqlParameter("pAccountID", MySqlDbType.VarChar, 45) { Value = entity.AccountID, Direction = ParameterDirection.Input },
-                new MySqlParameter("pBigFootOwned", entity.BigFootOwned ? 1: 0) { Direction = ParameterDirection.Input },
                 new MySqlParameter("pWebsiteCurrent", entity.WebsiteCurrent ? 1 : 0) { Direction = ParameterDirection.Input },
                 new MySqlParameter("pLocked", entity.Locked ? 1 : 0) { Direction = ParameterDirection.Input },
                 new MySqlParameter("pWebsiteUse", MySqlDbType.VarChar, 45) { Value = entity.WebsiteUse, Direction = ParameterDirection.Input },

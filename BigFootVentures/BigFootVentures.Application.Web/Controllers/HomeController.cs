@@ -1130,7 +1130,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("Domain", model);
+            return View("DomainView", model);
         }
 
         [Route("Domain/New", Name = "DomainNNew")]
@@ -1221,18 +1221,6 @@ namespace BigFootVentures.Application.Web.Controllers
 
                     if (model.Record.RegistrantCompany != null && model.Record.RegistrantCompany.ID > 0)
                     {
-                        if (model.Record.RegistrantCompany.ID.ToString() == ConfigurationManager.AppSettings["BigFoot_Company_ID"])
-                        {
-                            model.Record.BigFootOwned = true;
-                        }
-
-                        model.Record.RegistrantCompany = this._managementCompanyService.Get(model.Record.RegistrantCompany.ID);
-
-                        if (!model.Record.BigFootOwned && model.Record.RegistrantCompany.BigFootGroup)
-                        {
-                            model.Record.BigFootOwned = true;
-                        }
-
                         if (!string.IsNullOrWhiteSpace(model.Record.RegistrantCompany.Email))
                         {
                             model.Record.RegistrantEmail = model.Record.RegistrantCompany.Email;

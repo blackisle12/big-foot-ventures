@@ -8,9 +8,9 @@ namespace BigFootVentures.Business.Objects.Management
 
         public string OwnerName { get; set; }
 
-        public Company RegistrantCompany { get; set; }                
+        public Company RegistrantCompany { get; set; }
         public string Name { get; set; }
-        public Enquiry DomainEnquiry { get; set; }        
+        public Enquiry DomainEnquiry { get; set; }
         public Brand Brand { get; set; }        
         public string BFStrategy { get; set; }
         public string BuysideFunnel { get; set; }
@@ -19,8 +19,7 @@ namespace BigFootVentures.Business.Objects.Management
         public string Status { get; set; }
         public string Version { get; set; }
         public string Category { get; set; }
-        public string AccountID { get; set; }
-        public bool BigFootOwned { get; set; }
+        public string AccountID { get; set; }        
         public bool WebsiteCurrent { get; set; }
         public bool Locked { get; set; } = true;
         public string WebsiteUse { get; set; }
@@ -35,10 +34,10 @@ namespace BigFootVentures.Business.Objects.Management
         public string BigFootParkingPage { get; set; }
         public bool PrivacyProtected { get; set; }
 
-        public Register Registrar { get; set; }        
+        public Register Registrar { get; set; }
 
         public Company Registrant { get; set; }
-        public Company PreviousRegistrant { get; set; }        
+        public Company PreviousRegistrant { get; set; }
         public string RegistrantEmail { get; set; }
         public string PrivateRegistrationEmail { get; set; }
         public string PreviousRegistrantChangedOn { get; set; }
@@ -73,6 +72,13 @@ namespace BigFootVentures.Business.Objects.Management
 
         #region "Calculated Properties"
 
+        public bool BigFootOwned
+        {
+            get
+            {
+                return (this.RegistrantCompany?.BigFootGroup == true || this.RegistrantCompany?.DisplayName == "Bigfoot Group");
+            }
+        }
         public int DomainLength { get { return !this.Name.Contains(".") ? this.Name.Length : this.Name.Split(new char[] { '.' })[0].Length; } }
         public int NameLength { get { return this.Name.Length; } }
         public string NumberInTheName { get { return StringUtils.HasNumber(this.Name) ? "Yes" : "No"; } }
