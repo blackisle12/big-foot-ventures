@@ -38,7 +38,7 @@
                 <div class="panel-body">
                     <fieldset>
                         @{
-                            if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription())
+                            if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription() || string.IsNullOrWhiteSpace(Model.Record.AccountRecordType))
                             {
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Company Name</label>
@@ -344,7 +344,7 @@
             <!-- END: Deletion Request -->
             <!-- START: Incorporation Information -->
             @{
-                if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription())
+                if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription() || string.IsNullOrWhiteSpace(Model.Record.AccountRecordType))
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
