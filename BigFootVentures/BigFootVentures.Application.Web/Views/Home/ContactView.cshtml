@@ -29,46 +29,62 @@
                     <h4 class="panel-title">Contact Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Name</strong></li>
-                            <li class="list-group-item"><strong>Company Name</strong></li>
-                            <li class="list-group-item"><strong>Title</strong></li>
-                            <li class="list-group-item"><strong>Email</strong></li>
-                            <li class="list-group-item"><strong>Phone</strong></li>
-                            <li class="list-group-item"><strong>Mobile</strong></li>
-                            <li class="list-group-item"><strong>OHIM_Owner_ID</strong></li>
-                            <li class="list-group-item"><strong>OHIM_Num_Trademarks</strong></li>
-                            <li class="list-group-item"><strong>Website - Individual</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Salutation @Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</li>
-                            <li class="list-group-item">@(Model.Record.Company?.CompanyName)</li>
-                            <li class="list-group-item">@Model.Record.Title</li>
-                            <li class="list-group-item">@Model.Record.Email</li>
-                            <li class="list-group-item">@Model.Record.Phone</li>
-                            <li class="list-group-item">@Model.Record.Mobile</li>
-                            <li class="list-group-item">@Model.Record.OHIMOwnerID</li>
-                            <li class="list-group-item">@Model.Record.OHIMNumTrademarks</li>
-                            <li class="list-group-item">@Model.Record.WebsiteIndividual</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Contact Owner</strong></li>
-                            <li class="list-group-item"><strong>Department</strong></li>
-                            <li class="list-group-item"><strong>Fax</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                            <li class="list-group-item">@Model.Record.Department</li>
-                            <li class="list-group-item">@Model.Record.Fax</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td>@Model.Record.Salutation @Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</td>
+                            <td><strong>Contact Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Company Name</strong></td>
+                            <td>@(Model.Record.Company?.CompanyName)</td>
+                            <td><strong>Department</strong></td>
+                            <td>@Model.Record.Department</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Title</strong></td>
+                            <td>@Model.Record.Title</td>
+                            <td><strong>Fax</strong></td>
+                            <td>@Model.Record.Fax</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>@Model.Record.Email</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone</strong></td>
+                            <td>@Model.Record.Phone</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mobile</strong></td>
+                            <td>@Model.Record.Mobile</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>OHIM_Owner_ID</strong></td>
+                            <td>@Model.Record.OHIMOwnerID</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>OHIM_Num_Trademarks</strong></td>
+                            <td>@Model.Record.OHIMNumTrademarks</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Website - Individual</strong></td>
+                            <td>@Model.Record.WebsiteIndividual</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
@@ -78,16 +94,14 @@
                     <h4 class="panel-title">Address Information</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Mailing Address</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.MailingStreet, @Model.Record.MailingCity, @Model.Record.MailingState, @Model.Record.MailingPostalCode @Model.Record.MailingCountry</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Mailing Address</strong></td>
+                            <td>@Model.Record.MailingStreet, @Model.Record.MailingCity, @Model.Record.MailingState, @Model.Record.MailingPostalCode @Model.Record.MailingCountry</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Address Information -->
