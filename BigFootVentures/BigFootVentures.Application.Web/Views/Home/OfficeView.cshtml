@@ -29,64 +29,110 @@
                     <h4 class="panel-title">Office Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Office Name</strong></li>
-                            <li class="list-group-item"><strong>External_ID</strong></li>
-                            <li class="list-group-item"><strong>Geography_Type</strong></li>
-                            <li class="list-group-item"><strong>State</strong></li>
-                            <li class="list-group-item"><strong>State_Abbreviation</strong></li>
-                            <li class="list-group-item"><strong>Office URL</strong></li>
-                            <li class="list-group-item"><strong>Office Value Category</strong></li>
-                            <li class="list-group-item"><strong>Online</strong></li>
-                            <li class="list-group-item"><strong>Online Comments</strong></li>
-                            <li class="list-group-item"><strong>Publication Date Comments</strong></li>
-                            <li class="list-group-item"><strong>Registration Date Comments</strong></li>
-                            <li class="list-group-item"><strong>Opposition Period Months</strong></li>
-                            <li class="list-group-item"><strong>Search URL</strong></li>
-                            <li class="list-group-item"><strong>Office Statuses Source</strong></li>
-                            <li class="list-group-item"><strong>Office Name Archieve</strong></li>
-                            <li class="list-group-item"><strong>National Number Assigned</strong></li>
-                            <li class="list-group-item"><strong>Points</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OfficeName</li>
-                            <li class="list-group-item">@Model.Record.ExternalID</li>
-                            <li class="list-group-item">@Model.Record.GeographyType</li>
-                            <li class="list-group-item">@Model.Record.State</li>
-                            <li class="list-group-item">@Model.Record.StateAbbreviation</li>
-                            <li class="list-group-item">@Model.Record.OfficeUrl</li>
-                            <li class="list-group-item">@Model.Record.OfficeValueCategory</li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Online ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item">@Model.Record.OnlineComments</li>
-                            <li class="list-group-item">@Model.Record.PublicationDateComments</li>
-                            <li class="list-group-item">@Model.Record.RegistrationDateComments</li>
-                            <li class="list-group-item">@Model.Record.OppositionPeriodMonths</li>
-                            <li class="list-group-item">@Model.Record.SearchUrl</li>
-                            <li class="list-group-item">@Model.Record.OfficeStatusesSource</li>
-                            <li class="list-group-item">@Model.Record.OfficeNameArchive</li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.NationalNumberAssigned ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item">@Model.Record.Points</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Owner</strong></li>
-                            <li class="list-group-item"><strong>PCT</strong></li>
-                            <li class="list-group-item"><strong>Paris</strong></li>
-                            <li class="list-group-item"><strong>WTO</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.PCT ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Paris ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.WTO ? "checked" : string.Empty) /></li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Office Name</strong></td>
+                            <td>@Model.Record.OfficeName</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>External_ID</strong></td>
+                            <td>@Model.Record.ExternalID</td>
+                            <td><strong>PCT</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.PCT ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Geography_Type</strong></td>
+                            <td>@Model.Record.GeographyType</td>
+                            <td><strong>Paris</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.Paris ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>State</strong></td>
+                            <td>@Model.Record.State</td>
+                            <td><strong>WTO</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.WTO ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>State_Abbreviation</strong></td>
+                            <td>@Model.Record.StateAbbreviation</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office URL</strong></td>
+                            <td>@Model.Record.OfficeUrl</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office Value Category</strong></td>
+                            <td>@Model.Record.OfficeValueCategory</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Online</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.Online ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Online Comments</strong></td>
+                            <td>@Model.Record.OnlineComments</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Publication Date Comments</strong></td>
+                            <td>@Model.Record.PublicationDateComments</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Registration Date Comments</strong></td>
+                            <td>@Model.Record.RegistrationDateComments</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opposition Period Months</strong></td>
+                            <td>@Model.Record.OppositionPeriodMonths</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Search URL</strong></td>
+                            <td>@Model.Record.SearchUrl</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office Statuses Source</strong></td>
+                            <td>@Model.Record.OfficeStatusesSource</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office Name Archieve</strong></td>
+                            <td>@Model.Record.OfficeNameArchive</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>National Number Assigned</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.NationalNumberAssigned ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Points</strong></td>
+                            <td>@Model.Record.Points</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
@@ -96,22 +142,32 @@
                     <h4 class="panel-title">Payment and Tracking</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Registration Payment Notification</strong></li>
-                            <li class="list-group-item"><strong>Registration Payment Methods</strong></li>
-                            <li class="list-group-item"><strong>Opposition Payment Notification</strong></li>
-                            <li class="list-group-item"><strong>Opposition Payment Methods</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.RegistrationPaymentNotification</li>
-                            <li class="list-group-item">@Model.Record.RegistrationPaymentMethod</li>
-                            <li class="list-group-item">@Model.Record.OppositionPaymentNotification</li>
-                            <li class="list-group-item">@Model.Record.OppositionPaymentMethod</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Registration Payment Notification</strong></td>
+                            <td>@Model.Record.RegistrationPaymentNotification</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Registration Payment Methods</strong></td>
+                            <td>@Model.Record.RegistrationPaymentMethod</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opposition Payment Notification</strong></td>
+                            <td>@Model.Record.OppositionPaymentNotification</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opposition Payment Methods</strong></td>
+                            <td>@Model.Record.OppositionPaymentMethod</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Payment and Tracking -->

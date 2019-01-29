@@ -29,18 +29,20 @@
                     <h4 class="panel-title">TM representative Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Trademark</strong></li>
-                            <li class="list-group-item"><strong>Representative</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@(Model.Record.Trademark?.Name)</li>
-                            <li class="list-group-item">@(Model.Record.Representative?.CompanyName)</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Trademark</strong></td>
+                            <td>@(Model.Record.Trademark?.Name)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Representative</strong></td>
+                            <td>@(Model.Record.Representative?.CompanyName)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->

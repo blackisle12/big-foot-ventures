@@ -29,38 +29,50 @@
                     <h4 class="panel-title">EmailResponse Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Name</strong></li>
-                            <li class="list-group-item"><strong>Enquiries</strong></li>
-                            <li class="list-group-item"><strong>Description</strong></li>
-                            <li class="list-group-item"><strong>Email</strong></li>
-                            <li class="list-group-item"><strong>Status</strong></li>
-                            <li class="list-group-item"><strong>Subject</strong></li>
-                            <li class="list-group-item"><strong>Message Date</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Name</li>
-                            <li class="list-group-item">@(Model.Record.Enquiry?.OldCaseNumber)</li>
-                            <li class="list-group-item">@Model.Record.Description</li>
-                            <li class="list-group-item">@Model.Record.Email</li>
-                            <li class="list-group-item">@Model.Record.Status</li>
-                            <li class="list-group-item">@Model.Record.Subject</li>
-                            <li class="list-group-item">@Model.Record.MessageDate</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Ownner</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td>@Model.Record.Name</td>
+                            <td><strong>Ownner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Enquiries</strong></td>
+                            <td>@(Model.Record.Enquiry?.OldCaseNumber)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Description</strong></td>
+                            <td>@Model.Record.Description</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>@Model.Record.Email</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status</strong></td>
+                            <td>@Model.Record.Status</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Subject</strong></td>
+                            <td>@Model.Record.Subject</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Message Date</strong></td>
+                            <td>@Model.Record.MessageDate</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
