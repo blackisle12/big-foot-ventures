@@ -1337,7 +1337,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("EmailResponse", model);
+            return View("EmailResponseView", model);
         }
 
         [Route("EmailResponse/New", Name = "EmailResponseNew")]

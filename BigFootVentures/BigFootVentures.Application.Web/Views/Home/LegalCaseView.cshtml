@@ -74,25 +74,25 @@
                         </tr>
                         <tr>
                             <td><strong>Plantiff</strong></td>
-                            <td>@Model.Record.Plaintiff</td>
+                            <td>@(Model.Record.Plaintiff?.DisplayName)</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Defendant</strong></td>
-                            <td>@Model.Record.Defendant</td>
+                            <td>@(Model.Record.Defendant.DisplayName)</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Plantiff Representative</strong></td>
-                            <td>@Model.Record.PlaintiffRepresentative</td>
+                            <td>@(Model.Record.PlaintiffRepresentative?.DisplayName)</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Defendant Representative</strong></td>
-                            <td>@Model.Record.DefendantRepresentative</td>
+                            <td>@(Model.Record.DefendantRepresentative?.DisplayName)</td>
                             <td></td>
                             <td></td>
                         </tr>
