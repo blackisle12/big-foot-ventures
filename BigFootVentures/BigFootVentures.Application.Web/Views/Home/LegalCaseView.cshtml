@@ -29,50 +29,86 @@
                     <h4 class="panel-title">Legal Case Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Type Of Case</strong></li>
-                            <li class="list-group-item"><strong>Type of Case External Clients</strong></li>
-                            <li class="list-group-item"><strong>Trademark</strong></li>
-                            <li class="list-group-item"><strong>Trademark Number</strong></li>
-                            <li class="list-group-item"><strong>Keywords</strong></li>
-                            <li class="list-group-item"><strong>Date Assigned</strong></li>
-                            <li class="list-group-item"><strong>Court Url</strong></li>
-                            <li class="list-group-item"><strong>Plantiff</strong></li>
-                            <li class="list-group-item"><strong>Defendant</strong></li>
-                            <li class="list-group-item"><strong>Plantiff Representative</strong></li>
-                            <li class="list-group-item"><strong>Defendant Representative</strong></li>
-                            <li class="list-group-item"><strong>Deletion Request</strong></li>
-                            <li class="list-group-item"><strong>Deletion Request Reason</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.TypeOfCase</li>
-                            <li class="list-group-item">@Model.Record.TypeOfCaseExternalClients</li>
-                            <li class="list-group-item">@(Model.Record.Trademark?.Name)</li>
-                            <li class="list-group-item">@Model.Record.TrademarkNumber</li>
-                            <li class="list-group-item">@Model.Record.Keywords</li>
-                            <li class="list-group-item">@Model.Record.DateAssigned</li>
-                            <li class="list-group-item">@Model.Record.CourtURL</li>
-                            <li class="list-group-item">@Model.Record.Plaintiff.CompanyName</li>
-                            <li class="list-group-item">@Model.Record.Defendant.CompanyName</li>
-                            <li class="list-group-item">@(Model.Record.PlaintiffRepresentative?.CompanyName)</li>
-                            <li class="list-group-item">@(Model.Record.DefendantRepresentative?.CompanyName)</li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequest ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item">@Model.Record.DeletionRequestReason</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Owner</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.DisplayName</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Type Of Case</strong></td>
+                            <td>@Model.Record.TypeOfCase</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.DisplayName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Type of Case External Clients</strong></td>
+                            <td>@Model.Record.TypeOfCaseExternalClients</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark</strong></td>
+                            <td>@(Model.Record.Trademark?.Name)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Number</strong></td>
+                            <td>@Model.Record.TrademarkNumber</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Keywords</strong></td>
+                            <td>@Model.Record.Keywords</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date Assigned</strong></td>
+                            <td>@Model.Record.DateAssigned</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Court Url</strong></td>
+                            <td>@Model.Record.CourtURL</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Plantiff</strong></td>
+                            <td>@Model.Record.Plaintiff</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Defendant</strong></td>
+                            <td>@Model.Record.Defendant</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Plantiff Representative</strong></td>
+                            <td>@Model.Record.PlaintiffRepresentative</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Defendant Representative</strong></td>
+                            <td>@Model.Record.DefendantRepresentative</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deletion Request</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequest ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deletion Request Reason</strong></td>
+                            <td>@Model.Record.DeletionRequestReason</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->

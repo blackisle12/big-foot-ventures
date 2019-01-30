@@ -29,42 +29,38 @@
                     <h4 class="panel-title">Lead Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Lead Status</strong></li>
-                            <li class="list-group-item"><strong>Name</strong></li>
-                            <li class="list-group-item"><strong>Title</strong></li>
-                            <li class="list-group-item"><strong>Email</strong></li>
-                            <li class="list-group-item"><strong>Phone</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Status</li>
-                            <li class="list-group-item">@Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</li>
-                            <li class="list-group-item">@Model.Record.Title</li>
-                            <li class="list-group-item">@Model.Record.Email</li>
-                            <li class="list-group-item">@Model.Record.Phone</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Lead Owner</strong></li>
-                            <li class="list-group-item"><strong>Company</strong></li>
-                            <li class="list-group-item"><strong>Industry</strong></li>
-                            <li class="list-group-item"><strong>No. of Employees</strong></li>
-                            <li class="list-group-item"><strong>Lead Source</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                            <li class="list-group-item">@Model.Record.Company</li>
-                            <li class="list-group-item">@Model.Record.Industry</li>
-                            <li class="list-group-item">@Model.Record.NoOfEmployees</li>
-                            <li class="list-group-item">@Model.Record.Source</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Lead Status</strong></td>
+                            <td>@Model.Record.Status</td>
+                            <td><strong>Lead Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td>@Model.Record.FirstName @Model.Record.MiddleName @Model.Record.LastName</td>
+                            <td><strong>Company</strong></td>
+                            <td>@Model.Record.Company</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Title</strong></td>
+                            <td>@Model.Record.Title</td>
+                            <td><strong>Industry</strong></td>
+                            <td>@Model.Record.Industry</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>@Model.Record.Email</td>
+                            <td><strong>No. of Employees</strong></td>
+                            <td>@Model.Record.NoOfEmployees</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone</strong></td>
+                            <td>@Model.Record.Phone</td>
+                            <td><strong>Lead Source</strong></td>
+                            <td>@Model.Record.Source</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
@@ -74,16 +70,14 @@
                     <h4 class="panel-title">Address Information</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Address</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Street, @Model.Record.City, @Model.Record.State, @Model.Record.PostalCode @Model.Record.Country</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Address</strong></td>
+                            <td>@Model.Record.Street, @Model.Record.City, @Model.Record.State, @Model.Record.PostalCode @Model.Record.Country</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Address Information -->

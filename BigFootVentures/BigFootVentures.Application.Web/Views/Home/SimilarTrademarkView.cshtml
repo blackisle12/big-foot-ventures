@@ -29,34 +29,32 @@
                     <h4 class="panel-title">Similar Trademark Detail</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Trademark Name</strong></li>
-                            <li class="list-group-item"><strong>Comment</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@(Model.Record.Trademark?.Name)</li>
-                            <li class="list-group-item">@Model.Record.Comment</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Owner</strong></li>
-                            <li class="list-group-item"><strong>Trademark Similar Name</strong></li>
-                            <li class="list-group-item"><strong>Conflict</strong></li>
-                            <li class="list-group-item"><strong>Create Opposition Check</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OwnerName</li>
-                            <li class="list-group-item">@(Model.Record.TrademarkSimilar?.Name)</li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.Conflict ? "checked" : string.Empty) /></li>
-                            <li class="list-group-item"><input type="checkbox" disabled="disabled" @(Model.Record.CreateOppositionCheck ? "checked" : string.Empty) /></li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Trademark Name</strong></td>
+                            <td>@(Model.Record.Trademark?.Name)</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comment</strong></td>
+                            <td>@Model.Record.Comment</td>
+                            <td><strong>Trademark Similar Name</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.Name)</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Conflict</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.Conflict ? "checked" : string.Empty) /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Create Opposition Check</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.CreateOppositionCheck ? "checked" : string.Empty) /></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Information -->
@@ -66,26 +64,14 @@
                     <h4 class="panel-title">System Information</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Class Summary TM</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.ClassSummaryTM</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Class Summary Similar TM</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.ClassSummarySimilarTM</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Class Summary TM</strong></td>
+                            <td>@Model.Record.ClassSummaryTM</td>
+                            <td><strong>Class Summary Similar TM</strong></td>
+                            <td>@Model.Record.ClassSummarySimilarTM</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: System Information -->
@@ -95,30 +81,26 @@
                     <h4 class="panel-title">Potential Opposition</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Remarks</strong></li>
-                            <li class="list-group-item"><strong>Refilling Evaluation</strong></li>
-                            <li class="list-group-item"><strong>Refilling Comment</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.Remarks</li>
-                            <li class="list-group-item">@Model.Record.RefilingEvaluation</li>
-                            <li class="list-group-item">@Model.Record.RefilingComment</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Opposition Evaluation</strong></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="list-group">
-                            <li class="list-group-item">@Model.Record.OppositionEvaluation</li>
-                        </ul>
-                    </div>
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Remarks</strong></td>
+                            <td>@Model.Record.Remarks</td>
+                            <td><strong>Opposition Evaluation</strong></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Refilling Evaluation</strong></td>
+                            <td>@Model.Record.RefilingEvaluation</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Refilling Comment</strong></td>
+                            <td>@Model.Record.RefilingComment</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <!-- END: Potential Opposition -->
