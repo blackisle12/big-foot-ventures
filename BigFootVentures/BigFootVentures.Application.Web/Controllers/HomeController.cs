@@ -1088,11 +1088,6 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var domain = this._managementDomainService.Get(ID);
 
-            if (domain.RegistrantCompany != null)
-            {
-                domain.RegistrantCompany = this._managementCompanyService.Get(domain.RegistrantCompany.ID);
-            }
-
             if (domain.DomainEnquiry != null)
             {
                 domain.DomainEnquiry = this._managementEnquiryService.Get(domain.DomainEnquiry.ID);
@@ -1166,11 +1161,6 @@ namespace BigFootVentures.Application.Web.Controllers
             else
             {
                 var domain = this._managementDomainService.Get(ID);
-
-                if (domain.RegistrantCompany != null)
-                {
-                    domain.RegistrantCompany = this._managementCompanyService.Get(domain.RegistrantCompany.ID);
-                }
 
                 if (domain.DomainEnquiry != null)
                 {
@@ -1347,7 +1337,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("EmailResponse", model);
+            return View("EmailResponseView", model);
         }
 
         [Route("EmailResponse/New", Name = "EmailResponseNew")]

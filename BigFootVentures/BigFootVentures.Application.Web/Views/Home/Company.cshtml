@@ -33,15 +33,12 @@
             <!-- START: Account Information -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Account Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Account Information</h4>
                 </div>
                 <div class="panel-body">
                     <fieldset>
                         @{
-                            if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription())
+                            if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription() || string.IsNullOrWhiteSpace(Model.Record.AccountRecordType))
                             {
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Company Name</label>
@@ -347,7 +344,7 @@
             <!-- END: Deletion Request -->
             <!-- START: Incorporation Information -->
             @{
-                if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription())
+                if (Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.BusinessAccount.ToDescription() || Model.Record.AccountRecordType == ManagementEnums.Company.AccountRecordType.ExternalClient.ToDescription() || string.IsNullOrWhiteSpace(Model.Record.AccountRecordType))
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
