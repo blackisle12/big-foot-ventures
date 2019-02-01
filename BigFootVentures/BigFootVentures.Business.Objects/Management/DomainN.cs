@@ -76,7 +76,7 @@ namespace BigFootVentures.Business.Objects.Management
         {
             get
             {
-                return (this.RegistrantCompany?.BigFootGroup == true || this.RegistrantCompany?.ParentAccount?.DisplayName == "Bigfoot Group");
+                return (this.Registrant?.BigFootGroup == true || this.Registrant?.ParentAccount?.DisplayName == "Bigfoot Group");
             }
         }
         public int DomainLength { get { return !this.Name.Contains(".") ? this.Name.Length : this.Name.Split(new char[] { '.' })[0].Length; } }

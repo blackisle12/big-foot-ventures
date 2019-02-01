@@ -29,13 +29,11 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
         {
             var query = new StringBuilder().Append("SELECT ");
 
-            query.Append("d.*, c.ID AS RegistrantID, c.NAME AS RegistrantName, ");
-            query.Append("rc.ID AS RegistrantCompanyID, rc.NAME AS RegistrantCompanyName, rc.`BIGFOOT GROUP` AS RegistrantCompanyBigFootGroup, p.NAME AS RegistrantCompanyParentAccountName, ");
+            query.Append("d.*, c.ID AS RegistrantID, c.NAME AS RegistrantName, c.`BIGFOOT GROUP` AS RegistrantBigFootGroup, p.NAME AS RegistrantParentAccountName, ");
             query.Append("r.ID AS RegistrarID, r.Name AS RegistrarName ");
             query.Append("FROM DomainN d ");
-            query.Append("LEFT JOIN Company rc ON d.RegistrantCompanyID = rc.ID ");
-            query.Append("LEFT JOIN Company p ON rc.ParentAccountID = p.ID ");
             query.Append("LEFT JOIN Company c ON d.RegistrantID = c.ID ");
+            query.Append("LEFT JOIN Company p ON c.ParentAccountID = p.ID ");
             query.Append("LEFT JOIN Register r ON d.RegistrarID = r.ID ");
             query.Append($"WHERE 0 = 0 ");
 
@@ -46,7 +44,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append("AND (rc.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))
@@ -123,13 +121,11 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
             string version = null, string WHOIS = null, string category = null)
         {
-            query.Append("d.*, c.ID AS RegistrantID, c.NAME AS RegistrantName, ");
-            query.Append("rc.ID AS RegistrantCompanyID, rc.NAME AS RegistrantCompanyName, rc.`BIGFOOT GROUP` AS RegistrantCompanyBigFootGroup, p.NAME AS RegistrantCompanyParentAccountName, ");
+            query.Append("d.*, c.ID AS RegistrantID, c.NAME AS RegistrantName, c.`BIGFOOT GROUP` AS RegistrantBigFootGroup, p.NAME AS RegistrantParentAccountName, ");
             query.Append("r.ID AS RegistrarID, r.Name AS RegistrarName ");
             query.Append("FROM DomainN d ");
-            query.Append("LEFT JOIN Company rc ON d.RegistrantCompanyID = rc.ID ");
-            query.Append("LEFT JOIN Company p ON rc.ParentAccountID = p.ID ");
             query.Append("LEFT JOIN Company c ON d.RegistrantID = c.ID ");
+            query.Append("LEFT JOIN Company p ON c.ParentAccountID = p.ID ");
             query.Append("LEFT JOIN Register r ON d.RegistrarID = r.ID ");
             query.Append($"WHERE 0 = 0 ");
 
@@ -140,7 +136,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append("AND (rc.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))
@@ -215,8 +211,8 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
         {
             query.Append("COUNT(d.ID) INTO @total ");
             query.Append("FROM DomainN d ");
-            query.Append("LEFT JOIN Company rc ON d.RegistrantCompanyID = rc.ID ");
-            query.Append("LEFT JOIN Company p ON rc.ParentAccountID = p.ID ");
+            query.Append("LEFT JOIN Company c ON d.RegistrantID = c.ID ");
+            query.Append("LEFT JOIN Company p ON c.ParentAccountID = p.ID ");
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
@@ -226,7 +222,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append("AND (rc.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))

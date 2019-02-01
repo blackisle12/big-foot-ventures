@@ -1088,6 +1088,11 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var domain = this._managementDomainService.Get(ID);
 
+            if (domain.RegistrantCompany != null)
+            {
+                domain.RegistrantCompany = this._managementCompanyService.Get(domain.RegistrantCompany.ID);
+            }
+
             if (domain.DomainEnquiry != null)
             {
                 domain.DomainEnquiry = this._managementEnquiryService.Get(domain.DomainEnquiry.ID);
@@ -1101,11 +1106,6 @@ namespace BigFootVentures.Application.Web.Controllers
             if (domain.Registrar != null)
             {
                 domain.Registrar = this._managementRegisterService.Get(domain.Registrar.ID);
-            }
-
-            if (domain.Registrant != null)
-            {
-                domain.Registrant = this._managementCompanyService.Get(domain.Registrant.ID);
             }
 
             if (domain.PreviousRegistrant != null)
@@ -1162,6 +1162,11 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 var domain = this._managementDomainService.Get(ID);
 
+                if (domain.RegistrantCompany != null)
+                {
+                    domain.RegistrantCompany = this._managementCompanyService.Get(domain.RegistrantCompany.ID);
+                }
+
                 if (domain.DomainEnquiry != null)
                 {
                     domain.DomainEnquiry = this._managementEnquiryService.Get(domain.DomainEnquiry.ID);
@@ -1175,11 +1180,6 @@ namespace BigFootVentures.Application.Web.Controllers
                 if (domain.Registrar != null)
                 {
                     domain.Registrar = this._managementRegisterService.Get(domain.Registrar.ID);
-                }
-
-                if (domain.Registrant != null)
-                {
-                    domain.Registrant = this._managementCompanyService.Get(domain.Registrant.ID);
                 }
 
                 if (domain.PreviousRegistrant != null)
