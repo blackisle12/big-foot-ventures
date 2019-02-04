@@ -97,8 +97,28 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     ID = (int)dataReader["ID"],
 
                     ReferenceInternal = dataReader["ReferenceInternal"] as string,
-                    ReferenceExternal = dataReader["ReferenceExternal"] as string
+                    ReceiptDate = dataReader["ReceiptDate"] as string,
+                    ReferenceExternal = dataReader["ReferenceExternal"] as string,
+                    SubmissionMethod = dataReader["SubmissionMethod"] as string
                 };
+
+                if (int.TryParse((dataReader["TrademarkID"] as int?)?.ToString(), out int trademarkID))
+                {
+                    entity.Trademark = new Trademark
+                    {
+                        ID = trademarkID,
+                        Name = dataReader["TrademarkName"] as string
+                    };
+                }
+
+                if (int.TryParse((dataReader["ApplicantID"] as int?)?.ToString(), out int applicantID))
+                {
+                    entity.Applicant = new Company
+                    {
+                        ID = applicantID,
+                        DisplayName = dataReader["ApplicantName"] as string
+                    };
+                }
 
                 entities.Add(entity);
             }

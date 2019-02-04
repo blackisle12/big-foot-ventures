@@ -52,7 +52,7 @@
                             <td><strong>Cancellation Payment Date</strong></td>
                             <td>@Model.Record.PaymentDate</td>
                             <td><strong>Cancellation Applicant</strong></td>
-                            <td>@Model.Record.Applicant</td>
+                            <td>@(Model.Record.Applicant?.DisplayName)</td>
                         </tr>
                         <tr>
                             <td><strong>Cancellation Filing Cost</strong></td>

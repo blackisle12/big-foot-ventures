@@ -22,7 +22,13 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-name">Cancellation Reference Internal</th>
+                        <th></th>
+                        <th class="th-reference-internal">Cancellation Reference Internal</th>
+                        <th class="th-trademark-name">Trademark</th>
+                        <th class="th-receipt-date">Cancellation Receipt Date</th>
+                        <th class="th-reference-external">Cancellation Reference External</th>
+                        <th class="th-submission-method">Cancellation Submission Method</th>
+                        <th class="th-applicant-name">Cancellation Applicant</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +36,13 @@
                         foreach (var cancellation in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("CancellationView", new { ID = cancellation.ID })" target="_blank">@cancellation.ReferenceInternal</a></td>
+                                <td><a href="@Url.RouteUrl("CancellationView", new { ID = cancellation.ID })" target="_blank">View</a></td>
+                                <td>@cancellation.ReferenceInternal</td>
+                                <td>@(cancellation.Trademark?.Name)</td>
+                                <td>@cancellation.ReceiptDate</td>
+                                <td>@cancellation.ReferenceExternal</td>
+                                <td>@cancellation.SubmissionMethod</td>
+                                <td>@(cancellation.Applicant?.DisplayName)</td>
                             </tr>
                         }
                     }
