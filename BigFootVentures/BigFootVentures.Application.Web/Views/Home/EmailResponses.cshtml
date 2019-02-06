@@ -22,7 +22,11 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-name">Name</th>
+                        <th class="th-id">ID</th>
+                        <th class="th-subject">Subject</th>
+                        <th class="th-enquiry">Enquiry</th>
+                        <th class="th-status">Status</th>
+                        <th class="th-email">Email</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +34,20 @@
                         foreach (var emailResponse in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("EmailResponseView", new { ID = emailResponse.ID })" target="_blank">@emailResponse.Name</a></td>
+                                <td><a href="@Url.RouteUrl("EmailResponseView", new { ID = emailResponse.ID })" target="_blank">@emailResponse.ID</a></td>
+                                <td>@Html.Raw(emailResponse.Subject)</td>
+                                @{ 
+                                    if (emailResponse.Enquiry != null && emailResponse.Enquiry.ID > 0)
+                                    {
+                                        <td>@Html.Raw(emailResponse.Enquiry.CaseNumber)</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                }
+                                <td>@Html.Raw(emailResponse.Status)</td>
+                                <td>@Html.Raw(emailResponse.Email)</td>
                             </tr>
                         }
                     }

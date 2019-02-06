@@ -269,13 +269,14 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             file.Append("Language Second,Geography,Involved in Revocation,BigFoot Group Owned,Open Similarity Research Task,Initial Submitter,Last Similarity Research Completed On,");
             file.Append("Opposition Research,Similar Trademark Spellings,WIPO Designated Protection,ARIPO Designated State,Trademark Name English Translation,WIPO Basic Application ISO,");
             file.Append("WIPO Basic Application Filing Date,WIPO Basic Application Number,Payment Status Registered LV,Acceptance Due Date,Comments LV,LV Appeal Deadline,Reason for the Refusal LV,");
-            file.Append("Class1,Class1Description,Class2,Class2Description,Class3,Class3Description,Class4,Class4Description,Class5,Class5Description,Class6,Class6Description,Class7,Class7Description,");
-            file.Append("Class8,Class8Description,Class9,Class9Description,Class10,Class10Description,Class11,Class11Description,Class12,Class12Description,Class13,Class13Description,Class14,Class14Description,");
-            file.Append("Class15,Class15Description,Class16,Class16Description,Class17,Class17Description,Class18,Class18Description,Class19,Class19Description,Class20,Class20Description,Class21,Class21Description,");
-            file.Append("Class22,Class22Description,Class23,Class23Description,Class24,Class24Description,Class25,Class25Description,Class26,Class26Description,Class27,Class27Description,Class28,Class28Description,");
-            file.Append("Class29,Class29Description,Class30,Class30Description,Class31,Class31Description,Class32,Class32Description,Class33,Class33Description,Class34,Class34Description,Class35,Class35Description,");
-            file.Append("Class36,Class36Description,Class37,Class37Description,Class38,Class38Description,Class39,Class39Description,Class40,Class40Description,Class41,Class41Description,Class42,Class42Description,");
-            file.Append("Class43,Class43Description,Class44,Class44Description,Class45,Class45Description,Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
+            //file.Append("Class1,Class1Description,Class2,Class2Description,Class3,Class3Description,Class4,Class4Description,Class5,Class5Description,Class6,Class6Description,Class7,Class7Description,");
+            //file.Append("Class8,Class8Description,Class9,Class9Description,Class10,Class10Description,Class11,Class11Description,Class12,Class12Description,Class13,Class13Description,Class14,Class14Description,");
+            //file.Append("Class15,Class15Description,Class16,Class16Description,Class17,Class17Description,Class18,Class18Description,Class19,Class19Description,Class20,Class20Description,Class21,Class21Description,");
+            //file.Append("Class22,Class22Description,Class23,Class23Description,Class24,Class24Description,Class25,Class25Description,Class26,Class26Description,Class27,Class27Description,Class28,Class28Description,");
+            //file.Append("Class29,Class29Description,Class30,Class30Description,Class31,Class31Description,Class32,Class32Description,Class33,Class33Description,Class34,Class34Description,Class35,Class35Description,");
+            //file.Append("Class36,Class36Description,Class37,Class37Description,Class38,Class38Description,Class39,Class39Description,Class40,Class40Description,Class41,Class41Description,Class42,Class42Description,");
+            //file.Append("Class43,Class43Description,Class44,Class44Description,Class45,Class45Description,Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
+            file.Append("Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
             file.Append("Owner Defense,Source Name,BF Strategy,Strategy Notes,Name Value,Cancel Buy Budget,Revocation Reference External,Invalidity Number,Invalidity Invoked Ground,Invalidity Date,Invalidity Action Outcome,");
             file.Append("Letter Reference,Letter Origin,Letter Sending Method,Letter Sent On,Owner Response Deadline,Letter Outcome");
             file.Append(Environment.NewLine);
@@ -339,11 +340,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 file.Append(DataUtils.EscapeCSV($"{dataReader["LVAppealDeadline"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["ReasonForTheRefusalLV"] as string}") + ",");
 
-                for (var i = 1; i <= 45; i++)
-                {
-                    file.Append(DataUtils.EscapeCSV($"{(dataReader[$"Class{i}"] as sbyte? ?? 0) == 1}") + ",");
-                    file.Append(DataUtils.EscapeCSV($"{dataReader[$"Class{i}Description"] as string}") + ",");
-                }
+                //for (var i = 1; i <= 45; i++)
+                //{
+                //    file.Append(DataUtils.EscapeCSV($"{(dataReader[$"Class{i}"] as sbyte? ?? 0) == 1}") + ",");
+                //    file.Append(DataUtils.EscapeCSV($"{dataReader[$"Class{i}Description"] as string}") + ",");
+                //}
 
                 file.Append(DataUtils.EscapeCSV($"{dataReader["ResearcherName"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["CancellationStrategy"] as string}") + ",");

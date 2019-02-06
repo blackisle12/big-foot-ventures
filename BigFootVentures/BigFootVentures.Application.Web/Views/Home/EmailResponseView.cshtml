@@ -16,7 +16,7 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are viewing EmailResponse <strong>@Model.Record.Name</strong>
+                You are viewing EmailResponse <strong>@Html.Raw(Model.Record.Name)</strong>
             </span>
             <span class="panel-title pull-right">
                 <i class="fa fa-eye"></i>
@@ -32,43 +32,43 @@
                     <table class="table table-view">
                         <tr>
                             <td><strong>Name</strong></td>
-                            <td>@Model.Record.Name</td>
+                            <td>@Html.Raw(Model.Record.Name)</td>
                             <td><strong>Owner</strong></td>
-                            <td>@Model.Record.OwnerName</td>
+                            <td>@Html.Raw(Model.Record.OwnerName)</td>
                         </tr>
                         <tr>
                             <td><strong>Enquiries</strong></td>
-                            <td>@(Model.Record.Enquiry?.OldCaseNumber)</td>
+                            <td>@(Html.Raw(Model.Record.Enquiry?.CaseNumber))</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Description</strong></td>
-                            <td>@Model.Record.Description</td>
+                            <td>@Html.Raw(Model.Record.Description)</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Email</strong></td>
-                            <td>@Model.Record.Email</td>
+                            <td>@Html.Raw(Model.Record.Email)</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Status</strong></td>
-                            <td>@Model.Record.Status</td>
+                            <td>@Html.Raw(Model.Record.Status)</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Subject</strong></td>
-                            <td>@Model.Record.Subject</td>
+                            <td>@Html.Raw(Model.Record.Subject)</td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Message Date</strong></td>
-                            <td>@Model.Record.MessageDate</td>
+                            <td>@Html.Raw(Model.Record.MessageDate)</td>
                             <td></td>
                             <td></td>
                         </tr>

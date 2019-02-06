@@ -116,7 +116,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
         #endregion
 
-         #region "Private Methods"
+        #region "Private Methods"
 
         private static StringBuilder BuildQuery(StringBuilder query, int startIndex, int rowCount,
             string referenceInternal = null, string referenceExternal = null, string sentOrigin = null, string internalCaseNumber = null, string submissionMethod = null, string applicant = null,

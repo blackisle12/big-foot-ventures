@@ -24,7 +24,7 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are @(Model.Record.ID > 0 ? "editing" : "creating new") Email Response <strong>@Model.Record.Name</strong>
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new") Email Response <strong>@Html.Raw(Model.Record.Name)</strong>
             </span>
             <span class="panel-title pull-right">
                 <i class="fa fa-edit"></i>

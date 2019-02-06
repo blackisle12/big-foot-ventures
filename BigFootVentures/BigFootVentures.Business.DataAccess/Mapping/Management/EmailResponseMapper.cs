@@ -51,8 +51,15 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     ID = (int)dataReader["ID"],
 
-                    Name = dataReader["Name"] as string,
+                    Email = dataReader["Email"] as string,
+                    Status = dataReader["Status"] as string,
+                    Subject = dataReader["Subject"] as string,
                 };
+
+                if (int.TryParse((dataReader["EnquiryID"] as int?)?.ToString(), out int enquiryID))
+                {
+                    entity.Enquiry = new Enquiry { ID = enquiryID };
+                }
 
                 entities.Add(entity);
             }

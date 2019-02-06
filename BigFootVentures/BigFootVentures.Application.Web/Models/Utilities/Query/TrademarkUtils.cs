@@ -44,6 +44,26 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             var query = new StringBuilder().Append("SELECT ");
 
             query.Append("T.*, ");
+            //query.Append("T1.Class1, T1.Class1Description, T1.Class2, T1.Class2Description, T1.Class3, T1.Class3Description, ");
+            //query.Append("T1.Class4, T1.Class4Description, T1.Class5, T1.Class5Description, T1.Class6, T1.Class6Description, ");
+            //query.Append("T1.Class7, T1.Class7Description, T1.Class8, T1.Class8Description, T1.Class9, T1.Class9Description, ");
+            //query.Append("T1.Class10, T1.Class10Description, T2.Class11, T1.Class11Description, T1.Class12, T1.Class12Description, ");
+            //query.Append("T2.Class13, T2.Class13Description, T2.Class14, T2.Class14Description, T2.Class15, T2.Class15Description, ");
+            //query.Append("T2.Class16, T2.Class16Description, T2.Class17, T2.Class17Description, T2.Class18, T2.Class18Description, ");
+            //query.Append("T2.Class19, T2.Class19Description, T2.Class20, T2.Class20Description, T3.Class21, T3.Class21Description, ");
+            //query.Append("T3.Class22, T3.Class22Description, T3.Class23, T3.Class23Description, T3.Class24, T3.Class24Description, ");
+            //query.Append("T3.Class25, T3.Class25Description, T3.Class26, T3.Class26Description, T3.Class27, T3.Class27Description, ");
+            //query.Append("T3.Class28, T3.Class28Description, T3.Class29, T3.Class29Description, T3.Class30, T3.Class30Description, ");
+            //query.Append("T4.Class31, T4.Class31Description, T4.Class32, T4.Class32Description, T4.Class33, T4.Class33Description, ");
+            //query.Append("T4.Class34, T4.Class34Description, T4.Class35, T4.Class35Description, T4.Class36, T4.Class36Description, ");
+            //query.Append("T4.Class37, T4.Class37Description, T4.Class38, T4.Class38Description, T4.Class39, T4.Class39Description, ");
+            //query.Append("T4.Class40, T4.Class40Description, T5.Class41, T5.Class41Description, T5.Class42, T5.Class42Description, ");
+            //query.Append("T5.Class43, T5.Class43Description, T5.Class44, T5.Class44Description, T5.Class45, T5.Class45Description, ");
+            query.Append("T6.ResearcherName, T6.TMWebsiteID, T6.OwnerWebsiteID, T6.ComWebsiteID, T6.CancellationStrategy, T6.MarkUse, ");
+            query.Append("T6.CompetingMarks, T6.CompetingMark, T6.CancelResearcherComments, T6.OwnerDefense, T6.SourceName, T6.BFStrategy, ");
+            query.Append("T6.StrategyNotes, T6.NameValue, T6.CancelBuyBudget, T6.RevocationReferenceExternal, T6.InvalidityNumber, ");
+            query.Append("T6.InvalidityApplicantID, T6.InvalidityInvokedGround, T6.InvalidityDate, T6.InvalidityActionOutcome, ");
+            query.Append("T6.LetterReference, T6.LetterOrigin, T6.LetterSendingMethod, T6.LetterSentOn, T6.OwnerResponseDeadline, T6.LetterOutcome, ");
             query.Append("O.OfficeName AS OfficeName, ");
             query.Append("B.NAME AS BrandName, ");
             query.Append("OO.OfficeName AS OriginalOfficeName, ");
@@ -51,12 +71,18 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             query.Append("DD.Name AS OwnerWebsiteName, ");
             query.Append("DDD.Name AS ComWebsiteName ");
             query.Append("FROM Trademark T ");
+            //query.Append("LEFT JOIN TrademarkExtra T1 ON T.ID = T1.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra2 T2 ON T.ID = T2.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra3 T3 ON T.ID = T3.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra4 T4 ON T.ID = T4.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra5 T5 ON T.ID = T5.ID ");
+            query.Append("LEFT JOIN TrademarkExtra6 T6 ON T.ID = T6.ID ");
             query.Append("LEFT JOIN Office O ON T.OfficeID = O.ID ");
             query.Append("LEFT JOIN Brand B ON T.BrandID = B.ID ");
             query.Append("LEFT JOIN Office OO ON T.OriginalOfficeID = OO.ID ");
-            query.Append("LEFT JOIN DomainN D ON T.TMWebsiteID = D.ID ");
-            query.Append("LEFT JOIN DomainN DD ON T.OwnerWebsiteID = DD.ID ");
-            query.Append("LEFT JOIN DomainN DDD ON T.ComWebsiteID = DDD.ID ");
+            query.Append("LEFT JOIN DomainN D ON T6.TMWebsiteID = D.ID ");
+            query.Append("LEFT JOIN DomainN DD ON T6.OwnerWebsiteID = DD.ID ");
+            query.Append("LEFT JOIN DomainN DDD ON T6.ComWebsiteID = DDD.ID ");
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
@@ -97,40 +123,40 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch}%' ");
 
             if (!string.IsNullOrWhiteSpace(researcherName))
-                query.Append($"AND T.ResearcherName LIKE '%{researcherName}%' ");
+                query.Append($"AND T6.ResearcherName LIKE '%{researcherName}%' ");
             if (!string.IsNullOrWhiteSpace(markUse))
-                query.Append($"AND T.MarkUse LIKE '%{markUse}%' ");
+                query.Append($"AND T6.MarkUse LIKE '%{markUse}%' ");
             if (!string.IsNullOrWhiteSpace(TMWebsite))
-                query.Append($"AND T.TMWebsite LIKE '%{TMWebsite}%' ");
+                query.Append($"AND T6.TMWebsite LIKE '%{TMWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(competingMarks))
-                query.Append($"AND T.CompetingMarks = {competingMarks} ");
+                query.Append($"AND T6.CompetingMarks = {competingMarks} ");
             if (!string.IsNullOrWhiteSpace(ownerWebsite))
-                query.Append($"AND T.OwnerWebsite LIKE '%{ownerWebsite}%' ");
+                query.Append($"AND T6.OwnerWebsite LIKE '%{ownerWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(cancellationStrategy))
-                query.Append($"AND T.CancellationStrategy LIKE '%{cancellationStrategy}%' ");
+                query.Append($"AND T6.CancellationStrategy LIKE '%{cancellationStrategy}%' ");
             if (!string.IsNullOrWhiteSpace(comWebsite))
-                query.Append($"AND T.ComWebsite LIKE '%{comWebsite}%' ");
+                query.Append($"AND T6.ComWebsite LIKE '%{comWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(ownerDefense))
-                query.Append($"AND T.OwnerDefense LIKE '%{ownerDefense}%' ");
+                query.Append($"AND T6.OwnerDefense LIKE '%{ownerDefense}%' ");
 
             if (!string.IsNullOrWhiteSpace(BFStrategy))
-                query.Append($"AND T.BFStrategy LIKE '%{BFStrategy}%' ");
+                query.Append($"AND T6.BFStrategy LIKE '%{BFStrategy}%' ");
             if (!string.IsNullOrWhiteSpace(nameValue))
-                query.Append($"AND T.NameValue LIKE '%{nameValue}%' ");
+                query.Append($"AND T6.NameValue LIKE '%{nameValue}%' ");
 
             if (!string.IsNullOrWhiteSpace(invalidityNumber))
-                query.Append($"AND T.InvalidityNumber LIKE '%{invalidityNumber}%' ");
+                query.Append($"AND T6.InvalidityNumber LIKE '%{invalidityNumber}%' ");
             if (!string.IsNullOrWhiteSpace(invalidityActionOutcome))
-                query.Append($"AND T.InvalidityActionOutcome LIKE '%{invalidityActionOutcome}%' ");
+                query.Append($"AND T6.InvalidityActionOutcome LIKE '%{invalidityActionOutcome}%' ");
 
             if (!string.IsNullOrWhiteSpace(letterReference))
-                query.Append($"AND T.LetterReference LIKE '%{letterReference}%' ");
+                query.Append($"AND T6.LetterReference LIKE '%{letterReference}%' ");
             if (!string.IsNullOrWhiteSpace(letterOrigin))
-                query.Append($"AND T.LetterOrigin LIKE '%{letterOrigin}%' ");
+                query.Append($"AND T6.LetterOrigin LIKE '%{letterOrigin}%' ");
             if (!string.IsNullOrWhiteSpace(letterSendingMethod))
-                query.Append($"AND T.LetterSendingMethod LIKE '%{letterSendingMethod}%' ");
+                query.Append($"AND T6.LetterSendingMethod LIKE '%{letterSendingMethod}%' ");
             if (!string.IsNullOrWhiteSpace(letterOutcome))
-                query.Append($"AND T.LetterOutcome LIKE '%{letterOutcome}%' ");
+                query.Append($"AND T6.LetterOutcome LIKE '%{letterOutcome}%' ");
 
             query.Append("ORDER BY T.Name");
 
@@ -151,6 +177,26 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             string letterOrigin = null, string letterSendingMethod = null, string letterOutcome = null)
         {
             query.Append("T.*, ");
+            //query.Append("T1.Class1, T1.Class1Description, T1.Class2, T1.Class2Description, T1.Class3, T1.Class3Description, ");
+            //query.Append("T1.Class4, T1.Class4Description, T1.Class5, T1.Class5Description, T1.Class6, T1.Class6Description, ");
+            //query.Append("T1.Class7, T1.Class7Description, T1.Class8, T1.Class8Description, T1.Class9, T1.Class9Description, ");
+            //query.Append("T1.Class10, T1.Class10Description, T2.Class11, T1.Class11Description, T1.Class12, T1.Class12Description, ");
+            //query.Append("T2.Class13, T2.Class13Description, T2.Class14, T2.Class14Description, T2.Class15, T2.Class15Description, ");
+            //query.Append("T2.Class16, T2.Class16Description, T2.Class17, T2.Class17Description, T2.Class18, T2.Class18Description, ");
+            //query.Append("T2.Class19, T2.Class19Description, T2.Class20, T2.Class20Description, T3.Class21, T3.Class21Description, ");
+            //query.Append("T3.Class22, T3.Class22Description, T3.Class23, T3.Class23Description, T3.Class24, T3.Class24Description, ");
+            //query.Append("T3.Class25, T3.Class25Description, T3.Class26, T3.Class26Description, T3.Class27, T3.Class27Description, ");
+            //query.Append("T3.Class28, T3.Class28Description, T3.Class29, T3.Class29Description, T3.Class30, T3.Class30Description, ");
+            //query.Append("T4.Class31, T4.Class31Description, T4.Class32, T4.Class32Description, T4.Class33, T4.Class33Description, ");
+            //query.Append("T4.Class34, T4.Class34Description, T4.Class35, T4.Class35Description, T4.Class36, T4.Class36Description, ");
+            //query.Append("T4.Class37, T4.Class37Description, T4.Class38, T4.Class38Description, T4.Class39, T4.Class39Description, ");
+            //query.Append("T4.Class40, T4.Class40Description, T5.Class41, T5.Class41Description, T5.Class42, T5.Class42Description, ");
+            //query.Append("T5.Class43, T5.Class43Description, T5.Class44, T5.Class44Description, T5.Class45, T5.Class45Description, ");
+            //query.Append("T6.ResearcherName, T6.TMWebsiteID, T6.OwnerWebsiteID, T6.ComWebsiteID, T6.CancellationStrategy, T6.MarkUse, ");
+            //query.Append("T6.CompetingMarks, T6.CompetingMark, T6.CancelResearcherComments, T6.OwnerDefense, T6.SourceName, T6.BFStrategy, ");
+            //query.Append("T6.StrategyNotes, T6.NameValue, T6.CancelBuyBudget, T6.RevocationReferenceExternal, T6.InvalidityNumber, ");
+            //query.Append("T6.InvalidityApplicantID, T6.InvalidityInvokedGround, T6.InvalidityDate, T6.InvalidityActionOutcome, ");
+            //query.Append("T6.LetterReference, T6.LetterOrigin, T6.LetterSendingMethod, T6.LetterSentOn, T6.OwnerResponseDeadline, T6.LetterOutcome, ");
             query.Append("O.OfficeName AS OfficeName, ");
             query.Append("B.NAME AS BrandName, ");
             query.Append("OO.OfficeName AS OriginalOfficeName, ");
@@ -158,12 +204,18 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             query.Append("DD.Name AS OwnerWebsiteName, ");
             query.Append("DDD.Name AS ComWebsiteName ");
             query.Append("FROM Trademark T ");
+            //query.Append("LEFT JOIN TrademarkExtra T1 ON T.ID = T1.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra2 T2 ON T.ID = T2.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra3 T3 ON T.ID = T3.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra4 T4 ON T.ID = T4.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra5 T5 ON T.ID = T5.ID ");
+            query.Append("LEFT JOIN TrademarkExtra6 T6 ON T.ID = T6.ID ");
             query.Append("LEFT JOIN Office O ON T.OfficeID = O.ID ");
             query.Append("LEFT JOIN Brand B ON T.BrandID = B.ID ");
             query.Append("LEFT JOIN Office OO ON T.OriginalOfficeID = OO.ID ");
-            query.Append("LEFT JOIN DomainN D ON T.TMWebsiteID = D.ID ");
-            query.Append("LEFT JOIN DomainN DD ON T.OwnerWebsiteID = DD.ID ");
-            query.Append("LEFT JOIN DomainN DDD ON T.ComWebsiteID = DDD.ID ");
+            query.Append("LEFT JOIN DomainN D ON T6.TMWebsiteID = D.ID ");
+            query.Append("LEFT JOIN DomainN DD ON T6.OwnerWebsiteID = DD.ID ");
+            query.Append("LEFT JOIN DomainN DDD ON T6.ComWebsiteID = DDD.ID ");
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
@@ -204,40 +256,40 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch}%' ");
 
             if (!string.IsNullOrWhiteSpace(researcherName))
-                query.Append($"AND T.ResearcherName LIKE '%{researcherName}%' ");
+                query.Append($"AND T6.ResearcherName LIKE '%{researcherName}%' ");
             if (!string.IsNullOrWhiteSpace(markUse))
-                query.Append($"AND T.MarkUse LIKE '%{markUse}%' ");
+                query.Append($"AND T6.MarkUse LIKE '%{markUse}%' ");
             if (!string.IsNullOrWhiteSpace(TMWebsite))
-                query.Append($"AND T.TMWebsite LIKE '%{TMWebsite}%' ");
+                query.Append($"AND T6.TMWebsite LIKE '%{TMWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(competingMarks))
-                query.Append($"AND T.CompetingMarks = {competingMarks} ");
+                query.Append($"AND T6.CompetingMarks = {competingMarks} ");
             if (!string.IsNullOrWhiteSpace(ownerWebsite))
-                query.Append($"AND T.OwnerWebsite LIKE '%{ownerWebsite}%' ");
+                query.Append($"AND T6.OwnerWebsite LIKE '%{ownerWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(cancellationStrategy))
-                query.Append($"AND T.CancellationStrategy LIKE '%{cancellationStrategy}%' ");
+                query.Append($"AND T6.CancellationStrategy LIKE '%{cancellationStrategy}%' ");
             if (!string.IsNullOrWhiteSpace(comWebsite))
-                query.Append($"AND T.ComWebsite LIKE '%{comWebsite}%' ");
+                query.Append($"AND T6.ComWebsite LIKE '%{comWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(ownerDefense))
-                query.Append($"AND T.OwnerDefense LIKE '%{ownerDefense}%' ");
+                query.Append($"AND T6.OwnerDefense LIKE '%{ownerDefense}%' ");
 
             if (!string.IsNullOrWhiteSpace(BFStrategy))
-                query.Append($"AND T.BFStrategy LIKE '%{BFStrategy}%' ");
+                query.Append($"AND T6.BFStrategy LIKE '%{BFStrategy}%' ");
             if (!string.IsNullOrWhiteSpace(nameValue))
-                query.Append($"AND T.NameValue LIKE '%{nameValue}%' ");
+                query.Append($"AND T6.NameValue LIKE '%{nameValue}%' ");
 
             if (!string.IsNullOrWhiteSpace(invalidityNumber))
-                query.Append($"AND T.InvalidityNumber LIKE '%{invalidityNumber}%' ");
+                query.Append($"AND T6.InvalidityNumber LIKE '%{invalidityNumber}%' ");
             if (!string.IsNullOrWhiteSpace(invalidityActionOutcome))
-                query.Append($"AND T.InvalidityActionOutcome LIKE '%{invalidityActionOutcome}%' ");
+                query.Append($"AND T6.InvalidityActionOutcome LIKE '%{invalidityActionOutcome}%' ");
 
             if (!string.IsNullOrWhiteSpace(letterReference))
-                query.Append($"AND T.LetterReference LIKE '%{letterReference}%' ");
+                query.Append($"AND T6.LetterReference LIKE '%{letterReference}%' ");
             if (!string.IsNullOrWhiteSpace(letterOrigin))
-                query.Append($"AND T.LetterOrigin LIKE '%{letterOrigin}%' ");
+                query.Append($"AND T6.LetterOrigin LIKE '%{letterOrigin}%' ");
             if (!string.IsNullOrWhiteSpace(letterSendingMethod))
-                query.Append($"AND T.LetterSendingMethod LIKE '%{letterSendingMethod}%' ");
+                query.Append($"AND T6.LetterSendingMethod LIKE '%{letterSendingMethod}%' ");
             if (!string.IsNullOrWhiteSpace(letterOutcome))
-                query.Append($"AND T.LetterOutcome LIKE '%{letterOutcome}%' ");
+                query.Append($"AND T6.LetterOutcome LIKE '%{letterOutcome}%' ");
 
             query.Append($"ORDER BY T.Name LIMIT {startIndex},{rowCount}");
 
@@ -255,12 +307,18 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
         {
             query.Append("COUNT(T.ID) INTO @total ");
             query.Append("FROM Trademark T ");
+            //query.Append("LEFT JOIN TrademarkExtra T1 ON T.ID = T1.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra2 T2 ON T.ID = T2.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra3 T3 ON T.ID = T3.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra4 T4 ON T.ID = T4.ID ");
+            //query.Append("LEFT JOIN TrademarkExtra5 T5 ON T.ID = T5.ID ");
+            query.Append("LEFT JOIN TrademarkExtra6 T6 ON T.ID = T6.ID ");
             query.Append("LEFT JOIN Office O ON T.OfficeID = O.ID ");
             query.Append("LEFT JOIN Brand B ON T.BrandID = B.ID ");
             query.Append("LEFT JOIN Office OO ON T.OriginalOfficeID = OO.ID ");
-            query.Append("LEFT JOIN DomainN D ON T.TMWebsiteID = D.ID ");
-            query.Append("LEFT JOIN DomainN DD ON T.OwnerWebsiteID = DD.ID ");
-            query.Append("LEFT JOIN DomainN DDD ON T.ComWebsiteID = DDD.ID ");
+            query.Append("LEFT JOIN DomainN D ON T6.TMWebsiteID = D.ID ");
+            query.Append("LEFT JOIN DomainN DD ON T6.OwnerWebsiteID = DD.ID ");
+            query.Append("LEFT JOIN DomainN DDD ON T6.ComWebsiteID = DDD.ID ");
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
@@ -301,40 +359,40 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch}%' ");
 
             if (!string.IsNullOrWhiteSpace(researcherName))
-                query.Append($"AND T.ResearcherName LIKE '%{researcherName}%' ");
+                query.Append($"AND T6.ResearcherName LIKE '%{researcherName}%' ");
             if (!string.IsNullOrWhiteSpace(markUse))
-                query.Append($"AND T.MarkUse LIKE '%{markUse}%' ");
+                query.Append($"AND T6.MarkUse LIKE '%{markUse}%' ");
             if (!string.IsNullOrWhiteSpace(TMWebsite))
-                query.Append($"AND T.TMWebsite LIKE '%{TMWebsite}%' ");
+                query.Append($"AND T6.TMWebsite LIKE '%{TMWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(competingMarks))
-                query.Append($"AND T.CompetingMarks = {competingMarks} ");
+                query.Append($"AND T6.CompetingMarks = {competingMarks} ");
             if (!string.IsNullOrWhiteSpace(ownerWebsite))
-                query.Append($"AND T.OwnerWebsite LIKE '%{ownerWebsite}%' ");
+                query.Append($"AND T6.OwnerWebsite LIKE '%{ownerWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(cancellationStrategy))
-                query.Append($"AND T.CancellationStrategy LIKE '%{cancellationStrategy}%' ");
+                query.Append($"AND T6.CancellationStrategy LIKE '%{cancellationStrategy}%' ");
             if (!string.IsNullOrWhiteSpace(comWebsite))
-                query.Append($"AND T.ComWebsite LIKE '%{comWebsite}%' ");
+                query.Append($"AND T6.ComWebsite LIKE '%{comWebsite}%' ");
             if (!string.IsNullOrWhiteSpace(ownerDefense))
-                query.Append($"AND T.OwnerDefense LIKE '%{ownerDefense}%' ");
+                query.Append($"AND T6.OwnerDefense LIKE '%{ownerDefense}%' ");
 
             if (!string.IsNullOrWhiteSpace(BFStrategy))
-                query.Append($"AND T.BFStrategy LIKE '%{BFStrategy}%' ");
+                query.Append($"AND T6.BFStrategy LIKE '%{BFStrategy}%' ");
             if (!string.IsNullOrWhiteSpace(nameValue))
-                query.Append($"AND T.NameValue LIKE '%{nameValue}%' ");
+                query.Append($"AND T6.NameValue LIKE '%{nameValue}%' ");
 
             if (!string.IsNullOrWhiteSpace(invalidityNumber))
-                query.Append($"AND T.InvalidityNumber LIKE '%{invalidityNumber}%' ");
+                query.Append($"AND T6.InvalidityNumber LIKE '%{invalidityNumber}%' ");
             if (!string.IsNullOrWhiteSpace(invalidityActionOutcome))
-                query.Append($"AND T.InvalidityActionOutcome LIKE '%{invalidityActionOutcome}%' ");
+                query.Append($"AND T6.InvalidityActionOutcome LIKE '%{invalidityActionOutcome}%' ");
 
             if (!string.IsNullOrWhiteSpace(letterReference))
-                query.Append($"AND T.LetterReference LIKE '%{letterReference}%' ");
+                query.Append($"AND T6.LetterReference LIKE '%{letterReference}%' ");
             if (!string.IsNullOrWhiteSpace(letterOrigin))
-                query.Append($"AND T.LetterOrigin LIKE '%{letterOrigin}%' ");
+                query.Append($"AND T6.LetterOrigin LIKE '%{letterOrigin}%' ");
             if (!string.IsNullOrWhiteSpace(letterSendingMethod))
-                query.Append($"AND T.LetterSendingMethod LIKE '%{letterSendingMethod}%' ");
+                query.Append($"AND T6.LetterSendingMethod LIKE '%{letterSendingMethod}%' ");
             if (!string.IsNullOrWhiteSpace(letterOutcome))
-                query.Append($"AND T.LetterOutcome LIKE '%{letterOutcome}%' ");
+                query.Append($"AND T6.LetterOutcome LIKE '%{letterOutcome}%' ");
 
             return query;
         }
