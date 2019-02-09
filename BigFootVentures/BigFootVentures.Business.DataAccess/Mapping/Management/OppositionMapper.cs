@@ -158,8 +158,71 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     ID = (int)dataReader["ID"],
 
-                    OppositionName = dataReader["OppositionName"] as string
+                    OppositionName = dataReader["OppositionName"] as string,
+
+                    TrademarkRoleA = dataReader["TrademarkRoleA"] as string,
+                    TrademarkRoleD = dataReader["TrademarkRoleD"] as string
                 };
+
+                if (int.TryParse((dataReader["TrademarkNameA"] as int?)?.ToString(), out int trademarkNameA))
+                {
+                    if (trademarkNameA > 0)
+                    {
+                        entity.TrademarkNameA = new Trademark
+                        {
+                            ID = trademarkNameA,
+                            Name = dataReader["TrademarkNameAName"] as string,
+                            TrademarkNumber = dataReader["TrademarkNameATrademarkNumber"] as string,
+                            Office = new Office
+                            {
+                                OfficeName = dataReader["TrademarkNameAOfficeName"] as string
+                            },
+                            BigfootGroupOwned = dataReader["TrademarkNameABigFootGroupOwned"] as string
+                        };
+                    }
+                }
+
+                if (int.TryParse((dataReader["TrademarkNameD"] as int?)?.ToString(), out int trademarkNameD))
+                {
+                    if (trademarkNameD > 0)
+                    {
+                        entity.TrademarkNameD = new Trademark
+                        {
+                            ID = trademarkNameD,
+                            Name = dataReader["TrademarkNameDName"] as string,
+                            TrademarkNumber = dataReader["TrademarkNameDTrademarkNumber"] as string,
+                            Office = new Office
+                            {
+                                OfficeName = dataReader["TrademarkNameDOfficeName"] as string
+                            },
+                            BigfootGroupOwned = dataReader["TrademarkNameDBigFootGroupOwned"] as string
+                        };
+                    }
+                }
+
+                if (int.TryParse((dataReader["OwnerApplicantsRepresentative"] as int?)?.ToString(), out int ownerApplicantsRepresentative))
+                {
+                    if (ownerApplicantsRepresentative > 0)
+                    {
+                        entity.OwnerApplicantsRepresentative = new Company
+                        {
+                            ID = ownerApplicantsRepresentative,
+                            CompanyName = dataReader["OwnerApplicantsRepresentativeName"] as string
+                        };
+                    }
+                }
+
+                if (int.TryParse((dataReader["OpponentsRepresentative"] as int?)?.ToString(), out int opponentsRepresentative))
+                {
+                    if (opponentsRepresentative > 0)
+                    {
+                        entity.OpponentsRepresentative = new Company
+                        {
+                            ID = opponentsRepresentative,
+                            CompanyName = dataReader["OpponentsRepresentativeName"] as string
+                        };
+                    }
+                }
 
                 entities.Add(entity);
             }

@@ -23,15 +23,39 @@
                 <thead>
                     <tr class="th-bg">
                         <th class="th-opposition-name">Opposition Name</th>
+                        <th class="th-trademark-a-role">Trademark Role</th>
+                        <th class="th-trademark-a-bigfoot-group-owned">Trademark Bigfoot Group Owned</th>
+                        <th class="th-trademark-a-name">Trademark Name</th>
+                        <th class="th-trademark-a-trademark-number">Trademark Number</th>
+                        <th class="th-trademark-a-office">Trademark Office</th>
+                        <th class="th-owner-applicants-representative">Owner/Applicant's Representative</th>
+                        <th class="th-trademark-d-role">Trademark Role</th>
+                        <th class="th-trademark-d-bigfoot-group-owned">Trademark Bigfoot Group Owned</th>
+                        <th class="th-trademark-d-name">Trademark Name</th>
+                        <th class="th-trademark-d-trademark-number">Trademark Number</th>
+                        <th class="th-trademark-d-office">Trademark Office</th>
+                        <th class="th-opponents-representative">Opponent's Representative</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{
                         foreach (var opposition in Model.Records)
                         {
-                            <tr>
-                                <td><a href="@Url.RouteUrl("OppositionView", new { ID = opposition.ID })" target="_blank">@opposition.OppositionName</a></td>
-                            </tr>
+                    <tr>
+                        <td><a href="@Url.RouteUrl("OppositionView", new { ID = opposition.ID })" target="_blank">@opposition.OppositionName</a></td>
+                        <td>@opposition.TrademarkRoleA</td>
+                        <td>@(opposition.TrademarkNameA?.BigfootGroupOwned)</td>
+                        <td>@(opposition.TrademarkNameA?.Name)</td>
+                        <td>@(opposition.TrademarkNameA?.TrademarkNumber)</td>
+                        <td>@(opposition.TrademarkNameA?.Office?.OfficeName)</td>
+                        <td>@(opposition.OwnerApplicantsRepresentative?.CompanyName)</td>
+                        <td>@opposition.TrademarkRoleD</td>
+                        <td>@(opposition.TrademarkNameD?.BigfootGroupOwned)</td>
+                        <td>@(opposition.TrademarkNameD?.Name)</td>
+                        <td>@(opposition.TrademarkNameD?.TrademarkNumber)</td>
+                        <td>@(opposition.TrademarkNameD?.Office?.OfficeName)</td>
+                        <td>@(opposition.OpponentsRepresentative?.CompanyName)</td>
+                    </tr>
                         }
                     }
                 </tbody>
