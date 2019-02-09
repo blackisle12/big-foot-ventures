@@ -2573,6 +2573,20 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        var oppositionLast = this._managementOppositionService.GetLast();
+
+                        if (oppositionLast == null)
+                        {
+                            model.Record.OppositionName = "A-0001";
+                        }
+                        else
+                        {
+                            var oppositionNameArray = oppositionLast.OppositionName.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                            var oppositionNameNumber = Convert.ToInt32(oppositionNameArray[1]) + 1;
+
+                            model.Record.OppositionName = $"A-{oppositionNameNumber}";
+                        }
+
                         this._managementOppositionService.Insert(model.Record);
                     }
                     else

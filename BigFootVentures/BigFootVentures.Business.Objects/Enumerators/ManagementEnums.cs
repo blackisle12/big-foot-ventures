@@ -1595,6 +1595,147 @@ namespace BigFootVentures.Business.Objects.Enumerators
             }
         }
 
+        public static class Opposition
+        {
+            public enum TrademarkRoleA
+            {
+                [Description("Attacking")]
+                Attacking
+            }
+
+            public enum TrademarkRoleD
+            {
+                [Description("Defending")]
+                Defending
+            }
+
+            public enum OppositionStatus
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Open")]
+                Open,
+
+                [Description("Suspended")]
+                Suspended,
+
+                [Description("Closed")]
+                Closed
+            }
+
+            public enum Approval
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Proceed")]
+                Proceed,
+
+                [Description("Don't proceed")]
+                DontProceed
+            }
+
+            public enum LetterOrigin
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Tokyo")]
+                Tokyo,
+
+                [Description("Singapore")]
+                Singapore
+            }
+
+            public enum LetterSendingMethod
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Courier")]
+                Courier,
+
+                [Description("Registered post")]
+                RegisteredPost,
+
+                [Description("Regular post")]
+                RegularPost
+            }
+
+            public enum LetterOutcome
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("No answer")]
+                NoAnswer,
+
+                [Description("In negotiations")]
+                InNegotiations,
+
+                [Description("Accepted")]
+                Accepted,
+
+                [Description("Refused")]
+                Refused
+            }
+
+            public enum IPOOppositionLanguage
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("Dutch")]
+                Dutch,
+
+                [Description("English")]
+                English,
+
+                [Description("French")]
+                French,
+
+                [Description("German")]
+                German,
+
+                [Description("Portuguese")]
+                Portuguese,
+
+                [Description("Romanian")]
+                Romanian
+            }
+
+            public enum IPOOppositionStatus
+            {
+                [Description("")]
+                NotSet,
+
+                [Description("fully accepted")]
+                FullyAccepted,
+
+                [Description("partially accepted")]
+                PartiallyAccepted,
+
+                [Description("refused")]
+                Refused,
+
+                [Description("withdrawn")]
+                Withdrawn,
+
+                [Description("suspended")]
+                Suspended,
+
+                [Description("in process")]
+                InProcess,
+
+                [Description("MISSED")]
+                Missed,
+
+                [Description("closed")]
+                Closed
+            }
+        }
+
         public static class Task
         {
             public enum Priority

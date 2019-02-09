@@ -27,6 +27,8 @@ namespace BigFootVentures.Business.DataAccess
 
         TEntity Get(int ID);
 
+        TEntity GetLast();
+
         ICollection<TEntity> GetForEmailNotification(int week);
 
         ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
@@ -268,6 +270,38 @@ namespace BigFootVentures.Business.DataAccess
 
                     var dataReader = command.ExecuteReader();
                     var obj = this._mapper.ParseData(dataReader).SingleOrDefault();
+
+                    if (obj != null)
+                        entity = (TEntity)obj;
+
+                    dataReader.Close();
+                }
+
+                return entity;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public TEntity GetLast()
+        {
+            try
+            {
+                TEntity entity = null;
+
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                using (var command = new MySqlCommand($"{this._entityName}_GetLast", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    var dataReader = command.ExecuteReader();
+                    var obj = this._mapper.ParseDataMin(dataReader).SingleOrDefault();
 
                     if (obj != null)
                         entity = (TEntity)obj;

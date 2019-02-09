@@ -25,6 +25,8 @@ namespace BigFootVentures.Service.BusinessService
 
         TModel Get(int ID);
 
+        TModel GetLast();
+
         ICollection<AutocompleteWrapper> GetAutocomplete(string keyword);
 
         ICollection<TModel> GetByEmailAddress(string emailAddress);
@@ -114,6 +116,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.Get(ID);
+            }
+        }
+
+        public TModel GetLast()
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.GetLast();
             }
         }
 

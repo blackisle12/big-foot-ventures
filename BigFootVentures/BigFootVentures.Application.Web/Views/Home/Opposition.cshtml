@@ -1,0 +1,292 @@
+﻿<link href="~/Content/Views/Home/Opposition.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Opposition - " + (Model.Record.OppositionName ?? "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Opposition>
+
+@using (Html.BeginForm("Opposition", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.Record.ID)
+    @Html.HiddenFor(m => m.Record.TrademarkNameA.ID)
+    @Html.HiddenFor(m => m.Record.TrademarkNameD.ID)
+    @Html.HiddenFor(m => m.Record.OwnerApplicantsRepresentative.ID)
+    @Html.HiddenFor(m => m.Record.OpponentsRepresentative.ID)
+
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new") Opposition <strong>@Model.Record.OppositionName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-edit"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Information</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Trademark Role</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.TrademarkRoleA, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.TrademarkRoleA>()), new { @class = "form-control required" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Trademark Role</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.TrademarkRoleD, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.TrademarkRoleD>()), new { @class = "form-control required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Trademark Name</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.TrademarkNameA.Name, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.TrademarkNameA.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-2 control-label">Trademark Name</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.TrademarkNameD.Name, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.TrademarkNameD.Name" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Class Descriptions Attacking</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.ClassDescriptionsAttacking, new { @class = "form-control", rows = 10 })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Class Descriptions Defending</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.ClassDescriptionsDefending, new { @class = "form-control", rows = 10 })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Opposition Status</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(m => m.Record.OppositionStatus, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.OppositionStatus>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Internal Case Number</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.InternalCaseNumber, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Deletion Request</label>
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Record.DeletionRequest)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Deletion Request Reason</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.DeletionRequestReason, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: Opposition Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Opposition Information</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Opposition Deadline</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OppositionDeadline, new { @class = "form-control", @type = "date" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Opposition Cost</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OppositionCost, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Pre-Approval</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.CeaseAndDesistLetterPreApproval, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.Approval>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Approval</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.IPOOppositionApproval, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.Approval>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Pre-Approved By</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CeaseAndDesistLetterPreApprovedBy, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Approved By</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.IPOOppositionApprovedBy, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Pre-Approved On</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CeaseAndDesistLetterPreApprovedOn, new { @class = "form-control", @type = "date" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Approved On</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.IPOOppositionApprovedOn, new { @class = "form-control", @type = "date" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Approval</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.CeaseAndDesistLetterApproval, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.Approval>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Owner/Applicant's Representative</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.OwnerApplicantsRepresentative.CompanyName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.OwnerApplicantsRepresentative.CompanyName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Approved By</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CeaseAndDesistLetterApprovedBy, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Opponent's Representative</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.Record.OpponentsRepresentative.CompanyName, new { @class = "form-control", @readonly = "readonly" })
+                                    <div class="input-group-btn">
+                                        <button type="button" name="Button.OpponentsRepresentative.CompanyName" class="btn btn-default"><i class="fa fa-address-book-o"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Approved On</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CeaseAndDesistLetterApprovedOn, new { @class = "form-control", @type = "date" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Number</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.IPOOppositionNumber, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Reference</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CeaseAndDesistLetterReference, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Language</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.IPOOppositionLanguage, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.IPOOppositionLanguage>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Origin</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.CeaseAndDesistLetterOrigin, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.LetterOrigin>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.IPOOppositionDate, new { @class = "form-control", @type = "date" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Sending Method</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.CeaseAndDesistLetterSendingMethod, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.LetterSendingMethod>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Link</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.IPOOppositionLink, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Sent On</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.CeaseAndDesistLetterSentOn, new { @class = "form-control", @type = "date" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Status</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.IPOOppositionStatus, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.IPOOppositionStatus>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Owner Response Deadline</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerResponseDeadline, new { @class = "form-control", @type = "date" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">IPO Opposition Outcome Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.IPOOppositionOutcomeDate, new { @class = "form-control", @type = "date" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cease & Desist Letter Outcome</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.CeaseAndDesistLetterOutcome, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Opposition.LetterOutcome>()), new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Opposition Comments</label>
+                            <div class="col-sm-4">
+                                @Html.TextAreaFor(m => m.Record.OppositionComments, new { @class = "form-control", rows = 10 })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Trademark), ChildIDContainer = "TrademarkNameA.ID", ChildNameContainer = "TrademarkNameA.Name" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Trademark), ChildIDContainer = "TrademarkNameD.ID", ChildNameContainer = "TrademarkNameD.Name" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "OwnerApplicantsRepresentative.ID", ChildNameContainer = "OwnerApplicantsRepresentative.CompanyName" })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "OpponentsRepresentative.ID", ChildNameContainer = "OpponentsRepresentative.CompanyName" })
+
+    <script src="~/Scripts/Views/Shared/_Validator.js"></script>
+    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
+    <script src="~/Scripts/Views/Home/Opposition.js"></script>
+}

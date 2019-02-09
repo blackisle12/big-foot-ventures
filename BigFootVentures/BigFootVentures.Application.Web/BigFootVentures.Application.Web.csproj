@@ -437,6 +437,7 @@
     <Content Include="Views\Home\DomainView.cshtml" />
     <Content Include="Views\Home\Oppositions.cshtml" />
     <Content Include="Views\Home\OppositionView.cshtml" />
+    <Content Include="Views\Home\Opposition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
