@@ -1,0 +1,46 @@
+﻿<link href="~/Content/Views/Home/Oppositions.css" rel="stylesheet" />
+
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Application.Web.Models.ViewModels
+
+@{
+    ViewBag.Title = "Oppositions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMPageResult<Opposition>
+
+@using (Html.BeginForm("Oppositions", "Home", FormMethod.Get))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewHeader")
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="th-bg">
+                        <th class="th-opposition-name">Opposition Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var opposition in Model.Records)
+                        {
+                            <tr>
+                                <td><a href="@Url.RouteUrl("OppositionView", new { ID = opposition.ID })" target="_blank">@opposition.OppositionName</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageTableViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/Oppositions.js"></script>
+}

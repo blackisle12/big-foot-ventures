@@ -1,0 +1,281 @@
+﻿<link href="~/Content/Views/Home/Opposition.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Opposition - " + Model.Record.OppositionName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Opposition>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing Opposition <strong>@Model.Record.OppositionName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Information</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Opposition Name</strong></td>
+                            <td>@Model.Record.OppositionName</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Role</strong></td>
+                            <td>@Model.Record.TrademarkRoleA</td>
+                            <td><strong>Trademark Role</strong></td>
+                            <td>@Model.Record.TrademarkRoleD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Name</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.Name)</td>
+                            <td><strong>Trademark Name</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.Name)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Number</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.TrademarkNumber)</td>
+                            <td><strong>Trademark Number</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.TrademarkNumber)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Brand</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.Brand?.Name)</td>
+                            <td><strong>Trademark Brand</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.Brand?.Name)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Filing Date</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.FilingDateValue)</td>
+                            <td><strong>Trademark Filing Date</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.FilingDateValue)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Publication Date</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.PublicationDate)</td>
+                            <td><strong>Trademark Publication Date</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.PublicationDate)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Priority Date</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.PriorityDate)</td>
+                            <td><strong>Trademark Priority Date</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.PriorityDate)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark 6 Months Anniversary Date</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.SixMonthsAnniversary)</td>
+                            <td><strong>Trademark 6 Months Anniversary Date</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.SixMonthsAnniversary)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Office</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.Office?.OfficeName)</td>
+                            <td><strong>Trademark Office</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.Office?.OfficeName)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Bigfoot Group Owned</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.BigfootGroupOwned)</td>
+                            <td><strong>Trademark Bigfoot Group Owned</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.BigfootGroupOwned)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Priority Country</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.PriorityCountryAndPriorityTMNumber)</td>
+                            <td><strong>Priority Country (Def)</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.PriorityCountryAndPriorityTMNumber)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Class Descriptions Attacking</strong></td>
+                            <td>@Model.Record.ClassDescriptionsAttacking</td>
+                            <td><strong>Class Descriptions Defending</strong></td>
+                            <td>@Model.Record.ClassDescriptionsDefending</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TM Purpose (Att)</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.Brand?.Purpose)</td>
+                            <td><strong>TM Purpose (Def)</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.Brand?.Purpose)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TM Value (Att)</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.Brand?.Value)</td>
+                            <td><strong>TM Value (Def)</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.Brand?.Value)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TM Category (Att)</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.Brand?.Category)</td>
+                            <td><strong>TM Category (Def)</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.Brand?.Category)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TM HVT (High Value Target) (Att)</strong></td>
+                            @{
+                                if (Model.Record.TrademarkNameA != null && Model.Record.TrademarkNameA.Brand != null)
+                                {
+                                    <td><input type="checkbox" disabled="disabled" @(Model.Record.TrademarkNameA.Brand.HVTChk ? "checked" : string.Empty) /></td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                            <td><strong>TM HVT (High Value Target) (Def)</strong></td>
+                            @{
+                                if (Model.Record.TrademarkNameD != null && Model.Record.TrademarkNameD.Brand != null)
+                                {
+                                    <td><input type="checkbox" disabled="disabled" @(Model.Record.TrademarkNameD.Brand.HVTChk ? "checked" : string.Empty) /></td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Owner Name</strong></td>
+                            <td>@(Model.Record.TrademarkNameA?.OwnerName)</td>
+                            <td><strong>Trademark Owner Name</strong></td>
+                            <td>@(Model.Record.TrademarkNameD?.OwnerName)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opposition Status</strong></td>
+                            <td>@Model.Record.OppositionStatus</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Internal Case Number</strong></td>
+                            <td>@Model.Record.InternalCaseNumber</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deletion Request</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.DeletionRequest ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deletion Request Reason</strong></td>
+                            <td>@Model.Record.DeletionRequestReason</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Information -->
+            <!-- START: Opposition Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Opposition Information</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Opposition Deadline</strong></td>
+                            <td>@Model.Record.OppositionDeadline</td>
+                            <td><strong>Opposition Cost</strong></td>
+                            <td>@Model.Record.OppositionCost</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Pre-Approval</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterPreApproval</td>
+                            <td><strong>IPO Opposition Approval</strong></td>
+                            <td>@Model.Record.IPOOppositionApproval</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Pre-Approved By</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterPreApprovedBy</td>
+                            <td><strong>IPO Opposition Approved By</strong></td>
+                            <td>@Model.Record.IPOOppositionApprovedBy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Pre-Approved On</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterPreApprovedOn</td>
+                            <td><strong>IPO Opposition Approved On</strong></td>
+                            <td>@Model.Record.IPOOppositionApprovedOn</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Approval</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterApproval</td>
+                            <td><strong>Owner/Applicant's Representative</strong></td>
+                            <td>@(Model.Record.OwnerApplicantsRepresentative?.CompanyName)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Approved By</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterApprovedBy</td>
+                            <td><strong>Opponent's Representative</strong></td>
+                            <td>@(Model.Record.OpponentsRepresentative?.CompanyName)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Approved On</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterApprovedOn</td>
+                            <td><strong>IPO Opposition Number</strong></td>
+                            <td>@Model.Record.IPOOppositionNumber</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Reference</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterReference</td>
+                            <td><strong>IPO Opposition Language</strong></td>
+                            <td>@Model.Record.IPOOppositionLanguage</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Origin</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterOrigin</td>
+                            <td><strong>IPO Opposition Date</strong></td>
+                            <td>@Model.Record.IPOOppositionDate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Sending Method</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterSendingMethod</td>
+                            <td><strong>IPO Opposition Link</strong></td>
+                            <td>@Model.Record.IPOOppositionLink</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Sent On</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterSentOn</td>
+                            <td><strong>IPO Opposition Status</strong></td>
+                            <td>@Model.Record.IPOOppositionStatus</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Owner Response Deadline</strong></td>
+                            <td>@Model.Record.OwnerResponseDeadline</td>
+                            <td><strong>IPO Opposition Outcome Date</strong></td>
+                            <td>@Model.Record.IPOOppositionOutcomeDate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cease & Desist Letter Outcome</strong></td>
+                            <td>@Model.Record.CeaseAndDesistLetterOutcome</td>
+                            <td><strong>Opposition Comments</strong></td>
+                            <td>@Model.Record.OppositionComments</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Opposition Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>

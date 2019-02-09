@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
 using static BigFootVentures.Business.Objects.Enumerators.ManagementEnums.Company;
@@ -38,6 +37,7 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<LoginInformation> _managementLoginInformationService = null;
         private readonly IManagementService<Office> _managementOfficeService = null;
         private readonly IManagementService<OfficeStatus> _managementOfficeStatusService = null;
+        private readonly IManagementService<Opposition> _managementOppositionService = null;
         private readonly IManagementService<PreFilingSimilarityResearch> _managementPreFilingSimilarityResearchService = null;
         private readonly IManagementService<Register> _managementRegisterService = null;
         private readonly IManagementService<SimilarTrademark> _managementSimilarTrademarkService = null;
@@ -66,6 +66,7 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<LoginInformation> managementLoginInformationService,
             IManagementService<Office> managementOfficeService,
             IManagementService<OfficeStatus> managementOfficeStatusService,
+            IManagementService<Opposition> managementOppositionService,
             IManagementService<PreFilingSimilarityResearch> managementPreFilingSimilarityResearchService,
             IManagementService<Register> managementRegisterService,
             IManagementService<SimilarTrademark> managementSimilarTrademarkService,
@@ -88,6 +89,7 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementLoginInformationService = managementLoginInformationService;
             this._managementOfficeService = managementOfficeService;
             this._managementOfficeStatusService = managementOfficeStatusService;
+            this._managementOppositionService = managementOppositionService;
             this._managementPreFilingSimilarityResearchService = managementPreFilingSimilarityResearchService;
             this._managementRegisterService = managementRegisterService;            
             this._managementSimilarTrademarkService = managementSimilarTrademarkService;
@@ -2465,6 +2467,151 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return RedirectToAction("OfficeStatuses");
+        }
+
+        #endregion
+
+        #region "Opposition"
+
+        [Route("Oppositions/{rowCount?}/{page?}/{keyword?}", Name = "Oppositions")]
+        public ActionResult Oppositions(int rowCount = 25, int page = 1, string keyword = "")
+        {
+            var startIndex = (page - 1) * rowCount;
+            var oppositions = string.IsNullOrWhiteSpace(keyword) ?
+                this._managementOppositionService.Get(startIndex, rowCount, out int total) :
+                this._managementOppositionService.GetByKeyword(keyword, startIndex, rowCount, out total);
+            var pageResult = new VMPageResult<Opposition>
+            {
+                StartIndex = startIndex,
+                RowCount = rowCount,
+                Page = page,
+                Total = total,
+                Records = oppositions
+            };
+
+            if (TempData.ContainsKey("IsRedirectFromDelete"))
+            {
+                pageResult.IsRedirectFromDelete = true;
+                TempData.Remove("IsRedirectFromDelete");
+            }
+
+            ViewBag.Keyword = keyword;
+
+            return View(pageResult);
+        }
+
+        [Route("Opposition/{ID:int}", Name = "OppositionView")]
+        public ActionResult Opposition(int ID)
+        {
+            var opposition = this._managementOppositionService.Get(ID);
+            var model = new VMModel<Opposition>
+            {
+                Record = opposition,
+                PageMode = PageMode.View
+            };
+
+            if (TempData.ContainsKey("IsPosted"))
+            {
+                model.PageMode = PageMode.PersistSuccess;
+                TempData.Remove("IsPosted");
+            }
+
+            return View("OppositionView", model);
+        }
+
+        [Route("Opposition/New", Name = "OppositionNew")]
+        public ActionResult OppositionNew()
+        {
+            VMModel<Opposition> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Opposition>();
+            }
+            else
+            {
+                model = new VMModel<Opposition>
+                {
+                    Record = new Opposition(),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Opposition", model);
+        }
+
+        [Route("Opposition/Edit/{ID:int}", Name = "OppositionEdit")]
+        public ActionResult OppositionEdit(int ID)
+        {
+            VMModel<Opposition> model = null;
+
+            if (TempData.ContainsKey("ModelPosted"))
+            {
+                model = this.GetValidationErrors<Opposition>();
+            }
+            else
+            {
+                model = new VMModel<Opposition>
+                {
+                    Record = this._managementOppositionService.Get(ID),
+                    PageMode = PageMode.Edit
+                };
+            }
+
+            return View("Opposition", model);
+        }
+
+        [HttpPost]
+        [Route("Opposition", Name = "OppositionPost")]
+        public ActionResult Opposition(VMModel<Opposition> model)
+        {
+            Func<int> postModel = () =>
+            {
+                var validationResult = new Dictionary<string, string>();
+
+                if (OppositionValidator.IsValid(model.Record, out validationResult))
+                {
+                    if (model.Record.ID == 0)
+                    {
+                        this._managementOppositionService.Insert(model.Record);
+                    }
+                    else
+                    {
+                        this._managementOppositionService.Update(model.Record);
+                    }
+
+                    return model.Record.ID;
+                }
+                else
+                {
+                    foreach (var item in validationResult)
+                    {
+                        ModelState.AddModelError(item.Key, item.Value);
+                    }
+
+                    throw new Exception("error on validation.."); //will rework on this
+                }
+            };
+
+            return RedirectPost<Opposition>(model, postModel);
+        }
+
+        [HttpGet]
+        [Route("Opposition/Delete/{ID:int}", Name = "OppositionDelete")]
+        public ActionResult OppositionDelete(int ID)
+        {
+            try
+            {
+                this._managementOppositionService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("Oppositions");
         }
 
         #endregion

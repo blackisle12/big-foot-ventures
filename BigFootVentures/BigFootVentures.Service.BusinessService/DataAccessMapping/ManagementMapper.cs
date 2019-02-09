@@ -63,6 +63,10 @@ namespace BigFootVentures.Service.BusinessService.DataAccessMapping
             {
                 return new OfficeStatusMapper();
             }
+            else if (type == typeof(Opposition))
+            {
+                return new OppositionMapper();
+            }
             else if (type == typeof(PreFilingSimilarityResearch))
             {
                 return new PreFilingSimilarityResearchMapper();

@@ -8,11 +8,11 @@ namespace BigFootVentures.Service.BusinessService.Validators
     {
         #region "Public Methods"
 
-        public static bool IsValid(Office Office, out Dictionary<string, string> validationResult)
+        public static bool IsValid(Office office, out Dictionary<string, string> validationResult)
         {
             validationResult = new Dictionary<string, string>();
 
-            if (string.IsNullOrWhiteSpace(Office.OfficeName))
+            if (string.IsNullOrWhiteSpace(office.OfficeName))
             {
                 validationResult.Add("Record.OfficeName", ValidationMessages.REQUIRED);
             }
