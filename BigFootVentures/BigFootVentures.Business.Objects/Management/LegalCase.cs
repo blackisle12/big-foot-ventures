@@ -4,6 +4,7 @@
     {
         #region "Properties"
 
+        public string LegalProceedingName { get; set; }
         public string TypeOfCase { get; set; }
         public string TypeOfCaseExternalClients { get; set; }
         public Trademark Trademark { get; set; }

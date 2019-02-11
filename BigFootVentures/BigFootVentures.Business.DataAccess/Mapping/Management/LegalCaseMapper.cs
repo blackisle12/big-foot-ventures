@@ -20,6 +20,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     ID = (int)dataReader["ID"],
 
+                    LegalProceedingName = dataReader["LegalProceedingName"] as string,
                     TypeOfCase = dataReader["TypeOfCase"] as string,
                     TypeOfCaseExternalClients = dataReader["TypeOfCaseExternalClients"] as string,
                     TrademarkNumber = dataReader["TrademarkNumber"] as string,
@@ -37,6 +38,15 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                         ID = trademarkID,
                         Name = dataReader["TrademarkName"] as string
                     };
+
+                    if (int.TryParse((dataReader["OfficeID"] as int?)?.ToString(), out int officeID))
+                    {
+                        entity.Trademark.Office = new Office
+                        {
+                            ID = officeID,
+                            DisplayName = dataReader["OfficeName"] as string
+                        };
+                    }
                 }
 
                 if (int.TryParse((dataReader["PlainTiffID"] as int?)?.ToString(), out int plainTiffID))
@@ -91,8 +101,10 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     ID = (int)dataReader["ID"],
 
+                    LegalProceedingName = dataReader["LegalProceedingName"] as string,
                     TypeOfCase = dataReader["TypeOfCase"] as string,
-                    TrademarkNumber = dataReader["TrademarkNumber"] as string
+                    DateAssigned = dataReader["DateAssigned"] as string,
+                    Keywords = dataReader["Keywords"] as string
                 };
 
                 if (int.TryParse((dataReader["TrademarkID"] as int?)?.ToString(), out int trademarkID))
@@ -102,6 +114,15 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                         ID = trademarkID,
                         Name = dataReader["TrademarkName"] as string
                     };
+
+                    if (int.TryParse((dataReader["OfficeID"] as int?)?.ToString(), out int officeID))
+                    {
+                        entity.Trademark.Office = new Office
+                        {
+                            ID = officeID,
+                            DisplayName = dataReader["OfficeName"] as string
+                        };
+                    }
                 }
 
                 entities.Add(entity);
@@ -133,6 +154,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             parameters.AddRange(new MySqlParameter[]
             {
+                new MySqlParameter("pLegalProceedingName", MySqlDbType.VarChar, 200) { Value = entity.LegalProceedingName, Direction = ParameterDirection.Input },
                 new MySqlParameter("pTypeOfCase", MySqlDbType.VarChar, 45) { Value = entity.TypeOfCase, Direction = ParameterDirection.Input },
                 new MySqlParameter("pTypeOfCaseExternalClients", MySqlDbType.VarChar, 45) { Value = entity.TypeOfCaseExternalClients, Direction = ParameterDirection.Input },
                 new MySqlParameter("pTrademarkID", MySqlDbType.Int32) { Value = entity.Trademark?.ID, Direction = ParameterDirection.Input },

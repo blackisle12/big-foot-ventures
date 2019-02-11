@@ -1946,6 +1946,20 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        var legalCaseLast = this._managementLegalCaseService.GetLast();
+
+                        if (legalCaseLast == null)
+                        {
+                            model.Record.LegalProceedingName = $"001/{SessionUtils.GetCurrentDateTime().Year}";
+                        }
+                        else
+                        {
+                            var legalProceedingNameArray = legalCaseLast.LegalProceedingName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                            var legalProceedingNameNumber = Convert.ToInt32(legalProceedingNameArray[0]) + 1;
+
+                            model.Record.LegalProceedingName = $"{legalProceedingNameNumber}/{SessionUtils.GetCurrentDateTime().Year}";
+                        }
+
                         this._managementLegalCaseService.Insert(model.Record);
                     }
                     else

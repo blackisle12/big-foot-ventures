@@ -31,10 +31,22 @@
                 <div class="panel-body">
                     <table class="table table-view">
                         <tr>
-                            <td><strong>Type Of Case</strong></td>
-                            <td>@Model.Record.TypeOfCase</td>
+                            <td><strong>Legal Proceeding Name</strong></td>
+                            <td>@Model.Record.LegalProceedingName</td>
                             <td><strong>Owner</strong></td>
                             <td>@Model.Record.DisplayName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office</strong></td>
+                            <td>@(Model.Record.Trademark?.Office?.OfficeName)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Type Of Case</strong></td>
+                            <td>@Model.Record.TypeOfCase</td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><strong>Type of Case External Clients</strong></td>

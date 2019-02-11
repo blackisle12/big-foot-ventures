@@ -22,9 +22,12 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
+                        <th class="th-legal-proceeding-name">Legal Proceeding Name</th>
                         <th class="th-type-of-case">Type of Case</th>
+                        <th class="th-date-assigned">Date Assigned</th>
                         <th class="th-trademark-name">Trademark</th>
-                        <th class="th-trademark-number">Trademark Number</th>                        
+                        <th class="th-office-name">Office</th>
+                        <th class="th-keywords">Keywords</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,9 +35,12 @@
                         foreach (var legalCase in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("LegalCaseView", new { ID = legalCase.ID })" target="_blank">@legalCase.TypeOfCase</a></td>
-                                <td>@legalCase.Trademark.Name</td>
-                                <td>@legalCase.TrademarkNumber</td>                                
+                                <td><a href="@Url.RouteUrl("LegalCaseView", new { ID = legalCase.ID })" target="_blank">@legalCase.LegalProceedingName</a></td>
+                                <td>@legalCase.TypeOfCase</td>
+                                <td>@legalCase.DateAssigned</td>
+                                <td>@(legalCase.Trademark?.Name)</td>
+                                <td>@(legalCase.Trademark?.Office?.OfficeName)</td>
+                                <td>@legalCase.Keywords</td>
                             </tr>
                         }
                     }
