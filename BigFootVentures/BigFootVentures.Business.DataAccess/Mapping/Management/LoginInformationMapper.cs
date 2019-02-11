@@ -51,9 +51,20 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 var entity = new LoginInformation
                 {
                     ID = (int)dataReader["ID"],
-                                        
+                    OwnerName = dataReader["OwnerName"] as string,
+
+                    Country = dataReader["Country"] as string,
+                    Office = dataReader["Office"] as string,
+                    Url = dataReader["Url"] as string,
                     LoginInformationID = dataReader["LoginInformationID"] as string,
+                    PW = dataReader["PW"] as string,
                     AccountName = dataReader["AccountName"] as string,
+                    CurrentAccount = dataReader["CurrentAccount"] as string,
+                    SecretPhase = dataReader["SecretPhase"] as string,
+                    MonitoringStaff = dataReader["MonitoringStaff"] as string,
+                    OfficeID = dataReader["OfficeID"] as string,
+                    CompanyRegistrationNo = dataReader["CompanyRegistrationNo"] as string,
+                    Balance = dataReader["Balance"] as string,
                     EmailAddress = dataReader["EmailAddress"] as string,
                 };
 

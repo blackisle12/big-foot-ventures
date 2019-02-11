@@ -20,9 +20,13 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
+                        <th></th>
                         <th class="th-account-name">Account Name</th>
+                        <th class="th-office-name">Office</th>
+                        <th class="th-url">URL</th>
+                        <th class="th-country">Country</th>
                         <th class="th-id">ID</th>
-                        <th class="th-email-address">Email Address</th>
+                        <th class="th-pw">PW</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,9 +34,13 @@
                         foreach (var loginInformation in Model.Records)
                         {
                             <tr class="th-bg">
-                                <td class="th-account-name"><a href="@Url.RouteUrl("LoginInformationView", new { ID = loginInformation.ID })" target="_blank">@loginInformation.AccountName</a></td>
-                                <td class="th-login-information-id">@loginInformation.LoginInformationID</td>
-                                <td class="th-email-address">@loginInformation.EmailAddress</td>
+                                <td><a href="@Url.RouteUrl("LoginInformationView", new { ID = loginInformation.ID })" target="_blank">View</a></td>
+                                <td>@loginInformation.AccountName</td>
+                                <td>@loginInformation.Office</td>
+                                <td>@loginInformation.Url</td>
+                                <td>@loginInformation.Country</td>
+                                <td>@loginInformation.LoginInformationID</td>
+                                <td>@loginInformation.PW</td>
                             </tr>
                         }
                     }
