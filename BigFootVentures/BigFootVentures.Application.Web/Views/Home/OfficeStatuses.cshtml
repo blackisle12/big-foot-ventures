@@ -22,9 +22,11 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
+                        <th class="th-id">ID</th>
                         <th class="th-name">Name</th>
+                        <th class="th-status-description">Status Description</th>
                         <th class="th-status-grouping">Status Grouping</th>
-                        <th class="th-owner">Owner</th>
+                        <th class="th-office">Office</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,9 +34,11 @@
                         foreach (var officeStatus in Model.Records)
                         {
                             <tr>
-                                <td><a href="@Url.RouteUrl("OfficeStatusView", new { ID = officeStatus.ID })" target="_blank">@officeStatus.Name</a></td>
+                                <td><a href="@Url.RouteUrl("OfficeStatusView", new { ID = officeStatus.ID })" target="_blank">@officeStatus.ID</a></td>
+                                <td>@officeStatus.Name</td>
+                                <td>@officeStatus.StatusDescription</td>
                                 <td>@officeStatus.StatusGrouping</td>
-                                <td>@officeStatus.OwnerName</td>
+                                <td>@(officeStatus.Office?.OfficeName)</td>
                             </tr>
                         }
                     }

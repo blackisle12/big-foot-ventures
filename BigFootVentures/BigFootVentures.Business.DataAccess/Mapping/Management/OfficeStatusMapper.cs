@@ -47,10 +47,20 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     ID = (int)dataReader["ID"],
 
                     Name = dataReader["Name"] as string,
+                    StatusDescription = dataReader["StatusDescription"] as string,
                     StatusGrouping = dataReader["StatusGrouping"] as string,
 
                     OwnerName = dataReader["OwnerName"] as string
                 };
+
+                if (int.TryParse((dataReader["OfficeID"] as int?)?.ToString(), out int officeID))
+                {
+                    entity.Office = new Office
+                    {
+                        ID = officeID,
+                        OfficeName = dataReader["OfficeName"] as string
+                    };
+                }
 
                 entities.Add(entity);
             }
