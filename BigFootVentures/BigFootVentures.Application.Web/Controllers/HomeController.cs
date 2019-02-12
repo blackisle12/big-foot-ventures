@@ -3371,6 +3371,20 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     if (model.Record.ID == 0)
                     {
+                        var TMRepresentativeLast = this._managementTMRepresentativeService.GetLast();
+
+                        if (TMRepresentativeLast == null)
+                        {
+                            model.Record.TMRepresentativeName = $"TM-0001";
+                        }
+                        else
+                        {
+                            var TMRepresentativeNameArray = TMRepresentativeLast.TMRepresentativeName.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                            var TMRepresentativeNameNumber = Convert.ToInt32(TMRepresentativeNameArray[1]) + 1;
+
+                            model.Record.TMRepresentativeName = $"TM-{TMRepresentativeNameNumber}";
+                        }
+
                         this._managementTMRepresentativeService.Insert(model.Record);
                     }
                     else

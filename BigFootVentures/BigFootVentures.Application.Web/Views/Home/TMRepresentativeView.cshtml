@@ -4,7 +4,7 @@
 @using BigFootVentures.Business.Objects.Management
 
 @{
-    ViewBag.Title = "TM Representative - " + Model.Record.Trademark?.Name;
+    ViewBag.Title = "TM Representative - " + Model.Record.TMRepresentativeName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,7 +16,7 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are viewing TM representative <strong>@(Model.Record.Trademark?.Name)</strong>
+                You are viewing TM representative <strong>@(Model.Record.TMRepresentativeName)</strong>
             </span>
             <span class="panel-title pull-right">
                 <i class="fa fa-eye"></i>
@@ -31,6 +31,12 @@
                 <div class="panel-body">
                     <table class="table table-view">
                         <tr>
+                            <td><strong>TM Representative Name</strong></td>
+                            <td>@Model.Record.TMRepresentativeName</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
                             <td><strong>Trademark</strong></td>
                             <td>@(Model.Record.Trademark?.Name)</td>
                             <td></td>
@@ -38,7 +44,7 @@
                         </tr>
                         <tr>
                             <td><strong>Representative</strong></td>
-                            <td>@(Model.Record.Representative?.CompanyName)</td>
+                            <td>@(Model.Record.Representative?.DisplayName)</td>
                             <td></td>
                             <td></td>
                         </tr>

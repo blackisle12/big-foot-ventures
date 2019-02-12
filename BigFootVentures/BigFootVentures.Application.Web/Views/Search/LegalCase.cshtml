@@ -28,9 +28,9 @@
                 <thead>
                     <tr class="th-bg">
                         <th>Action</th>
+                        <th class="th-legal-proceeding-name">Legal Proceeding Name</th>
                         <th class="th-type-of-case">Type of Case</th>
                         <th class="th-trademark-name">Trademark</th>
-                        <th class="th-trademark-number">Trademark Number</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,9 +39,9 @@
                         {
                             <tr>
                                 <td><a href="@Url.RouteUrl("LegalCaseView", new { ID = legalCase.ID })" target="_blank">View</a></td>
+                                <td>@legalCase.LegalProceedingName</td>
                                 <td>@legalCase.TypeOfCase</td>
-                                <td>@legalCase.Trademark.Name</td>
-                                <td>@legalCase.TrademarkNumber</td>
+                                <td>@(legalCase.Trademark?.Name)</td>
                             </tr>
                         }
                     }

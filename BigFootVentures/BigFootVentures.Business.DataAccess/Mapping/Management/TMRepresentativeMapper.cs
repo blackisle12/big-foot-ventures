@@ -21,6 +21,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     ID = (int)dataReader["ID"],
 
+                    TMRepresentativeName = dataReader["TMRepresentativeName"] as string,
+
                     Trademark = new Trademark
                     {
                         ID = Convert.ToInt32(dataReader["TrademarkID"]),
@@ -49,8 +51,18 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     ID = (int)dataReader["ID"],
 
-                    Trademark = new Trademark { Name = dataReader["TrademarkName"] as string },
-                    Representative = new Company { DisplayName = dataReader["RepresentativeName"] as string }
+                    TMRepresentativeName = dataReader["TMRepresentativeName"] as string,
+
+                    Trademark = new Trademark
+                    {
+                        ID = Convert.ToInt32(dataReader["TrademarkID"]),
+                        Name = dataReader["TrademarkName"] as string
+                    },
+                    Representative = new Company
+                    {
+                        ID = Convert.ToInt32(dataReader["RepresentativeID"]),
+                        DisplayName = dataReader["RepresentativeName"] as string
+                    }
                 };
 
                 entities.Add(entity);
@@ -82,6 +94,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
             parameters.AddRange(new MySqlParameter[]
             {
+                new MySqlParameter("pTMRepresentativeName", MySqlDbType.VarChar, 200) { Value = entity.TMRepresentativeName, Direction = ParameterDirection.Input },
                 new MySqlParameter("pTrademarkID", MySqlDbType.Int32) { Value = entity.Trademark.ID, Direction = ParameterDirection.Input },
                 new MySqlParameter("pRepresentativeID", MySqlDbType.Int32) { Value = entity.Representative.ID, Direction = ParameterDirection.Input },
             });
