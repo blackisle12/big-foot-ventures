@@ -23,8 +23,6 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                     OwnerName = dataReader["OwnerName"] as string,
 
-                    Trademark = new Trademark { ID = Convert.ToInt32(dataReader["TrademarkID"]) },
-                    TrademarkSimilar = new Trademark { ID = Convert.ToInt32(dataReader["TrademarkSimilarID"]) },
                     Comment = dataReader["Comment"] as string,
                     Conflict = (dataReader["Conflict"] as sbyte? ?? 0) == 1,
                     CreateOppositionCheck = (dataReader["CreateOppositionCheck"] as sbyte? ?? 0) == 1,
@@ -38,6 +36,62 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     OppositionEvaluation = dataReader["OppositionEvaluation"] as string,
                     OppositionComment = dataReader["OppositionComment"] as string
                 };
+
+                if (int.TryParse((dataReader["TrademarkID"] as int?)?.ToString(), out int trademarkID))
+                {
+                    if (trademarkID > 0)
+                    {
+                        entity.Trademark = new Trademark
+                        {
+                            ID = trademarkID,
+                            Name = dataReader["TrademarkName"] as string,
+                            TrademarkNumber = dataReader["TrademarkNumber"] as string,
+                            Brand = new Brand
+                            {
+                                Name = dataReader["TrademarkBrandName"] as string
+                            },
+                            FilingDateValue = dataReader["TrademarkFilingDate"] as string,
+                            PublicationDate = dataReader["TrademarkPublicationDate"] as string,
+                            PriorityDate = dataReader["TrademarkPriorityDate"] as string,
+                            PriorityCountryAndPriorityTMNumber = dataReader["TrademarkPriorityCountry"] as string,
+                            SixMonthsAnniversary = dataReader["TrademarkSixMonthsAnniversary"] as string,
+                            Office = new Office
+                            {
+                                OfficeName = dataReader["TrademarkOfficeName"] as string
+                            },
+                            BigfootGroupOwned = dataReader["TrademarkBigFootGroupOwned"] as string,
+                            OwnerName = dataReader["TrademarkOwnerName"] as string
+                        };
+                    }
+                }
+
+                if (int.TryParse((dataReader["TrademarkSimilarID"] as int?)?.ToString(), out int trademarkSimilarID))
+                {
+                    if (trademarkSimilarID > 0)
+                    {
+                        entity.TrademarkSimilar = new Trademark
+                        {
+                            ID = trademarkID,
+                            Name = dataReader["TrademarkSimilarName"] as string,
+                            TrademarkNumber = dataReader["TrademarkSimilarNumber"] as string,
+                            Brand = new Brand
+                            {
+                                Name = dataReader["TrademarkSimilarBrandName"] as string
+                            },
+                            FilingDateValue = dataReader["TrademarkSimilarFilingDate"] as string,
+                            PublicationDate = dataReader["TrademarkSimilarPublicationDate"] as string,
+                            PriorityDate = dataReader["TrademarkSimilarPriorityDate"] as string,
+                            PriorityCountryAndPriorityTMNumber = dataReader["TrademarkSimilarPriorityCountry"] as string,
+                            SixMonthsAnniversary = dataReader["TrademarkSimilarSixMonthsAnniversary"] as string,
+                            Office = new Office
+                            {
+                                OfficeName = dataReader["TrademarkSimilarOfficeName"] as string
+                            },
+                            BigfootGroupOwned = dataReader["TrademarkSimilarBigFootGroupOwned"] as string,
+                            OwnerName = dataReader["TrademarkSimilarOwnerName"] as string
+                        };
+                    }
+                }
 
                 entities.Add(entity);
             }
@@ -55,8 +109,16 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 {
                     ID = (int)dataReader["ID"],
 
-                    Trademark = new Trademark { Name = dataReader["TrademarkName"] as string },
-                    TrademarkSimilar = new Trademark {  Name = dataReader["TrademarkSimilarName"] as string }
+                    Trademark = new Trademark
+                    {
+                        ID = Convert.ToInt32(dataReader["TrademarkID"]),
+                        Name = dataReader["TrademarkName"] as string
+                    },
+                    TrademarkSimilar = new Trademark
+                    {
+                        ID = Convert.ToInt32(dataReader["TrademarkSimilarID"]),
+                        Name = dataReader["TrademarkSimilarName"] as string
+                    }
                 };
 
                 entities.Add(entity);

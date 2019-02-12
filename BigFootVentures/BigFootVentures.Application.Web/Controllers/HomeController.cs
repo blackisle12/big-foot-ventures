@@ -3002,9 +3002,6 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var similarTrademark = this._managementSimilarTrademarkService.Get(ID);
 
-            similarTrademark.Trademark = this._managementTrademarkService.Get(similarTrademark.Trademark.ID);
-            similarTrademark.TrademarkSimilar = this._managementTrademarkService.Get(similarTrademark.TrademarkSimilar.ID);
-
             var model = new VMModel<SimilarTrademark>
             {
                 Record = similarTrademark,
@@ -3053,9 +3050,6 @@ namespace BigFootVentures.Application.Web.Controllers
             else
             {
                 var similarTrademark = this._managementSimilarTrademarkService.Get(ID);
-
-                similarTrademark.Trademark = this._managementTrademarkService.Get(similarTrademark.Trademark.ID);
-                similarTrademark.TrademarkSimilar = this._managementTrademarkService.Get(similarTrademark.TrademarkSimilar.ID);
 
                 model = new VMModel<SimilarTrademark>
                 {

@@ -1,4 +1,6 @@
-﻿namespace BigFootVentures.Business.Objects.Management
+﻿using BigFootVentures.Business.Objects.Utilities;
+
+namespace BigFootVentures.Business.Objects.Management
 {
     public sealed class SimilarTrademark : BusinessBase
     {
@@ -20,6 +22,12 @@
         public string RefilingComment { get; set; }
         public string OppositionEvaluation { get; set; }
         public string OppositionComment { get; set; }
+
+        #endregion
+
+        #region "Calculated Properties"
+
+        public string AutoNumber { get { return StringUtils.GenerateAutoNumber(this.ID); } }
 
         #endregion
     }

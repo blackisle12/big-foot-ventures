@@ -31,20 +31,74 @@
                 <div class="panel-body">
                     <table class="table table-view">
                         <tr>
-                            <td><strong>Trademark Name</strong></td>
-                            <td>@(Model.Record.Trademark?.Name)</td>
+                            <td><strong>Autonumber</strong></td>
+                            <td>@(Model.Record.AutoNumber)</td>
                             <td><strong>Owner</strong></td>
                             <td>@Model.Record.OwnerName</td>
                         </tr>
                         <tr>
-                            <td><strong>Comment</strong></td>
-                            <td>@Model.Record.Comment</td>
+                            <td><strong>Trademark Name</strong></td>
+                            <td>@(Model.Record.Trademark?.Name)</td>
                             <td><strong>Trademark Similar Name</strong></td>
                             <td>@(Model.Record.TrademarkSimilar?.Name)</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td><strong>Trademark Number</strong></td>
+                            <td>@(Model.Record.Trademark?.TrademarkNumber)</td>
+                            <td><strong>Trademark Number</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.TrademarkNumber)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Brand</strong></td>
+                            <td>@(Model.Record.Trademark?.Brand?.Name)</td>
+                            <td><strong>Trademark Brand</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.Brand?.Name)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Filing Date</strong></td>
+                            <td>@(Model.Record.Trademark?.FilingDateValue)</td>
+                            <td><strong>Trademark Filing Date</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.FilingDateValue)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Publication Date</strong></td>
+                            <td>@(Model.Record.Trademark?.PublicationDate)</td>
+                            <td><strong>Trademark Publication Date</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.PublicationDate)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Similar TM Priority Date</strong></td>
+                            <td>@(Model.Record.Trademark?.PriorityDate)</td>
+                            <td><strong>Similar TM Priority Date</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.PriorityDate)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Similar TM Priority Country</strong></td>
+                            <td>@(Model.Record.Trademark?.PriorityCountryAndPriorityTMNumber)</td>
+                            <td><strong>Similar TM Priority Country</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.PriorityCountryAndPriorityTMNumber)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark 6 Months Anniversary Date</strong></td>
+                            <td>@(Model.Record.Trademark?.SixMonthsAnniversary)</td>
+                            <td><strong>Trademark 6 Months Anniversary Date</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.SixMonthsAnniversary)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Office</strong></td>
+                            <td>@(Model.Record.Trademark?.Office?.OfficeName)</td>
+                            <td><strong>Trademark Office</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.Office?.OfficeName)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trademark Bigfoot Group Owned</strong></td>
+                            <td>@(Model.Record.Trademark?.BigfootGroupOwned)</td>
+                            <td><strong>Trademark Bigfoot Group Owned</strong></td>
+                            <td>@(Model.Record.TrademarkSimilar?.BigfootGroupOwned)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comment</strong></td>
+                            <td>@Model.Record.Comment</td>
                             <td><strong>Conflict</strong></td>
                             <td><input type="checkbox" disabled="disabled" @(Model.Record.Conflict ? "checked" : string.Empty) /></td>
                         </tr>
