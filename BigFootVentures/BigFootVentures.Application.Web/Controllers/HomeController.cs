@@ -3693,37 +3693,43 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             var trademarkOwner = this._managementTrademarkOwnerService.Get(ID);
 
-            var trademark = this._managementTrademarkService.Get(trademarkOwner.Trademark.ID);
-
-            trademark.Office = this._managementOfficeService.Get(trademark.Office.ID);
-            trademark.Brand = this._managementBrandService.Get(trademark.Brand.ID);
-
-            if (trademark.OriginalOffice != null)
+            if (trademarkOwner != null)
             {
-                trademark.OriginalOffice = this._managementOfficeService.Get(trademark.OriginalOffice.ID);
-            }
+                var trademark = this._managementTrademarkService.Get(trademarkOwner.Trademark.ID);
 
-            if (trademark.TMWebsite != null)
-            {
-                trademark.TMWebsite = this._managementDomainService.Get(trademark.TMWebsite.ID);
-            }
+                if(trademark != null)
+                {
+                    trademark.Office = this._managementOfficeService.Get(trademark.Office.ID);
+                    trademark.Brand = this._managementBrandService.Get(trademark.Brand.ID);
 
-            if (trademark.OwnerWebsite != null)
-            {
-                trademark.OwnerWebsite = this._managementDomainService.Get(trademark.OwnerWebsite.ID);
-            }
+                    if (trademark.OriginalOffice != null)
+                    {
+                        trademark.OriginalOffice = this._managementOfficeService.Get(trademark.OriginalOffice.ID);
+                    }
 
-            if (trademark.ComWebsite != null)
-            {
-                trademark.ComWebsite = this._managementDomainService.Get(trademark.ComWebsite.ID);
-            }
+                    if (trademark.TMWebsite != null)
+                    {
+                        trademark.TMWebsite = this._managementDomainService.Get(trademark.TMWebsite.ID);
+                    }
 
-            if (trademark.InvalidityApplicant != null)
-            {
-                trademark.InvalidityApplicant = this._managementCompanyService.Get(trademark.InvalidityApplicant.ID);
-            }
+                    if (trademark.OwnerWebsite != null)
+                    {
+                        trademark.OwnerWebsite = this._managementDomainService.Get(trademark.OwnerWebsite.ID);
+                    }
 
-            trademarkOwner.Trademark = trademark;
+                    if (trademark.ComWebsite != null)
+                    {
+                        trademark.ComWebsite = this._managementDomainService.Get(trademark.ComWebsite.ID);
+                    }
+
+                    if (trademark.InvalidityApplicant != null)
+                    {
+                        trademark.InvalidityApplicant = this._managementCompanyService.Get(trademark.InvalidityApplicant.ID);
+                    }
+                }
+
+                trademarkOwner.Trademark = trademark;
+            }
 
             var model = new VMModel<TrademarkOwner>
             {
