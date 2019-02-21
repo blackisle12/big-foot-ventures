@@ -29,7 +29,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
         {
             var query = new StringBuilder().Append("SELECT ");
 
-            query.Append("d.*, c.ID AS RegistrantID, c.NAME AS RegistrantName, c.`BIGFOOT GROUP` AS RegistrantBigFootGroup, p.NAME AS RegistrantParentAccountName, ");
+            query.Append("d.*, c.ID AS RegistrantID, CONCAT(IFNULL(c.NAME,''), IFNULL(c.FIRSTNAME,''), ' ', IFNULL(c.LASTNAME,'')) AS RegistrantName, c.`BIGFOOT GROUP` AS RegistrantBigFootGroup, p.NAME AS RegistrantParentAccountName, ");
             query.Append("r.ID AS RegistrarID, r.Name AS RegistrarName ");
             query.Append("FROM DomainN d ");
             query.Append("LEFT JOIN Company c ON d.RegistrantID = c.ID ");
@@ -44,7 +44,14 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                if (bigFootOwned == "1")
+                {
+                    query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                }
+                else
+                {
+                    query.Append("AND c.`BIGFOOT GROUP` = 0 AND p.NAME != 'Bigfoot Group' ");
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))
@@ -121,7 +128,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             string buySideFunnel = null, string FMVOrderOfMagnitude = null, string companyWebsite = null, string status = null, string autoRenew = null,
             string version = null, string WHOIS = null, string category = null)
         {
-            query.Append("d.*, c.ID AS RegistrantID, c.NAME AS RegistrantName, c.`BIGFOOT GROUP` AS RegistrantBigFootGroup, p.NAME AS RegistrantParentAccountName, ");
+            query.Append("d.*, c.ID AS RegistrantID, CONCAT(IFNULL(c.NAME,''), IFNULL(c.FIRSTNAME,''), ' ', IFNULL(c.LASTNAME,'')) AS RegistrantName, c.`BIGFOOT GROUP` AS RegistrantBigFootGroup, p.NAME AS RegistrantParentAccountName, ");
             query.Append("r.ID AS RegistrarID, r.Name AS RegistrarName ");
             query.Append("FROM DomainN d ");
             query.Append("LEFT JOIN Company c ON d.RegistrantID = c.ID ");
@@ -136,7 +143,14 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                if (bigFootOwned == "1")
+                {
+                    query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                }
+                else
+                {
+                    query.Append("AND c.`BIGFOOT GROUP` = 0 AND p.NAME != 'Bigfoot Group' ");
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))
@@ -222,7 +236,14 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
             {
-                query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                if (bigFootOwned == "1")
+                {
+                    query.Append("AND (c.`BIGFOOT GROUP` = 1 OR p.NAME = 'Bigfoot Group') ");
+                }
+                else
+                {
+                    query.Append("AND c.`BIGFOOT GROUP` = 0 AND p.NAME != 'Bigfoot Group' ");
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(websiteCurrent))
