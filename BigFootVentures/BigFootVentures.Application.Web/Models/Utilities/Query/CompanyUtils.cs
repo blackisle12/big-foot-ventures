@@ -36,14 +36,14 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             var query = new StringBuilder().Append("SELECT ");
 
             query.Append("C.*, ");
-            query.Append("CASE WHEN C.NAME IS NOT NULL THEN C.NAME ELSE CONCAT_WS('''' '''', C.LASTNAME, C.FIRSTNAME) END AS DISPLAYNAME ");
+            query.Append("CONCAT(IFNULL(C.NAME, ''), IFNULL(C.FIRSTNAME, ''), ' ', IFNULL(C.LASTNAME, '')) AS DISPLAYNAME ");
             query.Append("FROM Company C ");
             query.Append("LEFT JOIN Company CP ON C.ParentAccountID = CP.ID ");
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND C.NAME LIKE '%{name}%' ");
+                query.Append($"AND (C.NAME LIKE '%{name}%' OR C.FIRSTNAME LIKE '%{name}%' OR C.LASTNAME LIKE '%{name}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name}%') ");
             }
 
             if (!string.IsNullOrWhiteSpace(accountRecordType))
@@ -167,14 +167,14 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             string bigFootAccredited = null, string shippingCountry = null)
         {
             query.Append("C.*, ");
-            query.Append("CASE WHEN C.NAME IS NOT NULL THEN C.NAME ELSE CONCAT_WS('''' '''', C.LASTNAME, C.FIRSTNAME) END AS DISPLAYNAME ");
+            query.Append("CONCAT(IFNULL(C.NAME, ''), IFNULL(C.FIRSTNAME, ''), ' ', IFNULL(C.LASTNAME, '')) AS DISPLAYNAME ");
             query.Append("FROM Company C ");
             query.Append("LEFT JOIN Company CP ON C.ParentAccountID = CP.ID ");
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND C.NAME LIKE '%{name}%' ");
+                query.Append($"AND (C.NAME LIKE '%{name}%' OR C.FIRSTNAME LIKE '%{name}%' OR C.LASTNAME LIKE '%{name}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name}%') ");
             }
 
             if (!string.IsNullOrWhiteSpace(accountRecordType))
@@ -300,7 +300,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND C.NAME LIKE '%{name}%' ");
+                query.Append($"AND (C.NAME LIKE '%{name}%' OR C.FIRSTNAME LIKE '%{name}%' OR C.LASTNAME LIKE '%{name}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name}%') ");
             }
 
             if (!string.IsNullOrWhiteSpace(accountRecordType))

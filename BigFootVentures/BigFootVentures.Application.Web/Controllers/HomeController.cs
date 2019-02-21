@@ -702,7 +702,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            if (company.AccountRecordType == AccountRecordType.PersonAccount.ToString())
+            if (company.AccountRecordType == AccountRecordType.PersonAccount.ToDescription())
             {
                 return View("CompanyPersonView", model);
             }
