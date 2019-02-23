@@ -376,6 +376,7 @@ namespace BigFootVentures.Business.DataAccess
                         entities.Add(new AutocompleteWrapper
                         {
                             Text = dataReader["TEXT"] as string,
+                            Text2 = dataReader.FieldCount == 3 ? dataReader["TEXT2"] as string : string.Empty,
                             Value = Convert.ToInt32(dataReader["VALUE"])
                         });
                     }

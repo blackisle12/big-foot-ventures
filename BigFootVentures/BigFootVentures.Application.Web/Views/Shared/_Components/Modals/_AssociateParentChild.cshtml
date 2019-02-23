@@ -46,11 +46,19 @@
             $('[name="Modal.Input.Loader@(Model.ChildNameContainer)"]').hide();
 
             var currentName = $('[name="Record.@(Model.ChildNameContainer)"]').val();
+            var currentSubtitle = '@Model.Subtitle';
             var tbody = '';
 
             if (currentName.length > 0) {
                 tbody += '<tr>';
-                tbody += '<td>' + currentName + '<span class="label label-primary pull-right">SELECTED</span></td>';
+
+                if (currentSubtitle.length == 0) {
+                    tbody += '<td>' + currentName + '<span class="label label-primary pull-right">SELECTED</span></td>';
+                }
+                else {
+                    tbody += '<td>' + currentName + '<br/><span class="label label-default">' + currentSubtitle + '</span><span class="label label-primary pull-right">SELECTED</span></td>';
+                }
+
                 tbody += '</tr>';
             }
 
@@ -78,17 +86,31 @@
                         var tbody = '';
                         var currentName = $('[name="Record.@(Model.ChildNameContainer)"]').val();
                         var currentValue = $('[name="Record.@(Model.ChildIDContainer)"]').val();
+                        var currentSubtitle = '@Model.Subtitle';
 
                         if (currentName.length > 0) {
                             tbody += '<tr>';
-                            tbody += '<td>' + currentName + '<span class="label label-primary pull-right">SELECTED</span></td>';
+
+                            if (currentSubtitle.length == 0) {
+                                tbody += '<td>' + currentName + '<span class="label label-primary pull-right">SELECTED</span></td>';
+                            }
+                            else {
+                                tbody += '<td>' + currentName + '<br/><span class="label label-default">' + currentSubtitle + '</span><span class="label label-primary pull-right">SELECTED</span></td>';
+                            }
+
                             tbody += '</tr>';
                         }
 
                         $.each(response.Result, function (key, entry) {
                             if (entry.Value != currentValue) {
                                 tbody += '<tr>';
-                                tbody += '<td>' + entry.Text + '<button type="button" data-text="' + escapeQuote(entry.Text) + '" data-value="' + entry.Value + '" class="modal-table-select-account-btn pull-right">Select</button></td>';
+
+                                if (entry.Text2.length > 0) {
+                                    tbody += '<td>' + entry.Text + '<br/><span class="label label-default">' + entry.Text2 + '</span><button type="button" data-text="' + escapeQuote(entry.Text) + '" data-value="' + entry.Value + '" class="modal-table-select-account-btn pull-right">Select</button></td>';
+                                }
+                                else {
+                                    tbody += '<td>' + entry.Text + '<button type="button" data-text="' + escapeQuote(entry.Text) + '" data-value="' + entry.Value + '" class="modal-table-select-account-btn pull-right">Select</button></td>';
+                                }
                                 tbody += '</tr>';
                             }
                         });

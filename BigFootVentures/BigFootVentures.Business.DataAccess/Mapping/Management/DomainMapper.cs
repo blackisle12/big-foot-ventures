@@ -103,6 +103,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     {
                         ID = registrantID,
                         DisplayName = dataReader["RegistrantName"] as string,
+                        Email = dataReader["RegistrantEmail"] as string,
                         BigFootGroup = (dataReader["RegistrantBigFootGroup"] as sbyte? ?? 0) == 1,
                         ParentAccount = new Company
                         {

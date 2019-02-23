@@ -11,6 +11,8 @@
         public string ChildIDContainer { get; set; }
         public string ChildProperty { get; set; } = "Name";
 
+        public string Subtitle { get; set; }
+
         #endregion
     }
 }
