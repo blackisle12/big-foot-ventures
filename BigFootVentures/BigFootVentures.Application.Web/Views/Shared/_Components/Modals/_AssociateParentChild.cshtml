@@ -33,6 +33,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" name="Modal.Button.@(Model.ChildNameContainer).RemoveSelected" class="pull-left" style="display: none;">Remove Selected</button>
                 <button type="button" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
             </div>
         </div>
@@ -49,7 +50,11 @@
             var currentSubtitle = '@Model.Subtitle';
             var tbody = '';
 
+            $('[name="Modal.Button.@(Model.ChildNameContainer).RemoveSelected"]').css('display', 'none');
+
             if (currentName.length > 0) {
+                $('[name="Modal.Button.@(Model.ChildNameContainer).RemoveSelected"]').css('display', 'block');
+
                 tbody += '<tr>';
 
                 if (currentSubtitle.length == 0) {
@@ -129,6 +134,15 @@
                     }
                 }
             });
+        });
+
+        $('[name="Modal.Button.@(Model.ChildNameContainer).RemoveSelected"]').on('click', function () {
+            if (confirm('Remove selected entry?')) {
+                $('[name="Record.@(Model.ChildNameContainer)"]').val('');
+                $('[name="Record.@(Model.ChildIDContainer)"]').val(0);
+
+                $('[name="Button.@(Model.ChildNameContainer)"]').click();
+            }
         });
     });
 
