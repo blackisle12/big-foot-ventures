@@ -50,7 +50,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 }
                 else
                 {
-                    query.Append("AND c.`BIGFOOT GROUP` = 0 AND p.NAME != 'Bigfoot Group' ");
+                    query.Append("AND ((c.`BIGFOOT GROUP` = 0 OR c.`BIGFOOT GROUP` IS NULL) AND (p.NAME != 'Bigfoot Group' OR p.NAME IS NULL)) ");
                 }
             }
 
@@ -149,7 +149,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 }
                 else
                 {
-                    query.Append("AND c.`BIGFOOT GROUP` = 0 AND p.NAME != 'Bigfoot Group' ");
+                    query.Append("AND ((c.`BIGFOOT GROUP` = 0 OR c.`BIGFOOT GROUP` IS NULL) AND (p.NAME != 'Bigfoot Group' OR p.NAME IS NULL)) ");
                 }
             }
 
@@ -242,7 +242,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
                 }
                 else
                 {
-                    query.Append("AND c.`BIGFOOT GROUP` = 0 AND p.NAME != 'Bigfoot Group' ");
+                    query.Append("AND ((c.`BIGFOOT GROUP` = 0 OR c.`BIGFOOT GROUP` IS NULL) AND (p.NAME != 'Bigfoot Group' OR p.NAME IS NULL)) ");
                 }
             }
 
