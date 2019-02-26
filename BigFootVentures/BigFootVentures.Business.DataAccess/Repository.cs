@@ -269,7 +269,7 @@ namespace BigFootVentures.Business.DataAccess
                     command.Parameters.Add(new MySqlParameter("ID", MySqlDbType.Int32) { Value = ID, Direction = ParameterDirection.Input });
 
                     var dataReader = command.ExecuteReader();
-                    var obj = this._mapper.ParseData(dataReader).SingleOrDefault();
+                    var obj = this._mapper.ParseData(dataReader).FirstOrDefault();
 
                     if (obj != null)
                         entity = (TEntity)obj;
