@@ -276,9 +276,9 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
             //file.Append("Class29,Class29Description,Class30,Class30Description,Class31,Class31Description,Class32,Class32Description,Class33,Class33Description,Class34,Class34Description,Class35,Class35Description,");
             //file.Append("Class36,Class36Description,Class37,Class37Description,Class38,Class38Description,Class39,Class39Description,Class40,Class40Description,Class41,Class41Description,Class42,Class42Description,");
             //file.Append("Class43,Class43Description,Class44,Class44Description,Class45,Class45Description,Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
-            file.Append("Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
-            file.Append("Owner Defense,Source Name,BF Strategy,Strategy Notes,Name Value,Cancel Buy Budget,Revocation Reference External,Invalidity Number,Invalidity Invoked Ground,Invalidity Date,Invalidity Action Outcome,");
-            file.Append("Letter Reference,Letter Origin,Letter Sending Method,Letter Sent On,Owner Response Deadline,Letter Outcome");
+            //file.Append("Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
+            //file.Append("Owner Defense,Source Name,BF Strategy,Strategy Notes,Name Value,Cancel Buy Budget,Revocation Reference External,Invalidity Number,Invalidity Invoked Ground,Invalidity Date,Invalidity Action Outcome,");
+            //file.Append("Letter Reference,Letter Origin,Letter Sending Method,Letter Sent On,Owner Response Deadline,Letter Outcome");
             file.Append(Environment.NewLine);
 
             while (dataReader.Read())
@@ -286,11 +286,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 file.Append(DataUtils.EscapeCSV($"{dataReader["Name"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerName"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["OfficeName"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["OriginalOfficeName"] as string}") + ",");
+                file.Append(","); //file.Append(DataUtils.EscapeCSV($"{dataReader["OriginalOfficeName"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["BrandName"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["TMWebsiteName"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerWebsiteName"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["ComWebsiteName"] as string}") + ",");
+                file.Append(","); //file.Append(DataUtils.EscapeCSV($"{dataReader["TMWebsiteName"] as string}") + ",");
+                file.Append(","); //file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerWebsiteName"] as string}") + ",");
+                file.Append(","); //file.Append(DataUtils.EscapeCSV($"{dataReader["ComWebsiteName"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["OfficeStatus"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["TrademarkNumber"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["InternationalRegistrationNumber"] as string}") + ",");
@@ -346,33 +346,33 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 //    file.Append(DataUtils.EscapeCSV($"{dataReader[$"Class{i}Description"] as string}") + ",");
                 //}
 
-                file.Append(DataUtils.EscapeCSV($"{dataReader["ResearcherName"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["CancellationStrategy"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["MarkUse"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{(dataReader["CompetingMarks"] as sbyte? ?? 0) == 1}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["CompetingMark"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["CancelResearcherComments"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerDefense"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["ResearcherName"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["CancellationStrategy"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["MarkUse"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{(dataReader["CompetingMarks"] as sbyte? ?? 0) == 1}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["CompetingMark"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["CancelResearcherComments"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerDefense"] as string}") + ",");
 
-                file.Append(DataUtils.EscapeCSV($"{dataReader["SourceName"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["BFStrategy"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["StrategyNotes"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["NameValue"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["CancelBuyBudget"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["SourceName"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["BFStrategy"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["StrategyNotes"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["NameValue"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["CancelBuyBudget"] as string}") + ",");
 
-                file.Append(DataUtils.EscapeCSV($"{dataReader["RevocationReferenceExternal"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["RevocationReferenceExternal"] as string}") + ",");
 
-                file.Append(DataUtils.EscapeCSV($"{dataReader["InvalidityNumber"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["InvalidityInvokedGround"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["InvalidityDate"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["InvalidityActionOutcome"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["InvalidityNumber"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["InvalidityInvokedGround"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["InvalidityDate"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["InvalidityActionOutcome"] as string}") + ",");
 
-                file.Append(DataUtils.EscapeCSV($"{dataReader["LetterReference"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["LetterOrigin"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["LetterSendingMethod"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["LetterSentOn"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerResponseDeadline"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["LetterOutcome"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["LetterReference"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["LetterOrigin"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["LetterSendingMethod"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["LetterSentOn"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["OwnerResponseDeadline"] as string}") + ",");
+                //file.Append(DataUtils.EscapeCSV($"{dataReader["LetterOutcome"] as string}") + ",");
 
                 file.Append(Environment.NewLine);
             }

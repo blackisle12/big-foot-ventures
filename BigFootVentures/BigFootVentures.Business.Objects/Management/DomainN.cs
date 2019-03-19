@@ -79,9 +79,33 @@ namespace BigFootVentures.Business.Objects.Management
                 return (this.Registrant?.BigFootGroup == true || this.Registrant?.ParentAccount?.DisplayName == "Bigfoot Group");
             }
         }
-        public int DomainLength { get { return !this.Name.Contains(".") ? this.Name.Length : this.Name.Split(new char[] { '.' })[0].Length; } }
-        public int NameLength { get { return this.Name.Length; } }
-        public string NumberInTheName { get { return StringUtils.HasNumber(this.Name) ? "Yes" : "No"; } }
+        public int DomainLength
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(this.Name))
+                    return !this.Name.Contains(".") ? this.Name.Length : this.Name.Split(new char[] { '.' })[0].Length;
+                else
+                    return 0;
+            }
+        }
+        public int NameLength
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(this.Name) ? this.Name.Length : 0;
+            }
+        }
+
+        public string NumberInTheName
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(this.Name) ?
+                    StringUtils.HasNumber(this.Name) ? "Yes" : "No" :
+                    string.Empty;
+            }
+        }
 
         #endregion
     }
