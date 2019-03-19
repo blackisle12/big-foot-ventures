@@ -480,7 +480,7 @@
     @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Enquiry), ChildIDContainer = "DomainEnquiry.ID", ChildNameContainer = "DomainEnquiry.OldCaseNumber", ChildProperty = "Case Number" })
     @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Brand), ChildIDContainer = "Brand.ID", ChildNameContainer = "Brand.Name" })
     @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Register), ChildIDContainer = "Registrar.ID", ChildNameContainer = "Registrar.Name" })
-    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "Registrant.ID", ChildNameContainer = "Registrant.DisplayName", Subtitle = Model.Record.Registrant.Email })
+    @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "Registrant.ID", ChildNameContainer = "Registrant.DisplayName", Subtitle = Model.Record.Registrant?.Email })
     @Html.Partial("../Shared/_Components/Modals/_AssociateParentChild", new VMAssociation { ParentName = Model.Name, ChildName = nameof(Company), ChildIDContainer = "PreviousRegistrant.ID", ChildNameContainer = "PreviousRegistrant.DisplayName" })
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
