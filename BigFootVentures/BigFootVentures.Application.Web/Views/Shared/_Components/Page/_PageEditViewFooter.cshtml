@@ -1,10 +1,15 @@
 ﻿@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
 
 @{
     if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
     {
         <button type="button" onclick="window.open('@Url.RouteUrl($"{Model.Name}Edit", new { ID = Model.Record.ID })', '_self')" target="_blank"><i class="fa fa-edit"></i> Edit</button>
-        <button type="button" onclick="OnRecordDelete('@Url.Action($"{Model.Name}Delete", new { ID = Model.Record.ID })');"><i class="fa fa-trash-o"></i> Delete</button>
+
+        if (SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
+        {
+            <button type="button" onclick="OnRecordDelete('@Url.Action($"{Model.Name}Delete", new { ID = Model.Record.ID })');"><i class="fa fa-trash-o"></i> Delete</button>
+        }
     }
     else
     {

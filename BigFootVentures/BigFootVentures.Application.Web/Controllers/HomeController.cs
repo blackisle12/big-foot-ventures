@@ -49,6 +49,8 @@ namespace BigFootVentures.Application.Web.Controllers
 
         private readonly EmailAutomationService _emailAutomationService = null;
 
+        private readonly ITrademarkService _trademarkService = null;
+
         #endregion
 
         #region "Constructors"
@@ -74,7 +76,9 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<TMRepresentative> managementTMRepresentativeService,
             IManagementService<Trademark> managementTrademarkService,
             IManagementService<TrademarkOwner> managementTrademarkOwnerService,
-            IManagementService<UserAccount> managementUserAccountService)
+            IManagementService<UserAccount> managementUserAccountService,
+
+            ITrademarkService trademarkService)
         {
             this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
@@ -105,6 +109,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 ConfigurationManager.AppSettings["SMTP_FromEmail"],
                 ConfigurationManager.AppSettings["SMTP_Username"],
                 ConfigurationManager.AppSettings["SMTP_Password"]);
+
+            this._trademarkService = trademarkService;
         }
 
         #endregion
@@ -3454,7 +3460,7 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("Trademark/{ID:int}", Name = "TrademarkView")]
         public ActionResult Trademark(int ID)
         {
-            var trademark = this._managementTrademarkService.Get(ID);
+            var trademark = this._trademarkService.Get(ID);
 
             trademark.Office = this._managementOfficeService.Get(trademark.Office.ID);
             trademark.Brand = this._managementBrandService.Get(trademark.Brand.ID);
@@ -3531,7 +3537,7 @@ namespace BigFootVentures.Application.Web.Controllers
             }
             else
             {
-                var trademark = this._managementTrademarkService.Get(ID);
+                var trademark = this._trademarkService.Get(ID);
 
                 trademark.Office = this._managementOfficeService.Get(trademark.Office.ID);
                 trademark.Brand = this._managementBrandService.Get(trademark.Brand.ID);
@@ -3695,7 +3701,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
             if (trademarkOwner != null)
             {
-                var trademark = this._managementTrademarkService.Get(trademarkOwner.Trademark.ID);
+                var trademark = this._trademarkService.Get(trademarkOwner.Trademark.ID);
 
                 if(trademark != null)
                 {
@@ -3729,6 +3735,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 }
 
                 trademarkOwner.Trademark = trademark;
+                trademarkOwner.Company = this._managementCompanyService.Get(trademarkOwner.Company.ID);
             }
 
             var model = new VMModel<TrademarkOwner>

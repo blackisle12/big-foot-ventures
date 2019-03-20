@@ -222,6 +222,7 @@
     <Content Include="Content\images\bf_logo_white.png" />
     <Content Include="Content\images\jquery-te.png" />
     <Content Include="Content\images\loader.gif" />
+    <Content Include="Content\images\top1b.jpg" />
     <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\nav-css.css" />
     <Content Include="Content\Views\Home\Domains.css" />

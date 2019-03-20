@@ -54,7 +54,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     var userAccount = this._managementUserAccountService.GetByUsername(username).FirstOrDefault();
 
-                    FormsAuthentication.SetAuthCookie($"{userAccount.ID} {username} {userAccount.FirstName} {userAccount.LastName}", false);
+                    FormsAuthentication.SetAuthCookie($"{userAccount.ID} {username} {userAccount.FirstName} {userAccount.LastName} {userAccount.Roles}", false);
 
                     return RedirectToAction("Index", "Home");
                 }

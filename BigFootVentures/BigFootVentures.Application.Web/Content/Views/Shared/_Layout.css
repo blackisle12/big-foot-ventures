@@ -199,3 +199,15 @@ p.table-empty {
 .table-view td {
     width: 25%;
 }
+
+#background {
+    width: 100%;
+    position: static;
+    left: 0px;
+    top: 0px;
+    z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
+}
+
+.stretch {
+    width: 100%;
+}

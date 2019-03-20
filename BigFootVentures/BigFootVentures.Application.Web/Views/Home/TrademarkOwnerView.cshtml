@@ -128,8 +128,8 @@
                         <tr>
                             <td><strong>Expiry Date</strong></td>
                             <td>@Model.Record.Trademark.ExpiryDate</td>
-                            <td></td>
-                            <td></td>
+                            <td><strong>Company Address</strong></td>
+                            <td>@(Model.Record.Company?.ShippingStreet) @(Model.Record.Company?.ShippingCity) @(Model.Record.Company?.ShippingState) @(Model.Record.Company?.ShippingCountry) @(Model.Record.Company?.ShippingPostalCode)</td>
                         </tr>
                         <tr>
                             <td><strong>6 Months Anniversary</strong></td>
@@ -318,10 +318,10 @@
                 </div>
             </div>
             <!-- END: Country Specific-Latvia -->
-            <!-- START: Country Specific-Latvia -->
+            <!-- START: Classes -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Country Specific-Latvia</h4>
+                    <h4 class="panel-title">Classes</h4>
                 </div>
                 <div class="panel-body">
                     <table class="table table-view">
@@ -598,7 +598,7 @@
                     </table>
                 </div>
             </div>
-            <!-- END:  Country Specific-Latvia -->
+            <!-- END:  Classes -->
             <!-- START: Cancellation Researcher -->
             <div class="panel panel-default">
                 <div class="panel-heading">

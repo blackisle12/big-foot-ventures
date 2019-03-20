@@ -12,13 +12,14 @@ namespace BigFootVentures.Application.Web.Models.Utilities
         {
             var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
             var cookie = FormsAuthentication.Decrypt(authCookie.Value).Name;
-            var values = cookie.Split(new char[] { ' ' }, 3);
+            var values = cookie.Split(new char[] { ' ' }, 5);
 
             return new UserAccount
             {
                 ID = Convert.ToInt32(values.First()),
                 Username = values.ElementAt(1),
-                DisplayName = values.Last()
+                DisplayName = $"{values.ElementAt(2)} {values.ElementAt(3)}",
+                Roles = values.Last()
             };
         }
 

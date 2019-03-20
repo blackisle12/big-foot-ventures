@@ -40,6 +40,8 @@ namespace BigFootVentures.Application.Web
 
             container.RegisterType<ISearchService>(new InjectionFactory(c => new SearchService(connectionString)));
 
+            container.RegisterType<ITrademarkService>(new InjectionFactory(c => new TrademarkService(connectionString)));
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
