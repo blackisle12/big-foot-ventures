@@ -71,7 +71,7 @@
                             @{
                                 foreach (var header in table.Header)
                                 {
-                                    <th style="width: 47.5%">@header</th>
+                                    <th style="width: 31.5%">@header</th>
                                 }
                             }
                         </tr>
@@ -95,24 +95,21 @@
 
                                         string link = $"{Url.Action(action, "Home")}/{row[0]}";
 
-                                        for (var i = 1; i < row.Count; i++)
+                                        <td><a href="@link">View</a></td>
+                                        <td>@Html.Raw(row[1])</td>
+
+                                        if (table.Caption == "Domain")
                                         {
-                                            if (i == 1)
-                                            {
-                                                <td><a href="@link">View</a></td>
-                                                <td>@Html.Raw(row[i])</td>
-                                            }
-                                            else
-                                            {
-                                                if (table.Caption == "Domain")
-                                                {
-                                                    <td><input type="checkbox" @(row[i] == "True" ? "checked" : string.Empty) disabled /></td>
-                                                }
-                                                else
-                                                {
-                                                    <td>@Html.Raw(row[i])</td>
-                                                }
-                                            }
+                                            <td colspan="2"><input type="checkbox" @(row[2] == "True" ? "checked" : string.Empty) disabled /></td>
+                                        }
+                                        else if (table.Caption == "Trademark")
+                                        {
+                                            <td>@Html.Raw(row[2])</td>
+                                            <td><input type="checkbox" @(row[3] == "Yes" ? "checked" : string.Empty) disabled /></td>
+                                        }
+                                        else
+                                        {
+                                            <td colspan="2">@Html.Raw(row[2])</td>
                                         }
                                     }
                                 </tr>

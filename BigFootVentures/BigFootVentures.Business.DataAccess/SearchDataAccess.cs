@@ -63,7 +63,8 @@ namespace BigFootVentures.Business.DataAccess
                                 dataReader["Caption"] as string == "Enquiry" ? 
                                     StringUtils.GenerateAutoNumber(Convert.ToInt32(dataReader["COL1"] as string)) :
                                     dataReader["COL1"] as string,
-                                dataReader["COL2"] as string
+                                dataReader["COL2"] as string,
+                                dataReader["COL3"] as string
                             });
                         }
                     }
@@ -100,18 +101,18 @@ namespace BigFootVentures.Business.DataAccess
         {
             var searchResultList = new List<SearchResultWrapper>();
 
-            searchResultList.Add(new SearchResultWrapper { Caption = "Agreement", Header = new List<string> { "Agreement Name", "Type" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Brand", Header = new List<string> { "Brand Name", "Value" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Cancellation", Header = new List<string> { "Reference Internal", "Reference External" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Company", Header = new List<string> { "Name", "Account Record Type" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Contact", Header = new List<string> { "Name", "Department" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Domain", Header = new List<string> { "Domain Name", "BigFoot Owned" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Enquiry", Header = new List<string> { "Case Number", "Subject" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Lead", Header = new List<string> { "Name", "Company" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Legal Case", Header = new List<string> { "Legal Proceeding Name", "Type of Case" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Office", Header = new List<string> { "Office Name", string.Empty }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Registrar", Header = new List<string> { "Register Name", "Country" }, Rows = new List<List<string>>() });
-            searchResultList.Add(new SearchResultWrapper { Caption = "Trademark", Header = new List<string> { "Trademark Name", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Agreement", Header = new List<string> { "Agreement Name", "Type", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Brand", Header = new List<string> { "Brand Name", "Value", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Cancellation", Header = new List<string> { "Reference Internal", "Reference External", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Company", Header = new List<string> { "Name", "Account Record Type", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Contact", Header = new List<string> { "Name", "Department", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Domain", Header = new List<string> { "Domain Name", "BigFoot Owned", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Enquiry", Header = new List<string> { "Case Number", "Subject", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Lead", Header = new List<string> { "Name", "Company", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Legal Case", Header = new List<string> { "Legal Proceeding Name", "Type of Case", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Office", Header = new List<string> { "Office Name", string.Empty, string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Registrar", Header = new List<string> { "Register Name", "Country", string.Empty }, Rows = new List<List<string>>() });
+            searchResultList.Add(new SearchResultWrapper { Caption = "Trademark", Header = new List<string> { "Trademark Name", "Trademark Number", "BigFoot Group Owned" }, Rows = new List<List<string>>() });
 
             return searchResultList;
         }
