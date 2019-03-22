@@ -694,7 +694,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Action Methods"
 
-        [Route("Index/{keyword}", Name = "Search")]
+        [Route("Index", Name = "Search")]
         public ActionResult Index(string keyword)
         {
             var searchResultWrapperList = this._searchService.Search(keyword);
