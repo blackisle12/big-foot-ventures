@@ -289,3 +289,19 @@ a.article, a.article:hover {
         margin-left: 1264px;
     }
 }
+
+.container-fluid {
+    padding-bottom: 15px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #eee;
+    border-top: 1px solid #999;
+    text-align: center;
+    padding: 15px;
+    padding-bottom: 8px;
+}

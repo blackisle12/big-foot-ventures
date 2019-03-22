@@ -19,6 +19,7 @@ namespace BigFootVentures.Application.Web.Models.ViewModels
         public string DeleteMessage { get { return $"{typeof(TModel).Name} have been removed successfully."; } }
 
         public string Name { get { return typeof(TModel).Name; } }
+        public string Header { get; set; }
 
         #endregion
     }

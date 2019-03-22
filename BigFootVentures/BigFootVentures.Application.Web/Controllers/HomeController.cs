@@ -155,7 +155,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = agreements
+                Records = agreements,
+                Header = "Agreements"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -351,7 +352,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = brands
+                Records = brands,
+                Header = "Brands"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -525,7 +527,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = cancellations
+                Records = cancellations,
+                Header = "Cancellations"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -672,7 +675,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = companies
+                Records = companies,
+                Header = "Companies"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -881,7 +885,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = contacts
+                Records = contacts,
+                Header = "Contacts"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -1077,7 +1082,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = domains
+                Records = domains,
+                Header = "Domains"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -1311,7 +1317,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = emailResponse
+                Records = emailResponse,
+                Header = "Email Responses"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -1469,7 +1476,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = enquiries
+                Records = enquiries,
+                Header = "Enquiries"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -1689,7 +1697,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = leads
+                Records = leads,
+                Header = "Leads"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -1865,7 +1874,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = legalCases
+                Records = legalCases,
+                Header = "Legal Cases"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -2022,7 +2032,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = loginInformations
+                Records = loginInformations,
+                Header = "Login Information"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -2165,7 +2176,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = offices
+                Records = offices,
+                Header = "Offices"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -2348,7 +2360,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = officeStatuses
+                Records = officeStatuses,
+                Header = "Office Statuses"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -2506,7 +2519,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = oppositions
+                Records = oppositions,
+                Header = "Oppositions"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -2663,7 +2677,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = preFilingSimilarityResearchs
+                Records = preFilingSimilarityResearchs,
+                Header = "Pre-Filing Similarity Research"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -2820,7 +2835,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = registers
+                Records = registers,
+                Header = "Registers"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -2991,7 +3007,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = similarTrademarks
+                Records = similarTrademarks,
+                Header = "Similar Trademarks"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -3137,7 +3154,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = tasks
+                Records = tasks,
+                Header = "Tasks"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -3286,7 +3304,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = TMRepresentatives
+                Records = TMRepresentatives,
+                Header = "TM Representatives"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -3443,7 +3462,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = trademarks
+                Records = trademarks,
+                Header = "Trademarks"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -3682,7 +3702,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = trademarkOwners
+                Records = trademarkOwners,
+                Header = "Trademark Owners"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -3855,6 +3876,9 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("UserAccounts/{rowCount?}/{page?}", Name = "UserAccounts")]
         public ActionResult UserAccounts(int rowCount = 25, int page = 1)
         {
+            if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
+                return RedirectToAction("Index");
+
             var startIndex = (page - 1) * rowCount;
             var userAccounts = this._managementUserAccountService.Get(startIndex, rowCount, out int total);
             var pageResult = new VMPageResult<UserAccount>
@@ -3863,7 +3887,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 RowCount = rowCount,
                 Page = page,
                 Total = total,
-                Records = userAccounts
+                Records = userAccounts,
+                Header = "User Accounts"
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -3878,6 +3903,9 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("UserAccount/{ID:int}", Name = "UserAccountView")]
         public ActionResult UserAccount(int ID)
         {
+            if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
+                return RedirectToAction("Index");
+
             var userAccount = this._managementUserAccountService.Get(ID);
             var model = new VMModel<UserAccount>
             {
@@ -3897,6 +3925,9 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("UserAccount/New", Name = "UserAccountNew")]
         public ActionResult UserAccountNew()
         {
+            if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
+                return RedirectToAction("Index");
+
             VMModel<UserAccount> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
@@ -3918,6 +3949,9 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("UserAccount/Edit/{ID:int}", Name = "UserAccountEdit")]
         public ActionResult UserAccountEdit(int ID)
         {
+            if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
+                return RedirectToAction("Index");
+
             VMModel<UserAccount> model = null;
 
             if (TempData.ContainsKey("ModelPosted"))
@@ -3940,6 +3974,9 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("UserAccount", Name = "UserAccountPost")]
         public ActionResult UserAccount(VMModel<UserAccount> model)
         {
+            if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
+                return RedirectToAction("Index");
+
             Func<int> postModel = () =>
             {
                 if (model.Record.RolesSelected != null)
