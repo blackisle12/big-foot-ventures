@@ -299,9 +299,9 @@ a.article, a.article:hover {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #eee;
-    border-top: 1px solid #999;
-    text-align: center;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    text-align: right;
     padding: 15px;
     padding-bottom: 8px;
 }
