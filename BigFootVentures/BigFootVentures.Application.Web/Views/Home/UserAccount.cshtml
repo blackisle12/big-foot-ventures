@@ -42,10 +42,7 @@
             <!-- START: Information -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        General Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">General Information</h4>
                 </div>
                 <div class="panel-body">
                     <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
@@ -109,10 +106,7 @@
             <!--START: Mailing Address-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Mailing Address
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Mailing Address</h4>
                 </div>
                 <div class="panel-body">
                     <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
@@ -153,10 +147,7 @@
             <!--START: Roles -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Roles
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Roles</h4>
                 </div>
                 <div class="panel-body">
                     <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
@@ -185,7 +176,6 @@
     </div>
 
     <script src="~/Scripts/Views/Shared/_Validator.js"></script>
-    <script src="~/Scripts/Views/Shared/_PanelHelper.js"></script>
     <script src="~/Scripts/Views/Home/UserAccount.js"></script>
 }
 

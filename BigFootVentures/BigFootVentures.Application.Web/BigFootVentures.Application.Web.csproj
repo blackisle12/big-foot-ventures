@@ -175,6 +175,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -442,6 +443,7 @@
     <Content Include="Views\Home\Oppositions.cshtml" />
     <Content Include="Views\Home\OppositionView.cshtml" />
     <Content Include="Views\Home\Opposition.cshtml" />
+    <Content Include="Views\Account\AccountInformationView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

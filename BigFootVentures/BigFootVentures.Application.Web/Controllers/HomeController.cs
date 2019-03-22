@@ -2811,15 +2811,6 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #endregion
 
-        #region "Password Reset"
-
-        [Route("PasswordReset", Name = "PasswordReset")]
-        public ActionResult ChangePassword()
-        {
-            return View();
-        } 
-        #endregion
-
         #region "Register"
 
         [Route("Registers/{rowCount?}/{page?}/{keyword?}", Name = "Registers")]
@@ -4052,24 +4043,6 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        #endregion
-
-        #region "Other Views"
-
-        [Route("AccountInformation/{ID:int}", Name = "AccountInformationView")]
-        public ActionResult AccountInformation(int ID)
-        {
-            var userAccount = this._managementUserAccountService.Get(SessionUtils.GetUserAccount().ID);
-            
-            var model = new VMModel<UserAccount>
-            {
-                Record = userAccount,
-                PageMode = PageMode.View
-            };
-
-            return View("AccountInformation", model);
         }
 
         #endregion
