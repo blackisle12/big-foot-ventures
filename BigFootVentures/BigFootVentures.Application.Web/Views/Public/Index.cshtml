@@ -18,11 +18,29 @@
         {
             if (TempData.ContainsKey("UserActivatedInfo"))
             {
-                TempData.Remove("UserActivatedInfo");
-
                 <div class="alert alert-info">
-                    <p>You have successfully activated your account..</p>
+                    <p>You have successfully activated your account, you may now login on the system..</p>
                 </div>
+
+                TempData.Remove("UserActivatedInfo");
+            }
+
+            if (TempData.ContainsKey("ForgotPasswordInfo"))
+            {
+                <div class="alert alert-info">
+                    <p>An email has been sent to @TempData["ForgotPasswordInfo"].ToString(), please go to your e-mail and follow the steps..</p>
+                </div>
+
+                TempData.Remove("ForgotPasswordInfo");
+            }
+
+            if (TempData.ContainsKey("ForgotPasswordSetInfo"))
+            {
+                <div class="alert alert-info">
+                    <p>You have successfully changed your password, you may now login on the system..</p>
+                </div>
+
+                TempData.Remove("ForgotPasswordSetInfo");
             }
 
             <div class="container">
@@ -38,6 +56,9 @@
                         <div class="form-group">
                             <label>Password:</label>
                             @Html.Password("password", "", new { @class = "form-control", @required = "required" })
+                            <label class="pull-right">
+                                <a href="@Url.Action("ForgotPassword", "Public")">Forgot Password?</a>
+                            </label>
                         </div>
                         @if (TempData.ContainsKey("errorMessage"))
                         {

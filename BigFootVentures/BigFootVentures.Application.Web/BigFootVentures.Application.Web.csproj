@@ -445,6 +445,8 @@
     <Content Include="Views\Home\Opposition.cshtml" />
     <Content Include="Views\Account\AccountInformationView.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Public\ForgotPassword.cshtml" />
+    <Content Include="Views\Public\ForgotPasswordSet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

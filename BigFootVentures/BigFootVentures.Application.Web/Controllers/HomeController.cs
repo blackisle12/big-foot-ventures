@@ -3993,7 +3993,7 @@ namespace BigFootVentures.Application.Web.Controllers
                                 model.Record.ID,
                                 ConfigurationManager.AppSettings["Host"],
                                 model.Record.FirstName),
-                            fromName: "Big Foot Ventures",
+                            fromName: "Trademarkers LLC.",
                             isHtml: true);
 
                         TempData.Add("UserAccountInserted", true);
