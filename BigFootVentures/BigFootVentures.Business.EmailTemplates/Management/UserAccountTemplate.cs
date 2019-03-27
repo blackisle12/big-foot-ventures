@@ -20,5 +20,15 @@ namespace BigFootVentures.Business.EmailTemplates.Management
                     <p>Please click on these <a href='{url}/Public/ForgotPasswordSet?q={HttpUtility.UrlEncode(encryptedID)}'>link</a> to set a new password for your account.</p>";
 
         }
+
+        public static string GetReactivateAccountTemplate(string encryptedID, string url, string firstName)
+        {
+            return $@"<div>
+                        <span>Hi {firstName},</span><br />
+                    </div>
+                    <p>Please click on these <a href='{url}/Public/ForgotPasswordSet?q={HttpUtility.UrlEncode(encryptedID)}'>link</a> to set a new password for your account.</p>";
+
+
+        }
     }
 }

@@ -3983,6 +3983,24 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("UserAccount", Name = "UserAccountPost")]
         public ActionResult UserAccount(VMModel<UserAccount> model)
         {
+            var userAccount = this._managementUserAccountService.Get(model.Record.ID);
+
+            if(model.Record.IsActive && model.Record.IsActive != userAccount.IsActive)
+            {
+                var securityKey = ConfigurationManager.AppSettings["PasswordSecurityKey"];
+                var encryptedID = PasswordEncryption.Encrypt($"{securityKey}_{userAccount.ID}");
+
+                this._emailAutomationService.SendEmail(
+                    to: model.Record.EmailAddress,
+                    subject: $"Reactivate Account - {model.Record.EmailAddress}",
+                    body: UserAccountTemplate.GetReactivateAccountTemplate(
+                        encryptedID,
+                        ConfigurationManager.AppSettings["Host"],
+                        userAccount.FirstName),
+                    fromName: "Trademarkers LLC.",
+                    isHtml: true);
+            }
+
             if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
                 return RedirectToAction("Index");
 

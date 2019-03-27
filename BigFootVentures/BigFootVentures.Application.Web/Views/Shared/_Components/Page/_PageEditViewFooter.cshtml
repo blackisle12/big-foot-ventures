@@ -6,7 +6,7 @@
     {
         <button type="button" onclick="window.open('@Url.RouteUrl($"{Model.Name}Edit", new { ID = Model.Record.ID })', '_self')" target="_blank"><i class="fa fa-edit"></i> Edit</button>
 
-        if (SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
+        if (SessionUtils.GetUserAccount().Roles.Contains("Administrator") && Model.Name != "UserAccount")
         {
             <button type="button" onclick="OnRecordDelete('@Url.Action($"{Model.Name}Delete", new { ID = Model.Record.ID })');"><i class="fa fa-trash-o"></i> Delete</button>
         }
