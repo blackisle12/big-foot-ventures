@@ -3983,6 +3983,9 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("UserAccount", Name = "UserAccountPost")]
         public ActionResult UserAccount(VMModel<UserAccount> model)
         {
+            if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
+                return RedirectToAction("Index");
+
             var userAccount = this._managementUserAccountService.Get(model.Record.ID);
 
             if(model.Record.IsActive && model.Record.IsActive != userAccount.IsActive)
@@ -4000,9 +4003,6 @@ namespace BigFootVentures.Application.Web.Controllers
                     fromName: "Trademarkers LLC.",
                     isHtml: true);
             }
-
-            if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
-                return RedirectToAction("Index");
 
             Func<int> postModel = () =>
             {
