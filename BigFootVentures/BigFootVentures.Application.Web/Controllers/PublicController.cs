@@ -1,6 +1,8 @@
 ﻿using BigFootVentures.Application.Web.Models.Security;
+using BigFootVentures.Application.Web.Models.Utilities;
 using BigFootVentures.Application.Web.Models.ViewModels;
 using BigFootVentures.Business.EmailTemplates.Management;
+using BigFootVentures.Business.Objects.Logs;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using BigFootVentures.Service.BusinessService.Validators;
@@ -22,11 +24,16 @@ namespace BigFootVentures.Application.Web.Controllers
 
         private readonly EmailAutomationService _emailAutomationService = null;
 
+        private readonly IAuditTrailService _auditTrailService = null;
+
         #endregion
 
         #region "Constructors"
 
-        public PublicController(IManagementService<UserAccount> managementUserAccountService)
+        public PublicController(
+            IManagementService<UserAccount> managementUserAccountService,
+            
+            IAuditTrailService auditTrailService)
         {
             this._managementUserAccountService = managementUserAccountService;
 
@@ -36,6 +43,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 ConfigurationManager.AppSettings["SMTP_FromEmail"],
                 ConfigurationManager.AppSettings["SMTP_Username"],
                 ConfigurationManager.AppSettings["SMTP_Password"]);
+
+            this._auditTrailService = auditTrailService;
         }
 
         #endregion
@@ -67,6 +76,19 @@ namespace BigFootVentures.Application.Web.Controllers
 
                     FormsAuthentication.SetAuthCookie($"{userAccount.ID} {username} {userAccount.FirstName} {userAccount.LastName} {userAccount.Roles}", false);
 
+                    this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = userAccount.ID,
+                                Message = "User Account logged in.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = userAccount.ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -97,6 +119,19 @@ namespace BigFootVentures.Application.Web.Controllers
         [Route("Logout")]
         public ActionResult Logout()
         {
+            this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = SessionUtils.GetUserAccount().ID,
+                                Message = "User Account logged out.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
+
             FormsAuthentication.SignOut();
 
             return RedirectToAction("Index");
@@ -152,6 +187,19 @@ namespace BigFootVentures.Application.Web.Controllers
             model.Record.IsActive = true;
             model.Record.Password = PasswordEncryption.Encrypt(newPassword);
             this._managementUserAccountService.UpdateUserAccount(model.Record);
+
+            this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = model.Record.ID,
+                                Message = "User Account was verified successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = model.Record.ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
 
             TempData.Add("UserActivatedInfo", true);
 
@@ -243,6 +291,19 @@ namespace BigFootVentures.Application.Web.Controllers
             model.Record = userAccount;
             model.Record.Password = PasswordEncryption.Encrypt(newPassword);
             this._managementUserAccountService.UpdateUserAccount(model.Record);
+
+            this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = userAccount.ID,
+                                Message = "User Account reset password successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = userAccount.ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
 
             TempData.Add("ForgotPasswordSetInfo", true);
 

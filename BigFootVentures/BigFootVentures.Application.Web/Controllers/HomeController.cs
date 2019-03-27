@@ -5,6 +5,7 @@ using BigFootVentures.Application.Web.Models.ViewModels;
 using BigFootVentures.Business.EmailTemplates.Management;
 using BigFootVentures.Business.Objects;
 using BigFootVentures.Business.Objects.Enumerators;
+using BigFootVentures.Business.Objects.Logs;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using BigFootVentures.Service.BusinessService.Validators;
@@ -51,6 +52,8 @@ namespace BigFootVentures.Application.Web.Controllers
 
         private readonly ITrademarkService _trademarkService = null;
 
+        private readonly IAuditTrailService _auditTrailService = null;
+
         #endregion
 
         #region "Constructors"
@@ -78,7 +81,9 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<TrademarkOwner> managementTrademarkOwnerService,
             IManagementService<UserAccount> managementUserAccountService,
 
-            ITrademarkService trademarkService)
+            ITrademarkService trademarkService,
+            
+            IAuditTrailService auditTrailService)
         {
             this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
@@ -111,6 +116,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 ConfigurationManager.AppSettings["SMTP_Password"]);
 
             this._trademarkService = trademarkService;
+
+            this._auditTrailService = auditTrailService;
         }
 
         #endregion
@@ -269,10 +276,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementAgreementService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Agreement",
+                                ObjectID = model.Record.ID,
+                                Message = "Agreement was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementAgreementService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Agreement",
+                                ObjectID = model.Record.ID,
+                                Message = "Agreement was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -444,10 +477,36 @@ namespace BigFootVentures.Application.Web.Controllers
                     if (model.Record.ID == 0)
                     {
                         this._managementBrandService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Brand",
+                                ObjectID = model.Record.ID,
+                                Message = "Brand was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementBrandService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Brand",
+                                ObjectID = model.Record.ID,
+                                Message = "Brand was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -618,10 +677,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementCancellationService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Cancellation",
+                                ObjectID = model.Record.ID,
+                                Message = "Cancellation was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementCancellationService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Cancellation",
+                                ObjectID = model.Record.ID,
+                                Message = "Cancellation was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -802,10 +887,36 @@ namespace BigFootVentures.Application.Web.Controllers
                     if (model.Record.ID == 0)
                     {
                         this._managementCompanyService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Company",
+                                ObjectID = model.Record.ID,
+                                Message = "Company was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementCompanyService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Company",
+                                ObjectID = model.Record.ID,
+                                Message = "Company was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -999,10 +1110,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementContactService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Contact",
+                                ObjectID = model.Record.ID,
+                                Message = "Contact was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementContactService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Contact",
+                                ObjectID = model.Record.ID,
+                                Message = "Contact was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -1236,10 +1373,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementDomainService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Domain",
+                                ObjectID = model.Record.ID,
+                                Message = "Domain was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementDomainService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Domain",
+                                ObjectID = model.Record.ID,
+                                Message = "Domain was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -1419,10 +1582,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementEmailResponseService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "EmailResponse",
+                                ObjectID = model.Record.ID,
+                                Message = "Email Response was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementEmailResponseService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "EmailResponse",
+                                ObjectID = model.Record.ID,
+                                Message = "Email Response was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -1614,10 +1803,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementEnquiryService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Enquiry",
+                                ObjectID = model.Record.ID,
+                                Message = "Enquiry was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementEnquiryService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Enquiry",
+                                ObjectID = model.Record.ID,
+                                Message = "Enquiry was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -1791,6 +2006,19 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementLeadService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Lead",
+                                ObjectID = model.Record.ID,
+                                Message = "Lead was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
@@ -1977,10 +2205,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         }
 
                         this._managementLegalCaseService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "LegalCase",
+                                ObjectID = model.Record.ID,
+                                Message = "Legal Case was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementLegalCaseService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "LegalCase",
+                                ObjectID = model.Record.ID,
+                                Message = "Legal Case was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -2119,10 +2373,36 @@ namespace BigFootVentures.Application.Web.Controllers
                     if (model.Record.ID == 0)
                     {
                         this._managementLoginInformationService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "LoginInformation",
+                                ObjectID = model.Record.ID,
+                                Message = "Login Information was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementLoginInformationService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "LoginInformation",
+                                ObjectID = model.Record.ID,
+                                Message = "Login Information was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -2279,10 +2559,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementOfficeService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Office",
+                                ObjectID = model.Record.ID,
+                                Message = "Office was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementOfficeService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Office",
+                                ObjectID = model.Record.ID,
+                                Message = "Office was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -2462,10 +2768,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementOfficeStatusService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "OfficeStatus",
+                                ObjectID = model.Record.ID,
+                                Message = "Office Status was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementOfficeStatusService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "OfficeStatus",
+                                ObjectID = model.Record.ID,
+                                Message = "Office Status was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -2622,10 +2954,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         }
 
                         this._managementOppositionService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Opposition",
+                                ObjectID = model.Record.ID,
+                                Message = "Opposition was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementOppositionService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Opposition",
+                                ObjectID = model.Record.ID,
+                                Message = "Opposition was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -2769,10 +3127,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementPreFilingSimilarityResearchService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "PreFilingSimilarityResearch",
+                                ObjectID = model.Record.ID,
+                                Message = "Pre-Filing Similarity Research was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementPreFilingSimilarityResearchService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "PreFilingSimilarityResearch",
+                                ObjectID = model.Record.ID,
+                                Message = "Pre-Filing Similarity Research was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -2917,10 +3301,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementRegisterService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Register",
+                                ObjectID = model.Record.ID,
+                                Message = "Register was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementRegisterService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Register",
+                                ObjectID = model.Record.ID,
+                                Message = "Register was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -3090,10 +3500,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementSimilarTrademarkService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "SimilarTrademark",
+                                ObjectID = model.Record.ID,
+                                Message = "Similar Trademark was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementSimilarTrademarkService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "SimilarTrademark",
+                                ObjectID = model.Record.ID,
+                                Message = "Similar Trademark was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -3240,10 +3676,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementTaskService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Task",
+                                ObjectID = model.Record.ID,
+                                Message = "Task was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementTaskService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Task",
+                                ObjectID = model.Record.ID,
+                                Message = "Task was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -3396,10 +3858,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         }
 
                         this._managementTMRepresentativeService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "TMRepresentative",
+                                ObjectID = model.Record.ID,
+                                Message = "TM Representative was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementTMRepresentativeService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "TMRepresentative",
+                                ObjectID = model.Record.ID,
+                                Message = "TM Representative was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -3612,10 +4100,36 @@ namespace BigFootVentures.Application.Web.Controllers
                         model.Record.OwnerName = SessionUtils.GetUserAccount().DisplayName;
 
                         this._managementTrademarkService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Trademark",
+                                ObjectID = model.Record.ID,
+                                Message = "Trademark was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementTrademarkService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "Trademark",
+                                ObjectID = model.Record.ID,
+                                Message = "Trademark was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -3820,10 +4334,36 @@ namespace BigFootVentures.Application.Web.Controllers
                     if (model.Record.ID == 0)
                     {
                         this._managementTrademarkOwnerService.Insert(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "TrademarkOwner",
+                                ObjectID = model.Record.ID,
+                                Message = "Trademark Owner was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
                     else
                     {
                         this._managementTrademarkOwnerService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "TrademarkOwner",
+                                ObjectID = model.Record.ID,
+                                Message = "Trademark Owner was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;
@@ -3986,24 +4526,6 @@ namespace BigFootVentures.Application.Web.Controllers
             if (!SessionUtils.GetUserAccount().Roles.Contains("Administrator"))
                 return RedirectToAction("Index");
 
-            var userAccount = this._managementUserAccountService.Get(model.Record.ID);
-
-            if(model.Record.IsActive && model.Record.IsActive != userAccount.IsActive)
-            {
-                var securityKey = ConfigurationManager.AppSettings["PasswordSecurityKey"];
-                var encryptedID = PasswordEncryption.Encrypt($"{securityKey}_{userAccount.ID}");
-
-                this._emailAutomationService.SendEmail(
-                    to: model.Record.EmailAddress,
-                    subject: $"Reactivate Account - {model.Record.EmailAddress}",
-                    body: UserAccountTemplate.GetReactivateAccountTemplate(
-                        encryptedID,
-                        ConfigurationManager.AppSettings["Host"],
-                        userAccount.FirstName),
-                    fromName: "Trademarkers LLC.",
-                    isHtml: true);
-            }
-
             Func<int> postModel = () =>
             {
                 if (model.Record.RolesSelected != null)
@@ -4032,11 +4554,97 @@ namespace BigFootVentures.Application.Web.Controllers
                             fromName: "Trademarkers LLC.",
                             isHtml: true);
 
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = model.Record.ID,
+                                Message = "User Account was created successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = model.Record.ID,
+                                Message = $"An e-mail account verification was sent to {model.Record.Username}",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
+
                         TempData.Add("UserAccountInserted", true);
                     }
                     else
                     {
+                        var userAccount = this._managementUserAccountService.Get(model.Record.ID);
+
+                        if (model.Record.IsActive && model.Record.IsActive != userAccount.IsActive)
+                        {
+                            var securityKey = ConfigurationManager.AppSettings["PasswordSecurityKey"];
+                            var encryptedID = PasswordEncryption.Encrypt($"{securityKey}_{userAccount.ID}");
+
+                            this._emailAutomationService.SendEmail(
+                                to: model.Record.EmailAddress,
+                                subject: $"Reactivate Account - {model.Record.EmailAddress}",
+                                body: UserAccountTemplate.GetReactivateAccountTemplate(
+                                    encryptedID,
+                                    ConfigurationManager.AppSettings["Host"],
+                                    userAccount.FirstName),
+                                fromName: "Trademarkers LLC.",
+                                isHtml: true);
+
+                            this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = model.Record.ID,
+                                Message = $"An e-mail account reactivation was sent to {model.Record.EmailAddress}.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
+                        }
+
+                        if (!model.Record.IsActive && userAccount.IsActive)
+                        {
+                            this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = model.Record.ID,
+                                Message = "User Account was deactivated.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
+                        }
+
                         this._managementUserAccountService.Update(model.Record);
+
+                        this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = model.Record.ID,
+                                Message = "User Account was updated successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
                     }
 
                     return model.Record.ID;

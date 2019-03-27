@@ -1,6 +1,7 @@
 ﻿using BigFootVentures.Application.Web.Models.Security;
 using BigFootVentures.Application.Web.Models.Utilities;
 using BigFootVentures.Application.Web.Models.ViewModels;
+using BigFootVentures.Business.Objects.Logs;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
 using System;
@@ -17,13 +18,20 @@ namespace BigFootVentures.Application.Web.Controllers
 
         private readonly IManagementService<UserAccount> _service = null;
 
+        private readonly IAuditTrailService _auditTrailService = null;
+
         #endregion
 
         #region "Constructors"
 
-        public AccountController(IManagementService<UserAccount> service)
+        public AccountController(
+            IManagementService<UserAccount> service,
+            
+            IAuditTrailService auditTrailService)
         {
             this._service = service;
+
+            this._auditTrailService = auditTrailService;
         }
 
         #endregion
@@ -77,6 +85,19 @@ namespace BigFootVentures.Application.Web.Controllers
                     throw new Exception("Current password is incorrect.");
 
                 account.Password = PasswordEncryption.Encrypt(newPassword);
+
+                this._auditTrailService.Insert(
+                            new AuditTrail
+                            {
+                                ObjectName = "UserAccount",
+                                ObjectID = SessionUtils.GetUserAccount().ID,
+                                Message = "User Account password was changed successfully.",
+                                UserAccount = new UserAccount
+                                {
+                                    ID = SessionUtils.GetUserAccount().ID
+                                },
+                                CreateDate = SessionUtils.GetCurrentDateTime()
+                            });
 
                 this._service.UpdateUserAccount(account);
             }

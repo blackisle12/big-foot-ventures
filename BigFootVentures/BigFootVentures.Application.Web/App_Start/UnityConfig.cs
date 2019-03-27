@@ -42,6 +42,8 @@ namespace BigFootVentures.Application.Web
 
             container.RegisterType<ITrademarkService>(new InjectionFactory(c => new TrademarkService(connectionString)));
 
+            container.RegisterType<IAuditTrailService>(new InjectionFactory(c => new AuditTrailService(connectionString)));
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

@@ -25,7 +25,14 @@
         TempData.Remove("UserAccountInserted");
 
         <div class="alert alert-info">
-            <p>An e-mail has been sent to <strong>@Model.Record.Username</strong> for account verification</p>
+            <p>An e-mail has been sent to <strong>@Model.Record.Username</strong> for account verification.</p>
+        </div>
+    }
+
+    if (!Model.Record.IsActive)
+    {
+        <div class="alert alert-warning">
+            <p>This account is currently inactive.</p>
         </div>
     }
 
