@@ -3961,6 +3961,24 @@ namespace BigFootVentures.Application.Web.Controllers
             return View("UserAccount", model);
         }
 
+        [HttpGet]
+        [Route("UserAccount/Delete/{ID:int}", Name = "UserAccountDelete")]
+        public ActionResult UserAccountDelete(int ID)
+        {
+            try
+            {
+                this._managementUserAccountService.Delete(ID);
+
+                TempData.Add("IsRedirectFromDelete", true);
+            }
+            catch (Exception ex)
+            {
+                //log exception here
+            }
+
+            return RedirectToAction("UserAccounts");
+        }
+
         [HttpPost]
         [Route("UserAccount", Name = "UserAccountPost")]
         public ActionResult UserAccount(VMModel<UserAccount> model)
