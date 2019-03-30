@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace BigFootVentures.Business.Objects.Management
 {
@@ -32,7 +33,6 @@ namespace BigFootVentures.Business.Objects.Management
         public string PublicationDate { get; set; }
         public string RegistrationDate { get; set; }
         public string ExpiryDate { get; set; }
-        public string SixMonthsAnniversary { get; set; }
         public string PriorityDate { get; set; }
         public string PriorityCountryAndPriorityTMNumber { get; set; }
         public bool SeniorityUsed { get; set; }
@@ -198,6 +198,19 @@ namespace BigFootVentures.Business.Objects.Management
         #endregion
 
         #region "Calculated Properties"
+
+        public string SixMonthsAnniversary
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(FilingDateValue) && DateTime.TryParse(FilingDateValue, out DateTime sixMonthsAnniversary))
+                {
+                    return sixMonthsAnniversary.AddMonths(6).ToString("yyyy-MM-dd");
+                }
+
+                return null;
+            }
+        }
 
         public string[] WIPODesignatedProtections { get; set; }
         public string[] WIPODesignatedProtectionsSelected { get; set; }

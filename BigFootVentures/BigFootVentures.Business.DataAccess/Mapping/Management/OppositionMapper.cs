@@ -74,7 +74,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                             FilingDateValue = dataReader["TrademarkNameAFilingDate"] as string,
                             PublicationDate = dataReader["TrademarkNameAPublicationDate"] as string,
                             PriorityDate = dataReader["TrademarkNameAPriorityDate"] as string,
-                            SixMonthsAnniversary = dataReader["TrademarkNameASixMonthsAnniversary"] as string,
+                            //SixMonthsAnniversary = dataReader["TrademarkNameASixMonthsAnniversary"] as string,
                             Office = new Office
                             {
                                 OfficeName = dataReader["TrademarkNameAOfficeName"] as string
@@ -106,7 +106,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                             FilingDateValue = dataReader["TrademarkNameDFilingDate"] as string,
                             PublicationDate = dataReader["TrademarkNameDPublicationDate"] as string,
                             PriorityDate = dataReader["TrademarkNameDPriorityDate"] as string,
-                            SixMonthsAnniversary = dataReader["TrademarkNameDSixMonthsAnniversary"] as string,
+                            //SixMonthsAnniversary = dataReader["TrademarkNameDSixMonthsAnniversary"] as string,
                             Office = new Office
                             {
                                 OfficeName = dataReader["TrademarkNameDOfficeName"] as string

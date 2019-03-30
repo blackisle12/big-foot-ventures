@@ -37,7 +37,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     PublicationDate = dataReader["PublicationDate"] as string,
                     RegistrationDate = dataReader["RegistrationDate"] as string,
                     ExpiryDate = dataReader["ExpiryDate"] as string,
-                    SixMonthsAnniversary = dataReader["SixMonthsAnniversary"] as string,
+                    //SixMonthsAnniversary = dataReader["SixMonthsAnniversary"] as string,
                     PriorityDate = dataReader["PriorityDate"] as string,
                     PriorityCountryAndPriorityTMNumber = dataReader["PriorityCountryAndPriorityTMNumber"] as string,
                     SeniorityUsed = (dataReader["SeniorityUsed"] as sbyte? ?? 0) == 1,
@@ -302,7 +302,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 file.Append(DataUtils.EscapeCSV($"{dataReader["PublicationDate"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["RegistrationDate"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["ExpiryDate"] as string}") + ",");
-                file.Append(DataUtils.EscapeCSV($"{dataReader["SixMonthsAnniversary"] as string}") + ",");
+                file.Append(DataUtils.EscapeCSV($" ") + ","); //file.Append(DataUtils.EscapeCSV($"{dataReader["SixMonthsAnniversary"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["PriorityDate"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{dataReader["PriorityCountryAndPriorityTMNumber"] as string}") + ",");
                 file.Append(DataUtils.EscapeCSV($"{(dataReader["SeniorityUsed"] as sbyte? ?? 0) == 1}") + ",");
@@ -405,7 +405,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pPublicationDate", MySqlDbType.VarChar, 45) { Value = entity.PublicationDate, Direction = ParameterDirection.Input },
                 new MySqlParameter("pRegistrationDate", MySqlDbType.VarChar, 45) { Value = entity.RegistrationDate, Direction = ParameterDirection.Input },
                 new MySqlParameter("pExpiryDate", MySqlDbType.VarChar, 45) { Value = entity.ExpiryDate, Direction = ParameterDirection.Input },
-                new MySqlParameter("pSixMonthsAnniversary", MySqlDbType.VarChar, 45) { Value = entity.SixMonthsAnniversary, Direction = ParameterDirection.Input },
+                //new MySqlParameter("pSixMonthsAnniversary", MySqlDbType.VarChar, 45) { Value = entity.SixMonthsAnniversary, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPriorityDate", MySqlDbType.VarChar, 45) { Value = entity.PriorityDate, Direction = ParameterDirection.Input },
                 new MySqlParameter("pPriorityCountryAndPriorityTMNumber", MySqlDbType.VarChar, 255) { Value = entity.PriorityCountryAndPriorityTMNumber, Direction = ParameterDirection.Input },
                 new MySqlParameter("pSeniorityUsed", entity.SeniorityUsed ? 1 : 0) { Direction = ParameterDirection.Input },

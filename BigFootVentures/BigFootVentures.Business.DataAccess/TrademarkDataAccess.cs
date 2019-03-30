@@ -69,7 +69,7 @@ namespace BigFootVentures.Business.DataAccess
                             PublicationDate = dataReader["PublicationDate"] as string,
                             RegistrationDate = dataReader["RegistrationDate"] as string,
                             ExpiryDate = dataReader["ExpiryDate"] as string,
-                            SixMonthsAnniversary = dataReader["SixMonthsAnniversary"] as string,
+                            //SixMonthsAnniversary = dataReader["SixMonthsAnniversary"] as string,
                             PriorityDate = dataReader["PriorityDate"] as string,
                             PriorityCountryAndPriorityTMNumber = dataReader["PriorityCountryAndPriorityTMNumber"] as string,
                             SeniorityUsed = (dataReader["SeniorityUsed"] as sbyte? ?? 0) == 1,
