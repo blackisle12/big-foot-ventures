@@ -195,7 +195,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<AgreementT>
             {
                 Record = agreement,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Agreement")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -407,7 +408,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Brand>
             {
                 Record = brand,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Brand")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -608,7 +610,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Cancellation>
             {
                 Record = cancellation,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Cancellation")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -788,7 +791,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Company>
             {
                 Record = company,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Company")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -1029,7 +1033,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Contact>
             {
                 Record = contact,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Contact")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -1267,7 +1272,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<DomainN>
             {
                 Record = domain,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Domain")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -1506,7 +1512,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<EmailResponse>
             {
                 Record = emailResponse,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "EmailResponse")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -1698,7 +1705,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Enquiry>
             {
                 Record = enquiry,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Enquiry")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -1935,7 +1943,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Lead>
             {
                 Record = lead,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Lead")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -2124,7 +2133,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<LegalCase>
             {
                 Record = legalCase,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "LegalCase")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -2306,7 +2316,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<LoginInformation>
             {
                 Record = loginInformation,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "LoginInformation")
             };
             
             if (TempData.ContainsKey("IsPosted"))
@@ -2478,7 +2489,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Office>
             {
                 Record = office,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Office")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -2692,7 +2704,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<OfficeStatus>
             {
                 Record = officeStatus,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "OfficeStatus")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -2873,7 +2886,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Opposition>
             {
                 Record = opposition,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Opposition")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -3056,7 +3070,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<PreFilingSimilarityResearch>
             {
                 Record = preFilingSimilarityResearch,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "PreFilingSimilarityResearch")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -3232,7 +3247,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Register>
             {
                 Record = register,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Register")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -3429,7 +3445,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<SimilarTrademark>
             {
                 Record = similarTrademark,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "SimilarTrademark")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -3777,7 +3794,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<TMRepresentative>
             {
                 Record = TMRepresentative,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "TMRepresentative")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -3992,7 +4010,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Trademark>
             {
                 Record = trademark,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "Trademark")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -4267,7 +4286,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<TrademarkOwner>
             {
                 Record = trademarkOwner,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "TrademarkOwner")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -4441,7 +4461,8 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<UserAccount>
             {
                 Record = userAccount,
-                PageMode = PageMode.View
+                PageMode = PageMode.View,
+                AuditTrails = _auditTrailService.Get(ID, "UserAccount")
             };
 
             if (TempData.ContainsKey("IsPosted"))

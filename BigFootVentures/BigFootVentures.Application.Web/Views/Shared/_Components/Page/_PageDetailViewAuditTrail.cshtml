@@ -1,0 +1,32 @@
+﻿<!-- START: Audit Trail -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">History</h4>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Date</th>
+                        <th style="width: 35%;">User</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var auditTrail in Model.AuditTrails)
+                        {
+                            <tr>
+                                <td>@auditTrail.CreateDate</td>
+                                <td>@auditTrail.UserAccount.FirstName @auditTrail.UserAccount.LastName</td>
+                                <td>@auditTrail.Message</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- END: Audit Trail -->

@@ -1,4 +1,6 @@
 ﻿using BigFootVentures.Business.Objects;
+using BigFootVentures.Business.Objects.Logs;
+using System.Collections.Generic;
 using static BigFootVentures.Application.Web.Models.VMEnums;
 
 namespace BigFootVentures.Application.Web.Models.ViewModels
@@ -13,6 +15,8 @@ namespace BigFootVentures.Application.Web.Models.ViewModels
         public string ErrorMessage { get { return "<strong>Oh no!</strong> An error has occured while processing your request. Please review your changes."; } }
 
         public string Name { get { return typeof(TModel).Name; } }
+
+        public ICollection<AuditTrail> AuditTrails { get; set; }
 
         #endregion
     }

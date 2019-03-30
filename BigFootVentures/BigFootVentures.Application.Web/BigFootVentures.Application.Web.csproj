@@ -447,6 +447,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Public\ForgotPassword.cshtml" />
     <Content Include="Views\Public\ForgotPasswordSet.cshtml" />
+    <Content Include="Views\Shared\_Components\Page\_PageDetailViewAuditTrail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

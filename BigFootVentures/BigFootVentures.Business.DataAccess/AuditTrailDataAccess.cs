@@ -1,4 +1,5 @@
 ﻿using BigFootVentures.Business.Objects.Logs;
+using BigFootVentures.Business.Objects.Management;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace BigFootVentures.Business.DataAccess
     {
         #region "Factory Methods"
 
-        ICollection<AuditTrail> Get(string objectName, int startIndex, int rowCount, out int total);
+        ICollection<AuditTrail> Get(int objectID, string objectName);
 
         AuditTrail Get(int ID);
 
@@ -42,7 +43,7 @@ namespace BigFootVentures.Business.DataAccess
 
         #region "Factory Methods"
 
-        public ICollection<AuditTrail> Get(string objectName, int startIndex, int rowCount, out int total)
+        public ICollection<AuditTrail> Get(int objectID, string objectName)
         {
             try
             {
@@ -53,21 +54,32 @@ namespace BigFootVentures.Business.DataAccess
 
                 using (var command = new MySqlCommand("AuditTrail_Get", this._connection) { CommandType = CommandType.StoredProcedure })
                 {
-                    command.Parameters.Add(new MySqlParameter("objectName", MySqlDbType.VarChar, 45) { Value = objectName, Direction = ParameterDirection.Input });
-                    command.Parameters.Add(new MySqlParameter("startIndex", MySqlDbType.Int32) { Value = startIndex, Direction = ParameterDirection.Input });
-                    command.Parameters.Add(new MySqlParameter("rowCount", MySqlDbType.Int32) { Value = rowCount, Direction = ParameterDirection.Input });
-                    command.Parameters.Add(new MySqlParameter("total", MySqlDbType.Int32) { Direction = ParameterDirection.Output });
+                    command.Parameters.Add(new MySqlParameter("pObjectID", MySqlDbType.Int32) { Value = objectID, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("pObjectName", MySqlDbType.VarChar, 45) { Value = objectName, Direction = ParameterDirection.Input });
 
                     var dataReader = command.ExecuteReader();
 
                     while (dataReader.Read())
                     {
+                        entities.Add(new AuditTrail
+                        {
+                            ID = (int)dataReader["ID"],
 
+                            ObjectID = (int)dataReader["ObjectID"],
+                            ObjectName = dataReader["Object"] as string,
+                            Message = dataReader["Message"] as string,
+                            UserAccount = new UserAccount
+                            {
+                                ID = (int)dataReader["UserAccountID"],
+                                FirstName = dataReader["FirstName"] as string,
+                                LastName = dataReader["LastName"] as string
+                            },
+
+                            CreateDate = Convert.ToDateTime(dataReader["CreateDate"])
+                        });
                     }
 
                     dataReader.Close();
-
-                    total = (int)command.Parameters["total"].Value;
                 }
 
                 return entities;

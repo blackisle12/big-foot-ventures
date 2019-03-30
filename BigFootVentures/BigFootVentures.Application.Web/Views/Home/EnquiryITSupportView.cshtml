@@ -68,32 +68,38 @@
                         <tr>
                             <td><strong>Subject</strong></td>
                             <td>@Model.Record.Subject</td>
-                            <td></td><td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><strong>Description</strong></td>
                             <td>@Model.Record.Description</td>
-                            <td></td><td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><strong>Field Name(s)</strong></td>
                             <td>@Model.Record.FieldNames</td>
-                            <td></td><td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><strong>Internal Comments</strong></td>
                             <td>@Model.Record.InternalComments</td>
-                            <td></td><td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><strong>Object Name(s)</strong></td>
                             <td>@Model.Record.ObjectNames</td>
-                            <td></td><td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><strong>Technical Assesment</strong></td>
                             <td>@Model.Record.TechnicalAssessment</td>
-                            <td></td><td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
@@ -128,6 +134,8 @@
                 </div>
             </div>
             <!-- END: Additional Information -->
+
+            @Html.Partial("../Shared/_Components/Page/_PageDetailViewAuditTrail")
         </div>
         <div class="panel-footer">
             @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
