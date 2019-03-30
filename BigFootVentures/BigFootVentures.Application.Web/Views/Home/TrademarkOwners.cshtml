@@ -23,6 +23,7 @@
                 <thead>
                     <tr class="th-bg">
                         <th class="th-trademark-name">Trademark</th>
+                        <th class="th-trademark-number">Trademark Number</th>
                         <th class="th-company-display-name">Company</th>
                     </tr>
                 </thead>
@@ -32,6 +33,7 @@
                         {
                     <tr>
                         <td><a href="@Url.RouteUrl("TrademarkOwnerView", new { ID = trademarkOwner.ID })" target="_blank">@trademarkOwner.Trademark.Name</a></td>
+                        <td>@trademarkOwner.Trademark.TrademarkNumber</td>
                         <td>@trademarkOwner.Company.DisplayName</td>
                     </tr>
                         }

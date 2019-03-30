@@ -24,7 +24,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     Trademark = new Trademark
                     {
                         ID = Convert.ToInt32(dataReader["TrademarkID"]),
-                        Name = dataReader["TrademarkName"] as string
+                        Name = dataReader["TrademarkName"] as string,
+                        TrademarkNumber = dataReader["TrademarkNumber"] as string
                     },
                     Company = new Company
                     {
@@ -52,7 +53,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     Trademark = new Trademark
                     {
                         ID = Convert.ToInt32(dataReader["TrademarkID"]),
-                        Name = dataReader["TrademarkName"] as string
+                        Name = dataReader["TrademarkName"] as string,
+                        TrademarkNumber = dataReader["TrademarkNumber"] as string
                     },
                     Company = new Company
                     {
