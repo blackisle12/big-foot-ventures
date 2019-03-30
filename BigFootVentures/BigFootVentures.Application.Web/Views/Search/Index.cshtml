@@ -71,7 +71,7 @@
                             @{
                                 foreach (var header in table.Header)
                                 {
-                                    <th style="width: 31.5%">@header</th>
+                                    <th style="width: 23.75%">@header</th>
                                 }
                             }
                         </tr>
@@ -100,16 +100,17 @@
 
                                         if (table.Caption == "Domain")
                                         {
-                                            <td colspan="2"><input type="checkbox" @(row[2] == "True" ? "checked" : string.Empty) disabled /></td>
+                                            <td colspan="3"><input type="checkbox" @(row[2] == "True" ? "checked" : string.Empty) disabled /></td>
                                         }
                                         else if (table.Caption == "Trademark")
                                         {
                                             <td>@Html.Raw(row[2])</td>
-                                            <td><input type="checkbox" @(row[3] == "Yes" ? "checked" : string.Empty) disabled /></td>
+                                            <td>@Html.Raw(row[3])</td>
+                                            <td><input type="checkbox" @(row[4] == "Yes" ? "checked" : string.Empty) disabled /></td>
                                         }
                                         else
                                         {
-                                            <td colspan="2">@Html.Raw(row[2])</td>
+                                            <td colspan="3">@Html.Raw(row[2])</td>
                                         }
                                     }
                                 </tr>
