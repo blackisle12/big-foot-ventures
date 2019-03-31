@@ -1,0 +1,120 @@
+﻿<link href="~/Content/Views/Home/LoginInformations.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Management
+
+@{
+    ViewBag.Title = "Login Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<LoginInformation>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing Login Information <strong>@Model.Record.AccountName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Information</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Country</strong></td>
+                            <td>@Model.Record.Country</td>
+                            <td><strong>Owner</strong></td>
+                            <td>@Model.Record.OwnerName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office</strong></td>
+                            <td>@Model.Record.Office</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>URL</strong></td>
+                            <td>@Model.Record.Url</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ID</strong></td>
+                            <td>@Model.Record.LoginInformationID</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PW</strong></td>
+                            <td>@Model.Record.PW</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Account Name</strong></td>
+                            <td>@Model.Record.AccountName</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Current Account</strong></td>
+                            <td>@Model.Record.CurrentAccount</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secret Phase</strong></td>
+                            <td>@Model.Record.SecretPhase</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monitoring Staff</strong></td>
+                            <td>@Model.Record.MonitoringStaff</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office ID</strong></td>
+                            <td>@Model.Record.OfficeID</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Company Registration No</strong></td>
+                            <td>@Model.Record.CompanyRegistrationNo</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Balance</strong></td>
+                            <td>@Model.Record.Balance</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>E-mail Address</strong></td>
+                            <td>@Model.Record.EmailAddress</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>

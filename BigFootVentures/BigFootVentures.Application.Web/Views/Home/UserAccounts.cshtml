@@ -24,6 +24,8 @@
                     <tr class="th-bg">
                         <th class="th-name">Name</th>
                         <th class="th-email-address">Email Address</th>
+                        <th class="th-roles">Roles</th>
+                        <th class="th-is-active">Active</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +35,8 @@
                             <tr>
                                 <td><a href="@Url.RouteUrl("UserAccountView", new { ID = userAccount.ID })" target="_blank">@userAccount.FirstName @userAccount.LastName</a></td>
                                 <td>@userAccount.EmailAddress</td>
+                                <td>@userAccount.Roles</td>
+                                <td><input type="checkbox" @(userAccount.IsActive ? "checked" : string.Empty) disabled /></td>
                             </tr>
                         }
                     }

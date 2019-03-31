@@ -2326,7 +2326,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("LoginInformation", model);
+            return View("LoginInformationView", model);
         }
         
         [Route("LoginInformation/New", Name = "LoginInformationNew")]

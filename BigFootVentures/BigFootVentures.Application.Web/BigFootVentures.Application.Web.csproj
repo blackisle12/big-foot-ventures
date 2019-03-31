@@ -228,6 +228,7 @@
     <Content Include="Content\images\trademarkers.jpg" />
     <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\nav-css.css" />
+    <Content Include="Content\Views\Home\UserAccounts.css" />
     <Content Include="Content\Views\Home\Domains.css" />
     <Content Include="Content\Views\Home\Oppositions.css" />
     <Content Include="Content\Views\Public\Index.css" />
@@ -448,6 +449,7 @@
     <Content Include="Views\Public\ForgotPassword.cshtml" />
     <Content Include="Views\Public\ForgotPasswordSet.cshtml" />
     <Content Include="Views\Shared\_Components\Page\_PageDetailViewAuditTrail.cshtml" />
+    <Content Include="Views\Home\LoginInformationView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

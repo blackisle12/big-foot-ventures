@@ -69,7 +69,8 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     LastName = dataReader["LastName"] as string,
                     EmailAddress = dataReader["EmailAddress"] as string,
                     Username = dataReader["Username"] as string,
-                    IsActive = (dataReader["IsActive"] as sbyte? ?? 0) == 1
+                    IsActive = (dataReader["IsActive"] as sbyte? ?? 0) == 1,
+                    Roles = dataReader["Roles"] as string
                 };
 
                 entities.Add(entity);
