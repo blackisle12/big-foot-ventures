@@ -1,0 +1,61 @@
+﻿<link href="~/Content/Views/Home/OfficeStatus.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Office Status - " + Model.Record.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<OfficeStatus>
+
+<form class="form-horizontal">
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new") Office Status <strong>@Model.Record.Name</strong>
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Information</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td>@Model.Record.Name</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status Description</strong></td>
+                            <td>@Model.Record.StatusDescription</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status Grouping</strong></td>
+                            <td>@Model.Record.StatusGrouping</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Office</strong></td>
+                            <td>@(Model.Record.Office?.OfficeName)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Information -->
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+</form>
+

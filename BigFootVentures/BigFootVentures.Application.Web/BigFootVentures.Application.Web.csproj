@@ -450,6 +450,7 @@
     <Content Include="Views\Public\ForgotPasswordSet.cshtml" />
     <Content Include="Views\Shared\_Components\Page\_PageDetailViewAuditTrail.cshtml" />
     <Content Include="Views\Home\LoginInformationView.cshtml" />
+    <Content Include="Views\Home\OfficeStatusView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

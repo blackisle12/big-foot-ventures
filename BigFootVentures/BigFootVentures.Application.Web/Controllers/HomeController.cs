@@ -2714,7 +2714,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("OfficeStatus", model);
+            return View("OfficeStatusView", model);
         }
 
         [Route("OfficeStatus/New", Name = "OfficeStatusNew")]
