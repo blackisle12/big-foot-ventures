@@ -785,7 +785,7 @@
                                                     <td>@fileAttachment.FileName</td>
                                                     <td>@fileAttachment.CreateDate</td>
                                                     <td>
-                                                        <a href="#">
+                                                        <a href="@Url.Action("TrademarkFileDownload", new { ID = fileAttachment.ID })">
                                                             <i class="fa fa-download"></i>
                                                         </a>
                                                     </td>

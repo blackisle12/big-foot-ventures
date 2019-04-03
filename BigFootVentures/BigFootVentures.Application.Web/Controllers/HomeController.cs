@@ -4206,6 +4206,15 @@ namespace BigFootVentures.Application.Web.Controllers
         }
 
         [HttpGet]
+        [Route("Trademark/FileDownload", Name = "TrademarkFileDownload")]
+        public ActionResult TrademarkFileDownload(int ID)
+        {
+            var fileAttachment = this._fileAttachmentService.GetByID(ID, "Trademark");
+
+            return File(fileAttachment.File, "application/octet-stream", fileAttachment.FileName);
+        }
+
+        [HttpGet]
         [Route("Trademark/Delete/{ID:int}", Name = "TrademarkDelete")]
         public ActionResult TrademarkDelete(int ID)
         {
