@@ -140,7 +140,7 @@
 
                             <label class="col-sm-2 control-label">Expiration Date</label>
                             <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.ExpirationDate, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Record.ExpirationDate, new { @class = "form-control", @type = "date" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -195,7 +195,7 @@
 
                             <label class="col-sm-2 control-label">Registration Date</label>
                             <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.RegistrationDate, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Record.RegistrationDate, new { @class = "form-control", @type = "date" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -311,12 +311,12 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Purchase Date</label>
                             <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.PurchaseDate, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Record.PurchaseDate, new { @class = "form-control", @type = "date" })
                             </div>
 
                             <label class="col-sm-2 control-label">Sale Date</label>
                             <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.SaleDate, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Record.SaleDate, new { @class = "form-control", @type = "date" })
                             </div>
                         </div>
                     </fieldset>
@@ -333,7 +333,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">C&D Date Sent</label>
                             <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.CDDateSent, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Record.CDDateSent, new { @class = "form-control", @type = "date" })
                             </div>
 
                             <label class="col-sm-2 control-label">Trademark used in the UDRP</label>
@@ -354,7 +354,7 @@
 
                             <label class="col-sm-2 control-label">UDRP Filing Date</label>
                             <div class="col-sm-4">
-                                @Html.TextBoxFor(m => m.Record.UDRPFilingDate, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Record.UDRPFilingDate, new { @class = "form-control", @type = "date" })
                             </div>
                         </div>
                         <div class="form-group">
