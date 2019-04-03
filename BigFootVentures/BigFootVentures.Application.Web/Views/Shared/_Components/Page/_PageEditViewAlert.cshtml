@@ -8,4 +8,14 @@
             @Html.Raw(Model.PageMode == VMEnums.PageMode.PersistSuccess ? Model.SuccessMessage : Model.ErrorMessage)
         </div>
     }
+
+    if (TempData.ContainsKey("IsPostedFile"))
+    {
+        <div class="alert alert-success">
+            <i class="fa fa-info-circle"></i>
+            File has been uploaded successfully!
+        </div>
+
+        TempData.Remove("IsPostedFile");
+    }
 }

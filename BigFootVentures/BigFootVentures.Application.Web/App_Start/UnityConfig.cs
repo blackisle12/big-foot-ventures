@@ -44,6 +44,8 @@ namespace BigFootVentures.Application.Web
 
             container.RegisterType<IAuditTrailService>(new InjectionFactory(c => new AuditTrailService(connectionString)));
 
+            container.RegisterType<IFileAttachmentService>(new InjectionFactory(c => new FileAttachmentService(connectionString)));
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

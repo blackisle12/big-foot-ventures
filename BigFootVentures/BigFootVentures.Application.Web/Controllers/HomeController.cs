@@ -12,7 +12,9 @@ using BigFootVentures.Service.BusinessService.Validators;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using static BigFootVentures.Application.Web.Models.VMEnums;
 using static BigFootVentures.Business.Objects.Enumerators.ManagementEnums.Company;
@@ -54,6 +56,8 @@ namespace BigFootVentures.Application.Web.Controllers
 
         private readonly IAuditTrailService _auditTrailService = null;
 
+        private readonly IFileAttachmentService _fileAttachmentService = null;
+
         #endregion
 
         #region "Constructors"
@@ -83,7 +87,9 @@ namespace BigFootVentures.Application.Web.Controllers
 
             ITrademarkService trademarkService,
             
-            IAuditTrailService auditTrailService)
+            IAuditTrailService auditTrailService,
+            
+            IFileAttachmentService fileAttachmentService)
         {
             this._managementAgreementService = managementAgreementService;
             this._managementBrandService = managementBrandService;
@@ -118,6 +124,8 @@ namespace BigFootVentures.Application.Web.Controllers
             this._trademarkService = trademarkService;
 
             this._auditTrailService = auditTrailService;
+
+            this._fileAttachmentService = fileAttachmentService;
         }
 
         #endregion
@@ -4011,7 +4019,8 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 Record = trademark,
                 PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Trademark")
+                AuditTrails = _auditTrailService.Get(ID, "Trademark"),
+                FileAttachments = _fileAttachmentService.Get(ID, "Trademark")
             };
 
             if (TempData.ContainsKey("IsPosted"))
@@ -4165,6 +4174,35 @@ namespace BigFootVentures.Application.Web.Controllers
             };
 
             return RedirectPost<Trademark>(model, postModel);
+        }
+
+        [HttpPost]
+        [Route("Trademark/FileUpload", Name = "TrademarkFileUpload")]
+        public ActionResult TrademarkFileUpload(int ID, HttpPostedFileBase file)
+        {
+            byte[] fileContent = null;
+
+            using (var binaryReader = new BinaryReader(file.InputStream))
+            {
+                fileContent = binaryReader.ReadBytes(file.ContentLength);
+            }
+
+            var fileAttachment = new FileAttachment
+            {
+                ObjectID = ID,
+                FileName = file.FileName,
+                File = fileContent,
+
+                CreateDate = SessionUtils.GetCurrentDateTime()
+            };
+
+            var objectName = "Trademark";
+
+            this._fileAttachmentService.Insert(fileAttachment, objectName);
+
+            TempData.Add("IsPostedFile", true);
+
+            return RedirectToRoute(objectName + "View", new { ID = ID });
         }
 
         [HttpGet]

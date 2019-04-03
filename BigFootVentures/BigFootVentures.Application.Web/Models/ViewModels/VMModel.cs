@@ -1,5 +1,6 @@
 ﻿using BigFootVentures.Business.Objects;
 using BigFootVentures.Business.Objects.Logs;
+using BigFootVentures.Business.Objects.Management;
 using System.Collections.Generic;
 using static BigFootVentures.Application.Web.Models.VMEnums;
 
@@ -17,6 +18,7 @@ namespace BigFootVentures.Application.Web.Models.ViewModels
         public string Name { get { return typeof(TModel).Name; } }
 
         public ICollection<AuditTrail> AuditTrails { get; set; }
+        public ICollection<FileAttachment> FileAttachments { get; set; }
 
         #endregion
     }
