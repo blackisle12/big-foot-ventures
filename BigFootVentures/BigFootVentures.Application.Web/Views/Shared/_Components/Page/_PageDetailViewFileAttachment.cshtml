@@ -45,15 +45,18 @@
             {
                 <div class="row">
                     <div class="col-sm-12 center-align">
-                        <p>No attachments attached</p>
+                        <p class="subtitle">No attachments found</p>
                     </div>
                 </div>
             }
         }
+
+        <hr />
+
         <div class="form-group">
             <input type="hidden" name="ID" value="@Model.Record.ID" />
             <input type="hidden" name="objectName" value="@Model.Name" />
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-sm-12">
                 <div class="input-group">
                     <input type="file" name="file" class="form-control pull-right" required="required" />
                     <span class="input-group-btn">

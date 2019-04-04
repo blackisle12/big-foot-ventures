@@ -198,6 +198,10 @@ p.table-empty {
     border-bottom: 1px solid #ddd;
 }
 
+.table-view tbody tr:hover {
+    background-color: #eee;
+}
+
 .table-view td {
     width: 25%;
 }
@@ -216,4 +220,8 @@ p.table-empty {
 
 .center-align {
     text-align:center;
+}
+
+.subtitle {
+    color: #999;
 }
