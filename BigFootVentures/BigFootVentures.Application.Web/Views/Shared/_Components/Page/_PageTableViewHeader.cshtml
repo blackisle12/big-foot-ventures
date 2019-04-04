@@ -7,15 +7,15 @@
             @{
                 if (Model.Name == "Company")
                 {
-                    <button type="button" onclick="window.open('@Url.RouteUrl("CompanyNewSelectRecordType")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
+                    <button type="button" class="btn btn-default" onclick="window.open('@Url.RouteUrl("CompanyNewSelectRecordType")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
                 }
                 else if (Model.Name == "Enquiry")
                 {
-                    <button type="button" onclick="window.open('@Url.RouteUrl("EnquiryNewSelectRecordType")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
+                    <button type="button" class="btn btn-default" onclick="window.open('@Url.RouteUrl("EnquiryNewSelectRecordType")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
                 }
                 else
                 {
-                    <button type="button" onclick="window.open('@Url.RouteUrl($"{Model.Name}New")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
+                    <button type="button" class="btn btn-default" onclick="window.open('@Url.RouteUrl($"{Model.Name}New")', '_blank')" target="_blank"><i class="fa fa-plus-circle"></i> New Record</button>
                 }
             }
         </span>

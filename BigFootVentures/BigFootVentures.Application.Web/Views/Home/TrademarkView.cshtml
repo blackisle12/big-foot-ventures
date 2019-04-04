@@ -10,11 +10,9 @@
 
 @model VMModel<Trademark>
 
-@using (Html.BeginForm("TrademarkFileUpload", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("FileAttachmentUpload", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
 {
     @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
-
-    <input type="hidden" name="ID" value="@Model.Record.ID" />
 
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
@@ -759,59 +757,8 @@
                 </div>
             </div>
             <!-- END: Legal Section -->
-            <!-- START: File Attachment -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">File Attachment</h4>
-                </div>
-                <div class="panel-body">
-                    @{
-                        if (Model.FileAttachments.Any())
-                        {
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 70%;">File Name</th>
-                                            <th style="width: 25%;">Date Created</th>
-                                            <th style="width: 5%;"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @{
-                                            foreach (var fileAttachment in Model.FileAttachments)
-                                            {
-                                                <tr>
-                                                    <td>@fileAttachment.FileName</td>
-                                                    <td>@fileAttachment.CreateDate</td>
-                                                    <td>
-                                                        <a href="@Url.Action("TrademarkFileDownload", new { ID = fileAttachment.ID })">
-                                                            <i class="fa fa-download"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        }
-                    }
 
-                    <hr />
-
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <input type="file" name="file" class="form-control pull-right" required="required" />
-                        </div>
-                        <div class="col-sm-9">
-                            <input type="submit" value="Upload" class="btn btn-info" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END: File Attachment -->
-
+            @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewAuditTrail")
         </div>
         <div class="panel-footer">

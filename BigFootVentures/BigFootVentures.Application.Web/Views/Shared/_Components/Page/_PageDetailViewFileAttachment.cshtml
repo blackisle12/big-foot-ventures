@@ -1,0 +1,55 @@
+﻿<!-- START: File Attachment -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">File Attachment</h4>
+    </div>
+    <div class="panel-body">
+        @{
+            if (Model.FileAttachments.Count > 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 70%;">File Name</th>
+                                <th style="width: 25%;">Date Created</th>
+                                <th style="width: 5%;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var fileAttachment in Model.FileAttachments)
+                                {
+                                    <tr>
+                                        <td>@fileAttachment.FileName</td>
+                                        <td>@fileAttachment.CreateDate</td>
+                                        <td>
+                                            <a href="@Url.Action("FileAttachmentDownload", new { ID = fileAttachment.ID, objectName = Model.Name })" title="Download @fileAttachment.FileName">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+
+        <hr />
+
+        <div class="form-group">
+            <input type="hidden" name="ID" value="@Model.Record.ID" />
+            <input type="hidden" name="objectName" value="@Model.Name" />
+
+            <div class="col-sm-3">
+                <input type="file" name="file" class="form-control pull-right" required="required" />
+            </div>
+            <div class="col-sm-9">
+                <input type="submit" value="Upload" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: File Attachment -->

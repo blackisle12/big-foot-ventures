@@ -8,7 +8,7 @@
 
 @model VMModel<DomainN>
 
-@using (Html.BeginForm("Domain", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("FileAttachmentUpload", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
 {
     @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
 
@@ -347,6 +347,7 @@
             </div>
             <!-- END: System Information -->
 
+            @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewAuditTrail")
         </div>
         <div class="panel-footer">

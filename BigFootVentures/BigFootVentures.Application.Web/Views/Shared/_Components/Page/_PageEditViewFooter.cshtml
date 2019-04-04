@@ -4,20 +4,20 @@
 @{
     if (Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess)
     {
-        <button type="button" onclick="window.open('@Url.RouteUrl($"{Model.Name}Edit", new { ID = Model.Record.ID })', '_self')" target="_blank"><i class="fa fa-edit"></i> Edit</button>
+        <button type="button" class="btn btn-default" onclick="window.open('@Url.RouteUrl($"{Model.Name}Edit", new { ID = Model.Record.ID })', '_self')" target="_blank"><i class="fa fa-edit"></i> Edit</button>
 
         if (SessionUtils.GetUserAccount().Roles.Contains("Administrator") && Model.Name != "UserAccount")
         {
-            <button type="button" onclick="OnRecordDelete('@Url.Action($"{Model.Name}Delete", new { ID = Model.Record.ID })');"><i class="fa fa-trash-o"></i> Delete</button>
+            <button type="button" class="btn btn-danger" onclick="OnRecordDelete('@Url.Action($"{Model.Name}Delete", new { ID = Model.Record.ID })');"><i class="fa fa-trash-o"></i> Delete</button>
         }
     }
     else
     {
-        <button type="submit"><i class="fa fa-save"></i> Save</button>
+        <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Save</button>
 
         if (Model.Record.ID > 0)
         {
-            <button type="button" onclick="window.open('@Url.RouteUrl($"{Model.Name}View", new { ID = Model.Record.ID })', '_self')" target="_blank"><i class="fa fa-stop-circle"></i> Cancel</button>
+            <button type="button" class="btn btn-default" onclick="window.open('@Url.RouteUrl($"{Model.Name}View", new { ID = Model.Record.ID })', '_self')" target="_blank"><i class="fa fa-stop-circle"></i> Cancel</button>
         }
     }
 }

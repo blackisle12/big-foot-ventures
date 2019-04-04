@@ -17,8 +17,8 @@ namespace BigFootVentures.Application.Web.Models.ViewModels
 
         public string Name { get { return typeof(TModel).Name; } }
 
-        public ICollection<AuditTrail> AuditTrails { get; set; }
         public ICollection<FileAttachment> FileAttachments { get; set; }
+        public ICollection<AuditTrail> AuditTrails { get; set; }
 
         #endregion
     }

@@ -799,9 +799,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Company>
             {
                 Record = company,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Company")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -1041,9 +1043,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Contact>
             {
                 Record = contact,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Contact")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -1281,8 +1285,10 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 Record = domain,
                 PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Domain")
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -4019,9 +4025,10 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 Record = trademark,
                 PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Trademark"),
-                FileAttachments = _fileAttachmentService.Get(ID, "Trademark")
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -4174,44 +4181,6 @@ namespace BigFootVentures.Application.Web.Controllers
             };
 
             return RedirectPost<Trademark>(model, postModel);
-        }
-
-        [HttpPost]
-        [Route("Trademark/FileUpload", Name = "TrademarkFileUpload")]
-        public ActionResult TrademarkFileUpload(int ID, HttpPostedFileBase file)
-        {
-            byte[] fileContent = null;
-
-            using (var binaryReader = new BinaryReader(file.InputStream))
-            {
-                fileContent = binaryReader.ReadBytes(file.ContentLength);
-            }
-
-            var fileAttachment = new FileAttachment
-            {
-                ObjectID = ID,
-                FileName = file.FileName,
-                File = fileContent,
-
-                CreateDate = SessionUtils.GetCurrentDateTime()
-            };
-
-            var objectName = "Trademark";
-
-            this._fileAttachmentService.Insert(fileAttachment, objectName);
-
-            TempData.Add("IsPostedFile", true);
-
-            return RedirectToRoute(objectName + "View", new { ID = ID });
-        }
-
-        [HttpGet]
-        [Route("Trademark/FileDownload", Name = "TrademarkFileDownload")]
-        public ActionResult TrademarkFileDownload(int ID)
-        {
-            var fileAttachment = this._fileAttachmentService.GetByID(ID, "Trademark");
-
-            return File(fileAttachment.File, "application/octet-stream", fileAttachment.FileName);
         }
 
         [HttpGet]
@@ -4755,6 +4724,46 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region "Shared Action Results"
+
+        [HttpPost]
+        [Route("FileAttachment/Upload", Name = "FileAttachmentUpload")]
+        public ActionResult FileAttachmentUpload(int ID, string objectName, HttpPostedFileBase file)
+        {
+            byte[] fileContent = null;
+
+            using (var binaryReader = new BinaryReader(file.InputStream))
+            {
+                fileContent = binaryReader.ReadBytes(file.ContentLength);
+            }
+
+            var fileAttachment = new FileAttachment
+            {
+                ObjectID = ID,
+                FileName = file.FileName,
+                File = fileContent,
+
+                CreateDate = SessionUtils.GetCurrentDateTime()
+            };
+
+            this._fileAttachmentService.Insert(fileAttachment, objectName);
+
+            TempData.Add("IsPostedFile", fileAttachment.FileName);
+
+            return RedirectToRoute(objectName + "View", new { ID = ID });
+        }
+
+        [HttpGet]
+        [Route("FileAttachment/Download", Name = "FileAttachmentDownload")]
+        public ActionResult FileAttachmentDownload(int ID, string objectName)
+        {
+            var fileAttachment = this._fileAttachmentService.GetByID(ID, objectName);
+
+            return File(fileAttachment.File, "application/octet-stream", fileAttachment.FileName);
         }
 
         #endregion

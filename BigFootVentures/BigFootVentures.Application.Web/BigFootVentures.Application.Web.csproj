@@ -451,6 +451,7 @@
     <Content Include="Views\Shared\_Components\Page\_PageDetailViewAuditTrail.cshtml" />
     <Content Include="Views\Home\LoginInformationView.cshtml" />
     <Content Include="Views\Home\OfficeStatusView.cshtml" />
+    <Content Include="Views\Shared\_Components\Page\_PageDetailViewFileAttachment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

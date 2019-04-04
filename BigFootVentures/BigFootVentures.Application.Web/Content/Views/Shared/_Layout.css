@@ -31,6 +31,7 @@ textarea {
 
 .btn {
     border-radius: 0px;
+    font-size: 12px !important;
 }
 
 .go-button {
