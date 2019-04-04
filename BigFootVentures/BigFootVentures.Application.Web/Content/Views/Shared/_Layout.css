@@ -213,3 +213,7 @@ p.table-empty {
 .stretch {
     width: 100%;
 }
+
+.center-align {
+    text-align:center;
+}

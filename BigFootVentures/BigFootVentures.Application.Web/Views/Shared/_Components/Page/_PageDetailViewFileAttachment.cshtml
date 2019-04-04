@@ -41,20 +41,27 @@
                     </table>
                 </div>
             }
+            else
+            {
+                <div class="row">
+                    <div class="col-sm-12 center-align">
+                        <p>No attachments attached</p>
+                    </div>
+                </div>
+            }
         }
-
-        <hr />
-
         <div class="form-group">
             <input type="hidden" name="ID" value="@Model.Record.ID" />
             <input type="hidden" name="objectName" value="@Model.Name" />
-
-            <div class="col-sm-3">
-                <input type="file" name="file" class="form-control pull-right" required="required" />
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="input-group">
+                    <input type="file" name="file" class="form-control pull-right" required="required" />
+                    <span class="input-group-btn">
+                        <input type="submit" value="Upload" class="btn btn-info" />
+                    </span>
+                </div>
             </div>
-            <div class="col-sm-9">
-                <input type="submit" value="Upload" class="btn btn-info" />
-            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
