@@ -13,9 +13,19 @@
     {
         <div class="alert alert-success">
             <i class="fa fa-info-circle"></i>
-            File <strong>@(TempData["IsPostedFile"] as string)</strong> has been uploaded successfully!
+            File <strong>@(TempData["IsPostedFile"] as string)</strong> has been uploaded successfully.
         </div>
 
         TempData.Remove("IsPostedFile");
+    }
+
+    if (TempData.ContainsKey("IsDeletedFile"))
+    {
+        <div class="alert alert-success">
+            <i class="fa fa-info-circle"></i>
+            File <strong>@(TempData["IsDeletedFile"] as string)</strong> has been deleted successfully.
+        </div>
+
+        TempData.Remove("IsDeletedFile");
     }
 }
