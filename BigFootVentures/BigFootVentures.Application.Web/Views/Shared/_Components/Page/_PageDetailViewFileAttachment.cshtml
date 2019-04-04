@@ -13,7 +13,8 @@
                             <tr>
                                 <th style="width: 70%;">File Name</th>
                                 <th style="width: 25%;">Date Created</th>
-                                <th style="width: 5%;"></th>
+                                <th style="width: 2.5%;"></th>
+                                <th style="width: 2.5%;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,6 +27,11 @@
                                         <td>
                                             <a href="@Url.Action("FileAttachmentDownload", new { ID = fileAttachment.ID, objectName = Model.Name })" title="Download @fileAttachment.FileName">
                                                 <i class="fa fa-download"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="delete-file-attachment" data-id="@fileAttachment.ID" data-filename="@fileAttachment.FileName" title="Delete @fileAttachment.FileName">
+                                                <i class="fa fa-trash text-danger"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -59,4 +65,14 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.delete-file-attachment').on('click', function () {
+            if (confirm('Are you sure you want to delete the file ' + $(this).data('filename') + '?')) {
+                location.href = '@Url.Action("FileAttachmentDelete", "Home")?ID=' + $(this).data('id') + '&objectName=@Model.Name';
+            }
+        });
+    });
+</script>
 <!-- END: File Attachment -->

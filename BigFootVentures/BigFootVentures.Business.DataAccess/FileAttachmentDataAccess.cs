@@ -20,6 +20,8 @@ namespace BigFootVentures.Business.DataAccess
 
         void Insert(FileAttachment entity, string objectName);
 
+        void Delete(int ID, string objectName);
+
         #endregion
     }
 
@@ -154,6 +156,30 @@ namespace BigFootVentures.Business.DataAccess
                     command.Parameters.Add(new MySqlParameter("pCreateDate", MySqlDbType.DateTime) { Value = entity.CreateDate, Direction = ParameterDirection.Input });
 
                     entity.ID = Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public void Delete(int ID, string objectName)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                using (var command = new MySqlCommand($"{objectName}Attachment_Delete", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("pID", MySqlDbType.Int32) { Value = ID, Direction = ParameterDirection.Input });
+
+                    command.ExecuteNonQuery();
                 }
             }
             catch

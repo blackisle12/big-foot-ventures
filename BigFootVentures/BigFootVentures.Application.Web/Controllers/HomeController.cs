@@ -4766,6 +4766,19 @@ namespace BigFootVentures.Application.Web.Controllers
             return File(fileAttachment.File, "application/octet-stream", fileAttachment.FileName);
         }
 
+        [HttpGet]
+        [Route("FileAttachment/Delete", Name = "FileAttachmentDelete")]
+        public ActionResult FileAttachmentDelete(int ID, string objectName)
+        {
+            var fileAttachment = this._fileAttachmentService.GetByID(ID, objectName);
+
+            this._fileAttachmentService.Delete(ID, objectName);
+
+            TempData.Add("IsDeletedFile", fileAttachment.FileName);
+
+            return RedirectToRoute(objectName + "View", new { ID = fileAttachment.ObjectID });
+        }
+
         #endregion
 
         #region "Private Methods"

@@ -18,6 +18,8 @@ namespace BigFootVentures.Service.BusinessService
 
         void Insert(FileAttachment model, string objectName);
 
+        void Delete(int ID, string objectName);
+
         #endregion
     }
 
@@ -65,6 +67,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var dataAccess = new FileAttachmentDataAccess(_connectionString))
             {
                 dataAccess.Insert(model, objectName);
+            }
+        }
+
+        public void Delete(int ID, string objectName)
+        {
+            using (var dataAccess = new FileAttachmentDataAccess(_connectionString))
+            {
+                dataAccess.Delete(ID, objectName);
             }
         }
 
