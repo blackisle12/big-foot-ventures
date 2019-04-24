@@ -203,9 +203,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<AgreementT>
             {
                 Record = agreement,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Agreement")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -416,9 +418,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Brand>
             {
                 Record = brand,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Brand")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
