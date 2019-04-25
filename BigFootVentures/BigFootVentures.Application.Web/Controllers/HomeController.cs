@@ -622,9 +622,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Cancellation>
             {
                 Record = cancellation,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Cancellation")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -1530,9 +1532,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<EmailResponse>
             {
                 Record = emailResponse,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "EmailResponse")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -1723,10 +1727,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Enquiry>
             {
                 Record = enquiry,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Enquiry")
+                PageMode = PageMode.View
             };
 
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
             if (TempData.ContainsKey("IsPosted"))
             {
                 model.PageMode = PageMode.PersistSuccess;
@@ -1957,13 +1962,14 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult Lead(int ID)
         {
             var lead = this._managementLeadService.Get(ID);
-            
             var model = new VMModel<Lead>
             {
                 Record = lead,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Lead")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
