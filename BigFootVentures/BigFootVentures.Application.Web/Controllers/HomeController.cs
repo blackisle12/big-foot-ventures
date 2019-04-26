@@ -2140,9 +2140,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<LegalCase>
             {
                 Record = legalCase,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "LegalCase")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -2323,10 +2325,12 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<LoginInformation>
             {
                 Record = loginInformation,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "LoginInformation")
+                PageMode = PageMode.View
             };
-            
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
             if (TempData.ContainsKey("IsPosted"))
             {
                 model.PageMode = PageMode.PersistSuccess;
@@ -2496,9 +2500,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Office>
             {
                 Record = office,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Office")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -2711,9 +2717,11 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<OfficeStatus>
             {
                 Record = officeStatus,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "OfficeStatus")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
             if (TempData.ContainsKey("IsPosted"))
             {
