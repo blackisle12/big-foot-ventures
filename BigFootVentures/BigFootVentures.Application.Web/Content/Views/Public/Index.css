@@ -38,9 +38,3 @@ body {
     margin-bottom: 15px;
     color:red;
 }
-
-table tbody tr td {
-    word-wrap: break-word;
-    word-break: break-all;
-    white-space: normal;
-}
