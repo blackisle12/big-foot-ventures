@@ -1263,29 +1263,19 @@ namespace BigFootVentures.Application.Web.Controllers
             var domain = this._managementDomainService.Get(ID);
 
             if (domain.RegistrantCompany != null)
-            {
                 domain.RegistrantCompany = this._managementCompanyService.Get(domain.RegistrantCompany.ID);
-            }
 
             if (domain.DomainEnquiry != null)
-            {
                 domain.DomainEnquiry = this._managementEnquiryService.Get(domain.DomainEnquiry.ID);
-            }
 
             if (domain.Brand != null)
-            {
                 domain.Brand = this._managementBrandService.Get(domain.Brand.ID);
-            }
 
             if (domain.Registrar != null)
-            {
                 domain.Registrar = this._managementRegisterService.Get(domain.Registrar.ID);
-            }
 
             if (domain.PreviousRegistrant != null)
-            {
                 domain.PreviousRegistrant = this._managementCompanyService.Get(domain.PreviousRegistrant.ID);
-            }
 
             var model = new VMModel<DomainN>
             {
@@ -1295,6 +1285,9 @@ namespace BigFootVentures.Application.Web.Controllers
 
             model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
             model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
+            model.Record.RelatedContacts = this._managementDomainService.GetRelated<Contact>(ID);
+            model.Record.RelatedTrademarks = this._managementDomainService.GetRelated<Trademark>(ID);
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -1340,29 +1333,19 @@ namespace BigFootVentures.Application.Web.Controllers
                 var domain = this._managementDomainService.Get(ID);
 
                 if (domain.RegistrantCompany != null)
-                {
                     domain.RegistrantCompany = this._managementCompanyService.Get(domain.RegistrantCompany.ID);
-                }
 
                 if (domain.DomainEnquiry != null)
-                {
                     domain.DomainEnquiry = this._managementEnquiryService.Get(domain.DomainEnquiry.ID);
-                }
 
                 if (domain.Brand != null)
-                {
                     domain.Brand = this._managementBrandService.Get(domain.Brand.ID);
-                }
 
                 if (domain.Registrar != null)
-                {
                     domain.Registrar = this._managementRegisterService.Get(domain.Registrar.ID);
-                }
 
                 if (domain.PreviousRegistrant != null)
-                {
                     domain.PreviousRegistrant = this._managementCompanyService.Get(domain.PreviousRegistrant.ID);
-                }
 
                 model = new VMModel<DomainN>
                 {

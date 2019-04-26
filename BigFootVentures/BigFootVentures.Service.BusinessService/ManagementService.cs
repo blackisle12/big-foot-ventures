@@ -1,5 +1,6 @@
 ﻿using BigFootVentures.Business.DataAccess;
 using BigFootVentures.Business.DataAccess.Mapping;
+using BigFootVentures.Business.DataAccess.Mapping.Management;
 using BigFootVentures.Business.Objects;
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Business.Objects.Wrapper;
@@ -34,6 +35,8 @@ namespace BigFootVentures.Service.BusinessService
         ICollection<TModel> GetByUsername(string username);
 
         ICollection<TModel> GetAssigned(int assignedToID, int startIndex, int rowCount, out int total);
+
+        ICollection<TRelatedModel> GetRelated<TRelatedModel>(int objectID) where TRelatedModel : BusinessBase;
 
         #endregion
 
@@ -156,6 +159,21 @@ namespace BigFootVentures.Service.BusinessService
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.GetAssigned(assignedToID, startIndex, rowCount, out total);
+            }
+        }
+
+        public ICollection<TRelatedModel> GetRelated<TRelatedModel>(int objectID) where TRelatedModel : BusinessBase
+        {
+            IMapper mapper = null;
+
+            if (typeof(TRelatedModel) == typeof(Contact))
+                mapper = new ContactMapper();
+            else if (typeof(TRelatedModel) == typeof(Trademark))
+                mapper = new TrademarkMapper();
+
+            using (var repository = new Repository<TModel>(this._connectionString, mapper))
+            {
+                return repository.GetRelated<TRelatedModel>(objectID, mapper);
             }
         }
 

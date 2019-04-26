@@ -1,4 +1,5 @@
 ﻿using BigFootVentures.Business.Objects.Utilities;
+using System.Collections.Generic;
 
 namespace BigFootVentures.Business.Objects.Management
 {
@@ -106,6 +107,14 @@ namespace BigFootVentures.Business.Objects.Management
                     string.Empty;
             }
         }
+
+        #endregion
+
+        #region "Relationships"
+
+        public ICollection<Contact> RelatedContacts { get; set; }
+
+        public ICollection<Trademark> RelatedTrademarks { get; set; }
 
         #endregion
     }

@@ -39,6 +39,8 @@ namespace BigFootVentures.Business.DataAccess
 
         ICollection<TEntity> GetAssigned(int assignedToID, int startIndex, int rowCount, out int total);
 
+        ICollection<TRelatedEntity> GetRelated<TRelatedEntity>(int objectID, IMapper mapper) where TRelatedEntity : BusinessBase;
+
         #endregion
 
         #region "Persistence"
@@ -493,6 +495,41 @@ namespace BigFootVentures.Business.DataAccess
                     dataReader.Close();
 
                     total = (int)command.Parameters["total"].Value;
+                }
+
+                return entities;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public ICollection<TRelatedEntity> GetRelated<TRelatedEntity>(int objectID, IMapper mapper) where TRelatedEntity : BusinessBase 
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                var entities = new List<TRelatedEntity>();
+
+                using (var command = new MySqlCommand($"{this._entityName}_GetRelated{typeof(TRelatedEntity).Name}", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("objectID", MySqlDbType.Int32) { Value = objectID, Direction = ParameterDirection.Input });
+
+                    var dataReader = command.ExecuteReader();
+
+                    foreach (var entity in mapper.ParseDataMin(dataReader))
+                    {
+                        entities.Add((TRelatedEntity)entity);
+                    }
+
+                    dataReader.Close();
                 }
 
                 return entities;
