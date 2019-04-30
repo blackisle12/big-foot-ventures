@@ -225,3 +225,9 @@ p.table-empty {
 .subtitle {
     color: #999;
 }
+
+.table-view tbody tr td {
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+}
