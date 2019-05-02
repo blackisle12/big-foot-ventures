@@ -2901,9 +2901,12 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Opposition>
             {
                 Record = opposition,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Opposition")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -3081,13 +3084,16 @@ namespace BigFootVentures.Application.Web.Controllers
         public ActionResult PreFilingSimilarityResearch(int ID)
         {
             var preFilingSimilarityResearch = this._managementPreFilingSimilarityResearchService.Get(ID);
-          
+
             var model = new VMModel<PreFilingSimilarityResearch>
             {
                 Record = preFilingSimilarityResearch,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "PreFilingSimilarityResearch")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -3262,9 +3268,12 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<Register>
             {
                 Record = register,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "Register")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -3460,9 +3469,12 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<SimilarTrademark>
             {
                 Record = similarTrademark,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "SimilarTrademark")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -3634,11 +3646,15 @@ namespace BigFootVentures.Application.Web.Controllers
             task.AssignedTo = this._managementUserAccountService.Get(task.AssignedTo.ID);
             task.AssignedTo.DisplayName = $"{task.AssignedTo.FirstName} {task.AssignedTo.LastName}";
             
-            var model = new VMModel<Task>
+             var model = new VMModel<Task>
             {
                 Record = task,
                 PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -3809,9 +3825,12 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<TMRepresentative>
             {
                 Record = TMRepresentative,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "TMRepresentative")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
 
             if (TempData.ContainsKey("IsPosted"))
             {
@@ -4303,9 +4322,12 @@ namespace BigFootVentures.Application.Web.Controllers
             var model = new VMModel<TrademarkOwner>
             {
                 Record = trademarkOwner,
-                PageMode = PageMode.View,
-                AuditTrails = _auditTrailService.Get(ID, "TrademarkOwner")
+                PageMode = PageMode.View
             };
+
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
 
             if (TempData.ContainsKey("IsPosted"))
             {
