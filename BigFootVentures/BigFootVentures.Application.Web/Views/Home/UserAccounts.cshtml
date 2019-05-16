@@ -25,18 +25,26 @@
                         <th class="th-name">Name</th>
                         <th class="th-email-address">Email Address</th>
                         <th class="th-roles">Roles</th>
-                        <th class="th-is-active">Active</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{
                         foreach (var userAccount in Model.Records)
                         {
-                            <tr>
-                                <td><a href="@Url.RouteUrl("UserAccountView", new { ID = userAccount.ID })" target="_blank">@userAccount.FirstName @userAccount.LastName</a></td>
+                            <tr class="@(userAccount.IsActive ? string.Empty : "warning")">
+                                <td>
+                                    <a href="@Url.RouteUrl("UserAccountView", new { ID = userAccount.ID })" target="_blank">
+                                        @userAccount.FirstName @userAccount.LastName
+                                        @{
+                                            if (!userAccount.IsActive)
+                                            {
+                                                <span class="badge">INACTIVE</span>
+                                            }
+                                        }
+                                    </a>
+                                </td>
                                 <td>@userAccount.EmailAddress</td>
                                 <td>@userAccount.Roles</td>
-                                <td><input type="checkbox" @(userAccount.IsActive ? "checked" : string.Empty) disabled /></td>
                             </tr>
                         }
                     }

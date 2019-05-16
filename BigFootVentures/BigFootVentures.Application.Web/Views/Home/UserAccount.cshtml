@@ -29,7 +29,7 @@
         </div>
     }
 
-    if (!Model.Record.IsActive)
+    if (!Model.Record.IsActive && Model.Record.ID > 0)
     {
         <div class="alert alert-warning">
             <p>This account is currently inactive.</p>
@@ -39,10 +39,10 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) User Account <strong>@Model.Record.DisplayName</strong>
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new") User Account <strong>@Model.Record.DisplayName</strong>
             </span>
             <span class="panel-title pull-right">
-                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+                <i class="fa fa-edit"></i>
             </span>
         </div>
         <div class="panel-body">
@@ -52,7 +52,7 @@
                     <h4 class="panel-title">General Information</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">First Name</label>
                             <div class="col-sm-4">
@@ -116,7 +116,7 @@
                     <h4 class="panel-title">Mailing Address</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Country</label>
                             <div class="col-sm-10">
@@ -157,7 +157,7 @@
                     <h4 class="panel-title">Roles</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group display-flex">
                             <label class="col-sm-2 control-label text-neutral">Available</label>
                             <div class="col-sm-4">
@@ -176,8 +176,6 @@
                 </div>
             </div>
             <!-- END:  Roles -->
-
-            @Html.Partial("../Shared/_Components/Page/_PageDetailViewAuditTrail")
         </div>
         <div class="panel-footer">
             @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")

@@ -4488,7 +4488,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 TempData.Remove("IsPosted");
             }
 
-            return View("UserAccount", model);
+            return View("UserAccountView", model);
         }
 
         [Route("UserAccount/New", Name = "UserAccountNew")]
@@ -4508,7 +4508,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 model = new VMModel<UserAccount>
                 {
                     Record = new UserAccount(),
-                    PageMode = PageMode.Edit
+                    PageMode = PageMode.Edit,
+                    AuditTrails = new List<AuditTrail>()
                 };
             }
 
@@ -4532,7 +4533,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 model = new VMModel<UserAccount>
                 {
                     Record = this._managementUserAccountService.Get(ID),
-                    PageMode = PageMode.Edit
+                    PageMode = PageMode.Edit,
+                    AuditTrails = new List<AuditTrail>()
                 };
             }
 
