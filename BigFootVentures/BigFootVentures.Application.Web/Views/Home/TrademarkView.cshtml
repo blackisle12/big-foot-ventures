@@ -86,7 +86,7 @@
                         </tr>
                         <tr>
                             <td><strong>TM URL</strong></td>
-                            <td>@Model.Record.TMURL</td>
+                            <td><a href="#" class="open-link" data-link="@Model.Record.TMURL">@Model.Record.TMURL</a></td>
                             <td><strong>Figurative</strong></td>
                             <td><input type="checkbox" disabled="disabled" @(Model.Record.Figurative ? "checked" : string.Empty) /></td>
                         </tr>
@@ -100,7 +100,7 @@
                             <td><strong>Owner</strong></td>
                             <td>@Model.Record.OwnerName</td>
                             <td><strong>Figurative URL</strong></td>
-                            <td>@Model.Record.FigurativeURL</td>
+                            <td><a href="#" class="open-link" data-link="@Model.Record.FigurativeURL">@Model.Record.FigurativeURL</a></td>
                         </tr>
                         <tr>
                             <td><strong>Original Office</strong></td>
