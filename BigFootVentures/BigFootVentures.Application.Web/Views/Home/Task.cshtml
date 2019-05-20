@@ -25,23 +25,20 @@
     <div class="panel panel-default panel-parent">
         <div class="panel-heading">
             <span class="panel-title">
-                You are @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "viewing" : (Model.Record.ID > 0 ? "editing" : "creating new")) Task
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new") Task
             </span>
             <span class="panel-title pull-right">
-                <i class="fa fa-@(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "eye" : "edit" )"></i>
+                <i class="fa fa-edit"></i>
             </span>
         </div>
         <div class="panel-body">
             <!-- START: Task Information -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Task Information
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Task Information</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Subject</label>
                             <div class="col-sm-4">
@@ -113,13 +110,10 @@
             <!-- START: Related To -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Related to
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Related to</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Message Date</label>
                             <div class="col-sm-10">
@@ -133,13 +127,10 @@
             <!-- START: Reccurence -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Reccurence
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Reccurence</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Create Recurring Series of Tasks</label>
                             <div class="col-sm-10">
@@ -153,13 +144,10 @@
             <!-- START: Reminder -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Reminder
-                        <span class="pull-right panel-control"><i class="fa fa-window-minimize"></i></span>
-                    </h4>
+                    <h4 class="panel-title">Reminder</h4>
                 </div>
                 <div class="panel-body">
-                    <fieldset @(Model.PageMode == VMEnums.PageMode.View || Model.PageMode == VMEnums.PageMode.PersistSuccess ? "disabled" : string.Empty)>
+                    <fieldset>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Reminder</label>
                             <div class="col-sm-10">

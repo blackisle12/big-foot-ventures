@@ -1,0 +1,157 @@
+﻿<link href="~/Content/Views/Home/Task.css" rel="stylesheet" />
+
+@using BigFootVentures.Application.Web.Models
+@using BigFootVentures.Application.Web.Models.Utilities
+@using BigFootVentures.Application.Web.Models.ViewModels
+@using BigFootVentures.Business.Objects.Enumerators
+@using BigFootVentures.Business.Objects.Management
+@using BigFootVentures.Business.Objects.Utilities
+
+@{
+    ViewBag.Title = "Task - " + (Model.Record.ID > 0 ? Model.Record.Subject : "New Record");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model VMModel<Task>
+
+@using (Html.BeginForm("FileAttachmentUpload", "Home", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
+
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are viewing Task
+            </span>
+            <span class="panel-title pull-right">
+                <i class="fa fa-eye"></i>
+            </span>
+        </div>
+        <div class="panel-body">
+            <!-- START: Task Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Task Information</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Subject</strong></td>
+                            <td>@Model.Record.Subject</td>
+                            <td><strong>Assigned To</strong></td>
+                            <td>@Model.Record.AssignedTo.DisplayName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comments</strong></td>
+                            <td>@Model.Record.Comments</td>
+                            <td><strong>Status</strong></td>
+                            <td>@Model.Record.Status</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Issue Date</strong></td>
+                            <td>@(Model.Record.IssueDate?.ToString("yyyy-MM-dd"))</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Due Date</strong></td>
+                            <td>@(Model.Record.DueDate?.ToString("yyyy-MM-dd"))</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Close Task</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.CloseTask ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Priority</strong></td>
+                            <td>@Model.Record.Priority</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Completion Date</strong></td>
+                            <td>@(Model.Record.CompletionDate?.ToString("yyyy-MM-ddTHH:mm"))</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Creation Date</strong></td>
+                            <td>@(Model.Record.CreationDate?.ToString("yyyy-MM-ddTHH:mm"))</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Task Information -->
+            <!-- START: Related To -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Related to</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Message Date</strong></td>
+                            <td>@Model.Record.MessageDate</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Related To -->
+            <!-- START: Reccurence -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Reccurence</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Create Recurring Series of Tasks</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.CreateRecurringSeriesOfTasks ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Reccurence -->
+            <!-- START: Reminder -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Reminder</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Reminder</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.Reminder ? "checked" : string.Empty) /></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reminder Date</strong></td>
+                            <td>@Model.Record.ReminderDate</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Reminder -->
+
+            @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")
+            @Html.Partial("../Shared/_Components/Page/_PageDetailViewAuditTrail")
+        </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
+        </div>
+    </div>
+
+    <script src="~/Scripts/Views/Home/Task.js"></script>
+}

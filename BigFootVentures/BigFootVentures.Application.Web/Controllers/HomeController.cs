@@ -3640,13 +3640,16 @@ namespace BigFootVentures.Application.Web.Controllers
                 PageMode = PageMode.View
             };
 
+            model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
+            model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
+
             if (TempData.ContainsKey("IsPosted"))
             {
                 model.PageMode = PageMode.PersistSuccess;
                 TempData.Remove("IsPosted");
             }
 
-            return View("Task", model);
+            return View("TaskView", model);
         }
 
         [Route("Task/New", Name = "TaskNew")]
