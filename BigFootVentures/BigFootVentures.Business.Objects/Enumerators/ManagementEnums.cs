@@ -1758,6 +1758,9 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
             public enum ObjectName
             {
+                [Description("")]
+                NotSet,
+
                 [Description("Brand")]
                 Brand,
 

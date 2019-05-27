@@ -3686,6 +3686,9 @@ namespace BigFootVentures.Application.Web.Controllers
             {
                 var task = this._managementTaskService.Get(ID);
 
+                task.AssignedTo = this._managementUserAccountService.Get(task.AssignedTo.ID);
+                task.AssignedTo.DisplayName = $"{task.AssignedTo.FirstName} {task.AssignedTo.LastName}";
+
                 model = new VMModel<Task>
                 {
                     Record = task,

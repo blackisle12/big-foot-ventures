@@ -44,26 +44,20 @@
                             <td>@Model.Record.AssignedTo.DisplayName</td>
                         </tr>
                         <tr>
-                            <td><strong>Comments</strong></td>
-                            <td>@Model.Record.Comments</td>
                             <td><strong>Status</strong></td>
                             <td>@Model.Record.Status</td>
+                            <td><strong>Assigned Object</strong></td>
+                            <td>@Model.Record.RelatedToObjectName</td>
                         </tr>
                         <tr>
                             <td><strong>Issue Date</strong></td>
                             <td>@(Model.Record.IssueDate?.ToString("yyyy-MM-dd"))</td>
-                            <td></td>
-                            <td></td>
+                            <td><strong>Assigned Object ID</strong></td>
+                            <td>@Model.Record.RelatedToObjectID</td>
                         </tr>
                         <tr>
                             <td><strong>Due Date</strong></td>
                             <td>@(Model.Record.DueDate?.ToString("yyyy-MM-dd"))</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Close Task</strong></td>
-                            <td><input type="checkbox" disabled="disabled" @(Model.Record.CloseTask ? "checked" : string.Empty) /></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -82,6 +76,18 @@
                         <tr>
                             <td><strong>Creation Date</strong></td>
                             <td>@(Model.Record.CreationDate?.ToString("yyyy-MM-ddTHH:mm"))</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comments</strong></td>
+                            <td>@Model.Record.Comments</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Close Task</strong></td>
+                            <td><input type="checkbox" disabled="disabled" @(Model.Record.CloseTask ? "checked" : string.Empty) /></td>
                             <td></td>
                             <td></td>
                         </tr>
