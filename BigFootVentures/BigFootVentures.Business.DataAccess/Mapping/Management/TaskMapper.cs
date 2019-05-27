@@ -68,11 +68,18 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
 
                     CompletionDate = dataReader["CompletionDate"] as DateTime?,
                     IssueDate = dataReader["IssueDate"] as DateTime?,
+                    DueDate = dataReader["DueDate"] as DateTime?,
                     Status = dataReader["Status"] as string,
                     Subject = dataReader["Subject"] as string,
                     RelatedToObjectID = dataReader["RelatedToObjectID"] as int?,
                     RelatedToObjectName = dataReader["RelatedToObjectName"] as string,
                     RelatedToObjectValue = dataReader["RelatedToObjectValue"] as string,
+                    AssignedTo = new UserAccount
+                    {
+                        ID = dataReader["AssignedToID"] as int? ?? 0,
+                        DisplayName = dataReader["DisplayName"] as string
+                    },
+                    OwnerName = dataReader["OwnerName"] as string
                 };
 
                 entities.Add(entity);

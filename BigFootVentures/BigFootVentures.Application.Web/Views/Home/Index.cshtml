@@ -11,12 +11,9 @@
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
+    <h3>My Tasks</h3>
+    <hr />
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="panel-title">
-                My Tasks
-            </span>
-        </div>
         <div class="table-responsive">
             @{
                 if (Model.Tasks.Records.Any())
@@ -24,10 +21,11 @@
                     <table class="table table-striped table-hover" name="Table.Tasks">
                         <thead>
                             <tr class="th-bg">
-                                <th class="th-issue-date">Date</th>
-                                <th class="th-status">Status</th>
                                 <th class="th-subject">Subject</th>
+                                <th class="th-issue-date">Issue Date</th>
+                                <th class="th-due-date">Due Date</th>
                                 <th class="th-related-to">Related To</th>
+                                <th class="th-owner-name">Owner</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,10 +33,11 @@
                                 foreach (var task in Model.Tasks.Records)
                                 {
                                     <tr>
-                                        <td>@(task.IssueDate?.ToString("dd-MM-yyyy"))</td>
-                                        <td>@task.Status</td>
                                         <td><a href="@Url.RouteUrl("TaskView", new { ID = task.ID })" target="_blank">@task.Subject</a></td>
+                                        <td>@(task.IssueDate?.ToString("dd-MM-yyyy"))</td>
+                                        <td>@(task.DueDate?.ToString("dd-MM-yyyy"))</td>
                                         <td>@task.RelatedToObjectValue</td>
+                                        <td>@task.OwnerName</td>
                                     </tr>
                                 }
                             }
@@ -51,10 +50,10 @@
                 }
             }
         </div>
-        <div class="panel-footer">
-            @{
-                if (Model.Tasks.Records.Any())
-                {
+        @{
+            if (Model.Tasks.Records.Any())
+            {
+                <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-12">
                             <input type="hidden" name="rowCount" value="@Model.Tasks.RowCount" />
@@ -89,9 +88,9 @@
                             });
                         });
                     </script>
-                }
+                </div>
             }
-        </div>
+        }
     </div>
 
     <script src="~/Scripts/Views/Home/Index.js"></script>

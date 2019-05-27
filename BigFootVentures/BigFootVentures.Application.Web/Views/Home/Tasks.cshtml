@@ -14,6 +14,8 @@
 {
     @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
 
+    <h4>Tasks</h4>
+    <hr />
     <div class="panel panel-default">
         <div class="panel-heading">
             @Html.Partial("../Shared/_Components/Page/_PageTableViewHeader")
@@ -22,10 +24,11 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-issue-date">Date</th>
-                        <th class="th-status">Status</th>
                         <th class="th-subject">Subject</th>
-                        <th class="th-related-to">Related To</th>
+                        <th class="th-status">Status</th>
+                        <th class="th-issue-date">Issue Date</th>
+                        <th class="th-due-date">Due Date</th>
+                        <th class="th-assigned-to">Assigned To</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,10 +36,11 @@
                         foreach (var task in Model.Records)
                         {
                             <tr>
-                                <td>@(task.IssueDate?.ToString("dd-MM-yyyy"))</td>
-                                <td>@task.Status</td>
                                 <td><a href="@Url.RouteUrl("TaskView", new { ID = task.ID })" target="_blank">@task.Subject</a></td>
-                                <td>@task.RelatedToObjectValue</td>
+                                <td>@task.Status</td>
+                                <td>@(task.IssueDate?.ToString("dd-MM-yyyy"))</td>
+                                <td>@(task.DueDate?.ToString("dd-MM-yyyy"))</td>
+                                <td>@task.AssignedTo.DisplayName</td>
                             </tr>
                         }
                     }

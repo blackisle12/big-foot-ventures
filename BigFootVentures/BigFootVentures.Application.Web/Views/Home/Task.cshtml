@@ -67,6 +67,11 @@
                             <div class="col-sm-4">
                                 @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Task.Status>()), new { @class = "form-control required" })
                             </div>
+
+                            <label class="col-sm-2 control-label">Close Task</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.CloseTask)
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Issue Date</label>
@@ -78,11 +83,6 @@
                             <label class="col-sm-2 control-label">Due Date</label>
                             <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.DueDate, new { @class = "form-control", @type = "date", @Value = Model.Record.DueDate?.ToString("yyyy-MM-dd") })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Close Task</label>
-                            <div class="col-sm-4">
-                                @Html.CheckBoxFor(m => m.Record.CloseTask)
                             </div>
                         </div>
                         <div class="form-group">
