@@ -28,7 +28,16 @@
                 You are @(Model.Record.ID > 0 ? "editing" : "creating new") Task
             </span>
             <span class="panel-title pull-right">
-                <i class="fa fa-edit"></i>
+                @{
+                    if (Model.Record.ID > 0)
+                    {
+                        <span>Reference ID: <strong>@Model.Record.ID</strong></span>
+                    }
+                    else
+                    {
+                        <i class="fa fa-edit"></i>
+                    }
+                }
             </span>
         </div>
         <div class="panel-body">
@@ -63,14 +72,9 @@
                                 @Html.TextAreaFor(m => m.Record.Comments, new { @class = "form-control" })
                             </div>
 
-                            <label class="col-sm-2 control-label">Status</label>
+                            <label class="col-sm-2 control-label">Assigned Object</label>
                             <div class="col-sm-4">
-                                @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Task.Status>()), new { @class = "form-control required" })
-                            </div>
-
-                            <label class="col-sm-2 control-label">Close Task</label>
-                            <div class="col-sm-4">
-                                @Html.CheckBoxFor(m => m.Record.CloseTask)
+                                @Html.DropDownListFor(m => m.Record.RelatedToObjectName, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Task.ObjectName>()), new { @class = "form-control required" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -78,11 +82,27 @@
                             <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.IssueDate, new { @class = "form-control", @type = "date", @Value = Model.Record.IssueDate?.ToString("yyyy-MM-dd") })
                             </div>
+
+                            <label class="col-sm-2 control-label">Assigned Object ID</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.RelatedToObjectID, new { @class = "form-control", @type = "number" })
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Due Date</label>
                             <div class="col-sm-4">
                                 @Html.TextBoxFor(m => m.Record.DueDate, new { @class = "form-control", @type = "date", @Value = Model.Record.DueDate?.ToString("yyyy-MM-dd") })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Task.Status>()), new { @class = "form-control required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Close Task</label>
+                            <div class="col-sm-4">
+                                @Html.CheckBoxFor(m => m.Record.CloseTask)
                             </div>
                         </div>
                         <div class="form-group">

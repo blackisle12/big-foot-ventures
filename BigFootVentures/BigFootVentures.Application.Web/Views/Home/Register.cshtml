@@ -26,7 +26,16 @@
                 You are @(Model.Record.ID > 0 ? "editing" : "creating new") Register <strong>@Model.Record.Name</strong>
             </span>
             <span class="panel-title pull-right">
-                <i class="fa fa-edit"></i>
+                @{
+                    if (Model.Record.ID > 0)
+                    {
+                        <span>Reference ID: <strong>@Model.Record.ID</strong></span>
+                    }
+                    else
+                    {
+                        <i class="fa fa-edit"></i>
+                    }
+                }
             </span>
         </div>
         <div class="panel-body">

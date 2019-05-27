@@ -1755,6 +1755,36 @@ namespace BigFootVentures.Business.Objects.Enumerators
                 [Description("Completed")]
                 Completed
             }
+
+            public enum ObjectName
+            {
+                [Description("Brand")]
+                Brand,
+
+                [Description("Company")]
+                Company,
+
+                [Description("Contact")]
+                Contact,
+
+                [Description("Domain")]
+                Domain,
+
+                [Description("Enquiry")]
+                Enquiry,
+
+                [Description("Legal Case")]
+                LegalCase,
+
+                [Description("Office")]
+                Office,
+
+                [Description("Trademark")]
+                Trademark,
+
+                [Description("Trademark Owner")]
+                TrademarkOwner
+            }
         }
 
         public static class Trademark

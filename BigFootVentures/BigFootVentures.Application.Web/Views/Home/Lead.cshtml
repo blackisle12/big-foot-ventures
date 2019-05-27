@@ -18,169 +18,178 @@
 
     @Html.Partial("../Shared/_Components/Page/_PageEditViewAlert")
 
-<div class="panel panel-default panel-parent">
-    <div class="panel-heading">
-        <span class="panel-title">
-            You are @(Model.Record.ID > 0 ? "editing" : "creating new") Lead <strong>@Model.Record.FirstName @Model.Record.LastName</strong>
-        </span>
-        <span class="panel-title pull-right">
-            <i class="fa fa-edit"></i>
-        </span>
-    </div>
-    <div class="panel-body">
-        <!-- START: Lead Information -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Lead Information</h4>
-            </div>
-            <div class="panel-body">
-                <fieldset>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Lead Status</label>
-                        <div class="col-sm-4">
-                            @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Status>()), new { @class = "form-control required" })
-                        </div>
-
-                        <label class="col-sm-2 control-label text-neutral">Lead Owner</label>
-                        <div class="col-sm-4">
-                            @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control input-neutral", @readonly = "readonly" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label text-neutral">Salutation</label>
-                        <div class="col-sm-4">
-                            @Html.DropDownListFor(m => m.Record.Salutation, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Salutation>()), new { @class = "form-control input-neutral" })
-                        </div>
-
-                        <label class="col-sm-2 control-label">Company</label>
-                        <div class="col-sm-4">
-                            @Html.TextBoxFor(m => m.Record.Company, new { @class = "form-control required" })
-                            @Html.ValidationMessageFor(m => m.Record.Company, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">First Name</label>
-                        <div class="col-sm-4">
-                            @Html.TextBoxFor(m => m.Record.FirstName, new { @class = "form-control" })
-                        </div>
-
-                        <label class="col-sm-2 control-label">Industry</label>
-                        <div class="col-sm-4">
-                            @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Industry>()), new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Middle Name</label>
-                        <div class="col-sm-4">
-                            @Html.TextBoxFor(m => m.Record.MiddleName, new { @class = "form-control" })
-                        </div>
-
-                        <label class="col-sm-2 control-label">No. of Employees</label>
-                        <div class="col-sm-4">
-                            @Html.TextBoxFor(m => m.Record.NoOfEmployees, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Last Name</label>
-                        <div class="col-sm-4">
-                            @Html.TextBoxFor(m => m.Record.LastName, new { @class = "form-control required" })
-                            @Html.ValidationMessageFor(m => m.Record.LastName, "", new { @class = "text-danger" })
-                        </div>
-
-                        <label class="col-sm-2 control-label text-neutral">Lead Source</label>
-                        <div class="col-sm-4">
-                            @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Source>()), new { @class = "form-control input-neutral" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Suffix</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(m => m.Record.Suffix, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(m => m.Record.Title, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(m => m.Record.Email, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Phone</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
+    <div class="panel panel-default panel-parent">
+        <div class="panel-heading">
+            <span class="panel-title">
+                You are @(Model.Record.ID > 0 ? "editing" : "creating new") Lead <strong>@Model.Record.FirstName @Model.Record.LastName</strong>
+            </span>
+            <span class="panel-title pull-right">
+                @{
+                    if (Model.Record.ID > 0)
+                    {
+                        <span>Reference ID: <strong>@Model.Record.ID</strong></span>
+                    }
+                    else
+                    {
+                        <i class="fa fa-edit"></i>
+                    }
+                }
+            </span>
         </div>
-        <!-- END: Lead Information -->
-        <!-- START: Address Information -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Address Information</h4>
+        <div class="panel-body">
+            <!-- START: Lead Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Lead Information</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Lead Status</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Status, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Status>()), new { @class = "form-control required" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Lead Owner</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.OwnerName, new { @class = "form-control input-neutral", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-neutral">Salutation</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Salutation, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Salutation>()), new { @class = "form-control input-neutral" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Company</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.Company, new { @class = "form-control required" })
+                                @Html.ValidationMessageFor(m => m.Record.Company, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.FirstName, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Industry</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Industry>()), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Middle Name</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.MiddleName, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">No. of Employees</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.NoOfEmployees, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Last Name</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.LastName, new { @class = "form-control required" })
+                                @Html.ValidationMessageFor(m => m.Record.LastName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-2 control-label text-neutral">Lead Source</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.Industry, new SelectList(EnumUtils.GetDescriptions<ManagementEnums.Lead.Source>()), new { @class = "form-control input-neutral" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Suffix</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Suffix, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Title</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Title, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.Phone, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
             </div>
-            <div class="panel-body">
-                <fieldset>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Country</label>
-                        <div class="col-sm-10">
-                            @Html.DropDownListFor(m => m.Record.Country, new SelectList(BigFootVentures.Application.Web.Models.Utilities.StringUtils.GetCountries()), new { @class = "form-control" })
+            <!-- END: Lead Information -->
+            <!-- START: Address Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Address Information</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Country</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(m => m.Record.Country, new SelectList(BigFootVentures.Application.Web.Models.Utilities.StringUtils.GetCountries()), new { @class = "form-control" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Street</label>
-                        <div class="col-sm-10">
-                            @Html.TextAreaFor(m => m.Record.Street, new { @class = "form-control" })
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Street</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(m => m.Record.Street, new { @class = "form-control" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">City</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(m => m.Record.City, new { @class = "form-control" })
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">City</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.City, new { @class = "form-control" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">State/Province</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(m => m.Record.State, new { @class = "form-control" })
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">State/Province</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.State, new { @class = "form-control" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Zip/Postal Code</label>
-                        <div class="col-sm-10">
-                            @Html.TextBoxFor(m => m.Record.PostalCode, new { @class = "form-control" })
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Zip/Postal Code</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(m => m.Record.PostalCode, new { @class = "form-control" })
+                            </div>
                         </div>
-                    </div>
-                </fieldset>
+                    </fieldset>
+                </div>
             </div>
+            <!-- END: Address Information -->
+            <!-- START: Optional -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Optional</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Assign using active assignment rule</label>
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.Record.AssignUsingActiveAssignmentRule)
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Optional -->
         </div>
-        <!-- END: Address Information -->
-        <!-- START: Optional -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Optional</h4>
-            </div>
-            <div class="panel-body">
-                <fieldset>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Assign using active assignment rule</label>
-                        <div class="col-sm-10">
-                            @Html.CheckBoxFor(m => m.Record.AssignUsingActiveAssignmentRule)
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
+        <div class="panel-footer">
+            @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
         </div>
-        <!-- END: Optional -->
     </div>
-    <div class="panel-footer">
-        @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
-    </div>
-</div>
 }
