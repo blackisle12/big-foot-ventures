@@ -54,6 +54,8 @@ namespace BigFootVentures.Application.Web.Controllers
 
         private readonly ITrademarkService _trademarkService = null;
 
+        private readonly ITaskService _taskService = null;
+
         private readonly IAuditTrailService _auditTrailService = null;
 
         private readonly IFileAttachmentService _fileAttachmentService = null;
@@ -86,7 +88,9 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<UserAccount> managementUserAccountService,
 
             ITrademarkService trademarkService,
-            
+
+            ITaskService taskService,
+
             IAuditTrailService auditTrailService,
             
             IFileAttachmentService fileAttachmentService)
@@ -122,6 +126,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 ConfigurationManager.AppSettings["SMTP_Password"]);
 
             this._trademarkService = trademarkService;
+
+            this._taskService = taskService;
 
             this._auditTrailService = auditTrailService;
 
@@ -2143,6 +2149,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 PageMode = PageMode.View
             };
 
+            model.Tasks = this._taskService.Get(ID, model.Name);
             model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
             model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 
@@ -4034,6 +4041,7 @@ namespace BigFootVentures.Application.Web.Controllers
                 PageMode = PageMode.View,
             };
 
+            model.Tasks = this._taskService.Get(ID, model.Name);
             model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
             model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 

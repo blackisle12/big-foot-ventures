@@ -24,7 +24,7 @@
                                 <th class="th-subject">Subject</th>
                                 <th class="th-issue-date">Issue Date</th>
                                 <th class="th-due-date">Due Date</th>
-                                <th class="th-related-to">Related To</th>
+                                <th class="th-related-to">Assigned Object</th>
                                 <th class="th-owner-name">Owner</th>
                             </tr>
                         </thead>
@@ -36,7 +36,7 @@
                                         <td><a href="@Url.RouteUrl("TaskView", new { ID = task.ID })" target="_blank">@task.Subject</a></td>
                                         <td>@(task.IssueDate?.ToString("dd-MM-yyyy"))</td>
                                         <td>@(task.DueDate?.ToString("dd-MM-yyyy"))</td>
-                                        <td>@task.RelatedToObjectValue</td>
+                                        <td>@task.RelatedToObjectName</td>
                                         <td>@task.OwnerName</td>
                                     </tr>
                                 }

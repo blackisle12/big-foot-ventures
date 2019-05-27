@@ -1,0 +1,51 @@
+﻿ <!-- START: Task -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Tasks</h4>
+    </div>
+    <div class="panel-body">
+        @{
+            if (Model.Tasks.Count > 0)
+            {
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr class="th-bg">
+                                <th class="th-subject">Subject</th>
+                                <th class="th-status">Status</th>
+                                <th class="th-issue-date">Issue Date</th>
+                                <th class="th-due-date">Due Date</th>
+                                <th class="th-assigned-to">Assigned To</th>
+                                <th class="th-owner">Owner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var task in Model.Tasks)
+                                {
+                                    <tr>
+                                        <td><a href="@Url.RouteUrl("TaskView", new { ID = task.ID })" target="_blank">@task.Subject</a></td>
+                                        <td>@task.Status</td>
+                                        <td>@(task.IssueDate?.ToString("dd-MM-yyyy"))</td>
+                                        <td>@(task.DueDate?.ToString("dd-MM-yyyy"))</td>
+                                        <td>@task.AssignedTo.DisplayName</td>
+                                        <td>@task.OwnerName</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-sm-12 center-align">
+                        <p class="subtitle">No task found</p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<!-- END: Task -->

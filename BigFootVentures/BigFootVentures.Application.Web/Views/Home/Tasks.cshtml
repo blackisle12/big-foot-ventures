@@ -29,6 +29,7 @@
                         <th class="th-issue-date">Issue Date</th>
                         <th class="th-due-date">Due Date</th>
                         <th class="th-assigned-to">Assigned To</th>
+                        <th class="th-owner">Owner</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,7 @@
                                 <td>@(task.IssueDate?.ToString("dd-MM-yyyy"))</td>
                                 <td>@(task.DueDate?.ToString("dd-MM-yyyy"))</td>
                                 <td>@task.AssignedTo.DisplayName</td>
+                                <td>@task.OwnerName</td>
                             </tr>
                         }
                     }

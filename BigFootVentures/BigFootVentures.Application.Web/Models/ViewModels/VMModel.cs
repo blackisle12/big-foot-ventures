@@ -19,6 +19,7 @@ namespace BigFootVentures.Application.Web.Models.ViewModels
 
         public ICollection<FileAttachment> FileAttachments { get; set; }
         public ICollection<AuditTrail> AuditTrails { get; set; }
+        public ICollection<Task> Tasks { get; set; }
 
         #endregion
     }

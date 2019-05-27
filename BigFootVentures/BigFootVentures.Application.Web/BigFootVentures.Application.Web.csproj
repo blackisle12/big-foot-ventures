@@ -454,6 +454,7 @@
     <Content Include="Views\Shared\_Components\Page\_PageDetailViewFileAttachment.cshtml" />
     <Content Include="Views\Home\UserAccountView.cshtml" />
     <Content Include="Views\Home\TaskView.cshtml" />
+    <Content Include="Views\Shared\_Components\Page\_PageDetailViewTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

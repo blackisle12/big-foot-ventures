@@ -42,6 +42,8 @@ namespace BigFootVentures.Application.Web
 
             container.RegisterType<ITrademarkService>(new InjectionFactory(c => new TrademarkService(connectionString)));
 
+            container.RegisterType<ITaskService>(new InjectionFactory(c => new TaskService(connectionString)));
+
             container.RegisterType<IAuditTrailService>(new InjectionFactory(c => new AuditTrailService(connectionString)));
 
             container.RegisterType<IFileAttachmentService>(new InjectionFactory(c => new FileAttachmentService(connectionString)));
