@@ -757,6 +757,55 @@
                 </div>
             </div>
             <!-- END: Legal Section -->
+            <!-- START: Related Legal Cases -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Legal Cases</h4>
+                </div>
+                <div class="panel-body">
+                    @{
+                        if (Model.Record.RelatedLegalCases.Count > 0)
+                        {
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="th-bg">
+                                            <th class="th-legal-proceeding-name">Legal Proceeding Name</th>
+                                            <th class="th-type-of-case">Type of Case</th>
+                                            <th class="th-date-assigned">Date Assigned</th>
+                                            <th class="th-office-name">Office</th>
+                                            <th class="th-keywords">Keywords</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var legalCase in Model.Record.RelatedLegalCases)
+                                            {
+                                                <tr>
+                                                    <td><a href="@Url.RouteUrl("LegalCaseView", new { ID = legalCase.ID })" target="_blank">@legalCase.LegalProceedingName</a></td>
+                                                    <td>@legalCase.TypeOfCase</td>
+                                                    <td>@legalCase.DateAssigned</td>
+                                                    <td>@(legalCase.Trademark?.Office?.OfficeName)</td>
+                                                    <td>@legalCase.Keywords</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 center-align">
+                                    <p class="subtitle">No related legal case found</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <!-- END: Related Trademarks -->
 
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewTasks")
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")

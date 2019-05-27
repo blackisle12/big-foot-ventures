@@ -168,6 +168,8 @@ namespace BigFootVentures.Service.BusinessService
 
             if (typeof(TRelatedModel) == typeof(Contact))
                 mapper = new ContactMapper();
+            else if (typeof(TRelatedModel) == typeof(LegalCase))
+                mapper = new LegalCaseMapper();
             else if (typeof(TRelatedModel) == typeof(Trademark))
                 mapper = new TrademarkMapper();
 

@@ -346,10 +346,6 @@
                 </div>
             </div>
             <!-- END: System Information -->
-
-            @Html.Partial("../Shared/_Components/Page/_PageDetailViewAuditTrail")
-            @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")
-
             <!-- START: Related Contacts -->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -449,6 +445,9 @@
                 </div>
             </div>
             <!-- END: Related Trademarks -->
+
+            @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")
+            @Html.Partial("../Shared/_Components/Page/_PageDetailViewAuditTrail")
         </div>
         <div class="panel-footer">
             @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")

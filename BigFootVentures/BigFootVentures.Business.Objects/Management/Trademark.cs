@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 
 namespace BigFootVentures.Business.Objects.Management
 {
@@ -270,6 +270,12 @@ namespace BigFootVentures.Business.Objects.Management
             }
         }
         public int CancellationScore { get { return this.NameScore * this.DefenselessScore * this.NonUseScore; } }
+
+        #endregion
+
+        #region "Relationships"
+
+        public ICollection<LegalCase> RelatedLegalCases { get; set; }
 
         #endregion
     }
