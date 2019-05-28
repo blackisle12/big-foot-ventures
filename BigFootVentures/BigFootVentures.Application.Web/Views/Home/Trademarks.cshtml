@@ -25,11 +25,36 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-name">Name</th>
-                        <th class="th-trademark-number">Trademark Number</th>
-                        <th class="th-international-registration-number">International Registration No.</th>
-                        <th class="th-filing-date-value">Filing Date Value</th>
-                        <th class="th-publication-date">Publication Date</th>
+                        <th class="th-name">
+                            <a href="@Url.RouteUrl("Trademarks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "Name", sortOrder = (Model.SortBy == "Name" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Name @if (Model.SortBy == "Name")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-trademark-number">
+                            <a href="@Url.RouteUrl("Trademarks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "TrademarkNumber", sortOrder = (Model.SortBy == "TrademarkNumber" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Trademark Number @if (Model.SortBy == "TrademarkNumber")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-international-registration-number">
+                            <a href="@Url.RouteUrl("Trademarks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "InternationalRegistrationNumber", sortOrder = (Model.SortBy == "InternationalRegistrationNumber" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                International Registration No. @if (Model.SortBy == "InternationalRegistrationNumber")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-filing-date-value">
+                            <a href="@Url.RouteUrl("Trademarks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "FilingDateValue", sortOrder = (Model.SortBy == "FilingDateValue" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Filing Date @if (Model.SortBy == "FilingDateValue")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-publication-date">
+                            <a href="@Url.RouteUrl("Trademarks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "PublicationDate", sortOrder = (Model.SortBy == "PublicationDate" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Publication Date @if (Model.SortBy == "PublicationDate")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

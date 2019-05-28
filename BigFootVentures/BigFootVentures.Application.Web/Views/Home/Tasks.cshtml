@@ -24,12 +24,42 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-subject">Subject</th>
-                        <th class="th-status">Status</th>
-                        <th class="th-issue-date">Issue Date</th>
-                        <th class="th-due-date">Due Date</th>
-                        <th class="th-assigned-to">Assigned To</th>
-                        <th class="th-owner">Owner</th>
+                        <th class="th-subject">
+                            <a href="@Url.RouteUrl("Tasks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "Subject", sortOrder = (Model.SortBy == "Subject" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc") })">
+                                Subject @if (Model.SortBy == "Subject")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-status">
+                            <a href="@Url.RouteUrl("Tasks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "Status", sortOrder = (Model.SortBy == "Status" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc") })">
+                                Status @if (Model.SortBy == "Status")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-issue-date">
+                            <a href="@Url.RouteUrl("Tasks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "IssueDate", sortOrder = (Model.SortBy == "IssueDate" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc") })">
+                                Issue Date @if (Model.SortBy == "IssueDate")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-due-date">
+                            <a href="@Url.RouteUrl("Tasks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "DueDate", sortOrder = (Model.SortBy == "DueDate" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc") })">
+                                Due Date @if (Model.SortBy == "DueDate")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-assigned-to">
+                            <a href="@Url.RouteUrl("Tasks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "FirstName", sortOrder = (Model.SortBy == "FirstName" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc") })">
+                                Assigned To @if (Model.SortBy == "FirstName")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-owner">
+                            <a href="@Url.RouteUrl("Tasks", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "OwnerName" , sortOrder = (Model.SortBy == "OwnerName" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc") })">
+                                Owner @if (Model.SortBy == "OwnerName")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

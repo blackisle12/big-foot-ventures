@@ -21,6 +21,9 @@ namespace BigFootVentures.Application.Web.Models.ViewModels
         public string Name { get { return typeof(TModel).Name; } }
         public string Header { get; set; }
 
+        public string SortBy { get; set; }
+        public string SortOrder { get; set; }
+
         #endregion
     }
 }

@@ -16,7 +16,11 @@ namespace BigFootVentures.Service.BusinessService
 
         ICollection<TModel> Get(int startIndex, int rowCount, out int total);
 
+        ICollection<TModel> Get(int startIndex, int rowCount, string sortBy, string sortOrder, out int total);
+
         ICollection<TModel> GetByKeyword(string keyword, int startIndex, int rowCount, out int total);
+
+        ICollection<TModel> GetByKeyword(string keyword, int startIndex, int rowCount, string sortBy, string sortOrder, out int total);
 
         ICollection<TModel> GetByQuery(string query, string queryTotal, out int total);
 
@@ -82,11 +86,27 @@ namespace BigFootVentures.Service.BusinessService
             }
         }
 
+        public ICollection<TModel> Get(int startIndex, int rowCount, string sortBy, string sortOrder, out int total)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.Get(startIndex, rowCount, sortBy, sortOrder, out total);
+            }
+        }
+
         public ICollection<TModel> GetByKeyword(string keyword, int startIndex, int rowCount, out int total)
         {
             using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
             {
                 return repository.GetByKeyword(keyword, startIndex, rowCount, out total);
+            }
+        }
+
+        public ICollection<TModel> GetByKeyword(string keyword, int startIndex, int rowCount, string sortBy, string sortOrder, out int total)
+        {
+            using (var repository = new Repository<TModel>(this._connectionString, this._mapper))
+            {
+                return repository.GetByKeyword(keyword, startIndex, rowCount, sortBy, sortOrder, out total);
             }
         }
 

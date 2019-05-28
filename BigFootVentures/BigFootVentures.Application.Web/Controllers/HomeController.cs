@@ -3609,11 +3609,11 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Task"
 
-        [Route("Tasks/{rowCount?}/{page?}", Name = "Tasks")]
-        public ActionResult Tasks(int rowCount = 25, int page = 1)
+        [Route("Tasks/{rowCount?}/{page?}/{sortBy?}/{sortOrder?}", Name = "Tasks")]
+        public ActionResult Tasks(int rowCount = 25, int page = 1, string sortBy = "Subject", string sortOrder = "asc")
         {
             var startIndex = (page - 1) * rowCount;
-            var tasks = this._managementTaskService.Get(startIndex, rowCount, out int total);
+            var tasks = this._managementTaskService.Get(startIndex, rowCount, sortBy, sortOrder, out int total);
             var pageResult = new VMPageResult<Task>
             {
                 StartIndex = startIndex,
@@ -3621,7 +3621,9 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = tasks,
-                Header = "Tasks"
+                Header = "Tasks",
+                SortBy = sortBy,
+                SortOrder = sortOrder
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -3974,13 +3976,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Trademark"
 
-        [Route("Trademarks/{rowCount?}/{page?}/{keyword?}", Name = "Trademarks")]
-        public ActionResult Trademarks(int rowCount = 25, int page = 1, string keyword = "")
+        [Route("Trademarks/{rowCount?}/{page?}/{sortBy?}/{sortOrder?}/{keyword?}", Name = "Trademarks")]
+        public ActionResult Trademarks(int rowCount = 25, int page = 1, string sortBy = "Name", string sortOrder = "asc", string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
             var trademarks = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementTrademarkService.Get(startIndex, rowCount, out int total) :
-                this._managementTrademarkService.GetByKeyword(keyword, startIndex, rowCount, out total);
+                this._managementTrademarkService.Get(startIndex, rowCount, sortBy, sortOrder, out int total) :
+                this._managementTrademarkService.GetByKeyword(keyword, startIndex, rowCount, sortBy, sortOrder, out total);
             var pageResult = new VMPageResult<Trademark>
             {
                 StartIndex = startIndex,
@@ -3988,7 +3990,9 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = trademarks,
-                Header = "Trademarks"
+                Header = "Trademarks",
+                SortBy = sortBy,
+                SortOrder = sortOrder
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))

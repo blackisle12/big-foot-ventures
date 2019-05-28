@@ -17,7 +17,11 @@ namespace BigFootVentures.Business.DataAccess
 
         ICollection<TEntity> Get(int startIndex, int rowCount, out int total);
 
+        ICollection<TEntity> Get(int startIndex, int rowCount, string sortBy, string sortOrder, out int total);
+
         ICollection<TEntity> GetByKeyword(string keyword, int startIndex, int rowCount, out int total);
+
+        ICollection<TEntity> GetByKeyword(string keyword, int startIndex, int rowCount, string sortBy, string sortOrder, out int total);
 
         ICollection<TEntity> GetByQuery(string query, string queryTotal, out int total);
 
@@ -126,6 +130,47 @@ namespace BigFootVentures.Business.DataAccess
             }
         }
 
+        public ICollection<TEntity> Get(int startIndex, int rowCount, string sortBy, string sortOrder, out int total)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                var entities = new List<TEntity>();
+
+                using (var command = new MySqlCommand($"{this._entityName}_GetWithOrder", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("startIndex", MySqlDbType.Int32) { Value = startIndex, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("rowCount", MySqlDbType.Int32) { Value = rowCount, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("sortBy", MySqlDbType.VarChar, 45) { Value = sortBy, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("sortOrder", MySqlDbType.VarChar, 5) { Value = sortOrder, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("total", MySqlDbType.Int32) { Direction = ParameterDirection.Output });
+
+                    var dataReader = command.ExecuteReader();
+
+                    foreach (var entity in this._mapper.ParseDataMin(dataReader))
+                    {
+                        entities.Add((TEntity)entity);
+                    }
+
+                    dataReader.Close();
+
+                    total = (int)command.Parameters["total"].Value;
+                }
+
+                return entities;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
         public ICollection<TEntity> GetByKeyword(string keyword, int startIndex, int rowCount, out int total)
         {
             try
@@ -140,6 +185,48 @@ namespace BigFootVentures.Business.DataAccess
                     command.Parameters.Add(new MySqlParameter("keyword", MySqlDbType.VarChar, 50) { Value = keyword, Direction = ParameterDirection.Input });
                     command.Parameters.Add(new MySqlParameter("startIndex", MySqlDbType.Int32) { Value = startIndex, Direction = ParameterDirection.Input });
                     command.Parameters.Add(new MySqlParameter("rowCount", MySqlDbType.Int32) { Value = rowCount, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("total", MySqlDbType.Int32) { Direction = ParameterDirection.Output });
+
+                    var dataReader = command.ExecuteReader();
+
+                    foreach (var entity in this._mapper.ParseDataMin(dataReader))
+                    {
+                        entities.Add((TEntity)entity);
+                    }
+
+                    dataReader.Close();
+
+                    total = (int)command.Parameters["total"].Value;
+                }
+
+                return entities;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public ICollection<TEntity> GetByKeyword(string keyword, int startIndex, int rowCount, string sortBy, string sortOrder, out int total)
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                var entities = new List<TEntity>();
+
+                using (var command = new MySqlCommand($"{this._entityName}_GetByKeywordWithOrder", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    command.Parameters.Add(new MySqlParameter("keyword", MySqlDbType.VarChar, 50) { Value = keyword, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("startIndex", MySqlDbType.Int32) { Value = startIndex, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("rowCount", MySqlDbType.Int32) { Value = rowCount, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("sortBy", MySqlDbType.VarChar, 45) { Value = sortBy, Direction = ParameterDirection.Input });
+                    command.Parameters.Add(new MySqlParameter("sortOrder", MySqlDbType.VarChar, 5) { Value = sortOrder, Direction = ParameterDirection.Input });
                     command.Parameters.Add(new MySqlParameter("total", MySqlDbType.Int32) { Direction = ParameterDirection.Output });
 
                     var dataReader = command.ExecuteReader();
