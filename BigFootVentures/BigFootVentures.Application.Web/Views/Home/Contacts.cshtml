@@ -24,11 +24,36 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-name">Name</th>
-                        <th class="th-company-name">Company</th>
-                        <th class="th-title">Title</th>
-                        <th class="th-phone">Phone</th>
-                        <th class="th-email">Email</th>
+                        <th class="th-name">
+                            <a href="@Url.RouteUrl("Contacts", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "FirstName", sortOrder = (Model.SortBy == "FirstName" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Name @if (Model.SortBy == "FirstName")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-company-name">
+                            <a href="@Url.RouteUrl("Contacts", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "NAME", sortOrder = (Model.SortBy == "NAME" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Company @if (Model.SortBy == "NAME")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-title">
+                            <a href="@Url.RouteUrl("Contacts", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "Title", sortOrder = (Model.SortBy == "Title" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Title @if (Model.SortBy == "Title")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-phone">
+                            <a href="@Url.RouteUrl("Contacts", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "Phone", sortOrder = (Model.SortBy == "Phone" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Phone @if (Model.SortBy == "Phone")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-email">
+                            <a href="@Url.RouteUrl("Contacts", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "Email", sortOrder = (Model.SortBy == "Email" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Email @if (Model.SortBy == "Email")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

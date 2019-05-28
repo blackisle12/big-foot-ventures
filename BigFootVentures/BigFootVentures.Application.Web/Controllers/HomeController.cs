@@ -1009,13 +1009,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Contact"
 
-        [Route("Contacts/{rowCount?}/{page?}/{keyword?}", Name = "Contacts")]
-        public ActionResult Contacts(int rowCount = 25, int page = 1, string keyword = "")
+        [Route("Contacts/{rowCount?}/{page?}/{sortBy?}/{sortOrder?}/{keyword?}", Name = "Contacts")]
+        public ActionResult Contacts(int rowCount = 25, int page = 1, string sortBy = "FirstName", string sortOrder = "asc", string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
             var contacts = string.IsNullOrWhiteSpace(keyword) ? 
-                this._managementContactService.Get(startIndex, rowCount, out int total) :
-                this._managementContactService.GetByKeyword(keyword, startIndex, rowCount, out total);
+                this._managementContactService.Get(startIndex, rowCount, sortBy, sortOrder, out int total) :
+                this._managementContactService.GetByKeyword(keyword, startIndex, rowCount, sortBy, sortOrder, out total);
             var pageResult = new VMPageResult<Contact>
             {
                 StartIndex = startIndex,
@@ -1023,7 +1023,9 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = contacts,
-                Header = "Contacts"
+                Header = "Contacts",
+                SortBy = sortBy,
+                SortOrder = sortOrder
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -1670,13 +1672,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Enquiry"
 
-        [Route("Enquiries/{rowCount?}/{page?}/{keyword?}", Name = "Enquiries")]
-        public ActionResult Enquiries(int rowCount = 25, int page = 1, string keyword = "")
+        [Route("Enquiries/{rowCount?}/{page?}/{sortBy?}/{sortOrder?}/{keyword?}", Name = "Enquiries")]
+        public ActionResult Enquiries(int rowCount = 25, int page = 1, string sortBy = "ID", string sortOrder = "asc", string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
             var enquiries = string.IsNullOrWhiteSpace(keyword) ? 
-                this._managementEnquiryService.Get(startIndex, rowCount, out int total) :
-                this._managementEnquiryService.GetByKeyword(keyword, startIndex, rowCount, out total);
+                this._managementEnquiryService.Get(startIndex, rowCount, sortBy, sortOrder, out int total) :
+                this._managementEnquiryService.GetByKeyword(keyword, startIndex, rowCount, sortBy, sortOrder, out total);
             var pageResult = new VMPageResult<Enquiry>
             {
                 StartIndex = startIndex,
@@ -1684,7 +1686,9 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = enquiries,
-                Header = "Enquiries"
+                Header = "Enquiries",
+                SortBy = sortBy,
+                SortOrder = sortOrder
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
