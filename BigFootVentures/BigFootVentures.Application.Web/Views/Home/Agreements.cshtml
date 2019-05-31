@@ -24,14 +24,54 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-name">Name</th>
-                        <th class="th-bf-company">BF Company</th>
-                        <th class="th-counterpart">Name of the counterpart</th>
-                        <th class="th-applicability">Applicability</th>
-                        <th class="th-object-of-agreement">Object of Agreement</th>
-                        <th class="th-type">Type</th>
-                        <th class="th-date-of-signature">Date of Signature</th>
-                        <th class="th-created-by">Created by</th>
+                        <th class="th-name">
+                            <a href="@Url.RouteUrl("Agreements", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "A.Name", sortOrder = (Model.SortBy == "A.Name" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Name @if (Model.SortBy == "A.Name")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-bf-company">
+                            <a href="@Url.RouteUrl("Agreements", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "CA.NAME", sortOrder = (Model.SortBy == "CA.NAME" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                BF Company @if (Model.SortBy == "CA.NAME")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-counterpart">
+                            <a href="@Url.RouteUrl("Agreements", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "CB.NAME", sortOrder = (Model.SortBy == "CB.NAME" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Name of the counterpart @if (Model.SortBy == "CB.NAME")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-applicability">
+                            <a href="@Url.RouteUrl("Agreements", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "Applicability", sortOrder = (Model.SortBy == "Applicability" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Applicability @if (Model.SortBy == "Applicability")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-object-of-agreement">
+                            <a href="@Url.RouteUrl("Agreements", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "ObjectOfAgreement", sortOrder = (Model.SortBy == "ObjectOfAgreement" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Object of Agreement @if (Model.SortBy == "ObjectOfAgreement")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-type">
+                            <a href="@Url.RouteUrl("Agreements", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "A.Type", sortOrder = (Model.SortBy == "A.Type" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Type @if (Model.SortBy == "A.Type")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-date-of-signature">
+                            <a href="@Url.RouteUrl("Agreements", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "DateOfSignature", sortOrder = (Model.SortBy == "DateOfSignature" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Date of Signature @if (Model.SortBy == "DateOfSignature")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-created-by">
+                            <a href="@Url.RouteUrl("Agreements", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "A.OwnerName", sortOrder = (Model.SortBy == "A.OwnerName" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Owner @if (Model.SortBy == "A.OwnerName")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

@@ -10,7 +10,7 @@
 
 @model VMPageResult<Enquiry>
 
-@using (Html.BeginForm("Enquiries", "Home", FormMethod.Get))
+@using (Html.BeginForm("Enquiries", "Home", FormMethod.Get, new { sortBy = Model.SortBy, sortOrder = Model.SortOrder }))
 {
     @Html.Partial("../Shared/_Components/Page/_PageTableViewAlert")
 

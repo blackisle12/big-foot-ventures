@@ -163,13 +163,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Agreement"
 
-        [Route("Agreements/{rowCount?}/{page?}/{keyword?}", Name = "Agreements")]
-        public ActionResult Agreements(int rowCount = 25, int page = 1, string keyword = "")
+        [Route("Agreements/{rowCount?}/{page?}/{sortBy?}/{sortOrder?}/{keyword?}", Name = "Agreements")]
+        public ActionResult Agreements(int rowCount = 25, int page = 1, string sortBy = "A.Name", string sortOrder = "asc", string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
             var agreements = string.IsNullOrWhiteSpace(keyword) ?
-                this._managementAgreementService.Get(startIndex, rowCount, out int total) :
-                this._managementAgreementService.GetByKeyword(keyword, startIndex, rowCount, out total);
+                this._managementAgreementService.Get(startIndex, rowCount, sortBy, sortOrder, out int total) :
+                this._managementAgreementService.GetByKeyword(keyword, startIndex, rowCount, sortBy, sortOrder, out total);
             var pageResult = new VMPageResult<AgreementT>
             {
                 StartIndex = startIndex,
@@ -177,7 +177,9 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = agreements,
-                Header = "Agreements"
+                Header = "Agreements",
+                SortBy = sortBy,
+                SortOrder = sortOrder
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))
@@ -389,13 +391,13 @@ namespace BigFootVentures.Application.Web.Controllers
 
         #region "Brand"
 
-        [Route("Brands/{rowCount?}/{page?}/{keyword?}", Name = "Brands")]
-        public ActionResult Brands(int rowCount = 25, int page = 1, string keyword = "")
+        [Route("Brands/{rowCount?}/{page?}/{sortBy?}/{sortOrder?}/{keyword?}", Name = "Brands")]
+        public ActionResult Brands(int rowCount = 25, int page = 1, string sortBy = "NAME", string sortOrder = "asc", string keyword = "")
         {
             var startIndex = (page - 1) * rowCount;
             var brands = string.IsNullOrWhiteSpace(keyword) ? 
-                this._managementBrandService.Get(startIndex, rowCount, out int total) :
-                this._managementBrandService.GetByKeyword(keyword, startIndex, rowCount, out total);
+                this._managementBrandService.Get(startIndex, rowCount, sortBy, sortOrder, out int total) :
+                this._managementBrandService.GetByKeyword(keyword, startIndex, rowCount, sortBy, sortOrder, out total);
             var pageResult = new VMPageResult<Brand>
             {
                 StartIndex = startIndex,
@@ -403,7 +405,9 @@ namespace BigFootVentures.Application.Web.Controllers
                 Page = page,
                 Total = total,
                 Records = brands,
-                Header = "Brands"
+                Header = "Brands",
+                SortBy = sortBy,
+                SortOrder = sortOrder
             };
 
             if (TempData.ContainsKey("IsRedirectFromDelete"))

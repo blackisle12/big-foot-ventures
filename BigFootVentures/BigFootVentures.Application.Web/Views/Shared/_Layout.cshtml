@@ -78,14 +78,22 @@
             <hr>
             <ul class="list-unstyled components">
                 <li class="@(Request.RawUrl == "/" || Request.RawUrl == "/Home" || Request.RawUrl == "/Home/" || Request.RawUrl.IndexOf("/Home/Index", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Index", "Home")">Home</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Agreement", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Agreements", "Home")">Agreements</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Brand", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Brands", "Home")">Brands</a></li>
+                <li class="@(Request.RawUrl.IndexOf("/Home/Agreement", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")">
+                    <a href="@Url.RouteUrl("Agreements", new { rowCount = 25, page = 1, sortBy = "A.Name", sortOrder = "asc", keyword = string.Empty })">Agreements</a>
+                </li>
+                <li class="@(Request.RawUrl.IndexOf("/Home/Brand", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")">
+                    <a href="@Url.RouteUrl("Brands", new { rowCount = 25, page = 1, sortBy = "NAME", sortOrder = "asc", keyword = string.Empty })">Brands</a>
+                </li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/Cancellation", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Cancellations", "Home")">Cancellations</a></li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/Compan", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Companies", "Home")">Companies</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Contact", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Contacts", "Home")">Contacts</a></li>
+                <li class="@(Request.RawUrl.IndexOf("/Home/Contact", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")">
+                    <a href="@Url.RouteUrl("Contacts", new { rowCount = 25, page = 1, sortBy = "FirstName", sortOrder = "asc", keyword = string.Empty })">Contacts</a>
+                </li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/Domain", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Domains", "Home")">Domains</a></li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/EmailResponse", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("EmailResponses", "Home")">Email Responses</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Enquir", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Enquiries", "Home")">Enquiries</a></li>
+                <li class="@(Request.RawUrl.IndexOf("/Home/Enquir", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")">
+                    <a href="@Url.RouteUrl("Enquiries", new { rowCount = 25, page = 1, sortBy = "ID", sortOrder = "asc", keyword = string.Empty })">Enquiries</a>
+                </li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/Lead", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Leads", "Home")">Leads</a></li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/LegalCase", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("LegalCases", "Home")">Legal Cases</a></li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/LoginInformation", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("LoginInformations", "Home")">Login Information</a></li>
@@ -95,9 +103,13 @@
                 <li class="@(Request.RawUrl.IndexOf("/Home/PreFilingSimilarityResearch", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("PreFilingSimilarityResearchs", "Home")">Pre-Filing Similarity Research</a></li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/Register", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Registers", "Home")">Registrar</a></li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/SimilarTrademark", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("SimilarTrademarks", "Home")">Similar Trademarks</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Task", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("Tasks", "Home")">Tasks</a></li>
+                <li class="@(Request.RawUrl.IndexOf("/Home/Task", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")">
+                    <a href="@Url.RouteUrl("Tasks", new { rowCount = 25, page = 1, sortBy = "Subject", sortOrder = "asc" })">Tasks</a>
+                </li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/TMRepresentative", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TMRepresentatives", "Home")">TM Representatives</a></li>
-                <li class="@(Request.RawUrl.IndexOf("/Home/Trademark", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")"><a href="@Url.Action("Trademarks", "Home")">Trademarks</a></li>
+                <li class="@(Request.RawUrl.IndexOf("/Home/Trademark", StringComparison.InvariantCultureIgnoreCase) > -1 && Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) == -1 ? "active" : "")">
+                    <a href="@Url.RouteUrl("Trademarks", new { rowCount = 25, page = 1, sortBy = "Name", sortOrder = "asc", keyword = string.Empty })">Trademarks</a>
+                </li>
                 <li class="@(Request.RawUrl.IndexOf("/Home/TrademarkOwner", StringComparison.InvariantCultureIgnoreCase) > -1 ? "active" : "")"><a href="@Url.Action("TrademarkOwners", "Home")">Trademark Owners</a></li>
 
                 @{

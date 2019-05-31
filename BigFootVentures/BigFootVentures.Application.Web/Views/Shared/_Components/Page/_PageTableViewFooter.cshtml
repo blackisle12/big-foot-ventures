@@ -1,18 +1,28 @@
 ﻿<div class="row">
     <div class="col-sm-12">
-        <input type="hidden" name="rowCount" value="@Model.RowCount" />
-        <input type="hidden" name="page" value="@Model.Page" />
         <input type="hidden" name="keyword" value="@ViewBag.Keyword" />
+
         <nav aria-label="...">
             <ul class="pager">
                 @{
+                    var routeName = Model.Name + "s";
+
+                    if (Model.Name == "Enquiry")
+                    {
+                        routeName = "Enquiries";
+                    }
+                    else if (Model.Name == "AgreementT")
+                    {
+                        routeName = "Agreements";
+                    }
+
                     if (Model.Page != 1)
                     {
-                        <li><a id="pagePrevious" href="#">Previous</a></li>
+                        <li><a id="pagePrevious" href="@Url.RouteUrl(routeName, new { rowCount = Model.RowCount, page = (Model.Page - 1), sortBy = Model.SortBy, sortOrder = Model.SortOrder, keyword = ViewBag.Keyword })">Previous</a></li>
                     }
                     if (Model.Pages > Model.Page)
                     {
-                        <li><a id="pageNext" href="#">Next</a></li>
+                        <li><a id="pageNext" href="@Url.RouteUrl(routeName, new { rowCount = Model.RowCount, page = (Model.Page + 1), sortBy = Model.SortBy, sortOrder = Model.SortOrder, keyword = ViewBag.Keyword })">Next</a></li>
                     }
                 }
             </ul>
@@ -26,17 +36,3 @@
         </span>*@
     </div>
 </div>
-
-<script type="text/javascript">
-    $(function () {
-        $('#pagePrevious').on('click', function () {
-            $('[name="page"]').val('@(Model.Page - 1)');
-            $('form').submit();
-        });
-
-        $('#pageNext').on('click', function () {
-            $('[name="page"]').val('@(Model.Page + 1)');
-            $('form').submit();
-        });
-    });
-</script>

@@ -24,12 +24,42 @@
             <table class="table table-striped table-hover" name="Table.Brands">
                 <thead>
                     <tr class="th-bg">
-                        <th class="th-name">Name</th>
-                        <th class="th-pupose">Purpose</th>
-                        <th class="th-vaue">Value</th>
-                        <th class="th-categories">Categories</th>
-                        <th class="th-hvt">HVT (High Value Target)</th>
-                        <th class="th-emv">EMV</th>
+                        <th class="th-name">
+                            <a href="@Url.RouteUrl("Brands", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "NAME", sortOrder = (Model.SortBy == "NAME" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Name @if (Model.SortBy == "NAME")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-pupose">
+                            <a href="@Url.RouteUrl("Brands", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "PURPOSE", sortOrder = (Model.SortBy == "PURPOSE" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Purpose @if (Model.SortBy == "PURPOSE")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-vaue">
+                            <a href="@Url.RouteUrl("Brands", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "VALUE", sortOrder = (Model.SortBy == "VALUE" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Value @if (Model.SortBy == "VALUE")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-categories">
+                            <a href="@Url.RouteUrl("Brands", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "CATEGORY", sortOrder = (Model.SortBy == "CATEGORY" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                Categories @if (Model.SortBy == "CATEGORY")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-hvt">
+                            <a href="@Url.RouteUrl("Brands", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "HVT", sortOrder = (Model.SortBy == "HVT" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                HVT (High Value Target) @if (Model.SortBy == "HVT")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
+                        <th class="th-emv">
+                            <a href="@Url.RouteUrl("Brands", new { rowCount = Model.RowCount, page = Model.Page, sortBy = "EMV", sortOrder = (Model.SortBy == "EMV" ? (Model.SortOrder == "asc" ? "desc" : "asc") : "asc"), keyword = ViewBag.Keyword })">
+                                EMV @if (Model.SortBy == "EMV")
+                                {<i class="fa fa-sort-alpha-@Model.SortOrder"></i>}
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
