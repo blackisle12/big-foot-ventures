@@ -1,7 +1,6 @@
 ﻿using BigFootVentures.Business.DataAccess;
 using BigFootVentures.Business.Objects.Management;
-using BigFootVentures.Business.Objects.Wrapper;
-using System.Collections.Generic;
+using System.Text;
 
 namespace BigFootVentures.Service.BusinessService
 {
@@ -10,6 +9,8 @@ namespace BigFootVentures.Service.BusinessService
         #region "Factory Methods"
 
         Trademark Get(int ID);
+
+        StringBuilder Export(string query);
 
         #endregion
     }
@@ -38,6 +39,14 @@ namespace BigFootVentures.Service.BusinessService
             using (var trademarkDataAccess = new TrademarkDataAccess(this._connectionString))
             {
                 return trademarkDataAccess.Get(ID);
+            }
+        }
+
+        public StringBuilder Export(string query)
+        {
+            using (var trademarkDataAccess = new TrademarkDataAccess(this._connectionString))
+            {
+                return trademarkDataAccess.Export(query);
             }
         }
 

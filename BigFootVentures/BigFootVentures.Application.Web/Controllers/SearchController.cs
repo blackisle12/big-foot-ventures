@@ -29,6 +29,8 @@ namespace BigFootVentures.Application.Web.Controllers
         private readonly IManagementService<Register> _managementRegisterService = null;
         private readonly IManagementService<Trademark> _managementTrademarkService = null;
 
+        private readonly ITrademarkService _trademarkService = null;
+
         #endregion
 
         #region "Constructors"
@@ -45,7 +47,8 @@ namespace BigFootVentures.Application.Web.Controllers
             IManagementService<LegalCase> managementLegalCaseService,
             IManagementService<Office> managementOfficeService,
             IManagementService<Register> managementRegisterService,
-            IManagementService<Trademark> managementTrademarkService)
+            IManagementService<Trademark> managementTrademarkService,
+            ITrademarkService trademarkService)
         {
             this._searchService = searchService;
 
@@ -61,6 +64,8 @@ namespace BigFootVentures.Application.Web.Controllers
             this._managementOfficeService = managementOfficeService;
             this._managementRegisterService = managementRegisterService;
             this._managementTrademarkService = managementTrademarkService;
+
+            this._trademarkService = trademarkService;
         }
 
         #endregion
@@ -685,7 +690,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 involvedInRevocation, bigFootGroupOwned, seniorityUsed, revocationTarget, openSimilarityResearchTask, oppositionResearch, researcherName,
                 markUse, TMWebsite, competingMarks, ownerWebsite, cancellationStrategy, comWebsite, ownerDefense, BFStrategy, nameValue, invalidityNumber,
                 invalidityApplicant, invalidityActionOutcome, letterReference, letterOrigin, letterSendingMethod, letterOutcome);
-            var file = this._managementTrademarkService.ExportByQuery(query);
+
+            var file = _trademarkService.Export(query);
 
             return File(new UTF8Encoding().GetBytes(file.ToString()), "text/csv", $"Export-Trademark-{StringUtils.GetCurrentDateTimeAsString()}.csv");
         }
