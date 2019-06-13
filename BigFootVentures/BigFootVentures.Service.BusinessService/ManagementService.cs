@@ -186,6 +186,8 @@ namespace BigFootVentures.Service.BusinessService
         {
             IMapper mapper = null;
 
+            if (typeof(TRelatedModel) == typeof(Brand))
+                mapper = new BrandMapper();
             if (typeof(TRelatedModel) == typeof(Contact))
                 mapper = new ContactMapper();
             else if (typeof(TRelatedModel) == typeof(LegalCase))

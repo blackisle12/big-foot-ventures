@@ -4,7 +4,7 @@
 @using BigFootVentures.Business.Objects.Management
 
 @{
-    ViewBag.Title = "Legal Case - " + Model.Record.TypeOfCase;
+    ViewBag.Title = "Legal Case - " + Model.Record.LegalProceedingName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <td><strong>Office</strong></td>
-                            <td>@(Model.Record.Trademark?.Office?.OfficeName)</td>
+                            <td><a href="@Url.RouteUrl("OfficeView", new { ID = Model.Record.Trademark?.Office?.ID })">@(Model.Record.Trademark?.Office?.OfficeName)</a></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -57,7 +57,7 @@
                         </tr>
                         <tr>
                             <td><strong>Trademark</strong></td>
-                            <td>@(Model.Record.Trademark?.Name)</td>
+                            <td><a href="@Url.RouteUrl("TrademarkView", new { ID = Model.Record.Trademark?.ID })">@(Model.Record.Trademark?.Name)</a></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -87,25 +87,25 @@
                         </tr>
                         <tr>
                             <td><strong>Plantiff</strong></td>
-                            <td>@(Model.Record.Plaintiff?.DisplayName)</td>
+                            <td><a href="@Url.RouteUrl("CompanyView", new { ID = Model.Record.Plaintiff?.ID })">@(Model.Record.Plaintiff?.DisplayName)</a></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Defendant</strong></td>
-                            <td>@(Model.Record.Defendant.DisplayName)</td>
+                            <td><a href="@Url.RouteUrl("CompanyView", new { ID = Model.Record.Defendant?.ID })">@(Model.Record.Defendant?.DisplayName)</a></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Plantiff Representative</strong></td>
-                            <td>@(Model.Record.PlaintiffRepresentative?.DisplayName)</td>
+                            <td><a href="@Url.RouteUrl("CompanyView", new { ID = Model.Record.PlaintiffRepresentative?.ID })">@(Model.Record.PlaintiffRepresentative?.DisplayName)</a></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td><strong>Defendant Representative</strong></td>
-                            <td>@(Model.Record.DefendantRepresentative?.DisplayName)</td>
+                            <td><a href="@Url.RouteUrl("CompanyView", new { ID = Model.Record.DefendantRepresentative?.ID })">@(Model.Record.DefendantRepresentative?.DisplayName)</a></td>
                             <td></td>
                             <td></td>
                         </tr>

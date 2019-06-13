@@ -392,7 +392,7 @@ namespace BigFootVentures.Business.DataAccess
                 result.Append("Class22,Class22Description,Class23,Class23Description,Class24,Class24Description,Class25,Class25Description,Class26,Class26Description,Class27,Class27Description,Class28,Class28Description,");
                 result.Append("Class29,Class29Description,Class30,Class30Description,Class31,Class31Description,Class32,Class32Description,Class33,Class33Description,Class34,Class34Description,Class35,Class35Description,");
                 result.Append("Class36,Class36Description,Class37,Class37Description,Class38,Class38Description,Class39,Class39Description,Class40,Class40Description,Class41,Class41Description,Class42,Class42Description,");
-                result.Append("Class43,Class43Description,Class44,Class44Description,Class45,Class45Description,Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
+                result.Append("Class43,Class43Description,Class44,Class44Description,Class45,Class45Description,Classes,Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
                 result.Append("Researcher Name,Cancellation Strategy,Mark Use,Competing Marks,Competing Mark,Cancel Researcher Comments,");
                 result.Append("Owner Defense,Source Name,BF Strategy,Strategy Notes,Name Value,Cancel Buy Budget,Revocation Reference External,Invalidity Number,Invalidity Invoked Ground,Invalidity Date,Invalidity Action Outcome,");
                 result.Append("Letter Reference,Letter Origin,Letter Sending Method,Letter Sent On,Owner Response Deadline,Letter Outcome");
@@ -808,11 +808,22 @@ namespace BigFootVentures.Business.DataAccess
                     result.Append(DataUtils.EscapeCSV($"{trademark.LVAppealDeadline}") + ",");
                     result.Append(DataUtils.EscapeCSV($"{trademark.ReasonForTheRefusalLV}") + ",");
 
+                    var classes = string.Empty;
+
                     for (var i = 1; i <= 45; i++)
                     {
-                        result.Append(DataUtils.EscapeCSV($"{Convert.ToBoolean(typeof(Trademark).GetProperty($"Class{i}").GetValue(trademark))}") + ",");
+                        var useClass = Convert.ToBoolean(typeof(Trademark).GetProperty($"Class{i}").GetValue(trademark));
+
+                        result.Append(DataUtils.EscapeCSV($"{useClass}") + ",");
                         result.Append(DataUtils.EscapeCSV($"{typeof(Trademark).GetProperty($"Class{i}Description").GetValue(trademark) as string}") + ",");
+
+                        if (useClass)
+                        {
+                            classes += $"{(string.IsNullOrWhiteSpace(classes) ? string.Empty : ",")} {i}";
+                        }
                     }
+
+                    result.Append(DataUtils.EscapeCSV($"{classes}") + ",");
 
                     result.Append(DataUtils.EscapeCSV($"{trademark.ResearcherName}") + ",");
                     result.Append(DataUtils.EscapeCSV($"{trademark.CancellationStrategy}") + ",");

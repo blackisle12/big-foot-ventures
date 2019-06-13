@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <td><strong>Office</strong></td>
-                            <td>@(Model.Record.Office?.OfficeName)</td>
+                            <td><a href="@Url.RouteUrl("OfficeView", new { ID = Model.Record.Office?.ID })">@(Model.Record.Office?.OfficeName)</a></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -92,7 +92,7 @@
                         </tr>
                         <tr>
                             <td><strong>Brand</strong></td>
-                            <td>@(Model.Record.Brand?.Name)</td>
+                            <td><a href="@Url.RouteUrl("BrandView", new { ID = Model.Record.Brand?.ID })">@(Model.Record.Brand?.Name)</a></td>
                             <td><strong>Trademark Type</strong></td>
                             <td>@Model.Record.TrademarkType</td>
                         </tr>
@@ -760,7 +760,7 @@
             <!-- START: Related Legal Cases -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Legal Cases</h4>
+                    <h4 class="panel-title">Related Legal Cases</h4>
                 </div>
                 <div class="panel-body">
                     @{
@@ -805,7 +805,7 @@
                     }
                 </div>
             </div>
-            <!-- END: Related Trademarks -->
+            <!-- END: Related Legal Cases -->
 
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewTasks")
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")

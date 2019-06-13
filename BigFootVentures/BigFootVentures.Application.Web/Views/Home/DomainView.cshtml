@@ -349,7 +349,7 @@
             <!-- START: Related Contacts -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Contacts</h4>
+                    <h4 class="panel-title">Related Contacts</h4>
                 </div>
                 <div class="panel-body">
                     @{
@@ -398,7 +398,7 @@
             <!-- START: Related Trademarks -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Trademarks</h4>
+                    <h4 class="panel-title">Related Trademarks</h4>
                 </div>
                 <div class="panel-body">
                     @{
@@ -420,7 +420,6 @@
                                             foreach (var trademark in Model.Record.RelatedTrademarks)
                                             {
                                                 <tr>
-                                                    <
                                                     <td><a href="@Url.RouteUrl("TrademarkView", new { ID = trademark.ID })" target="_blank">@trademark.Name</a></td>
                                                     <td>@trademark.TrademarkNumber</td>
                                                     <td>@trademark.InternationalRegistrationNumber</td>

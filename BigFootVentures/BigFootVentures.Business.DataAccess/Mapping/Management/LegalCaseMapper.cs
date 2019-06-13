@@ -44,7 +44,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                         entity.Trademark.Office = new Office
                         {
                             ID = officeID,
-                            DisplayName = dataReader["OfficeName"] as string
+                            OfficeName = dataReader["OfficeName"] as string
                         };
                     }
                 }

@@ -431,6 +431,8 @@ namespace BigFootVentures.Application.Web.Controllers
                 PageMode = PageMode.View
             };
 
+            model.Record.RelatedTrademarks = this._managementBrandService.GetRelated<Trademark>(ID);
+
             model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);
             model.AuditTrails = this._auditTrailService.Get(ID, model.Name);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BigFootVentures.Business.Objects.Management
 {
@@ -39,6 +40,12 @@ namespace BigFootVentures.Business.Objects.Management
 
         public bool HVTChk { get; set; }
         public bool DeletionRequestChk { get; set; }
+
+        #endregion
+
+        #region "Relationships"
+
+        public ICollection<Trademark> RelatedTrademarks { get; set; }
 
         #endregion
     }
