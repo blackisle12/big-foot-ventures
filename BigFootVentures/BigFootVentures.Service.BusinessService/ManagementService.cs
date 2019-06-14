@@ -188,10 +188,14 @@ namespace BigFootVentures.Service.BusinessService
 
             if (typeof(TRelatedModel) == typeof(Brand))
                 mapper = new BrandMapper();
+            else if (typeof(TRelatedModel) == typeof(Cancellation))
+                mapper = new CancellationMapper();
             if (typeof(TRelatedModel) == typeof(Contact))
                 mapper = new ContactMapper();
             else if (typeof(TRelatedModel) == typeof(LegalCase))
                 mapper = new LegalCaseMapper();
+            else if (typeof(TRelatedModel) == typeof(TMRepresentative))
+                mapper = new TMRepresentativeMapper();
             else if (typeof(TRelatedModel) == typeof(Trademark))
                 mapper = new TrademarkMapper();
 

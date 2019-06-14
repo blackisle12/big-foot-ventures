@@ -757,6 +757,57 @@
                 </div>
             </div>
             <!-- END: Legal Section -->
+            <!-- START: Related Cancellations -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Related Cancellations</h4>
+                </div>
+                <div class="panel-body">
+                    @{
+                        if (Model.Record.RelatedCancellations.Count > 0)
+                        {
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="th-bg">
+                                            <th></th>
+                                            <th class="th-reference-internal">Cancellation Reference Internal</th>
+                                            <th class="th-receipt-date">Cancellation Receipt Date</th>
+                                            <th class="th-reference-external">Cancellation Reference External</th>
+                                            <th class="th-submission-method">Cancellation Submission Method</th>
+                                            <th class="th-applicant-name">Cancellation Applicant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var cancellation in Model.Record.RelatedCancellations)
+                                            {
+                                                <tr>
+                                                    <td><a href="@Url.RouteUrl("CancellationView", new { ID = cancellation.ID })" target="_blank">View</a></td>
+                                                    <td>@cancellation.ReferenceInternal</td>
+                                                    <td>@cancellation.ReceiptDate</td>
+                                                    <td>@cancellation.ReferenceExternal</td>
+                                                    <td>@cancellation.SubmissionMethod</td>
+                                                    <td>@(cancellation.Applicant?.DisplayName)</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 center-align">
+                                    <p class="subtitle">No related Cancellation</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <!-- END: Related Cancellations -->
             <!-- START: Related Legal Cases -->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -798,7 +849,7 @@
                         {
                             <div class="row">
                                 <div class="col-sm-12 center-align">
-                                    <p class="subtitle">No related legal case found</p>
+                                    <p class="subtitle">No related Legal Case</p>
                                 </div>
                             </div>
                         }
@@ -806,6 +857,49 @@
                 </div>
             </div>
             <!-- END: Related Legal Cases -->
+            <!-- START: Related TM Representatives -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Related TM Representatives</h4>
+                </div>
+                <div class="panel-body">
+                    @{
+                        if (Model.Record.RelatedTMRepresentatives.Count > 0)
+                        {
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="th-bg">
+                                            <th class="th-tm-representative-name">TM Representative Name</th>
+                                            <th class="th-company-display-name">Representative</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var TMRepresentative in Model.Record.RelatedTMRepresentatives)
+                                            {
+                                                <tr>
+                                                    <td><a href="@Url.RouteUrl("TMRepresentativeView", new { ID = TMRepresentative.ID })" target="_blank">@TMRepresentative.TMRepresentativeName</a></td>
+                                                    <td>@TMRepresentative.Representative.DisplayName</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 center-align">
+                                    <p class="subtitle">No related TM Representative</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <!-- END: Related TM Representatives -->
 
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewTasks")
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")

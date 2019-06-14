@@ -275,7 +275,9 @@ namespace BigFootVentures.Business.Objects.Management
 
         #region "Relationships"
 
+        public ICollection<Cancellation> RelatedCancellations { get; set; }
         public ICollection<LegalCase> RelatedLegalCases { get; set; }
+        public ICollection<TMRepresentative> RelatedTMRepresentatives { get; set; }
 
         #endregion
     }
