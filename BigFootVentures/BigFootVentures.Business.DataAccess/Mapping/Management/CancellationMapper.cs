@@ -69,6 +69,15 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                         ID = trademarkID,
                         Name = dataReader["TrademarkName"] as string
                     };
+
+                    if (int.TryParse((dataReader["OfficeID"] as int?)?.ToString(), out int officeID))
+                    {
+                        entity.Trademark.Office = new Office
+                        {
+                            ID = officeID,
+                            OfficeName = dataReader["OfficeName"] as string
+                        };
+                    }
                 }
 
                 if (int.TryParse((dataReader["ApplicantID"] as int?)?.ToString(), out int applicantID))

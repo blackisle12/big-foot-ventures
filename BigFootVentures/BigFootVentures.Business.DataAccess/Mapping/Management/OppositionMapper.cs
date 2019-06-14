@@ -65,6 +65,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                             TrademarkNumber = dataReader["TrademarkNameATrademarkNumber"] as string,
                             Brand = new Brand
                             {
+                                ID = (dataReader["TrademarkNameABrandID"] as int?) ?? 0,
                                 Name = dataReader["TrademarkNameABrand"] as string,
                                 Purpose = dataReader["TrademarkNameAPurpose"] as string,
                                 Value = dataReader["TrademarkNameAValue"] as string,
@@ -77,6 +78,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                             //SixMonthsAnniversary = dataReader["TrademarkNameASixMonthsAnniversary"] as string,
                             Office = new Office
                             {
+                                ID = (dataReader["TrademarkNameAOfficeID"] as int?) ?? 0,
                                 OfficeName = dataReader["TrademarkNameAOfficeName"] as string
                             },
                             BigfootGroupOwned = dataReader["TrademarkNameABigFootGroupOwned"] as string,
@@ -97,6 +99,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                             TrademarkNumber = dataReader["TrademarkNameDTrademarkNumber"] as string,
                             Brand = new Brand
                             {
+                                ID = (dataReader["TrademarkNameDBrandID"] as int?) ?? 0,
                                 Name = dataReader["TrademarkNameDBrand"] as string,
                                 Purpose = dataReader["TrademarkNameDPurpose"] as string,
                                 Value = dataReader["TrademarkNameDValue"] as string,
@@ -109,6 +112,7 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                             //SixMonthsAnniversary = dataReader["TrademarkNameDSixMonthsAnniversary"] as string,
                             Office = new Office
                             {
+                                ID = (dataReader["TrademarkNameDOfficeID"] as int?) ?? 0,
                                 OfficeName = dataReader["TrademarkNameDOfficeName"] as string
                             },
                             BigfootGroupOwned = dataReader["TrademarkNameDBigFootGroupOwned"] as string,

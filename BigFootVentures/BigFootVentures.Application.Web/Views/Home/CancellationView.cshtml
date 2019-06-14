@@ -4,7 +4,7 @@
 @using BigFootVentures.Business.Objects.Management
 
 @{
-    ViewBag.Title = "Cancellation - " + Model.Record.ReferenceInternal;
+    ViewBag.Title = "Cancellation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -53,7 +53,7 @@
                             <td><strong>Cancellation Payment Date</strong></td>
                             <td>@Model.Record.PaymentDate</td>
                             <td><strong>Cancellation Applicant</strong></td>
-                            <td>@(Model.Record.Applicant?.DisplayName)</td>
+                            <td><a href="@Url.RouteUrl("CompanyView", new { ID = Model.Record.Applicant?.ID })">@(Model.Record.Applicant?.DisplayName)</a></td>
                         </tr>
                         <tr>
                             <td><strong>Cancellation Filing Cost</strong></td>
@@ -63,13 +63,13 @@
                         </tr>
                         <tr>
                             <td><strong>Trademark</strong></td>
-                            <td>@(Model.Record.Trademark?.Name)</td>
+                            <td><a href="@Url.RouteUrl("TrademarkView", new { ID = Model.Record.Trademark?.ID })">@(Model.Record.Trademark?.Name)</a></td>
                             <td><strong>Cancellation Research Performance</strong></td>
                             <td>@Model.Record.ResearchPerformance</td>
                         </tr>
                         <tr>
                             <td><strong>Trademark Office</strong></td>
-                            <td>@(Model.Record.Trademark?.Office?.OfficeName)</td>
+                            <td><a href="@Url.RouteUrl("OfficeView", new { ID = Model.Record.Trademark?.Office?.ID })">@(Model.Record.Trademark?.Office?.OfficeName)</a></td>
                             <td><strong>Comments</strong></td>
                             <td>@Model.Record.Comments</td>
                         </tr>
