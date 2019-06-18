@@ -194,6 +194,8 @@ namespace BigFootVentures.Service.BusinessService
                 mapper = new ContactMapper();
             else if (typeof(TRelatedModel) == typeof(LegalCase))
                 mapper = new LegalCaseMapper();
+            else if (typeof(TRelatedModel) == typeof(Opposition))
+                mapper = new OppositionMapper();
             else if (typeof(TRelatedModel) == typeof(TMRepresentative))
                 mapper = new TMRepresentativeMapper();
             else if (typeof(TRelatedModel) == typeof(Trademark))

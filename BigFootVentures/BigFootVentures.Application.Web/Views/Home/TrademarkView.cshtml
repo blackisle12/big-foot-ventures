@@ -943,6 +943,51 @@
                 </div>
             </div>
             <!-- END: Related Trademark Owners -->
+            <!-- START: Related Oppositions -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Related Oppositions</h4>
+                </div>
+                <div class="panel-body">
+                    @{
+                        if (Model.Record.RelatedOppositions.Count > 0)
+                        {
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="th-bg">
+                                            <th class="th-opposition-name">Opposition Name</th>
+                                            <th class="th-owner-applicants-representative">Owner/Applicant's Representative</th>
+                                            <th class="th-opponents-representative">Opponent's Representative</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var opposition in Model.Record.RelatedOppositions)
+                                            {
+                                                <tr>
+                                                    <td><a href="@Url.RouteUrl("OppositionView", new { ID = opposition.ID })" target="_blank">@opposition.OppositionName</a></td>
+                                                    <td>@(opposition.OwnerApplicantsRepresentative?.CompanyName)</td>
+                                                    <td>@(opposition.OpponentsRepresentative?.CompanyName)</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 center-align">
+                                    <p class="subtitle">No related Trademark Owner</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <!-- END: Related Oppositions -->
 
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewTasks")
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")

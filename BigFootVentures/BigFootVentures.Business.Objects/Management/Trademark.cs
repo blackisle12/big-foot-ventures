@@ -277,6 +277,7 @@ namespace BigFootVentures.Business.Objects.Management
 
         public ICollection<Cancellation> RelatedCancellations { get; set; }
         public ICollection<LegalCase> RelatedLegalCases { get; set; }
+        public ICollection<Opposition> RelatedOppositions { get; set; }
         public ICollection<TMRepresentative> RelatedTMRepresentatives { get; set; }
         public ICollection<TrademarkOwner> RelatedTrademarkOwners { get; set; }
 

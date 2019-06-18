@@ -4057,6 +4057,7 @@ namespace BigFootVentures.Application.Web.Controllers
 
             model.Record.RelatedCancellations = this._managementTrademarkService.GetRelated<Cancellation>(ID);
             model.Record.RelatedLegalCases = this._managementTrademarkService.GetRelated<LegalCase>(ID);
+            model.Record.RelatedOppositions = this._managementTrademarkService.GetRelated<Opposition>(ID);
             model.Record.RelatedTMRepresentatives = this._managementTrademarkService.GetRelated<TMRepresentative>(ID);
             model.Record.RelatedTrademarkOwners = this._managementTrademarkService.GetRelated<TrademarkOwner>(ID);
 
