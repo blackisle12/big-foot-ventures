@@ -900,6 +900,49 @@
                 </div>
             </div>
             <!-- END: Related TM Representatives -->
+            <!-- START: Related Trademark Owners -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Related Trademark Owners</h4>
+                </div>
+                <div class="panel-body">
+                    @{
+                        if (Model.Record.RelatedTrademarkOwners.Count > 0)
+                        {
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="th-bg">
+                                            <th>ID</th>
+                                            <th class="th-company-display-name">Company</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var trademarkOwner in Model.Record.RelatedTrademarkOwners)
+                                            {
+                                                <tr>
+                                                    <td><a href="@Url.RouteUrl("TrademarkOwnerView", new { ID = trademarkOwner.ID })" target="_blank">@trademarkOwner.ID</a></td>
+                                                    <td>@trademarkOwner.Company.DisplayName</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 center-align">
+                                    <p class="subtitle">No related Trademark Owner</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <!-- END: Related Trademark Owners -->
 
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewTasks")
             @Html.Partial("../Shared/_Components/Page/_PageDetailViewFileAttachment")

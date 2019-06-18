@@ -4058,6 +4058,7 @@ namespace BigFootVentures.Application.Web.Controllers
             model.Record.RelatedCancellations = this._managementTrademarkService.GetRelated<Cancellation>(ID);
             model.Record.RelatedLegalCases = this._managementTrademarkService.GetRelated<LegalCase>(ID);
             model.Record.RelatedTMRepresentatives = this._managementTrademarkService.GetRelated<TMRepresentative>(ID);
+            model.Record.RelatedTrademarkOwners = this._managementTrademarkService.GetRelated<TrademarkOwner>(ID);
 
             model.Tasks = this._taskService.Get(ID, model.Name);
             model.FileAttachments = this._fileAttachmentService.Get(ID, model.Name);

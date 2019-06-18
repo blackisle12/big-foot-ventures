@@ -198,6 +198,8 @@ namespace BigFootVentures.Service.BusinessService
                 mapper = new TMRepresentativeMapper();
             else if (typeof(TRelatedModel) == typeof(Trademark))
                 mapper = new TrademarkMapper();
+            else if (typeof(TRelatedModel) == typeof(TrademarkOwner))
+                mapper = new TrademarkOwnerMapper();
 
             using (var repository = new Repository<TModel>(this._connectionString, mapper))
             {
