@@ -41,67 +41,67 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(referenceInternal))
             {
-                query.Append($"AND C.ReferenceInternal LIKE '%{referenceInternal}%' ");
+                query.Append($"AND C.ReferenceInternal LIKE '%{referenceInternal.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(referenceExternal))
             {
-                query.Append($"AND C.ReferenceExternal LIKE '%{referenceExternal}%' ");
+                query.Append($"AND C.ReferenceExternal LIKE '%{referenceExternal.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(sentOrigin))
             {
-                query.Append($"AND C.SentOrigin LIKE '%{sentOrigin}%' ");
+                query.Append($"AND C.SentOrigin LIKE '%{sentOrigin.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(internalCaseNumber))
             {
-                query.Append($"AND C.InternalCaseNumber LIKE '%{internalCaseNumber}%' ");
+                query.Append($"AND C.InternalCaseNumber LIKE '%{internalCaseNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(submissionMethod))
             {
-                query.Append($"AND C.SubmissionMethod LIKE '%{submissionMethod}%' ");
+                query.Append($"AND C.SubmissionMethod LIKE '%{submissionMethod.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(applicant))
             {
-                query.Append($"AND CO.NAME LIKE '%{applicant}%' ");
+                query.Append($"AND CO.NAME LIKE '%{applicant.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(trademark))
             {
-                query.Append($"AND T.Name LIKE '%{trademark}%' ");
+                query.Append($"AND T.Name LIKE '%{trademark.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(researchPerformance))
             {
-                query.Append($"AND C.ResearchPerformance LIKE '%{researchPerformance}%' ");
+                query.Append($"AND C.ResearchPerformance LIKE '%{researchPerformance.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND C.Status LIKE '%{status}%' ");
+                query.Append($"AND C.Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(acquisitionLetterSentOrigin))
             {
-                query.Append($"AND C.AcquisitionLetterSentOrigin LIKE '%{acquisitionLetterSentOrigin}%' ");
+                query.Append($"AND C.AcquisitionLetterSentOrigin LIKE '%{acquisitionLetterSentOrigin.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(acquisitionLetterSentMethod))
             {
-                query.Append($"AND C.AcquisitionLetterSentMethod LIKE '%{acquisitionLetterSentMethod}%' ");
+                query.Append($"AND C.AcquisitionLetterSentMethod LIKE '%{acquisitionLetterSentMethod.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(UDRPStrategy))
             {
-                query.Append($"AND C.UDRPStrategy LIKE '%{UDRPStrategy}%' ");
+                query.Append($"AND C.UDRPStrategy LIKE '%{UDRPStrategy.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(ownerResponseAcquisitionLetter))
             {
-                query.Append($"AND C.OwnerResponseAcquisitionLetter LIKE '%{ownerResponseAcquisitionLetter}%' ");
+                query.Append($"AND C.OwnerResponseAcquisitionLetter LIKE '%{ownerResponseAcquisitionLetter.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(domainEnquiry))
@@ -133,67 +133,67 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(referenceInternal))
             {
-                query.Append($"AND C.ReferenceInternal LIKE '%{referenceInternal}%' ");
+                query.Append($"AND C.ReferenceInternal LIKE '%{referenceInternal.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(referenceExternal))
             {
-                query.Append($"AND C.ReferenceExternal LIKE '%{referenceExternal}%' ");
+                query.Append($"AND C.ReferenceExternal LIKE '%{referenceExternal.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(sentOrigin))
             {
-                query.Append($"AND C.SentOrigin LIKE '%{sentOrigin}%' ");
+                query.Append($"AND C.SentOrigin LIKE '%{sentOrigin.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(internalCaseNumber))
             {
-                query.Append($"AND C.InternalCaseNumber LIKE '%{internalCaseNumber}%' ");
+                query.Append($"AND C.InternalCaseNumber LIKE '%{internalCaseNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(submissionMethod))
             {
-                query.Append($"AND C.SubmissionMethod LIKE '%{submissionMethod}%' ");
+                query.Append($"AND C.SubmissionMethod LIKE '%{submissionMethod.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(applicant))
             {
-                query.Append($"AND CO.NAME LIKE '%{applicant}%' ");
+                query.Append($"AND CO.NAME LIKE '%{applicant.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(trademark))
             {
-                query.Append($"AND T.Name LIKE '%{trademark}%' ");
+                query.Append($"AND T.Name LIKE '%{trademark.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(researchPerformance))
             {
-                query.Append($"AND C.ResearchPerformance LIKE '%{researchPerformance}%' ");
+                query.Append($"AND C.ResearchPerformance LIKE '%{researchPerformance.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND C.Status LIKE '%{status}%' ");
+                query.Append($"AND C.Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(acquisitionLetterSentOrigin))
             {
-                query.Append($"AND C.AcquisitionLetterSentOrigin LIKE '%{acquisitionLetterSentOrigin}%' ");
+                query.Append($"AND C.AcquisitionLetterSentOrigin LIKE '%{acquisitionLetterSentOrigin.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(acquisitionLetterSentMethod))
             {
-                query.Append($"AND C.AcquisitionLetterSentMethod LIKE '%{acquisitionLetterSentMethod}%' ");
+                query.Append($"AND C.AcquisitionLetterSentMethod LIKE '%{acquisitionLetterSentMethod.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(UDRPStrategy))
             {
-                query.Append($"AND C.UDRPStrategy LIKE '%{UDRPStrategy}%' ");
+                query.Append($"AND C.UDRPStrategy LIKE '%{UDRPStrategy.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(ownerResponseAcquisitionLetter))
             {
-                query.Append($"AND C.OwnerResponseAcquisitionLetter LIKE '%{ownerResponseAcquisitionLetter}%' ");
+                query.Append($"AND C.OwnerResponseAcquisitionLetter LIKE '%{ownerResponseAcquisitionLetter.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(domainEnquiry))
@@ -219,67 +219,67 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(referenceInternal))
             {
-                query.Append($"AND C.ReferenceInternal LIKE '%{referenceInternal}%' ");
+                query.Append($"AND C.ReferenceInternal LIKE '%{referenceInternal.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(referenceExternal))
             {
-                query.Append($"AND C.ReferenceExternal LIKE '%{referenceExternal}%' ");
+                query.Append($"AND C.ReferenceExternal LIKE '%{referenceExternal.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(sentOrigin))
             {
-                query.Append($"AND C.SentOrigin LIKE '%{sentOrigin}%' ");
+                query.Append($"AND C.SentOrigin LIKE '%{sentOrigin.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(internalCaseNumber))
             {
-                query.Append($"AND C.InternalCaseNumber LIKE '%{internalCaseNumber}%' ");
+                query.Append($"AND C.InternalCaseNumber LIKE '%{internalCaseNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(submissionMethod))
             {
-                query.Append($"AND C.SubmissionMethod LIKE '%{submissionMethod}%' ");
+                query.Append($"AND C.SubmissionMethod LIKE '%{submissionMethod.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(applicant))
             {
-                query.Append($"AND CO.NAME LIKE '%{applicant}%' ");
+                query.Append($"AND CO.NAME LIKE '%{applicant.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(trademark))
             {
-                query.Append($"AND T.Name LIKE '%{trademark}%' ");
+                query.Append($"AND T.Name LIKE '%{trademark.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(researchPerformance))
             {
-                query.Append($"AND C.ResearchPerformance LIKE '%{researchPerformance}%' ");
+                query.Append($"AND C.ResearchPerformance LIKE '%{researchPerformance.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND C.Status LIKE '%{status}%' ");
+                query.Append($"AND C.Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(acquisitionLetterSentOrigin))
             {
-                query.Append($"AND C.AcquisitionLetterSentOrigin LIKE '%{acquisitionLetterSentOrigin}%' ");
+                query.Append($"AND C.AcquisitionLetterSentOrigin LIKE '%{acquisitionLetterSentOrigin.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(acquisitionLetterSentMethod))
             {
-                query.Append($"AND C.AcquisitionLetterSentMethod LIKE '%{acquisitionLetterSentMethod}%' ");
+                query.Append($"AND C.AcquisitionLetterSentMethod LIKE '%{acquisitionLetterSentMethod.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(UDRPStrategy))
             {
-                query.Append($"AND C.UDRPStrategy LIKE '%{UDRPStrategy}%' ");
+                query.Append($"AND C.UDRPStrategy LIKE '%{UDRPStrategy.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(ownerResponseAcquisitionLetter))
             {
-                query.Append($"AND C.OwnerResponseAcquisitionLetter LIKE '%{ownerResponseAcquisitionLetter}%' ");
+                query.Append($"AND C.OwnerResponseAcquisitionLetter LIKE '%{ownerResponseAcquisitionLetter.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(domainEnquiry))

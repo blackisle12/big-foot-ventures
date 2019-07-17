@@ -39,7 +39,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND d.Name LIKE '%{name}%' ");
+                query.Append($"AND d.Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
@@ -66,22 +66,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(websiteUse))
             {
-                query.Append($"AND d.WebsiteUse LIKE '%{websiteUse}%' ");
+                query.Append($"AND d.WebsiteUse LIKE '%{websiteUse.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(BFStrategy))
             {
-                query.Append($"AND d.BFStrategy LIKE '%{BFStrategy}%' ");
+                query.Append($"AND d.BFStrategy LIKE '%{BFStrategy.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(buySideFunnel))
             {
-                query.Append($"AND d.BuySideFunnel LIKE '%{buySideFunnel}%' ");
+                query.Append($"AND d.BuySideFunnel LIKE '%{buySideFunnel.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(FMVOrderOfMagnitude))
             {
-                query.Append($"AND d.FMVOrderOfMagnitude LIKE '%{FMVOrderOfMagnitude}%' ");
+                query.Append($"AND d.FMVOrderOfMagnitude LIKE '%{FMVOrderOfMagnitude.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(companyWebsite))
@@ -91,7 +91,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND d.Status LIKE '%{status}%' ");
+                query.Append($"AND d.Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(autoRenew))
@@ -101,17 +101,17 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(version))
             {
-                query.Append($"AND d.Version LIKE '%{version}%' ");
+                query.Append($"AND d.Version LIKE '%{version.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(WHOIS))
             {
-                query.Append($"AND d.WHOIS LIKE '%{WHOIS}%' ");
+                query.Append($"AND d.WHOIS LIKE '%{WHOIS.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                query.Append($"AND d.Category LIKE '%{category}%' ");
+                query.Append($"AND d.Category LIKE '%{category.Replace("'", "''")}%' ");
             }
 
             query.Append("ORDER BY d.Name");
@@ -138,7 +138,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND d.Name LIKE '%{name}%' ");
+                query.Append($"AND d.Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
@@ -165,22 +165,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(websiteUse))
             {
-                query.Append($"AND d.WebsiteUse LIKE '%{websiteUse}%' ");
+                query.Append($"AND d.WebsiteUse LIKE '%{websiteUse.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(BFStrategy))
             {
-                query.Append($"AND d.BFStrategy LIKE '%{BFStrategy}%' ");
+                query.Append($"AND d.BFStrategy LIKE '%{BFStrategy.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(buySideFunnel))
             {
-                query.Append($"AND d.BuySideFunnel LIKE '%{buySideFunnel}%' ");
+                query.Append($"AND d.BuySideFunnel LIKE '%{buySideFunnel.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(FMVOrderOfMagnitude))
             {
-                query.Append($"AND d.FMVOrderOfMagnitude LIKE '%{FMVOrderOfMagnitude}%' ");
+                query.Append($"AND d.FMVOrderOfMagnitude LIKE '%{FMVOrderOfMagnitude.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(companyWebsite))
@@ -190,7 +190,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND d.Status LIKE '%{status}%' ");
+                query.Append($"AND d.Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(autoRenew))
@@ -200,17 +200,17 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(version))
             {
-                query.Append($"AND d.Version LIKE '%{version}%' ");
+                query.Append($"AND d.Version LIKE '%{version.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(WHOIS))
             {
-                query.Append($"AND d.WHOIS LIKE '%{WHOIS}%' ");
+                query.Append($"AND d.WHOIS LIKE '%{WHOIS.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                query.Append($"AND d.Category LIKE '%{category}%' ");
+                query.Append($"AND d.Category LIKE '%{category.Replace("'", "''")}%' ");
             }
 
             query.Append($"ORDER BY d.Name LIMIT {startIndex},{rowCount}");
@@ -231,7 +231,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND d.Name LIKE '%{name}%' ");
+                query.Append($"AND d.Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(bigFootOwned))
@@ -258,22 +258,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(websiteUse))
             {
-                query.Append($"AND d.WebsiteUse LIKE '%{websiteUse}%' ");
+                query.Append($"AND d.WebsiteUse LIKE '%{websiteUse.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(BFStrategy))
             {
-                query.Append($"AND d.BFStrategy LIKE '%{BFStrategy}%' ");
+                query.Append($"AND d.BFStrategy LIKE '%{BFStrategy.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(buySideFunnel))
             {
-                query.Append($"AND d.BuySideFunnel LIKE '%{buySideFunnel}%' ");
+                query.Append($"AND d.BuySideFunnel LIKE '%{buySideFunnel.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(FMVOrderOfMagnitude))
             {
-                query.Append($"AND d.FMVOrderOfMagnitude LIKE '%{FMVOrderOfMagnitude}%' ");
+                query.Append($"AND d.FMVOrderOfMagnitude LIKE '%{FMVOrderOfMagnitude.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(companyWebsite))
@@ -283,7 +283,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND d.Status LIKE '%{status}%' ");
+                query.Append($"AND d.Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(autoRenew))
@@ -293,17 +293,17 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(version))
             {
-                query.Append($"AND d.Version LIKE '%{version}%' ");
+                query.Append($"AND d.Version LIKE '%{version.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(WHOIS))
             {
-                query.Append($"AND d.WHOIS LIKE '%{WHOIS}%' ");
+                query.Append($"AND d.WHOIS LIKE '%{WHOIS.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                query.Append($"AND d.Category LIKE '%{category}%' ");
+                query.Append($"AND d.Category LIKE '%{category.Replace("'", "''")}%' ");
             }
 
             return query;

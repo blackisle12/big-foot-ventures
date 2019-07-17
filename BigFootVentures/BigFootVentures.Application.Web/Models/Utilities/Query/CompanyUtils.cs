@@ -43,72 +43,72 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND (C.NAME LIKE '%{name}%' OR C.FIRSTNAME LIKE '%{name}%' OR C.LASTNAME LIKE '%{name}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name}%') ");
+                query.Append($"AND (C.NAME LIKE '%{name.Replace("'", "''")}%' OR C.FIRSTNAME LIKE '%{name.Replace("'", "''")}%' OR C.LASTNAME LIKE '%{name.Replace("'", "''")}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name.Replace("'", "''")}%') ");
             }
 
             if (!string.IsNullOrWhiteSpace(accountRecordType))
             {
-                query.Append($"AND C.AccountRecordType LIKE '%{accountRecordType}%' ");
+                query.Append($"AND C.AccountRecordType LIKE '%{accountRecordType.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(formerName))
             {
-                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName}%' ");
+                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))
             {
-                query.Append($"AND C.TYPE LIKE '%{type}%' ");
+                query.Append($"AND C.TYPE LIKE '%{type.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(parentAccount))
             {
-                query.Append($"AND CP.NAME LIKE '%{parentAccount}%' ");
+                query.Append($"AND CP.NAME LIKE '%{parentAccount.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND C.PHONE LIKE '%{phone}%' ");
+                query.Append($"AND C.PHONE LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(fax))
             {
-                query.Append($"AND C.FAX LIKE '%{fax}%' ");
+                query.Append($"AND C.FAX LIKE '%{fax.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND C.EMAIL LIKE '%{email}%' ");
+                query.Append($"AND C.EMAIL LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(companySize))
             {
-                query.Append($"AND C.`COMPANY SIZE` LIKE '%{companySize}%' ");
+                query.Append($"AND C.`COMPANY SIZE` LIKE '%{companySize.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(industry))
             {
-                query.Append($"AND C.INDUSTRY LIKE '%{industry}%' ");
+                query.Append($"AND C.INDUSTRY LIKE '%{industry.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(nameID))
             {
-                query.Append($"AND C.`NAME ID` LIKE '%{nameID}%' ");
+                query.Append($"AND C.`NAME ID` LIKE '%{nameID.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(employees))
             {
-                query.Append($"AND C.EMPLOYEES LIKE '%{employees}%' ");
+                query.Append($"AND C.EMPLOYEES LIKE '%{employees.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeIDGB))
             {
-                query.Append($"AND C.`OFFICE ID OHIM` LIKE '%{officeIDGB}%' ");
+                query.Append($"AND C.`OFFICE ID OHIM` LIKE '%{officeIDGB.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMNumOppositions))
             {
-                query.Append($"AND C.`OHIM NUM OPPOSITIONS` LIKE '%{OHIMNumOppositions}%' ");
+                query.Append($"AND C.`OHIM NUM OPPOSITIONS` LIKE '%{OHIMNumOppositions.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(escrowAgent))
@@ -123,22 +123,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(companyRegistrationNumber))
             {
-                query.Append($"AND C.`COMPANY REGISTRATION NUMBER` LIKE '%{companyRegistrationNumber}%' ");
+                query.Append($"AND C.`COMPANY REGISTRATION NUMBER` LIKE '%{companyRegistrationNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(countryOfIncorporation))
             {
-                query.Append($"AND C.`COUNTRY OF INCORPORATION` LIKE '%{countryOfIncorporation}%' ");
+                query.Append($"AND C.`COUNTRY OF INCORPORATION` LIKE '%{countryOfIncorporation.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officers))
             {
-                query.Append($"AND C.OFFICERS LIKE '%{officers}%' ");
+                query.Append($"AND C.OFFICERS LIKE '%{officers.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(taxNumber))
             {
-                query.Append($"AND C.`TAX NUMBER` LIKE '%{taxNumber}%' ");
+                query.Append($"AND C.`TAX NUMBER` LIKE '%{taxNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(bigFootAccredited))
@@ -148,7 +148,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(shippingCountry))
             {
-                query.Append($"AND C.SHIPPINGCOUNTRY LIKE '%{shippingCountry}%' ");
+                query.Append($"AND C.SHIPPINGCOUNTRY LIKE '%{shippingCountry.Replace("'", "''")}%' ");
             }
 
             query.Append("ORDER BY C.NAME");
@@ -174,72 +174,72 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND (C.NAME LIKE '%{name}%' OR C.FIRSTNAME LIKE '%{name}%' OR C.LASTNAME LIKE '%{name}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name}%') ");
+                query.Append($"AND (C.NAME LIKE '%{name.Replace("'", "''")}%' OR C.FIRSTNAME LIKE '%{name.Replace("'", "''")}%' OR C.LASTNAME LIKE '%{name.Replace("'", "''")}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name.Replace("'", "''")}%') ");
             }
 
             if (!string.IsNullOrWhiteSpace(accountRecordType))
             {
-                query.Append($"AND C.AccountRecordType LIKE '%{accountRecordType}%' ");
+                query.Append($"AND C.AccountRecordType LIKE '%{accountRecordType.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(formerName))
             {
-                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName}%' ");
+                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))
             {
-                query.Append($"AND C.TYPE LIKE '%{type}%' ");
+                query.Append($"AND C.TYPE LIKE '%{type.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(parentAccount))
             {
-                query.Append($"AND CP.NAME LIKE '%{parentAccount}%' ");
+                query.Append($"AND CP.NAME LIKE '%{parentAccount.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND C.PHONE LIKE '%{phone}%' ");
+                query.Append($"AND C.PHONE LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(fax))
             {
-                query.Append($"AND C.FAX LIKE '%{fax}%' ");
+                query.Append($"AND C.FAX LIKE '%{fax.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND C.EMAIL LIKE '%{email}%' ");
+                query.Append($"AND C.EMAIL LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(companySize))
             {
-                query.Append($"AND C.`COMPANY SIZE` LIKE '%{companySize}%' ");
+                query.Append($"AND C.`COMPANY SIZE` LIKE '%{companySize.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(industry))
             {
-                query.Append($"AND C.INDUSTRY LIKE '%{industry}%' ");
+                query.Append($"AND C.INDUSTRY LIKE '%{industry.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(nameID))
             {
-                query.Append($"AND C.`NAME ID` LIKE '%{nameID}%' ");
+                query.Append($"AND C.`NAME ID` LIKE '%{nameID.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(employees))
             {
-                query.Append($"AND C.EMPLOYEES LIKE '%{employees}%' ");
+                query.Append($"AND C.EMPLOYEES LIKE '%{employees.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeIDGB))
             {
-                query.Append($"AND C.`OFFICE ID OHIM` LIKE '%{officeIDGB}%' ");
+                query.Append($"AND C.`OFFICE ID OHIM` LIKE '%{officeIDGB.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMNumOppositions))
             {
-                query.Append($"AND C.`OHIM NUM OPPOSITIONS` LIKE '%{OHIMNumOppositions}%' ");
+                query.Append($"AND C.`OHIM NUM OPPOSITIONS` LIKE '%{OHIMNumOppositions.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(escrowAgent))
@@ -254,22 +254,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(companyRegistrationNumber))
             {
-                query.Append($"AND C.`COMPANY REGISTRATION NUMBER` LIKE '%{companyRegistrationNumber}%' ");
+                query.Append($"AND C.`COMPANY REGISTRATION NUMBER` LIKE '%{companyRegistrationNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(countryOfIncorporation))
             {
-                query.Append($"AND C.`COUNTRY OF INCORPORATION` LIKE '%{countryOfIncorporation}%' ");
+                query.Append($"AND C.`COUNTRY OF INCORPORATION` LIKE '%{countryOfIncorporation.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officers))
             {
-                query.Append($"AND C.OFFICERS LIKE '%{officers}%' ");
+                query.Append($"AND C.OFFICERS LIKE '%{officers.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(taxNumber))
             {
-                query.Append($"AND C.`TAX NUMBER` LIKE '%{taxNumber}%' ");
+                query.Append($"AND C.`TAX NUMBER` LIKE '%{taxNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(bigFootAccredited))
@@ -279,7 +279,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(shippingCountry))
             {
-                query.Append($"AND C.SHIPPINGCOUNTRY LIKE '%{shippingCountry}%' ");
+                query.Append($"AND C.SHIPPINGCOUNTRY LIKE '%{shippingCountry.Replace("'", "''")}%' ");
             }
 
             query.Append($"ORDER BY C.NAME LIMIT {startIndex},{rowCount}");
@@ -300,72 +300,72 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND (C.NAME LIKE '%{name}%' OR C.FIRSTNAME LIKE '%{name}%' OR C.LASTNAME LIKE '%{name}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name}%') ");
+                query.Append($"AND (C.NAME LIKE '%{name.Replace("'", "''")}%' OR C.FIRSTNAME LIKE '%{name.Replace("'", "''")}%' OR C.LASTNAME LIKE '%{name.Replace("'", "''")}%' OR CONCAT(C.FIRSTNAME, ' ', C.LASTNAME) LIKE '%{name.Replace("'", "''")}%') ");
             }
 
             if (!string.IsNullOrWhiteSpace(accountRecordType))
             {
-                query.Append($"AND C.AccountRecordType LIKE '%{accountRecordType}%' ");
+                query.Append($"AND C.AccountRecordType LIKE '%{accountRecordType.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(formerName))
             {
-                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName}%' ");
+                query.Append($"AND C.`FORMER NAME` LIKE '%{formerName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))
             {
-                query.Append($"AND C.TYPE LIKE '%{type}%' ");
+                query.Append($"AND C.TYPE LIKE '%{type.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(parentAccount))
             {
-                query.Append($"AND CP.NAME LIKE '%{parentAccount}%' ");
+                query.Append($"AND CP.NAME LIKE '%{parentAccount.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND C.PHONE LIKE '%{phone}%' ");
+                query.Append($"AND C.PHONE LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(fax))
             {
-                query.Append($"AND C.FAX LIKE '%{fax}%' ");
+                query.Append($"AND C.FAX LIKE '%{fax.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND C.EMAIL LIKE '%{email}%' ");
+                query.Append($"AND C.EMAIL LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(companySize))
             {
-                query.Append($"AND C.`COMPANY SIZE` LIKE '%{companySize}%' ");
+                query.Append($"AND C.`COMPANY SIZE` LIKE '%{companySize.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(industry))
             {
-                query.Append($"AND C.INDUSTRY LIKE '%{industry}%' ");
+                query.Append($"AND C.INDUSTRY LIKE '%{industry.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(nameID))
             {
-                query.Append($"AND C.`NAME ID` LIKE '%{nameID}%' ");
+                query.Append($"AND C.`NAME ID` LIKE '%{nameID.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(employees))
             {
-                query.Append($"AND C.EMPLOYEES LIKE '%{employees}%' ");
+                query.Append($"AND C.EMPLOYEES LIKE '%{employees.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeIDGB))
             {
-                query.Append($"AND C.`OFFICE ID OHIM` LIKE '%{officeIDGB}%' ");
+                query.Append($"AND C.`OFFICE ID OHIM` LIKE '%{officeIDGB.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMNumOppositions))
             {
-                query.Append($"AND C.`OHIM NUM OPPOSITIONS` LIKE '%{OHIMNumOppositions}%' ");
+                query.Append($"AND C.`OHIM NUM OPPOSITIONS` LIKE '%{OHIMNumOppositions.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(escrowAgent))
@@ -380,22 +380,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(companyRegistrationNumber))
             {
-                query.Append($"AND C.`COMPANY REGISTRATION NUMBER` LIKE '%{companyRegistrationNumber}%' ");
+                query.Append($"AND C.`COMPANY REGISTRATION NUMBER` LIKE '%{companyRegistrationNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(countryOfIncorporation))
             {
-                query.Append($"AND C.`COUNTRY OF INCORPORATION` LIKE '%{countryOfIncorporation}%' ");
+                query.Append($"AND C.`COUNTRY OF INCORPORATION` LIKE '%{countryOfIncorporation.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officers))
             {
-                query.Append($"AND C.OFFICERS LIKE '%{officers}%' ");
+                query.Append($"AND C.OFFICERS LIKE '%{officers.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(taxNumber))
             {
-                query.Append($"AND C.`TAX NUMBER` LIKE '%{taxNumber}%' ");
+                query.Append($"AND C.`TAX NUMBER` LIKE '%{taxNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(bigFootAccredited))
@@ -405,7 +405,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(shippingCountry))
             {
-                query.Append($"AND C.SHIPPINGCOUNTRY LIKE '%{shippingCountry}%' ");
+                query.Append($"AND C.SHIPPINGCOUNTRY LIKE '%{shippingCountry.Replace("'", "''")}%' ");
             }
 
             return query;

@@ -33,47 +33,47 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND Status LIKE '%{status}%' ");
+                query.Append($"AND Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query.Append($"AND FirstName LIKE '%{firstName}%' ");
+                query.Append($"AND FirstName LIKE '%{firstName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(middleName))
             {
-                query.Append($"AND MiddleName LIKE '%{middleName}%' ");
+                query.Append($"AND MiddleName LIKE '%{middleName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query.Append($"AND LastName LIKE '%{lastName}%' ");
+                query.Append($"AND LastName LIKE '%{lastName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND Email LIKE '%{email}%' ");
+                query.Append($"AND Email LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND Phone LIKE '%{phone}%' ");
+                query.Append($"AND Phone LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(company))
             {
-                query.Append($"AND Company LIKE '%{company}%' ");
+                query.Append($"AND Company LIKE '%{company.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(industry))
             {
-                query.Append($"AND Industry LIKE '%{industry}%' ");
+                query.Append($"AND Industry LIKE '%{industry.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(source))
             {
-                query.Append($"AND Source LIKE '%{source}%' ");
+                query.Append($"AND Source LIKE '%{source.Replace("'", "''")}%' ");
             }
 
             query.Append("ORDER BY Status");
@@ -95,47 +95,47 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND Status LIKE '%{status}%' ");
+                query.Append($"AND Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query.Append($"AND FirstName LIKE '%{firstName}%' ");
+                query.Append($"AND FirstName LIKE '%{firstName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(middleName))
             {
-                query.Append($"AND MiddleName LIKE '%{middleName}%' ");
+                query.Append($"AND MiddleName LIKE '%{middleName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query.Append($"AND LastName LIKE '%{lastName}%' ");
+                query.Append($"AND LastName LIKE '%{lastName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND Email LIKE '%{email}%' ");
+                query.Append($"AND Email LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND Phone LIKE '%{phone}%' ");
+                query.Append($"AND Phone LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(company))
             {
-                query.Append($"AND Company LIKE '%{company}%' ");
+                query.Append($"AND Company LIKE '%{company.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(industry))
             {
-                query.Append($"AND Industry LIKE '%{industry}%' ");
+                query.Append($"AND Industry LIKE '%{industry.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(source))
             {
-                query.Append($"AND Source LIKE '%{source}%' ");
+                query.Append($"AND Source LIKE '%{source.Replace("'", "''")}%' ");
             }
 
             query.Append($"ORDER BY Status LIMIT {startIndex},{rowCount}");
@@ -153,47 +153,47 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND Status LIKE '%{status}%' ");
+                query.Append($"AND Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query.Append($"AND FirstName LIKE '%{firstName}%' ");
+                query.Append($"AND FirstName LIKE '%{firstName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(middleName))
             {
-                query.Append($"AND MiddleName LIKE '%{middleName}%' ");
+                query.Append($"AND MiddleName LIKE '%{middleName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query.Append($"AND LastName LIKE '%{lastName}%' ");
+                query.Append($"AND LastName LIKE '%{lastName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND Email LIKE '%{email}%' ");
+                query.Append($"AND Email LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND Phone LIKE '%{phone}%' ");
+                query.Append($"AND Phone LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(company))
             {
-                query.Append($"AND Company LIKE '%{company}%' ");
+                query.Append($"AND Company LIKE '%{company.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(industry))
             {
-                query.Append($"AND Industry LIKE '%{industry}%' ");
+                query.Append($"AND Industry LIKE '%{industry.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(source))
             {
-                query.Append($"AND Source LIKE '%{source}%' ");
+                query.Append($"AND Source LIKE '%{source.Replace("'", "''")}%' ");
             }
 
             return query;

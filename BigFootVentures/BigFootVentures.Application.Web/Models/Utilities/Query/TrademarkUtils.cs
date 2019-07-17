@@ -66,41 +66,40 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
-                query.Append($"AND T.Name LIKE '%{name}%' ");
-            if (!string.IsNullOrWhiteSpace(office))
-                query.Append($"AND O.OfficeName LIKE '%{office}%' ");
+                query.Append($"AND T.Name LIKE '%{name.Replace("'", "''")}%' ");
+            if (!string.IsNullOrWhiteSpace(office.Replace("'", "''")))
+                query.Append($"AND O.OfficeName LIKE '%{office.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(officeStatus))
-                query.Append($"AND T.OfficeStatus LIKE '%{officeStatus}%' ");
-
+                query.Append($"AND T.OfficeStatus LIKE '%{officeStatus.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(trademarkNumber))
-                query.Append($"AND T.TrademarkNumber LIKE '%{trademarkNumber}%' ");
+                query.Append($"AND T.TrademarkNumber LIKE '%{trademarkNumber.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(figurative))
                 query.Append($"AND T.Figurative = {figurative} ");
             if (!string.IsNullOrWhiteSpace(brand))
-                query.Append($"AND B.NAME LIKE '%{brand}%' ");
+                query.Append($"AND B.NAME LIKE '%{brand.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(figurativeURL))
-                query.Append($"AND T.FigurativeURL LIKE '%{figurativeURL}%' ");
+                query.Append($"AND T.FigurativeURL LIKE '%{figurativeURL.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(originalOffice))
-                query.Append($"AND T.OriginalOffice LIKE '%{originalOffice}%' ");
+                query.Append($"AND T.OriginalOffice LIKE '%{originalOffice.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(languageFiling))
-                query.Append($"AND T.LanguageFiling LIKE '%{languageFiling}%' ");
+                query.Append($"AND T.LanguageFiling LIKE '%{languageFiling.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(languageSecond))
-                query.Append($"AND T.LanguageSecond LIKE '%{languageSecond}%' ");
+                query.Append($"AND T.LanguageSecond LIKE '%{languageSecond.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(geography))
-                query.Append($"AND T.Geography LIKE '%{geography}%' ");
+                query.Append($"AND T.Geography LIKE '%{geography.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(involvedInRevocation))
                 query.Append($"AND T.InvolvedInRevocation = {involvedInRevocation} ");
             if (!string.IsNullOrWhiteSpace(bigFootGroupOwned))
-                query.Append($"AND T.BigFootGroupOwned LIKE '%{bigFootGroupOwned}%' ");
+                query.Append($"AND T.BigFootGroupOwned LIKE '%{bigFootGroupOwned.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(seniorityUsed))
                 query.Append($"AND T.SeniorityUsed = {seniorityUsed} ");
             if (!string.IsNullOrWhiteSpace(revocationTarget))
                 query.Append($"AND T.RevocationTarget = {revocationTarget} ");
 
             if (!string.IsNullOrWhiteSpace(openSimilarityResearchTask))
-                query.Append($"AND T.OpenSimilarityResearchTask LIKE '%{openSimilarityResearchTask}%' ");
+                query.Append($"AND T.OpenSimilarityResearchTask LIKE '%{openSimilarityResearchTask.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(oppositionResearch))
-                query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch}%' ");
+                query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch.Replace("'", "''")}%' ");
 
             //if (!string.IsNullOrWhiteSpace(researcherName))
             //    query.Append($"AND T6.ResearcherName LIKE '%{researcherName}%' ");
@@ -179,41 +178,41 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
-                query.Append($"AND T.Name LIKE '%{name}%' ");
+                query.Append($"AND T.Name LIKE '%{name.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(office))
-                query.Append($"AND O.OfficeName LIKE '%{office}%' ");
+                query.Append($"AND O.OfficeName LIKE '%{office.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(officeStatus))
-                query.Append($"AND T.OfficeStatus LIKE '%{officeStatus}%' ");
+                query.Append($"AND T.OfficeStatus LIKE '%{officeStatus.Replace("'", "''")}%' ");
 
             if (!string.IsNullOrWhiteSpace(trademarkNumber))
-                query.Append($"AND T.TrademarkNumber LIKE '%{trademarkNumber}%' ");
+                query.Append($"AND T.TrademarkNumber LIKE '%{trademarkNumber.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(figurative))
                 query.Append($"AND T.Figurative = {figurative} ");
             if (!string.IsNullOrWhiteSpace(brand))
-                query.Append($"AND B.NAME LIKE '%{brand}%' ");
+                query.Append($"AND B.NAME LIKE '%{brand.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(figurativeURL))
-                query.Append($"AND T.FigurativeURL LIKE '%{figurativeURL}%' ");
+                query.Append($"AND T.FigurativeURL LIKE '%{figurativeURL.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(originalOffice))
-                query.Append($"AND T.OriginalOffice LIKE '%{originalOffice}%' ");
+                query.Append($"AND T.OriginalOffice LIKE '%{originalOffice.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(languageFiling))
-                query.Append($"AND T.LanguageFiling LIKE '%{languageFiling}%' ");
+                query.Append($"AND T.LanguageFiling LIKE '%{languageFiling.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(languageSecond))
-                query.Append($"AND T.LanguageSecond LIKE '%{languageSecond}%' ");
+                query.Append($"AND T.LanguageSecond LIKE '%{languageSecond.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(geography))
-                query.Append($"AND T.Geography LIKE '%{geography}%' ");
+                query.Append($"AND T.Geography LIKE '%{geography.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(involvedInRevocation))
                 query.Append($"AND T.InvolvedInRevocation = {involvedInRevocation} ");
             if (!string.IsNullOrWhiteSpace(bigFootGroupOwned))
-                query.Append($"AND T.BigFootGroupOwned LIKE '%{bigFootGroupOwned}%' ");
+                query.Append($"AND T.BigFootGroupOwned LIKE '%{bigFootGroupOwned.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(seniorityUsed))
                 query.Append($"AND T.SeniorityUsed = {seniorityUsed} ");
             if (!string.IsNullOrWhiteSpace(revocationTarget))
                 query.Append($"AND T.RevocationTarget = {revocationTarget} ");
 
             if (!string.IsNullOrWhiteSpace(openSimilarityResearchTask))
-                query.Append($"AND T.OpenSimilarityResearchTask LIKE '%{openSimilarityResearchTask}%' ");
+                query.Append($"AND T.OpenSimilarityResearchTask LIKE '%{openSimilarityResearchTask.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(oppositionResearch))
-                query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch}%' ");
+                query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch.Replace("'", "''")}%' ");
 
             //if (!string.IsNullOrWhiteSpace(researcherName))
             //    query.Append($"AND T6.ResearcherName LIKE '%{researcherName}%' ");
@@ -277,41 +276,41 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             query.Append($"WHERE 0 = 0 ");
 
             if (!string.IsNullOrWhiteSpace(name))
-                query.Append($"AND T.Name LIKE '%{name}%' ");
+                query.Append($"AND T.Name LIKE '%{name.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(office))
-                query.Append($"AND O.OfficeName LIKE '%{office}%' ");
+                query.Append($"AND O.OfficeName LIKE '%{office.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(officeStatus))
-                query.Append($"AND T.OfficeStatus LIKE '%{officeStatus}%' ");
+                query.Append($"AND T.OfficeStatus LIKE '%{officeStatus.Replace("'", "''")}%' ");
 
             if (!string.IsNullOrWhiteSpace(trademarkNumber))
-                query.Append($"AND T.TrademarkNumber LIKE '%{trademarkNumber}%' ");
+                query.Append($"AND T.TrademarkNumber LIKE '%{trademarkNumber.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(figurative))
                 query.Append($"AND T.Figurative = {figurative} ");
             if (!string.IsNullOrWhiteSpace(brand))
-                query.Append($"AND B.NAME LIKE '%{brand}%' ");
+                query.Append($"AND B.NAME LIKE '%{brand.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(figurativeURL))
-                query.Append($"AND T.FigurativeURL LIKE '%{figurativeURL}%' ");
+                query.Append($"AND T.FigurativeURL LIKE '%{figurativeURL.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(originalOffice))
-                query.Append($"AND T.OriginalOffice LIKE '%{originalOffice}%' ");
+                query.Append($"AND T.OriginalOffice LIKE '%{originalOffice.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(languageFiling))
-                query.Append($"AND T.LanguageFiling LIKE '%{languageFiling}%' ");
+                query.Append($"AND T.LanguageFiling LIKE '%{languageFiling.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(languageSecond))
-                query.Append($"AND T.LanguageSecond LIKE '%{languageSecond}%' ");
+                query.Append($"AND T.LanguageSecond LIKE '%{languageSecond.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(geography))
-                query.Append($"AND T.Geography LIKE '%{geography}%' ");
+                query.Append($"AND T.Geography LIKE '%{geography.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(involvedInRevocation))
                 query.Append($"AND T.InvolvedInRevocation = {involvedInRevocation} ");
             if (!string.IsNullOrWhiteSpace(bigFootGroupOwned))
-                query.Append($"AND T.BigFootGroupOwned LIKE '%{bigFootGroupOwned}%' ");
+                query.Append($"AND T.BigFootGroupOwned LIKE '%{bigFootGroupOwned.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(seniorityUsed))
                 query.Append($"AND T.SeniorityUsed = {seniorityUsed} ");
             if (!string.IsNullOrWhiteSpace(revocationTarget))
                 query.Append($"AND T.RevocationTarget = {revocationTarget} ");
 
             if (!string.IsNullOrWhiteSpace(openSimilarityResearchTask))
-                query.Append($"AND T.OpenSimilarityResearchTask LIKE '%{openSimilarityResearchTask}%' ");
+                query.Append($"AND T.OpenSimilarityResearchTask LIKE '%{openSimilarityResearchTask.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(oppositionResearch))
-                query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch}%' ");
+                query.Append($"AND T.OppositionResearch LIKE '%{oppositionResearch.Replace("'", "''")}%' ");
 
             //if (!string.IsNullOrWhiteSpace(researcherName))
             //    query.Append($"AND T6.ResearcherName LIKE '%{researcherName}%' ");
