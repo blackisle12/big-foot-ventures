@@ -31,27 +31,27 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND A.Name LIKE '%{name}%' ");
+                query.Append($"AND A.Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(BFCompany))
             {
-                query.Append($"AND CA.NAME LIKE '%{BFCompany}%' ");
+                query.Append($"AND CA.NAME LIKE '%{BFCompany.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(counterpart))
             {
-                query.Append($"AND CB.NAME LIKE '%{counterpart}%' ");
+                query.Append($"AND CB.NAME LIKE '%{counterpart.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(objectOfAgreement))
             {
-                query.Append($"AND A.ObjectOfAgreement LIKE '%{objectOfAgreement}%' ");
+                query.Append($"AND A.ObjectOfAgreement LIKE '%{objectOfAgreement.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))
             {
-                query.Append($"AND A.Type LIKE '%{type}%' ");
+                query.Append($"AND A.Type LIKE '%{type.Replace("'", "''")}%' ");
             }
 
             query.Append("ORDER BY A.Name");
@@ -74,27 +74,27 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND A.Name LIKE '%{name}%' ");
+                query.Append($"AND A.Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(BFCompany))
             {
-                query.Append($"AND CA.NAME LIKE '%{BFCompany}%' ");
+                query.Append($"AND CA.NAME LIKE '%{BFCompany.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(counterpart))
             {
-                query.Append($"AND CB.NAME LIKE '%{counterpart}%' ");
+                query.Append($"AND CB.NAME LIKE '%{counterpart.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(objectOfAgreement))
             {
-                query.Append($"AND A.ObjectOfAgreement LIKE '%{objectOfAgreement}%' ");
+                query.Append($"AND A.ObjectOfAgreement LIKE '%{objectOfAgreement.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))
             {
-                query.Append($"AND A.Type LIKE '%{type}%' ");
+                query.Append($"AND A.Type LIKE '%{type.Replace("'", "''")}%' ");
             }
 
             query.Append($"ORDER BY A.Name LIMIT {startIndex},{rowCount}");
@@ -113,27 +113,27 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND A.Name LIKE '%{name}%' ");
+                query.Append($"AND A.Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(BFCompany))
             {
-                query.Append($"AND CA.NAME LIKE '%{BFCompany}%' ");
+                query.Append($"AND CA.NAME LIKE '%{BFCompany.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(counterpart))
             {
-                query.Append($"AND CB.NAME LIKE '%{counterpart}%' ");
+                query.Append($"AND CB.NAME LIKE '%{counterpart.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(objectOfAgreement))
             {
-                query.Append($"AND A.ObjectOfAgreement LIKE '%{objectOfAgreement}%' ");
+                query.Append($"AND A.ObjectOfAgreement LIKE '%{objectOfAgreement.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(type))
             {
-                query.Append($"AND A.Type LIKE '%{type}%' ");
+                query.Append($"AND A.Type LIKE '%{type.Replace("'", "''")}%' ");
             }
 
             return query;

@@ -34,17 +34,17 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(officeName))
             {
-                query.Append($"AND OfficeName LIKE '%{officeName}%' ");
+                query.Append($"AND OfficeName LIKE '%{officeName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(state))
             {
-                query.Append($"AND State LIKE '%{state}%' ");
+                query.Append($"AND State LIKE '%{state.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeURL))
             {
-                query.Append($"AND OfficeURL LIKE '%{officeURL}%' ");
+                query.Append($"AND OfficeURL LIKE '%{officeURL.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(online))
@@ -54,7 +54,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(officeNameArchive))
             {
-                query.Append($"AND OfficeNameArchive LIKE '%{officeNameArchive}%' ");
+                query.Append($"AND OfficeNameArchive LIKE '%{officeNameArchive.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(PCT))
@@ -69,22 +69,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(geographyType))
             {
-                query.Append($"AND GeographyType LIKE '%{geographyType}%' ");
+                query.Append($"AND GeographyType LIKE '%{geographyType.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(office))
             {
-                query.Append($"AND Office LIKE '%{office}%' ");
+                query.Append($"AND Office LIKE '%{office.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeValueCategory))
             {
-                query.Append($"AND OfficeValueCategory LIKE '%{officeValueCategory}%' ");
+                query.Append($"AND OfficeValueCategory LIKE '%{officeValueCategory.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(searchURL))
             {
-                query.Append($"AND SearchURL LIKE '%{searchURL}%' ");
+                query.Append($"AND SearchURL LIKE '%{searchURL.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(nationalNumberAssigned))
@@ -116,17 +116,17 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(officeName))
             {
-                query.Append($"AND OfficeName LIKE '%{officeName}%' ");
+                query.Append($"AND OfficeName LIKE '%{officeName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(state))
             {
-                query.Append($"AND State LIKE '%{state}%' ");
+                query.Append($"AND State LIKE '%{state.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeURL))
             {
-                query.Append($"AND OfficeURL LIKE '%{officeURL}%' ");
+                query.Append($"AND OfficeURL LIKE '%{officeURL.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(online))
@@ -136,7 +136,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(officeNameArchive))
             {
-                query.Append($"AND OfficeNameArchive LIKE '%{officeNameArchive}%' ");
+                query.Append($"AND OfficeNameArchive LIKE '%{officeNameArchive.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(PCT))
@@ -151,22 +151,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(geographyType))
             {
-                query.Append($"AND GeographyType LIKE '%{geographyType}%' ");
+                query.Append($"AND GeographyType LIKE '%{geographyType.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(office))
             {
-                query.Append($"AND Office LIKE '%{office}%' ");
+                query.Append($"AND Office LIKE '%{office.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeValueCategory))
             {
-                query.Append($"AND OfficeValueCategory LIKE '%{officeValueCategory}%' ");
+                query.Append($"AND OfficeValueCategory LIKE '%{officeValueCategory.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(searchURL))
             {
-                query.Append($"AND SearchURL LIKE '%{searchURL}%' ");
+                query.Append($"AND SearchURL LIKE '%{searchURL.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(nationalNumberAssigned))
@@ -194,17 +194,17 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(officeName))
             {
-                query.Append($"AND OfficeName LIKE '%{officeName}%' ");
+                query.Append($"AND OfficeName LIKE '%{officeName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(state))
             {
-                query.Append($"AND State LIKE '%{state}%' ");
+                query.Append($"AND State LIKE '%{state.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeURL))
             {
-                query.Append($"AND OfficeURL LIKE '%{officeURL}%' ");
+                query.Append($"AND OfficeURL LIKE '%{officeURL.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(online))
@@ -214,7 +214,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(officeNameArchive))
             {
-                query.Append($"AND OfficeNameArchive LIKE '%{officeNameArchive}%' ");
+                query.Append($"AND OfficeNameArchive LIKE '%{officeNameArchive.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(PCT))
@@ -229,22 +229,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(geographyType))
             {
-                query.Append($"AND GeographyType LIKE '%{geographyType}%' ");
+                query.Append($"AND GeographyType LIKE '%{geographyType.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(office))
             {
-                query.Append($"AND Office LIKE '%{office}%' ");
+                query.Append($"AND Office LIKE '%{office.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(officeValueCategory))
             {
-                query.Append($"AND OfficeValueCategory LIKE '%{officeValueCategory}%' ");
+                query.Append($"AND OfficeValueCategory LIKE '%{officeValueCategory.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(searchURL))
             {
-                query.Append($"AND SearchURL LIKE '%{searchURL}%' ");
+                query.Append($"AND SearchURL LIKE '%{searchURL.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(nationalNumberAssigned))

@@ -34,47 +34,47 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query.Append($"AND C.FirstName LIKE '%{firstName}%' ");
+                query.Append($"AND C.FirstName LIKE '%{firstName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(middleName))
             {
-                query.Append($"AND C.MiddleName LIKE '%{middleName}%' ");
+                query.Append($"AND C.MiddleName LIKE '%{middleName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query.Append($"AND C.LastName LIKE '%{lastName}%' ");
+                query.Append($"AND C.LastName LIKE '%{lastName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(department))
             {
-                query.Append($"AND C.Department LIKE '%{department}%' ");
+                query.Append($"AND C.Department LIKE '%{department.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(fax))
             {
-                query.Append($"AND C.Fax LIKE '%{fax}%' ");
+                query.Append($"AND C.Fax LIKE '%{fax.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND C.Email LIKE '%{email}%' ");
+                query.Append($"AND C.Email LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND C.Phone LIKE '%{phone}%' ");
+                query.Append($"AND C.Phone LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(mobile))
             {
-                query.Append($"AND C.Mobile LIKE '%{mobile}%' ");
+                query.Append($"AND C.Mobile LIKE '%{mobile.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMOwnerID))
             {
-                query.Append($"AND C.OHIMOwnerID LIKE '%{OHIMOwnerID}%' ");
+                query.Append($"AND C.OHIMOwnerID LIKE '%{OHIMOwnerID.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMNumTrademarks))
@@ -102,52 +102,52 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query.Append($"AND C.FirstName LIKE '%{firstName}%' ");
+                query.Append($"AND C.FirstName LIKE '%{firstName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(middleName))
             {
-                query.Append($"AND C.MiddleName LIKE '%{middleName}%' ");
+                query.Append($"AND C.MiddleName LIKE '%{middleName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query.Append($"AND C.LastName LIKE '%{lastName}%' ");
+                query.Append($"AND C.LastName LIKE '%{lastName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(department))
             {
-                query.Append($"AND C.Department LIKE '%{department}%' ");
+                query.Append($"AND C.Department LIKE '%{department.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(fax))
             {
-                query.Append($"AND C.Fax LIKE '%{fax}%' ");
+                query.Append($"AND C.Fax LIKE '%{fax.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND C.Email LIKE '%{email}%' ");
+                query.Append($"AND C.Email LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND C.Phone LIKE '%{phone}%' ");
+                query.Append($"AND C.Phone LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(mobile))
             {
-                query.Append($"AND C.Mobile LIKE '%{mobile}%' ");
+                query.Append($"AND C.Mobile LIKE '%{mobile.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMOwnerID))
             {
-                query.Append($"AND C.OHIMOwnerID LIKE '%{OHIMOwnerID}%' ");
+                query.Append($"AND C.OHIMOwnerID LIKE '%{OHIMOwnerID.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMNumTrademarks))
             {
-                query.Append($"AND C.OHIMNumTrademarks LIKE '%{OHIMNumTrademarks}%' ");
+                query.Append($"AND C.OHIMNumTrademarks LIKE '%{OHIMNumTrademarks.Replace("'", "''")}%' ");
             }
 
             query.Append($"ORDER BY C.FirstName LIMIT {startIndex},{rowCount}");
@@ -166,52 +166,52 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query.Append($"AND C.FirstName LIKE '%{firstName}%' ");
+                query.Append($"AND C.FirstName LIKE '%{firstName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(middleName))
             {
-                query.Append($"AND C.MiddleName LIKE '%{middleName}%' ");
+                query.Append($"AND C.MiddleName LIKE '%{middleName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query.Append($"AND C.LastName LIKE '%{lastName}%' ");
+                query.Append($"AND C.LastName LIKE '%{lastName.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(department))
             {
-                query.Append($"AND C.Department LIKE '%{department}%' ");
+                query.Append($"AND C.Department LIKE '%{department.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(fax))
             {
-                query.Append($"AND C.Fax LIKE '%{fax}%' ");
+                query.Append($"AND C.Fax LIKE '%{fax.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(email))
             {
-                query.Append($"AND C.Email LIKE '%{email}%' ");
+                query.Append($"AND C.Email LIKE '%{email.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                query.Append($"AND C.Phone LIKE '%{phone}%' ");
+                query.Append($"AND C.Phone LIKE '%{phone.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(mobile))
             {
-                query.Append($"AND C.Mobile LIKE '%{mobile}%' ");
+                query.Append($"AND C.Mobile LIKE '%{mobile.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMOwnerID))
             {
-                query.Append($"AND C.OHIMOwnerID LIKE '%{OHIMOwnerID}%' ");
+                query.Append($"AND C.OHIMOwnerID LIKE '%{OHIMOwnerID.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(OHIMNumTrademarks))
             {
-                query.Append($"AND C.OHIMNumTrademarks LIKE '%{OHIMNumTrademarks}%' ");
+                query.Append($"AND C.OHIMNumTrademarks LIKE '%{OHIMNumTrademarks.Replace("'", "''")}%' ");
             }
 
             return query;

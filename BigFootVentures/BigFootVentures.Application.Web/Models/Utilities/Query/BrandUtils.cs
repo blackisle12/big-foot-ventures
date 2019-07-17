@@ -29,22 +29,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND NAME LIKE '%{name}%' ");
+                query.Append($"AND NAME LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(purpose))
             {
-                query.Append($"AND PURPOSE LIKE '%{purpose}%' ");
+                query.Append($"AND PURPOSE LIKE '%{purpose.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(value))
             {
-                query.Append($"AND VALUE LIKE '%{value}%' ");
+                query.Append($"AND VALUE LIKE '%{value.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                query.Append($"AND CATEGORY LIKE '%{category}%' ");
+                query.Append($"AND CATEGORY LIKE '%{category.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(HVT))
@@ -70,22 +70,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND NAME LIKE '%{name}%' ");
+                query.Append($"AND NAME LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(purpose))
             {
-                query.Append($"AND PURPOSE LIKE '%{purpose}%' ");
+                query.Append($"AND PURPOSE LIKE '%{purpose.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(value))
             {
-                query.Append($"AND VALUE LIKE '%{value}%' ");
+                query.Append($"AND VALUE LIKE '%{value.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                query.Append($"AND CATEGORY LIKE '%{category}%' ");
+                query.Append($"AND CATEGORY LIKE '%{category.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(HVT))
@@ -107,22 +107,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND NAME LIKE '%{name}%' ");
+                query.Append($"AND NAME LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(purpose))
             {
-                query.Append($"AND PURPOSE LIKE '%{purpose}%' ");
+                query.Append($"AND PURPOSE LIKE '%{purpose.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(value))
             {
-                query.Append($"AND VALUE LIKE '%{value}%' ");
+                query.Append($"AND VALUE LIKE '%{value.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                query.Append($"AND CATEGORY LIKE '%{category}%' ");
+                query.Append($"AND CATEGORY LIKE '%{category.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(HVT))

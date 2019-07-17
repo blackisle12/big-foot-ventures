@@ -31,22 +31,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND Name LIKE '%{name}%' ");
+                query.Append($"AND Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(RAAYear))
             {
-                query.Append($"AND `RAA Year` LIKE '%{RAAYear}%' ");
+                query.Append($"AND `RAA Year` LIKE '%{RAAYear.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(country))
             {
-                query.Append($"AND Country LIKE '%{country}%' ");
+                query.Append($"AND Country LIKE '%{country.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(accreditedTLDs))
             {
-                query.Append($"AND `Accredited TLDs` LIKE '%{accreditedTLDs}%' ");
+                query.Append($"AND `Accredited TLDs` LIKE '%{accreditedTLDs.Replace("'", "''")}%' ");
             }
 
             query.Append("ORDER BY Name");
@@ -67,22 +67,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND Name LIKE '%{name}%' ");
+                query.Append($"AND Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(RAAYear))
             {
-                query.Append($"AND `RAA Year` LIKE '%{RAAYear}%' ");
+                query.Append($"AND `RAA Year` LIKE '%{RAAYear.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(country))
             {
-                query.Append($"AND Country LIKE '%{country}%' ");
+                query.Append($"AND Country LIKE '%{country.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(accreditedTLDs))
             {
-                query.Append($"AND `Accredited TLDs` LIKE '%{accreditedTLDs}%' ");
+                query.Append($"AND `Accredited TLDs` LIKE '%{accreditedTLDs.Replace("'", "''")}%' ");
             }
 
             query.Append($"ORDER BY Name LIMIT {startIndex},{rowCount}");
@@ -99,22 +99,22 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                query.Append($"AND Name LIKE '%{name}%' ");
+                query.Append($"AND Name LIKE '%{name.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(RAAYear))
             {
-                query.Append($"AND `RAA Year` LIKE '%{RAAYear}%' ");
+                query.Append($"AND `RAA Year` LIKE '%{RAAYear.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(country))
             {
-                query.Append($"AND Country LIKE '%{country}%' ");
+                query.Append($"AND Country LIKE '%{country.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(accreditedTLDs))
             {
-                query.Append($"AND `Accredited TLDs` LIKE '%{accreditedTLDs}%' ");
+                query.Append($"AND `Accredited TLDs` LIKE '%{accreditedTLDs.Replace("'", "''")}%' ");
             }
 
             return query;

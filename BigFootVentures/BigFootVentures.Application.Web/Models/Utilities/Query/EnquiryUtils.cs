@@ -31,27 +31,27 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(caseNumber))
             {
-                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber}%' ");
+                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND Status LIKE '%{status}%' ");
+                query.Append($"AND Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(caseAssign))
             {
-                query.Append($"AND CaseAssign LIKE '%{caseAssign}%' ");
+                query.Append($"AND CaseAssign LIKE '%{caseAssign.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(priority))
             {
-                query.Append($"AND Priority LIKE '%{priority}%' ");
+                query.Append($"AND Priority LIKE '%{priority.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(subject))
             {
-                query.Append($"AND Subject LIKE '%{subject}%' ");
+                query.Append($"AND Subject LIKE '%{subject.Replace("'", "''")}%' ");
             }
 
             query.Append("ORDER BY ID");
@@ -72,27 +72,27 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(caseNumber))
             {
-                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber}%' ");
+                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND Status LIKE '%{status}%' ");
+                query.Append($"AND Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(caseAssign))
             {
-                query.Append($"AND CaseAssign LIKE '%{caseAssign}%' ");
+                query.Append($"AND CaseAssign LIKE '%{caseAssign.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(priority))
             {
-                query.Append($"AND Priority LIKE '%{priority}%' ");
+                query.Append($"AND Priority LIKE '%{priority.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(subject))
             {
-                query.Append($"AND Subject LIKE '%{subject}%' ");
+                query.Append($"AND Subject LIKE '%{subject.Replace("'", "''")}%' ");
             }
 
             query.Append($"ORDER BY ID LIMIT {startIndex},{rowCount}");
@@ -109,27 +109,27 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(caseNumber))
             {
-                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber}%' ");
+                query.Append($"AND CAST(ID AS CHAR) LIKE '%{caseNumber.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                query.Append($"AND Status LIKE '%{status}%' ");
+                query.Append($"AND Status LIKE '%{status.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(caseAssign))
             {
-                query.Append($"AND CaseAssign LIKE '%{caseAssign}%' ");
+                query.Append($"AND CaseAssign LIKE '%{caseAssign.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(priority))
             {
-                query.Append($"AND Priority LIKE '%{priority}%' ");
+                query.Append($"AND Priority LIKE '%{priority.Replace("'", "''")}%' ");
             }
 
             if (!string.IsNullOrWhiteSpace(subject))
             {
-                query.Append($"AND Subject LIKE '%{subject}%' ");
+                query.Append($"AND Subject LIKE '%{subject.Replace("'", "''")}%' ");
             }
 
             return query;
