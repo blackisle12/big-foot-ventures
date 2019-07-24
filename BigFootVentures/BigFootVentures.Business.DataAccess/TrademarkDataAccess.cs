@@ -362,12 +362,22 @@ namespace BigFootVentures.Business.DataAccess
 
                         if (int.TryParse((dataReader["AssignedStaffID"] as int?)?.ToString(), out int assignedStaffID))
                         {
-                            trademark.AssignedStaff = new UserAccount { ID = invalidityApplicantID };
+                            trademark.AssignedStaff = new UserAccount
+                            {
+                                ID = assignedStaffID,
+                                FirstName = dataReader["StaffFirstName"] as string,
+                                LastName = dataReader["StaffLastName"] as string
+                            };
                         }
 
                         if (int.TryParse((dataReader["AssignedSupervisorID"] as int?)?.ToString(), out int assignedSupervisorID))
                         {
-                            trademark.AssignedSupervisor = new UserAccount { ID = assignedSupervisorID };
+                            trademark.AssignedSupervisor = new UserAccount
+                            {
+                                ID = assignedSupervisorID,
+                                FirstName = dataReader["SupervisorFirstName"] as string,
+                                LastName = dataReader["SupervisorLastName"] as string
+                            };
                         }
 
                         break;
