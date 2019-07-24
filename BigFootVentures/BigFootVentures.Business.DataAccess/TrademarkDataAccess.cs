@@ -356,6 +356,20 @@ namespace BigFootVentures.Business.DataAccess
                             trademark.InvalidityApplicant = new Company { ID = invalidityApplicantID };
                         }
 
+                        trademark.DeadlineForSubmission = dataReader["DeadlineForSubmission"] as string;
+                        trademark.DeadlineForSubmission2 = dataReader["DeadlineForSubmission2"] as string;
+                        trademark.DeadlineForSubmission3 = dataReader["DeadlineForSubmission3"] as string;
+
+                        if (int.TryParse((dataReader["AssignedStaffID"] as int?)?.ToString(), out int assignedStaffID))
+                        {
+                            trademark.AssignedStaff = new UserAccount { ID = invalidityApplicantID };
+                        }
+
+                        if (int.TryParse((dataReader["AssignedSupervisorID"] as int?)?.ToString(), out int assignedSupervisorID))
+                        {
+                            trademark.AssignedSupervisor = new UserAccount { ID = assignedSupervisorID };
+                        }
+
                         break;
                     }
 

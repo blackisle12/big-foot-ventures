@@ -4092,6 +4092,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 };
             }
 
+            var selectListItems = GetUserAccountsSelectListItem();
+
+            ViewBag.SelectListAssignedStaff = new SelectList(selectListItems, "Value", "Text", 0);
+            ViewBag.SelectListAssignedSupervisor = new SelectList(selectListItems, "Value", "Text", 0);
+
             return View("Trademark", model);
         }
 
@@ -4135,6 +4140,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 {
                     trademark.InvalidityApplicant = this._managementCompanyService.Get(trademark.InvalidityApplicant.ID);
                 }
+
+                var selectListItems = GetUserAccountsSelectListItem();
+
+                ViewBag.SelectListAssignedStaff = new SelectList(selectListItems, "Value", "Text", trademark.AssignedStaff?.ID ?? 0);
+                ViewBag.SelectListAssignedSupervisor = new SelectList(selectListItems, "Value", "Text", trademark.AssignedSupervisor?.ID ?? 0);
 
                 model = new VMModel<Trademark>
                 {
@@ -4861,6 +4871,26 @@ namespace BigFootVentures.Application.Web.Controllers
             }
 
             return model;
+        }
+
+        private List<SelectListItem> GetUserAccountsSelectListItem()
+        {
+            var userAccounts = _managementUserAccountService.Get(0, 1000, out int total);
+            var selectListItems = userAccounts.Select(u => new SelectListItem
+            {
+                Selected = false,
+                Text = $"{u.FirstName} {u.LastName}",
+                Value = u.ID.ToString()
+            }).ToList();
+
+            selectListItems.Add(new SelectListItem
+            {
+                Selected = false,
+                Text = string.Empty,
+                Value = "0"
+            });
+
+            return selectListItems;
         }
 
         #endregion

@@ -565,6 +565,13 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pLetterSentOn", MySqlDbType.VarChar, 45) { Value = entity.LetterSentOn, Direction = ParameterDirection.Input },
                 new MySqlParameter("pOwnerResponseDeadline", MySqlDbType.VarChar, 45) { Value = entity.OwnerResponseDeadline, Direction = ParameterDirection.Input },
                 new MySqlParameter("pLetterOutcome", MySqlDbType.VarChar, 45) { Value = entity.LetterOutcome, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pAssignedStaffID", MySqlDbType.Int32) { Value = entity.AssignedStaff?.ID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pAssignedSupervisorID", MySqlDbType.Int32) { Value = entity.AssignedSupervisor?.ID, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pDeadlineForSubmission", MySqlDbType.VarChar, 45) { Value = entity.DeadlineForSubmission, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDeadlineForSubmission2", MySqlDbType.VarChar, 45) { Value = entity.DeadlineForSubmission2, Direction = ParameterDirection.Input },
+                new MySqlParameter("pDeadlineForSubmission3", MySqlDbType.VarChar, 45) { Value = entity.DeadlineForSubmission3, Direction = ParameterDirection.Input }
             });
 
             return parameters.ToArray();

@@ -195,6 +195,13 @@ namespace BigFootVentures.Business.Objects.Management
         public string OwnerResponseDeadline { get; set; }
         public string LetterOutcome { get; set; }
 
+        public string DeadlineForSubmission { get; set; }
+        public string DeadlineForSubmission2 { get; set; }
+        public string DeadlineForSubmission3 { get; set; }
+
+        public UserAccount AssignedStaff { get; set; }
+        public UserAccount AssignedSupervisor { get; set; }
+
         #endregion
 
         #region "Calculated Properties"

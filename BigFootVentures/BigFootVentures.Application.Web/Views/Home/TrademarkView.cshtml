@@ -757,6 +757,35 @@
                 </div>
             </div>
             <!-- END: Legal Section -->
+            <!-- START: Other Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Other Information</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-view">
+                        <tr>
+                            <td><strong>Assigned Staff</strong></td>
+                            <td>@(Model.Record.AssignedStaff?.FirstName) @(Model.Record.AssignedStaff?.LastName)</td>
+                            <td><strong>Deadline for Submission</strong></td>
+                            <td>@Model.Record.DeadlineForSubmission</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Assigned Supervisor</strong></td>
+                            <td>@(Model.Record.AssignedSupervisor?.FirstName) @(Model.Record.AssignedSupervisor?.LastName)</td>
+                            <td><strong>Deadline for Submission (2)</strong></td>
+                            <td>@Model.Record.DeadlineForSubmission2</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Deadline for Submission (3)</strong></td>
+                            <td>@Model.Record.DeadlineForSubmission3</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- END: Other Information -->
             <!-- START: Related Cancellations -->
             <div class="panel panel-default">
                 <div class="panel-heading">
