@@ -49,6 +49,8 @@ namespace BigFootVentures.Application.Web.Controllers
         {
             if (string.Equals(username, _username, StringComparison.InvariantCulture) && string.Equals(password, _password, StringComparison.InvariantCulture))
             {
+                #region Proof of Use
+
                 var list = this._notificationTrademarkService.GetProofOfUse();
 
                 foreach(var entry in list)
@@ -86,6 +88,92 @@ namespace BigFootVentures.Application.Web.Controllers
                         continue;
                     }
                 }
+
+                #endregion
+
+                #region Proof of Use "2"
+
+                list = this._notificationTrademarkService.GetProofOfUse(iteration: "2");
+
+                foreach (var entry in list)
+                {
+                    try
+                    {
+                        this._emailAutomationService.SendEmail(
+                            to: entry.StaffEmailAddress,
+                            subject: "Proof of Use",
+                            body: TrademarkTemplate.GetProofOfUseTemplate(
+                                entry.OfficeName,
+                                entry.TrademarkName,
+                                entry.TrademarkNumber,
+                                entry.DeadlineForSubmission,
+                                entry.StaffName,
+                                entry.SupervisorName),
+                            fromName: "Trademarkers LLC.",
+                            isHtml: true);
+
+                        this._emailAutomationService.SendEmail(
+                                to: entry.SupervisorEmailAddress,
+                                subject: "Proof of Use",
+                                body: TrademarkTemplate.GetProofOfUseTemplate(
+                                    entry.OfficeName,
+                                    entry.TrademarkName,
+                                    entry.TrademarkNumber,
+                                    entry.DeadlineForSubmission,
+                                    entry.StaffName,
+                                    entry.SupervisorName),
+                                fromName: "Trademarkers LLC.",
+                                isHtml: true);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+
+                #endregion
+
+                #region Proof of Use "3"
+
+                list = this._notificationTrademarkService.GetProofOfUse(iteration: "3");
+
+                foreach (var entry in list)
+                {
+                    try
+                    {
+                        this._emailAutomationService.SendEmail(
+                            to: entry.StaffEmailAddress,
+                            subject: "Proof of Use",
+                            body: TrademarkTemplate.GetProofOfUseTemplate(
+                                entry.OfficeName,
+                                entry.TrademarkName,
+                                entry.TrademarkNumber,
+                                entry.DeadlineForSubmission,
+                                entry.StaffName,
+                                entry.SupervisorName),
+                            fromName: "Trademarkers LLC.",
+                            isHtml: true);
+
+                        this._emailAutomationService.SendEmail(
+                                to: entry.SupervisorEmailAddress,
+                                subject: "Proof of Use",
+                                body: TrademarkTemplate.GetProofOfUseTemplate(
+                                    entry.OfficeName,
+                                    entry.TrademarkName,
+                                    entry.TrademarkNumber,
+                                    entry.DeadlineForSubmission,
+                                    entry.StaffName,
+                                    entry.SupervisorName),
+                                fromName: "Trademarkers LLC.",
+                                isHtml: true);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+
+                #endregion
             }
 
             return null;

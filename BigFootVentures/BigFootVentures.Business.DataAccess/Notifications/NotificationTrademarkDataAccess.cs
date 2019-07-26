@@ -8,7 +8,7 @@ namespace BigFootVentures.Business.DataAccess.Notifications
 {
     public interface INotificationTrademarkDataAccess
     {
-        ICollection<ProofOfUse> GetProofOfUse();
+        ICollection<ProofOfUse> GetProofOfUse(string iteration = "");
     }
 
     public sealed class NotificationTrademarkDataAccess : INotificationTrademarkDataAccess, IDisposable
@@ -30,7 +30,7 @@ namespace BigFootVentures.Business.DataAccess.Notifications
 
         #region "Factory Methods"
 
-        public ICollection<ProofOfUse> GetProofOfUse()
+        public ICollection<ProofOfUse> GetProofOfUse(string iteration = "")
         {
             try
             {
@@ -39,7 +39,7 @@ namespace BigFootVentures.Business.DataAccess.Notifications
 
                 var proofOfUseList = new List<ProofOfUse>();
 
-                using (var command = new MySqlCommand("Notifications_Trademark_ProofOfUse_Get", this._connection) { CommandType = CommandType.StoredProcedure })
+                using (var command = new MySqlCommand($"Notifications_Trademark_ProofOfUse{iteration}_Get", this._connection) { CommandType = CommandType.StoredProcedure })
                 {
                     var dataReader = command.ExecuteReader();
 
@@ -50,7 +50,7 @@ namespace BigFootVentures.Business.DataAccess.Notifications
                             OfficeName = dataReader["OfficeName"] as string,
                             TrademarkName = dataReader["Name"] as string,
                             TrademarkNumber = dataReader["TrademarkNumber"] as string,
-                            DeadlineForSubmission = dataReader["DeadlineForSubmission"] as string,
+                            DeadlineForSubmission = dataReader[$"DeadlineForSubmission{iteration}"] as string,
                             StaffName = dataReader["StaffName"] as string,
                             StaffEmailAddress = dataReader["StaffEmailAddress"] as string,
                             SupervisorName = dataReader["SupervisorName"] as string,

@@ -6,7 +6,7 @@ namespace BigFootVentures.Service.BusinessService.Notifications
 {
     public interface INotificationTrademarkService
     {
-        ICollection<ProofOfUse> GetProofOfUse();
+        ICollection<ProofOfUse> GetProofOfUse(string iteration = "");
     }
 
     public sealed class NotificationTrademarkService :INotificationTrademarkService
@@ -28,11 +28,11 @@ namespace BigFootVentures.Service.BusinessService.Notifications
 
         #region "Factory Methods"
 
-        public ICollection<ProofOfUse> GetProofOfUse()
+        public ICollection<ProofOfUse> GetProofOfUse(string iteration = "")
         {
             using (var notificationTrademarkDataAccess = new NotificationTrademarkDataAccess(this._connectionString))
             {
-                return notificationTrademarkDataAccess.GetProofOfUse();
+                return notificationTrademarkDataAccess.GetProofOfUse(iteration);
             }
         }
 
