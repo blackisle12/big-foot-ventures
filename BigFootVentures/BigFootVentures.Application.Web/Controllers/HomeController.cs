@@ -4141,17 +4141,17 @@ namespace BigFootVentures.Application.Web.Controllers
                     trademark.InvalidityApplicant = this._managementCompanyService.Get(trademark.InvalidityApplicant.ID);
                 }
 
-                var selectListItems = GetUserAccountsSelectListItem();
-
-                ViewBag.SelectListAssignedStaff = new SelectList(selectListItems, "Value", "Text", trademark.AssignedStaff?.ID ?? 0);
-                ViewBag.SelectListAssignedSupervisor = new SelectList(selectListItems, "Value", "Text", trademark.AssignedSupervisor?.ID ?? 0);
-
                 model = new VMModel<Trademark>
                 {
                     Record = trademark,
                     PageMode = PageMode.Edit
                 };
             }
+
+            var selectListItems = GetUserAccountsSelectListItem();
+
+            ViewBag.SelectListAssignedStaff = new SelectList(selectListItems, "Value", "Text", model.Record.AssignedStaff?.ID ?? 0);
+            ViewBag.SelectListAssignedSupervisor = new SelectList(selectListItems, "Value", "Text", model.Record.AssignedSupervisor?.ID ?? 0);
 
             return View("Trademark", model);
         }

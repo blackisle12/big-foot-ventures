@@ -1,5 +1,6 @@
 using BigFootVentures.Business.Objects.Management;
 using BigFootVentures.Service.BusinessService;
+using BigFootVentures.Service.BusinessService.Notifications;
 using System.Configuration;
 using System.Web.Mvc;
 using Unity;
@@ -47,6 +48,8 @@ namespace BigFootVentures.Application.Web
             container.RegisterType<IAuditTrailService>(new InjectionFactory(c => new AuditTrailService(connectionString)));
 
             container.RegisterType<IFileAttachmentService>(new InjectionFactory(c => new FileAttachmentService(connectionString)));
+
+            container.RegisterType<INotificationTrademarkService>(new InjectionFactory(c => new NotificationTrademarkService(connectionString)));
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
