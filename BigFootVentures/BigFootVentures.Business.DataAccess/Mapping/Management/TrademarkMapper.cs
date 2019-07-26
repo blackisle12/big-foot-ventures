@@ -253,6 +253,15 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     PublicationDate = dataReader["PublicationDate"] as string
                 };
 
+                if (int.TryParse((dataReader["OfficeID"] as int?)?.ToString(), out int officeID))
+                {
+                    entity.Office = new Office
+                    {
+                        ID = officeID,
+                        OfficeName = dataReader["OfficeName"] as string
+                    };
+                }
+
                 entities.Add(entity);
             }
 

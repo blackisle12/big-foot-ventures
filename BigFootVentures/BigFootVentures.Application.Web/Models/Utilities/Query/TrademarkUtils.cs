@@ -67,7 +67,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
 
             if (!string.IsNullOrWhiteSpace(name))
                 query.Append($"AND T.Name LIKE '%{name.Replace("'", "''")}%' ");
-            if (!string.IsNullOrWhiteSpace(office.Replace("'", "''")))
+            if (!string.IsNullOrWhiteSpace(office))
                 query.Append($"AND O.OfficeName LIKE '%{office.Replace("'", "''")}%' ");
             if (!string.IsNullOrWhiteSpace(officeStatus))
                 query.Append($"AND T.OfficeStatus LIKE '%{officeStatus.Replace("'", "''")}%' ");
@@ -157,7 +157,7 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
         {
             query.Append("T.* ");
 
-            if (!string.IsNullOrWhiteSpace(office))
+            //if (!string.IsNullOrWhiteSpace(office))
                 query.Append(",O.OfficeName AS OfficeName ");
 
             if (!string.IsNullOrWhiteSpace(brand))
