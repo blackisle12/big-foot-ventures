@@ -7,6 +7,8 @@ namespace BigFootVentures.Service.BusinessService.Notifications
     public interface INotificationTrademarkService
     {
         ICollection<ProofOfUse> GetProofOfUse(string iteration = "");
+
+        ICollection<SixMonthsAnniversary> GetSixMonthsAnniversary();
     }
 
     public sealed class NotificationTrademarkService :INotificationTrademarkService
@@ -33,6 +35,14 @@ namespace BigFootVentures.Service.BusinessService.Notifications
             using (var notificationTrademarkDataAccess = new NotificationTrademarkDataAccess(this._connectionString))
             {
                 return notificationTrademarkDataAccess.GetProofOfUse(iteration);
+            }
+        }
+
+        public ICollection<SixMonthsAnniversary> GetSixMonthsAnniversary()
+        {
+            using (var notificationTrademarkDataAccess = new NotificationTrademarkDataAccess(this._connectionString))
+            {
+                return notificationTrademarkDataAccess.GetSixMonthsAnniversary();
             }
         }
 

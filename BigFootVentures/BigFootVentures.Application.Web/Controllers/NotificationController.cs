@@ -179,6 +179,51 @@ namespace BigFootVentures.Application.Web.Controllers
             return null;
         }
 
+        [Route("TrademarkGetSixMonthsAnniversary", Name = "TrademarkGetSixMonthsAnniversary")]
+        public ActionResult TrademarkGetSixMonthsAnniversary(string username, string password)
+        {
+            if (string.Equals(username, _username, StringComparison.InvariantCulture) && string.Equals(password, _password, StringComparison.InvariantCulture))
+            {
+                var list = this._notificationTrademarkService.GetSixMonthsAnniversary();
+
+                foreach (var entry in list)
+                {
+                    try
+                    {
+                        this._emailAutomationService.SendEmail(
+                            to: entry.StaffEmailAddress,
+                            subject: "6 Month Anniversary",
+                            body: TrademarkTemplate.GetSixMonthsAnniversaryTemplate(
+                                entry.TrademarkName,
+                                entry.TrademarkNumber,
+                                entry.SixMonthsAnniversaryDate,
+                                entry.StaffName,
+                                entry.SupervisorName),
+                            fromName: "Trademarkers LLC.",
+                            isHtml: true);
+
+                        this._emailAutomationService.SendEmail(
+                                to: entry.SupervisorEmailAddress,
+                                subject: "6 Month Anniversary",
+                                body: TrademarkTemplate.GetSixMonthsAnniversaryTemplate(
+                                    entry.TrademarkName,
+                                    entry.TrademarkNumber,
+                                    entry.SixMonthsAnniversaryDate,
+                                    entry.StaffName,
+                                    entry.SupervisorName),
+                                fromName: "Trademarkers LLC.",
+                                isHtml: true);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         #endregion
     }
 }

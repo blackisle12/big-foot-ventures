@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigFootVentures.Business.Em
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigFootVentures.Application.CSVParser", "BigFootVentures.Application.CSVParser\BigFootVentures.Application.CSVParser.csproj", "{A8ED9DAC-0CE4-4A62-94FD-BC5720BDE492}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Job", "Job", "{D234CFC7-2234-4FED-9509-4B3537B7A45F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigFootVentures.Job.Notification.Trademark", "BigFootVentures.Job.Notification.Trademark\BigFootVentures.Job.Notification.Trademark.csproj", "{B08B688B-FFB1-4003-B9B2-8F40E4117724}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{A8ED9DAC-0CE4-4A62-94FD-BC5720BDE492}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8ED9DAC-0CE4-4A62-94FD-BC5720BDE492}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8ED9DAC-0CE4-4A62-94FD-BC5720BDE492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B08B688B-FFB1-4003-B9B2-8F40E4117724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B08B688B-FFB1-4003-B9B2-8F40E4117724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B08B688B-FFB1-4003-B9B2-8F40E4117724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B08B688B-FFB1-4003-B9B2-8F40E4117724}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{9BDBBD43-B54E-4D6D-B7D9-1E94A1FD3321} = {C50BFC6E-3E9F-4DC6-A772-084751CD2A9D}
 		{7DFB8830-0F13-4365-B8EF-740D3F7DB0D3} = {5202067A-7C69-42D5-9B1C-6362AF8E0531}
 		{A8ED9DAC-0CE4-4A62-94FD-BC5720BDE492} = {C50BFC6E-3E9F-4DC6-A772-084751CD2A9D}
+		{B08B688B-FFB1-4003-B9B2-8F40E4117724} = {D234CFC7-2234-4FED-9509-4B3537B7A45F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C7D2573-C7A1-4FD5-B35A-8BB83A2F7FD3}
