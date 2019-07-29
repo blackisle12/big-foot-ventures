@@ -96,7 +96,7 @@ namespace BigFootVentures.Business.DataAccess.Notifications
                         {
                             TrademarkName = dataReader["Name"] as string,
                             TrademarkNumber = dataReader["TrademarkNumber"] as string,
-                            SixMonthsAnniversaryDate = dataReader["SixMonthsAnniversary"] as string,
+                            SixMonthsAnniversaryDate = Convert.ToDateTime(dataReader["SixMonthsAnniversaryDate"]),
                             StaffName = dataReader["StaffName"] as string,
                             StaffEmailAddress = dataReader["StaffEmailAddress"] as string,
                             SupervisorName = dataReader["SupervisorName"] as string,

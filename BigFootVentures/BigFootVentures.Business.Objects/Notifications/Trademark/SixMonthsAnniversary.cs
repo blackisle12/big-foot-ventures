@@ -1,4 +1,6 @@
-﻿namespace BigFootVentures.Business.Objects.Notifications.Trademark
+﻿using System;
+
+namespace BigFootVentures.Business.Objects.Notifications.Trademark
 {
     public sealed class SixMonthsAnniversary
     {
@@ -6,7 +8,7 @@
 
         public string TrademarkName { get; set; }
         public string TrademarkNumber { get; set; }
-        public string SixMonthsAnniversaryDate { get; set; }
+        public DateTime SixMonthsAnniversaryDate { get; set; }
         public string StaffName { get; set; }
         public string StaffEmailAddress { get; set; }
         public string SupervisorName { get; set; }
