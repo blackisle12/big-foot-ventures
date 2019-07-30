@@ -20,6 +20,8 @@ namespace BigFootVentures.Job.Notification.Trademark
 
             await this.ConnectToNotificationTrademarkSixMonthsAnniversary();
 
+            await this.ConnectToNotificationTrademarkRenewal();
+
             Console.WriteLine("Finishing Notification_Trademark function..");
         }
 
@@ -61,6 +63,31 @@ namespace BigFootVentures.Job.Notification.Trademark
                     var uri = "http://trademarkers.us-east-2.elasticbeanstalk.com/Notification/TrademarkGetSixMonthsAnniversary?username=sa&password=FxWaWJ3csC58k";
 
                     Console.WriteLine("Connecting to Notification Trademark Six Months Anniversary..");
+                    Console.WriteLine("URI: " + uri);
+
+                    var response = await client.GetAsync(uri);
+
+                    Console.WriteLine("Status Code: " + response.StatusCode);
+                    Console.WriteLine("Content: " + await response.Content.ReadAsStringAsync());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error encountered:");
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }
+        }
+
+        private async Task ConnectToNotificationTrademarkRenewal()
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    var uri = "http://trademarkers.us-east-2.elasticbeanstalk.com/Notification/TrademarkGetTrademarkRenewal?username=sa&password=FxWaWJ3csC58k";
+
+                    Console.WriteLine("Connecting to Notification Trademark Renewal..");
                     Console.WriteLine("URI: " + uri);
 
                     var response = await client.GetAsync(uri);

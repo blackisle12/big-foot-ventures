@@ -9,6 +9,8 @@ namespace BigFootVentures.Service.BusinessService.Notifications
         ICollection<ProofOfUse> GetProofOfUse(string iteration = "");
 
         ICollection<SixMonthsAnniversary> GetSixMonthsAnniversary();
+
+        ICollection<TrademarkRenewal> GetTrademarkRenewal();
     }
 
     public sealed class NotificationTrademarkService :INotificationTrademarkService
@@ -43,6 +45,14 @@ namespace BigFootVentures.Service.BusinessService.Notifications
             using (var notificationTrademarkDataAccess = new NotificationTrademarkDataAccess(this._connectionString))
             {
                 return notificationTrademarkDataAccess.GetSixMonthsAnniversary();
+            }
+        }
+
+        public ICollection<TrademarkRenewal> GetTrademarkRenewal()
+        {
+            using (var notificationTrademarkDataAccess = new NotificationTrademarkDataAccess(this._connectionString))
+            {
+                return notificationTrademarkDataAccess.GetTrademarkRenewal();
             }
         }
 

@@ -28,5 +28,17 @@ namespace BigFootVentures.Business.EmailTemplates.Notifications
                     </div>
                     <p>This is to remind you that we need to file a priority mark before the date specified above. </p>";
         }
+
+        public static string GetTrademarkRenewalTemplate(string trademarkName, string trademarkNumber, DateTime expirationDate, string assignedStaff, string assignedSupervisor)
+        {
+            return $@"<div>
+                        <span>Trademark: <strong>{trademarkName}</strong></span><br />
+                        <span>Trademark Number: <strong>{trademarkNumber}</strong></span><br />
+                        <span>Expiration Date: <strong>{expirationDate.ToString("MMMM dd, yyyy")}</strong></span><br />
+                        <span>Assigned Staff: <strong>{assignedStaff}</strong></span><br />
+                        <span>Supervisor: <strong>{assignedSupervisor}</strong></span><br />
+                    </div>
+                    <p>This is to remind you that we need to file the renewal for this mark before the date specified above.</p>";
+        }
     }
 }

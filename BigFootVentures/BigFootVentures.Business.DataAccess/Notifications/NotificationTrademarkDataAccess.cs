@@ -11,6 +11,8 @@ namespace BigFootVentures.Business.DataAccess.Notifications
         ICollection<ProofOfUse> GetProofOfUse(string iteration = "");
 
         ICollection<SixMonthsAnniversary> GetSixMonthsAnniversary();
+
+        ICollection<TrademarkRenewal> GetTrademarkRenewal();
     }
 
     public sealed class NotificationTrademarkDataAccess : INotificationTrademarkDataAccess, IDisposable
@@ -97,6 +99,50 @@ namespace BigFootVentures.Business.DataAccess.Notifications
                             TrademarkName = dataReader["Name"] as string,
                             TrademarkNumber = dataReader["TrademarkNumber"] as string,
                             SixMonthsAnniversaryDate = Convert.ToDateTime(dataReader["SixMonthsAnniversaryDate"]),
+                            StaffName = dataReader["StaffName"] as string,
+                            StaffEmailAddress = dataReader["StaffEmailAddress"] as string,
+                            SupervisorName = dataReader["SupervisorName"] as string,
+                            SupervisorEmailAddress = dataReader["SupervisorEmailAddress"] as string
+                        };
+
+                        list.Add(entry);
+                    }
+
+                    dataReader.Close();
+                }
+
+                return list;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                this._connection.Close();
+            }
+        }
+
+        public ICollection<TrademarkRenewal> GetTrademarkRenewal()
+        {
+            try
+            {
+                if (this._connection.State != ConnectionState.Open)
+                    this._connection.Open();
+
+                var list = new List<TrademarkRenewal>();
+
+                using (var command = new MySqlCommand("Notifications_Trademark_TrademarkRenewal_Get", this._connection) { CommandType = CommandType.StoredProcedure })
+                {
+                    var dataReader = command.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        var entry = new TrademarkRenewal
+                        {
+                            TrademarkName = dataReader["Name"] as string,
+                            TrademarkNumber = dataReader["TrademarkNumber"] as string,
+                            ExpirationDate = Convert.ToDateTime(dataReader["ExpiryDate"]),
                             StaffName = dataReader["StaffName"] as string,
                             StaffEmailAddress = dataReader["StaffEmailAddress"] as string,
                             SupervisorName = dataReader["SupervisorName"] as string,

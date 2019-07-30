@@ -224,6 +224,51 @@ namespace BigFootVentures.Application.Web.Controllers
             return null;
         }
 
+        [Route("TrademarkGetTrademarkRenewal", Name = "TrademarkGetTrademarkRenewal")]
+        public ActionResult TrademarkGetTrademarkRenewal(string username, string password)
+        {
+            if (string.Equals(username, _username, StringComparison.InvariantCulture) && string.Equals(password, _password, StringComparison.InvariantCulture))
+            {
+                var list = this._notificationTrademarkService.GetTrademarkRenewal();
+
+                foreach (var entry in list)
+                {
+                    try
+                    {
+                        this._emailAutomationService.SendEmail(
+                            to: entry.StaffEmailAddress,
+                            subject: "Trademark Renewal",
+                            body: TrademarkTemplate.GetTrademarkRenewalTemplate(
+                                entry.TrademarkName,
+                                entry.TrademarkNumber,
+                                entry.ExpirationDate,
+                                entry.StaffName,
+                                entry.SupervisorName),
+                            fromName: "Trademarkers LLC.",
+                            isHtml: true);
+
+                        this._emailAutomationService.SendEmail(
+                                to: entry.SupervisorEmailAddress,
+                                subject: "Trademark Renewal",
+                                body: TrademarkTemplate.GetTrademarkRenewalTemplate(
+                                    entry.TrademarkName,
+                                    entry.TrademarkNumber,
+                                    entry.ExpirationDate,
+                                    entry.StaffName,
+                                    entry.SupervisorName),
+                                fromName: "Trademarkers LLC.",
+                                isHtml: true);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         #endregion
     }
 }
