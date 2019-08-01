@@ -91,6 +91,28 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                     entity.ParentAccount = new Company { ID = parentAccountID };
                 }
 
+                entity.DueDate = dataReader["DueDate"] as string;
+
+                if (int.TryParse((dataReader["AssignedStaffID"] as int?)?.ToString(), out int assignedStaffID))
+                {
+                    entity.AssignedStaff = new UserAccount
+                    {
+                        ID = assignedStaffID,
+                        FirstName = dataReader["StaffFirstName"] as string,
+                        LastName = dataReader["StaffLastName"] as string
+                    };
+                }
+
+                if (int.TryParse((dataReader["AssignedSupervisorID"] as int?)?.ToString(), out int assignedSupervisorID))
+                {
+                    entity.AssignedSupervisor = new UserAccount
+                    {
+                        ID = assignedSupervisorID,
+                        FirstName = dataReader["SupervisorFirstName"] as string,
+                        LastName = dataReader["SupervisorLastName"] as string
+                    };
+                }
+
                 entities.Add(entity);
             }
 
@@ -267,6 +289,11 @@ namespace BigFootVentures.Business.DataAccess.Mapping.Management
                 new MySqlParameter("pShippingCity", MySqlDbType.VarChar, 100) { Value = entity.ShippingCity, Direction = ParameterDirection.Input },
                 new MySqlParameter("pShippingState", MySqlDbType.VarChar, 100) { Value = entity.ShippingState, Direction = ParameterDirection.Input },
                 new MySqlParameter("pShippingPostalCode", MySqlDbType.VarChar, 100) { Value = entity.ShippingPostalCode, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pAssignedStaffID", MySqlDbType.Int32) { Value = entity.AssignedStaff?.ID, Direction = ParameterDirection.Input },
+                new MySqlParameter("pAssignedSupervisorID", MySqlDbType.Int32) { Value = entity.AssignedSupervisor?.ID, Direction = ParameterDirection.Input },
+
+                new MySqlParameter("pDueDate", MySqlDbType.VarChar, 45) { Value = entity.DueDate, Direction = ParameterDirection.Input },
             });
 
             return parameters.ToArray();

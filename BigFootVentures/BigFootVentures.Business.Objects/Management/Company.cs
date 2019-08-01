@@ -75,10 +75,15 @@ namespace BigFootVentures.Business.Objects.Management
         public string ShippingState { get; set; }
         public string ShippingPostalCode { get; set; }
 
+        public UserAccount AssignedStaff { get; set; }
+        public UserAccount AssignedSupervisor { get; set; }
+
+        public string DueDate { get; set; }
+
         #endregion
 
         #region "Calculated Properties"
-        
+
         public bool DeletionRequestChk { get; set; }
 
         #endregion
