@@ -51,6 +51,8 @@ namespace BigFootVentures.Application.Web.Models.Utilities.Query
             //query.Append("T6.LetterReference, T6.LetterOrigin, T6.LetterSendingMethod, T6.LetterSentOn, T6.OwnerResponseDeadline, T6.LetterOutcome, ");
             query.Append(",O.OfficeName AS OfficeName ");
             query.Append(",B.NAME AS BrandName ");
+            query.Append(",B.HVT AS BrandHVT ");
+            query.Append(",B.PURPOSE AS BrandPurpose ");
             //query.Append(",OO.OfficeName AS OriginalOfficeName ");
             //query.Append(",D.Name AS TMWebsiteName ");
             //query.Append(",DD.Name AS OwnerWebsiteName ");

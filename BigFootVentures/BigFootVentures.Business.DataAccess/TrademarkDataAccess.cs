@@ -404,7 +404,7 @@ namespace BigFootVentures.Business.DataAccess
             {
                 var result = new StringBuilder();
 
-                result.Append("Name,Owner Name,Office Name,Original Office Name,Brand Name,TM Website,Owner Website,Com Website,Office Status,Trademark Number,International Registration Number,Filing Number,Registration Number,TM URL,Receipt Date,Filing Date Value,");
+                result.Append("Name,Owner Name,Office Name,Original Office Name,Brand Name,Brand HVT,Brand Purpose,TM Website,Owner Website,Com Website,Office Status,Trademark Number,International Registration Number,Filing Number,Registration Number,TM URL,Receipt Date,Filing Date Value,");
                 result.Append("Publication Date,Registration Date,Expiry Date,6 Months Anniversary,Priority Date,Priority Country and Priority TM Number,Seniority Used, Seniority Details,");
                 result.Append("Deletion Request,Deletion Request Reason,Deletion Duplicate,Revocation Target,User Status Description,Figurative,Trademark Type,Figurative URL,Language Filing,");
                 result.Append("Language Second,Geography,Involved in Revocation,BigFoot Group Owned,Open Similarity Research Task,Initial Submitter,Last Similarity Research Completed On,");
@@ -456,7 +456,9 @@ namespace BigFootVentures.Business.DataAccess
                             TMURL = dataReader["TMURL"] as string,
                             Brand = new Brand
                             {
-                                Name = dataReader["BrandName"] as string
+                                Name = dataReader["BrandName"] as string,
+                                HVT = dataReader["BrandHVT"] as string,
+                                Purpose = dataReader["BrandPurpose"] as string
                             },
                             ReceiptDate = dataReader["ReceiptDate"] as string,
                             FilingDateValue = dataReader["FilingDateValue"] as string,
@@ -780,6 +782,8 @@ namespace BigFootVentures.Business.DataAccess
                     result.Append(DataUtils.EscapeCSV($"{trademark.Office?.OfficeName}") + ",");
                     result.Append(","); //result.Append(DataUtils.EscapeCSV($"{dataReader["OriginalOfficeName"] as string}") + ",");
                     result.Append(DataUtils.EscapeCSV($"{trademark.Brand?.Name}") + ",");
+                    result.Append(DataUtils.EscapeCSV($"{trademark.Brand?.HVT}") + ",");
+                    result.Append(DataUtils.EscapeCSV($"{trademark.Brand?.Purpose}") + ",");
                     result.Append(DataUtils.EscapeCSV($"{trademark.TMWebsite?.Name}") + ",");
                     result.Append(DataUtils.EscapeCSV($"{trademark.OwnerWebsite?.Name}") + ",");
                     result.Append(DataUtils.EscapeCSV($"{trademark.ComWebsite?.Name}") + ",");
