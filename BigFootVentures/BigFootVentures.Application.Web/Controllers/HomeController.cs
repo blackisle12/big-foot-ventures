@@ -890,6 +890,11 @@ namespace BigFootVentures.Application.Web.Controllers
                 };
             }
 
+            var selectListItems = GetUserAccountsSelectListItem();
+
+            ViewBag.SelectListAssignedStaff = new SelectList(selectListItems, "Value", "Text", model.Record.AssignedStaff?.ID ?? 0);
+            ViewBag.SelectListAssignedSupervisor = new SelectList(selectListItems, "Value", "Text", model.Record.AssignedSupervisor?.ID ?? 0);
+
             return View("Company", model);
         }
 

@@ -1841,6 +1841,9 @@ namespace BigFootVentures.Business.Objects.Enumerators
 
                 [Description("Opposed")]
                 Opposed,
+                
+                [Description("Partially Cancelled")]
+                PartiallyCancelled,
 
                 [Description("Published")]
                 Published,

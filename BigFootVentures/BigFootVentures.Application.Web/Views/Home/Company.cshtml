@@ -516,6 +516,34 @@
                 }
             }
             <!-- END: System Information -->
+            <!-- START: Other Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Other Information</h4>
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Assigned Staff</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.AssignedStaff.ID, (SelectList)ViewBag.SelectListAssignedStaff, new { @class = "form-control" })
+                            </div>
+
+                            <label class="col-sm-2 control-label">Due Date</label>
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.Record.DueDate, new { @class = "form-control", @type = "date" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Assigned Supervisor</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(m => m.Record.AssignedSupervisor.ID, (SelectList)ViewBag.SelectListAssignedSupervisor, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <!-- END: Other Information -->
         </div>
         <div class="panel-footer">
             @Html.Partial("../Shared/_Components/Page/_PageEditViewFooter")
